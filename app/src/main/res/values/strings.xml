@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MotivLearn</string>
+    <string name="sample_string">you can share your experience \n   with other students</string>
 </resources>
