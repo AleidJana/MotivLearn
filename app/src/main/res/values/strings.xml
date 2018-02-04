@@ -1,4 +1,27 @@
 <resources>
     <string name="app_name">MotivLearn</string>
     <string name="sample_string">you can share your experience \n   with other students</string>
+
+
+    <!--register page -->
+    <string name="title">REGISTER</string>
+    <string name="user_name">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="department">Department :</string>
+    <string name="department1">SWE</string>
+    <string name="department2">IT</string>
+    <string name="department3">CS</string>
+    <string name="department4">IS</string>
+    <string name="register_btn">Register</string>
+    <string name="register_q">Have an account?</string>
+
+
+    <!--login page -->
+    <string name="login_title">LOGIN</string>
+    <string name="login_btn">Login</string>
+    <string name="login_q">Not a member?</string>
+
+
 </resources>
