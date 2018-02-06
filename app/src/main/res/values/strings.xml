@@ -22,6 +22,8 @@
     <string name="login_title">LOGIN</string>
     <string name="login_btn">Login</string>
     <string name="login_q">Not a member?</string>
+    <string name="login_error_empty">Fill all fields please</string>
+    <string name="login_error_notFound">Incorrect email or password</string>
 
 
 </resources>
