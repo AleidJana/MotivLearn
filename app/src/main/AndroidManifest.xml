@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jana.motivlearn">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -20,7 +21,11 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".IntroActivity" />
         <activity android:name=".Register" />
-        <activity android:name=".Login"></activity>
+        <activity android:name=".Login" />
+        <activity android:name=".suggestVedio" />
+        <activity android:name=".fillBlank" />
+        <activity android:name=".multipleChoices" />
+        <activity android:name=".CodeOutput"></activity>
     </application>
 
 </manifest>

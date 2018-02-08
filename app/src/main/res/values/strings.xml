@@ -26,4 +26,25 @@
     <string name="login_error_notFound">Incorrect email or password</string>
 
 
+    <!--suggest Video-->
+    <string name="Video_hint">Write the video link in the next field:</string>
+    <string name="URL">https://</string>
+    <string name="video_title">Suggest video</string>
+
+
+    <string name="blankT">Fill Blank</string>
+
+
+    <!--all questions -->
+    <string name="question">Question</string>
+    <string name="answer">Answer</string>
+    <string name="enterQ">    Enter question</string>
+    <string name="enterA">   Enter answer</string>
+
+
+    <!--buttons-->
+    <string name="Submit">Submit</string>
+    <string name="addblank">Add blank</string>
+
+
 </resources>
