@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/pink4"
     tools:context="com.example.jana.motivlearn.activities.Register">
     <EditText
@@ -258,5 +258,76 @@
         android:layout_alignBottom="@+id/radioButton3"
         android:layout_toStartOf="@+id/radioButton3" />
 
+    <LinearLayout
+        android:id="@+id/errorlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editText7"
+        android:layout_alignEnd="@+id/editText7"
+        android:layout_alignStart="@+id/editText7"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/rounded_bgcorner"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/jhj"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="@string/register_error_empty"
+                android:textColor="?attr/colorError"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView7"
+                android:layout_alignBottom="@+id/textView7"
+                android:layout_marginStart="24dp"
+                android:layout_toEndOf="@+id/jhj"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="@string/register_error_email"
+                android:textAlignment="center"
+                android:textColor="?attr/colorError"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView7"
+                android:layout_alignBottom="@+id/textView7"
+                android:layout_marginStart="24dp"
+                android:layout_toEndOf="@+id/jhj"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="@string/register_error_password"
+                android:textAlignment="center"
+                android:textColor="?attr/colorError"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/jhj"
+                android:layout_width="52dp"
+                android:layout_height="41dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/error2" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

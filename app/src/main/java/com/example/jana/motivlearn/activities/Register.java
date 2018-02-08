@@ -3,11 +3,14 @@ package com.example.jana.motivlearn.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jana.motivlearn.Login;
@@ -16,7 +19,7 @@ import com.example.jana.motivlearn.model.PresenterImp;
 import com.example.jana.motivlearn.presenter.RegisterPresenter;
 import com.example.jana.motivlearn.view.RegisterView;
 
-public class Register extends Activity implements RegisterView {
+public class Register extends AppCompatActivity implements RegisterView {
 
     EditText userNameF , emailF,passwordF,conPasswordF ;
     RadioGroup radioGroup;
@@ -68,8 +71,17 @@ RegisterPresenter mRegisterView;
 
     @Override
     public void registerValidations() {
-        Toast.makeText(getApplicationContext(),"Enter all the fields",Toast.LENGTH_LONG).show();
+        LinearLayout linlay = findViewById(R.id.errorlay);
+        linlay.setVisibility(View.VISIBLE);
 
+        TextView eror = findViewById(R.id.textView7);
+        eror.setVisibility(View.VISIBLE);
+
+        TextView eror1 = findViewById(R.id.textView8);
+        eror1.setVisibility(View.GONE);
+
+        TextView eror2 = findViewById(R.id.textView9);
+        eror2.setVisibility(View.GONE);
     }
 
     @Override
@@ -94,12 +106,31 @@ RegisterPresenter mRegisterView;
     }
     public void passwordMatch(){
 
-        Toast.makeText(getApplicationContext()," password dosent match",Toast.LENGTH_LONG).show();
-    }
+        LinearLayout linlay = findViewById(R.id.errorlay);
+        linlay.setVisibility(View.VISIBLE);
+
+        TextView eror = findViewById(R.id.textView9);
+        eror.setVisibility(View.VISIBLE);
+
+        TextView eror1 = findViewById(R.id.textView7);
+        eror1.setVisibility(View.GONE);
+
+        TextView eror2 = findViewById(R.id.textView8);
+        eror2.setVisibility(View.GONE);    }
+
     public void emailError(){
 
-        Toast.makeText(getApplicationContext()," reEnterEmail",Toast.LENGTH_LONG).show();
-    }
+        LinearLayout linlay = findViewById(R.id.errorlay);
+        linlay.setVisibility(View.VISIBLE);
+
+        TextView eror = findViewById(R.id.textView8);
+        eror.setVisibility(View.VISIBLE);
+
+        TextView eror1 = findViewById(R.id.textView7);
+        eror1.setVisibility(View.GONE);
+
+        TextView eror2 = findViewById(R.id.textView9);
+        eror2.setVisibility(View.GONE);    }
 }
 
 

@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".IntroActivity" />
-        <activity android:name=".Register" />
+        <activity android:name=".activities.Register" />
         <activity android:name=".Login"></activity>
     </application>
 

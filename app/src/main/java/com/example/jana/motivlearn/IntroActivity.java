@@ -30,8 +30,8 @@ public class IntroActivity extends AppIntro2 {
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-
-        startActivity(new Intent(getApplicationContext(),Register.class));
+Intent i = new Intent(this, Register.class);
+        startActivity(i);
     }
 
     @Override
