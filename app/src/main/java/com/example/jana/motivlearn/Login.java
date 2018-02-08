@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.jana.motivlearn.activities.Register;
+
 public class Login extends AppCompatActivity {
 
     @Override

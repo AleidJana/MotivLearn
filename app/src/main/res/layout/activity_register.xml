@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/pink4"
-    tools:context="com.example.jana.motivlearn.Register">
+    tools:context="com.example.jana.motivlearn.activities.Register">
     <EditText
         android:id="@+id/editText7"
         android:layout_width="270dp"
@@ -155,6 +155,14 @@
         android:textSize="12sp"
         android:textStyle="bold"
         tools:ignore="OnClick" />
+    <RadioGroup
+        android:id="@+id/RadioG"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="459dp"
+        android:layout_marginLeft="80dp"
+        >
 
     <RadioButton
         android:id="@+id/radioButton"
@@ -209,6 +217,7 @@
         android:buttonTint="#8767b3"
         android:text="CSC"
         android:textColor="#8767b3" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/textView"
@@ -242,6 +251,12 @@
         android:textAlignment="textStart"
         android:textColor="#8767b3"
         android:textSize="15sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/radioButton3"
+        android:layout_toStartOf="@+id/radioButton3" />
 
 
 </RelativeLayout>
