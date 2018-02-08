@@ -29,7 +29,7 @@
     <!--suggest Video-->
     <string name="Video_hint">Write the video link in the next field:</string>
     <string name="URL">https://</string>
-    <string name="video_title">Suggest video</string>
+    <string name="video_title">Suggest Video</string>
 
 
     <string name="blankT">Fill Blank</string>
