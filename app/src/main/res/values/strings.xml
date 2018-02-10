@@ -16,6 +16,9 @@
     <string name="department4">IS</string>
     <string name="register_btn">Register</string>
     <string name="register_q">Have an account?</string>
+    <string name="register_error_empty">Fill all fields please</string>
+    <string name="register_error_email">write a ksu email please</string>
+    <string name="register_error_password">passwords does not match</string>
 
 
     <!--login page -->

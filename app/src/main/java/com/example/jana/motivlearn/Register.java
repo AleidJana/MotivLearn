@@ -1,4 +1,4 @@
-package com.example.jana.motivlearn.activities;
+package com.example.jana.motivlearn;
 
 import android.app.Activity;
 import android.content.Intent;
