@@ -1,4 +1,4 @@
-package com.example.jana.motivlearn; /**
+package com.example.jana.motivlearn.Fragments; /**
  * Created by jana on 2/1/2018 AD.
  */
 

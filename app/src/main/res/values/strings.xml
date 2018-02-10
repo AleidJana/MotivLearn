@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">MotivLearn</string>
-    <string name="sample_string">you can share your experience \n   with other students</string>
+
+
+    <!--intro page -->
+
+
+    <string name="first_string">Turn your learning process into  \n  a fun challenge journey</string>
+    <string name="secound_string">Learn more, improve your skills and  \n be "only one" in your field</string>
+    <string name="thired_string">Solve challenges, make achievement, \n communicate with colleagues and expand your knowledge area </string>
 
 
     <!--register page -->
@@ -27,7 +34,10 @@
     <string name="login_q">Not a member?</string>
     <string name="login_error_empty">Fill all fields please</string>
     <string name="login_error_notFound">Incorrect email or password</string>
-
+    <!--Services page for teacher-->
+    <string name="Create_challenge">Create Challenge</string>
+    <string name="Suggest_challenge">Suggest Challenge</string>
+    <string name="Suggest_video">Suggest Video</string>
 
     <!--suggest Video-->
     <string name="Video_hint">Write the video link in the next field:</string>
@@ -49,5 +59,27 @@
     <string name="Submit">Submit</string>
     <string name="addblank">Add blank</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+
+    <string-array name="planets_array">
+        <item>SWE</item>
+        <item>IT</item>
+        <item>IS</item>
+        <item>CS</item>
+
+    </string-array>
+
+
+    <string-array name="planets_array2">
+        <item>SWE</item>
+        <item>IT</item>
+        <item>IS</item>
+        <item>CS</item>
+
+    </string-array>
 
 </resources>

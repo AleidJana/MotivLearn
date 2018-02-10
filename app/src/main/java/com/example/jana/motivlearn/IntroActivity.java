@@ -7,14 +7,13 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.WindowManager;
 
-import com.github.paolorotolo.appintro.AppIntro2;
-import com.github.paolorotolo.appintro.AppIntroFragment;
+import com.example.jana.motivlearn.Fragments.SampleSlide;
+import com.github.paolorotolo.appintro.AppIntro;
 
-public class IntroActivity extends AppIntro2 {
+public class IntroActivity extends AppIntro {
 
     @SuppressLint("ResourceType")
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -27,13 +26,14 @@ public class IntroActivity extends AppIntro2 {
         addSlide(SampleSlide.newInstance(R.layout.slide_3));
         showSkipButton(false);
         setFadeAnimation();
+        setBarColor(Color.parseColor("#5a3689"));
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
 
-        startActivity(new Intent(getApplicationContext(),Register.class));
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
     @Override
