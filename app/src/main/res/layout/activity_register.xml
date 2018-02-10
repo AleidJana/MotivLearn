@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/pink4"
-    tools:context="com.example.jana.motivlearn.Register">
-
+    tools:context="com.example.jana.motivlearn.activities.Register">
     <EditText
         android:id="@+id/editText7"
         android:layout_width="270dp"
@@ -16,11 +15,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="14dp"
         android:background="@drawable/oval"
+        android:paddingLeft="10dp"
         android:drawableLeft="@drawable/ic_action_em"
         android:ems="10"
-        android:hint="@string/email"
+        android:hint="  Email"
         android:inputType="textCapCharacters|textEmailAddress"
-        android:paddingLeft="10dp"
         android:singleLine="false"
         android:textColor="#8767b3"
         android:textColorHint="#8767b3"
@@ -36,12 +35,12 @@
         android:layout_alignLeft="@+id/editText7"
         android:layout_alignStart="@+id/editText7"
         android:layout_marginBottom="14dp"
+        android:paddingLeft="10dp"
         android:background="@drawable/oval"
         android:drawableLeft="@drawable/ic_action_pa"
         android:ems="10"
-        android:hint="@string/user_name"
+        android:hint=" Username"
         android:inputType="textPersonName"
-        android:paddingLeft="10dp"
         android:singleLine="false"
         android:textColor="#8767b3"
         android:textColorHint="#8767b3"
@@ -62,7 +61,7 @@
         android:background="@drawable/oval"
         android:drawableLeft="@drawable/ic_action_pas"
         android:ems="10"
-        android:hint="@string/password"
+        android:hint=" Password"
         android:inputType="textPersonName"
         android:singleLine="false"
         android:textColor="#8767b3"
@@ -80,7 +79,7 @@
         android:layout_marginTop="26dp"
         android:fontFamily="cursive"
         android:paddingLeft="10dp"
-        android:text="@string/title"
+        android:text="REGISTER"
         android:textColor="#8767b3"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -101,7 +100,7 @@
         android:background="@drawable/oval"
         android:drawableLeft="@drawable/ic_action_pas"
         android:ems="10"
-        android:hint="@string/confirm_password"
+        android:hint=" Confirm Password"
         android:inputType="textPassword"
         android:singleLine="false"
         android:textColor="#8767b3"
@@ -121,7 +120,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="13dp"
         android:background="@drawable/ovalbutton"
-        android:text="@string/register_btn"
+        android:text="Create "
         android:paddingLeft="10dp"
         android:textColor="@color/cardview_light_background" />
 
@@ -136,7 +135,7 @@
         android:layout_marginBottom="70dp"
         android:layout_toLeftOf="@+id/button3"
         android:layout_toStartOf="@+id/button3"
-        android:text="@string/register_q"
+        android:text="Have an account? "
         android:textColor="#8767b3" />
 
 
@@ -151,11 +150,19 @@
         android:background="@drawable/button"
         android:onClick="Action"
         android:paddingBottom="1dp"
-        android:text="@string/login_btn"
+        android:text="Login"
         android:textColor="#c273cc"
         android:textSize="12sp"
         android:textStyle="bold"
         tools:ignore="OnClick" />
+    <RadioGroup
+        android:id="@+id/RadioG"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="459dp"
+        android:layout_marginLeft="80dp"
+        >
 
     <RadioButton
         android:id="@+id/radioButton"
@@ -166,7 +173,7 @@
         android:layout_toEndOf="@+id/radioButton3"
         android:layout_toRightOf="@+id/radioButton3"
         android:buttonTint="#8767b3"
-        android:text="@string/department2"
+        android:text="IT"
         android:textColor="#8767b3" />
 
     <RadioButton
@@ -179,13 +186,14 @@
         android:layout_toStartOf="@+id/button2"
         android:buttonTint="#8767b3"
         android:checked="true"
-        android:text="@string/department1"
+        android:text="SWE"
         android:textColor="#8767b3" />
 
     <RadioButton
         android:id="@+id/radioButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_alignBaseline="@+id/radioButton5"
         android:layout_alignBottom="@+id/radioButton5"
         android:layout_marginLeft="11dp"
@@ -193,7 +201,7 @@
         android:layout_toEndOf="@+id/radioButton5"
         android:layout_toRightOf="@+id/radioButton5"
         android:buttonTint="#8767b3"
-        android:text="@string/department4"
+        android:text="IS"
         android:textColor="#8767b3" />
 
 
@@ -207,8 +215,9 @@
         android:layout_alignEnd="@+id/textView4"
         android:layout_alignRight="@+id/textView4"
         android:buttonTint="#8767b3"
-        android:text="@string/department3"
+        android:text="CSC"
         android:textColor="#8767b3" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/textView"
@@ -238,10 +247,87 @@
         android:gravity="start"
         android:paddingLeft="40dp"
         android:paddingTop="15dp"
-        android:text="@string/department"
+        android:text="  Department :"
         android:textAlignment="textStart"
         android:textColor="#8767b3"
         android:textSize="15sp" />
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/radioButton3"
+        android:layout_toStartOf="@+id/radioButton3" />
+
+    <LinearLayout
+        android:id="@+id/errorlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editText7"
+        android:layout_alignEnd="@+id/editText7"
+        android:layout_alignStart="@+id/editText7"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/rounded_bgcorner"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/jhj"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="@string/register_error_empty"
+                android:textColor="?attr/colorError"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView7"
+                android:layout_alignBottom="@+id/textView7"
+                android:layout_marginStart="24dp"
+                android:layout_toEndOf="@+id/jhj"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="@string/register_error_email"
+                android:textAlignment="center"
+                android:textColor="?attr/colorError"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView7"
+                android:layout_alignBottom="@+id/textView7"
+                android:layout_marginStart="24dp"
+                android:layout_toEndOf="@+id/jhj"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="@string/register_error_password"
+                android:textAlignment="center"
+                android:textColor="?attr/colorError"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/jhj"
+                android:layout_width="52dp"
+                android:layout_height="41dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/error2" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
