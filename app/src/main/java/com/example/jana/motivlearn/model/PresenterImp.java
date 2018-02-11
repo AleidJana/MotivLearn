@@ -34,7 +34,7 @@ public class PresenterImp  implements RegisterPresenter {
                     AsyncHttpClient client = new AsyncHttpClient();
                     RequestParams params = new RequestParams();
 
-                    if (email.substring(email.indexOf("@")).equals("@student.ksu.edu.sa")) {
+                    if ((email.substring(email.indexOf("@"))).toLowerCase().equals("@student.ksu.edu.sa")) {
                         type = "S";
                     } else {
                         type = "T";
