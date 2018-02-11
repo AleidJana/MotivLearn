@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,12 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jana.motivlearn.activities.Register;
 import com.example.jana.motivlearn.model.loginImp;
 import com.example.jana.motivlearn.presenter.loginPresenter;
+import com.example.jana.motivlearn.model.PresenterImp;
+import com.example.jana.motivlearn.presenter.RegisterPresenter;
+import com.example.jana.motivlearn.view.RegisterView;
 import com.example.jana.motivlearn.view.loginView;
 
 public class Login extends AppCompatActivity
@@ -24,7 +30,7 @@ public class Login extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button toReg = findViewById(R.id.button2);
+        Button toReg = findViewById(R.id.button3);
         toReg.setOnClickListener(new Button.OnClickListener()
         {
             @Override
@@ -81,5 +87,6 @@ public class Login extends AppCompatActivity
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         startActivity(intent);
     }
+
 }
 

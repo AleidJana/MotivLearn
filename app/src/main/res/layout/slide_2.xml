@@ -3,23 +3,29 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f6ebfe">
+    android:background="@color/white"
+
+    >
 
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="5"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/skills"
         android:contentDescription="TODO" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_gravity="center"
-        android:text="hello 2!"
-        android:textSize="30dp"
-        android:textColor="@color/colorPrimary2"
+        android:layout_weight="3"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/secound_string"
+        android:textSize="20dp"
+        android:lines="4"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
         />
 </LinearLayout>

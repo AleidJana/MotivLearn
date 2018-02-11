@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_Profile"
+        icon="@drawable/ic_profile"
+        title="Profile" />
+    <tab
+    id="@+id/tab_Timeline"
+    icon="@drawable/ic_timeline"
+    title="Timeline" />
+    <tab
+        id="@+id/tab_Leaderboard"
+        icon="@drawable/ic_leader"
+        title="Leaderboard" />
+    <tab
+        id="@+id/tab_Challengeboard"
+        icon="@drawable/ic_challenge"
+        title="Challengeboard" />
+    <tab
+        id="@+id/tab_Services"
+        icon="@drawable/ic_services"
+        title="Services" />
+</tabs>
