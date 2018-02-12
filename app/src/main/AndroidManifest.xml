@@ -26,7 +26,10 @@
         <activity android:name=".fillBlank" />
         <activity android:name=".multipleChoices" />
         <activity android:name=".CodeOutput" />
-        <activity android:name=".createChallenge"></activity>
+        <activity android:name=".displayfillBlanck" />
+        <activity android:name=".displaychoice" />
+        <activity android:name=".createChallenge" />
+        <activity android:name=".puzzel"></activity>
     </application>
 
 </manifest>

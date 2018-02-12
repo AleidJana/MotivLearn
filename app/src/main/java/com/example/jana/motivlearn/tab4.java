@@ -54,7 +54,7 @@ public class tab4 extends Fragment {
                         1,
                         "Highest rate",
                         "Haifa Alabduljabbar",
-                        R.drawable.code, R.drawable.js));
+                        R.drawable.code, R.drawable.qa));
         productList.add(
                 new question(
                         1,

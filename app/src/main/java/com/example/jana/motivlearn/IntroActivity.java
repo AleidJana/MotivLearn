@@ -33,7 +33,7 @@ public class IntroActivity extends AppIntro {
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
 
-        startActivity(new Intent(getApplicationContext(),Login.Register.class));
+        startActivity(new Intent(getApplicationContext(),Register.class));
     }
 
     @Override
