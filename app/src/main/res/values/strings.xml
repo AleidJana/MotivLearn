@@ -24,8 +24,15 @@
     <string name="register_btn">Register</string>
     <string name="register_q">Have an account?</string>
     <string name="register_error_empty">Fill all fields please</string>
-    <string name="register_error_email">write a ksu email please</string>
-    <string name="register_error_password">passwords does not match</string>
+    <string name="register_error_email">Write a ksu email please</string>
+    <string name="register_error_password">Passwords does not match</string>
+    <string name="register_error_EmailExists">Email already exists </string>
+
+    <!--suggest Video page -->
+    <string name="suggestVideo_error_empty">Fill the field please</string>
+    <string name="suggestVideo_error_format">Enter the link with http:// format</string>
+
+
 
 
     <!--login page -->
@@ -64,20 +71,28 @@
 
 
     <string-array name="planets_array">
-        <item>SWE</item>
-        <item>IT</item>
-        <item>IS</item>
-        <item>CS</item>
+        <item>Multiple choices </item>
+        <item>Code output</item>
+        <item>Puzzle</item>
+        <item>Fill blanks</item>
 
     </string-array>
 
 
     <string-array name="planets_array2">
+        <item>Java</item>
+        <item>JavaScript</item>
+        <item>C</item>
+        <item>Html</item>
+        <item>CSS</item>
+        <item>Php</item>
+        <item>Security</item>
+        <item>Ethics</item>
+        <item>Network</item>
+        <item>Quality assurance</item>
         <item>SWE</item>
-        <item>IT</item>
-        <item>IS</item>
-        <item>CS</item>
 
     </string-array>
+
 
 </resources>

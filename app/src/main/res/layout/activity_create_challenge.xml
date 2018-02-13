@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/number_picker_bg_color"
-            app:snp_buttonIconDown="@drawable/ic_minuse"
+            app:snp_buttonIconDown="@drawable/ic_plus"
             app:snp_buttonIconUp="@drawable/ic_plus"
             app:snp_maxValue="60"
             app:snp_minValue="5"
@@ -190,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/number_picker_bg_color"
-            app:snp_buttonIconDown="@drawable/ic_minuse"
+            app:snp_buttonIconDown="@drawable/ic_plus"
             app:snp_buttonIconUp="@drawable/ic_plus"
             app:snp_maxValue="5"
             app:snp_minValue="1"
@@ -202,6 +202,9 @@
             app:snp_valueMarginEnd="8dp"
             app:snp_valueMarginStart="8dp" />
     </LinearLayout>
+
+
+
 
 </RelativeLayout>
 

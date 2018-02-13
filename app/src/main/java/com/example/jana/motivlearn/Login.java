@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jana.motivlearn.activities.Register;
+import com.example.jana.motivlearn.Register;
 import com.example.jana.motivlearn.model.loginImp;
 import com.example.jana.motivlearn.presenter.loginPresenter;
 import com.example.jana.motivlearn.model.PresenterImp;

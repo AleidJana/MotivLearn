@@ -82,6 +82,9 @@ RegisterPresenter mRegisterView;
 
         TextView eror2 = findViewById(R.id.textView9);
         eror2.setVisibility(View.GONE);
+
+        TextView eror3 = findViewById(R.id.textView10);
+        eror3.setVisibility(View.GONE);
     }
 
     @Override
@@ -89,11 +92,26 @@ RegisterPresenter mRegisterView;
         Toast.makeText(getApplicationContext(),"Register is success",Toast.LENGTH_LONG).show();
 
 
+
     }
 
     @Override
     public void registerError() {
-        Toast.makeText(getApplicationContext(),"Register is failed",Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(),"Email is exset",Toast.LENGTH_LONG).show();
+        LinearLayout linlay = findViewById(R.id.errorlay);
+        linlay.setVisibility(View.VISIBLE);
+
+        TextView eror = findViewById(R.id.textView10);
+        eror.setVisibility(View.VISIBLE);
+
+        TextView eror1 = findViewById(R.id.textView7);
+        eror1.setVisibility(View.GONE);
+
+        TextView eror2 = findViewById(R.id.textView8);
+        eror2.setVisibility(View.GONE);
+
+        TextView eror3 = findViewById(R.id.textView9);
+        eror3.setVisibility(View.GONE);
 
 
     }
@@ -116,7 +134,12 @@ RegisterPresenter mRegisterView;
         eror1.setVisibility(View.GONE);
 
         TextView eror2 = findViewById(R.id.textView8);
-        eror2.setVisibility(View.GONE);    }
+        eror2.setVisibility(View.GONE);
+
+        TextView eror3 = findViewById(R.id.textView10);
+        eror3.setVisibility(View.GONE);
+
+    }
 
     public void emailError(){
 
@@ -130,7 +153,12 @@ RegisterPresenter mRegisterView;
         eror1.setVisibility(View.GONE);
 
         TextView eror2 = findViewById(R.id.textView9);
-        eror2.setVisibility(View.GONE);    }
+        eror2.setVisibility(View.GONE);
+
+        TextView eror3 = findViewById(R.id.textView10);
+        eror3.setVisibility(View.GONE);
+
+    }
 }
 
 
