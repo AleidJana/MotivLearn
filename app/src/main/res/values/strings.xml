@@ -27,6 +27,7 @@
     <string name="register_error_email">Write a ksu email please</string>
     <string name="register_error_password">Passwords does not match</string>
     <string name="register_error_EmailExists">Email already exists </string>
+    <string name="register_success">you have been registered successfully </string>
 
     <!--suggest Video page -->
     <string name="suggestVideo_error_empty">Fill the field please</string>
@@ -41,6 +42,7 @@
     <string name="login_q">Not a member?</string>
     <string name="login_error_empty">Fill all fields please</string>
     <string name="login_error_notFound">Incorrect email or password</string>
+    <string name="login_success">logged in successfully</string>
     <!--Services page for teacher-->
     <string name="Create_challenge">Create Challenge</string>
     <string name="Suggest_challenge">Suggest Challenge</string>
@@ -71,7 +73,7 @@
 
 
     <string-array name="planets_array">
-        <item>Multiple choices </item>
+        <item>Multiple choices</item>
         <item>Code output</item>
         <item>Puzzle</item>
         <item>Fill blanks</item>
@@ -93,6 +95,23 @@
         <item>SWE</item>
 
     </string-array>
+
+    <!--- create public challenge -->
+
+    <string name="fillblank_empty">write the question with 1 blank at least</string>
+    <string name="fillblank_noblank">add 1 blank at least</string>
+    <string name="fillblank_emptyblank">write the answer between the double brackets</string>
+
+    <string name="multichoices_emptyQuestion">you have to fill the question field</string>
+    <string name="multichoices_noAnswer">please, check the correct choice</string>
+    <string name="multichoices_fewChoices">write 2 choices at least</string>
+    <string name="multichoices_validAnswer">check a valid choice please</string>
+
+    <string name="codeoutput_empty">Fill all fields please</string>
+
+
+    <string name="bad_connection">poor connection</string>
+    <string name="successCreation">the challenge have been created successfully</string>
 
 
 </resources>

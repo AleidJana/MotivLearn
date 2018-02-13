@@ -10,9 +10,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emredavarci.noty.Noty;
 import com.example.jana.motivlearn.Register;
 import com.example.jana.motivlearn.model.loginImp;
 import com.example.jana.motivlearn.presenter.loginPresenter;
@@ -55,35 +57,39 @@ public class Login extends AppCompatActivity
     }
 
     @Override
-    public void loginValidation() {
-        // Toast toast=Toast.makeText(MainActivity.this,res,Toast.LENGTH_SHORT);
-        //  toast.show();
-        LinearLayout linlay = findViewById(R.id.errorlay);
-        linlay.setVisibility(View.VISIBLE);
+    public void loginFail(String message) {
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
+        int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
+        String mmm = Login.this.getResources().getString(resourceId);
 
-        TextView eror = findViewById(R.id.textView7);
-        eror.setVisibility(View.GONE);
-
-        TextView eror2 = findViewById(R.id.textView8);
-        eror2.setVisibility(View.VISIBLE);
+        Noty.init(Login.this, mmm, rl,
+                Noty.WarningStyle.ACTION)
+                .setActionText("OK")
+                .setWarningBoxBgColor("#d9534f")
+                .setWarningTappedColor("#d9534f")
+                .setWarningBoxPosition(Noty.WarningPos.BOTTOM)
+                .setWarningBoxRadius(80,80,80,80)
+                .setWarningBoxMargins(15,15,15,10)
+                .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
+                .show();
     }
 
     @Override
-    public void loginFail() {
-        LinearLayout linlay = findViewById(R.id.errorlay);
-        linlay.setVisibility(View.VISIBLE);
+    public void loginSuccess(String message) {
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
+        int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
+        String mmm = Login.this.getResources().getString(resourceId);
 
-        TextView eror2 = findViewById(R.id.textView8);
-        eror2.setVisibility(View.GONE);
-
-        TextView eror = findViewById(R.id.textView7);
-        eror.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void loginSuccess(String res) {
-        Toast toast=Toast.makeText(Login.this,res,Toast.LENGTH_SHORT);
-        toast.show();
+        Noty.init(Login.this, mmm, rl,
+                Noty.WarningStyle.ACTION)
+                .setActionText("OK")
+                .setWarningBoxBgColor("#5cb85c")
+                .setWarningTappedColor("#5cb85c")
+                .setWarningBoxPosition(Noty.WarningPos.BOTTOM)
+                .setWarningBoxRadius(80,80,80,80)
+                .setWarningBoxMargins(15,15,15,10)
+                .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
+                .show();
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         startActivity(intent);
     }

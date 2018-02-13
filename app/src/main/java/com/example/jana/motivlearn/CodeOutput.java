@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.emredavarci.noty.Noty;
 import com.example.jana.motivlearn.model.CodeOutputImp;
 import com.example.jana.motivlearn.presenter.CodeOutputPresenter;
 import com.example.jana.motivlearn.view.CodeOutputView;
@@ -46,21 +48,38 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
     }
 
     @Override
-    public void codeOutputValidations() {
-        Toast.makeText(getApplicationContext(),"all the field",Toast.LENGTH_LONG).show();
+    public void codeOutputSuccess(String message) {
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
+        int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
+        String mmm = CodeOutput.this.getResources().getString(resourceId);
+        Noty.init(CodeOutput.this, mmm, rl,
+                Noty.WarningStyle.ACTION)
+                .setActionText("OK")
+                .setWarningBoxBgColor("#5cb85c")
+                .setWarningTappedColor("#5cb85c")
+                .setWarningBoxPosition(Noty.WarningPos.BOTTOM)
+                .setWarningBoxRadius(80,80,80,80)
+                .setWarningBoxMargins(15,15,15,10)
+                .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
+                .show();
 
     }
 
     @Override
-    public void codeOutputSuccess() {
-        Toast.makeText(getApplicationContext()," is success",Toast.LENGTH_LONG).show();
+    public void codeOutputFail(String message) {
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
+        int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
+        String mmm = CodeOutput.this.getResources().getString(resourceId);
 
-
-    }
-
-    @Override
-    public void codeOutputError() {
-        Toast.makeText(getApplicationContext(),"error",Toast.LENGTH_LONG).show();
-
+        Noty.init(CodeOutput.this, mmm, rl,
+                Noty.WarningStyle.ACTION)
+                .setActionText("OK")
+                .setWarningBoxBgColor("#d9534f")
+                .setWarningTappedColor("#d9534f")
+                .setWarningBoxPosition(Noty.WarningPos.BOTTOM)
+                .setWarningBoxRadius(80,80,80,80)
+                .setWarningBoxMargins(15,15,15,10)
+                .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
+                .show();
     }
 }

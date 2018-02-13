@@ -6,7 +6,6 @@ package com.example.jana.motivlearn.view;
 
 public interface CreateChallengeView {
 
-    void CreateChallengeValidations();
-    void CreateChallengeError();
+    void CreateChallengeValidations(String message);
     void CreateChallengeSuccess();
 }

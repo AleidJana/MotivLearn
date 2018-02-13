@@ -15,14 +15,16 @@ public class CreateChallengeImp implements CreateChallengePresenter {
 
     CreateChallengeView CreateChallengeView ;
 
-    public CreateChallengeImp(Class<createChallenge> CreateChallenge ){
-        this.CreateChallengeView=CreateChallengeView;
+    public CreateChallengeImp(CreateChallengeView v ){
+        this.CreateChallengeView=v;
     }
     @Override
     public void pformvalidet(String title) {
-        if (TextUtils.isEmpty(title)){
-            CreateChallengeView.CreateChallengeValidations();
+        if (TextUtils.isEmpty(title))
+            CreateChallengeView.CreateChallengeValidations("register_error_empty");
+            else
+            CreateChallengeView.CreateChallengeSuccess();
+
 
         }
     }
-}

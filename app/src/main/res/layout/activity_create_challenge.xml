@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/pink4"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pink4"
     tools:context="com.example.jana.motivlearn.createChallenge">
 
 
@@ -31,11 +32,11 @@
         android:layout_marginLeft="31dp"
         android:layout_marginStart="31dp"
         android:layout_marginTop="31dp"
-        android:text="Challenge Title"
         android:fontFamily="sans-serif"
+        android:text="Challenge Title"
         android:textColor="#8767b3"
         android:textSize="24dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editText3"
@@ -44,12 +45,12 @@
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2"
         android:layout_below="@+id/textView2"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/vvv"
         android:ems="10"
-        android:layout_marginLeft="10dp"
+        android:hint="    Name"
         android:inputType="textPersonName"
-        android:hint="Name"
         android:textColor="#8767b3"
         android:textColorHint="#8767b3"
         android:textSize="15sp" />
@@ -128,8 +129,8 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="365dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="365dp"
         android:fontFamily="sans-serif"
         android:text="Time"
         android:textColor="#8767b3"
@@ -137,11 +138,11 @@
         android:textStyle="bold" />
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginLeft="120dp"
         android:layout_marginTop="320dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
 
         <com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
@@ -150,26 +151,25 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/number_picker_bg_color"
-            app:snp_buttonIconDown="@drawable/ic_plus"
+            app:snp_buttonIconDown="@drawable/ic_minuse"
             app:snp_buttonIconUp="@drawable/ic_plus"
             app:snp_maxValue="60"
             app:snp_minValue="5"
-            app:snp_value_text_color="@color/white"
             app:snp_orientation="vertical"
             app:snp_stepSize="5"
             app:snp_updateInterval="10"
             app:snp_value="5"
             app:snp_valueMarginEnd="8dp"
             app:snp_valueMarginStart="8dp"
-            />
+            app:snp_value_text_color="@color/white" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="365dp"
         android:layout_marginLeft="210dp"
+        android:layout_marginTop="365dp"
         android:fontFamily="sans-serif"
         android:text="Coins"
         android:textColor="#8767b3"
@@ -177,11 +177,11 @@
         android:textStyle="bold" />
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginLeft="290dp"
         android:layout_marginTop="320dp"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
 
         <com.michaelmuenzer.android.scrollablennumberpicker.ScrollableNumberPicker
@@ -190,20 +190,18 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/number_picker_bg_color"
-            app:snp_buttonIconDown="@drawable/ic_plus"
+            app:snp_buttonIconDown="@drawable/ic_minuse"
             app:snp_buttonIconUp="@drawable/ic_plus"
             app:snp_maxValue="5"
             app:snp_minValue="1"
-            app:snp_value_text_color="@color/white"
             app:snp_orientation="vertical"
             app:snp_stepSize="1"
             app:snp_updateInterval="10"
             app:snp_value="1"
             app:snp_valueMarginEnd="8dp"
-            app:snp_valueMarginStart="8dp" />
+            app:snp_valueMarginStart="8dp"
+            app:snp_value_text_color="@color/white" />
     </LinearLayout>
-
-
 
 
 </RelativeLayout>

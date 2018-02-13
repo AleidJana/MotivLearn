@@ -5,10 +5,6 @@ package com.example.jana.motivlearn.view;
  */
 
 public interface RegisterView {
-    void registerValidations();
-    void registerSuccess();
-    void registerError();
-    void registerIn();
-    void passwordMatch();
-    void emailError();
+    void registerSuccess(String message);
+    void registerFail(String message);
 }

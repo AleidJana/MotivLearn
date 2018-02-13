@@ -29,7 +29,7 @@
         <activity android:name=".displayfillBlanck" />
         <activity android:name=".displaychoice" />
         <activity android:name=".createChallenge" />
-        <activity android:name=".puzzel"></activity>
+        <activity android:name=".puzzel"/>
     </application>
 
 </manifest>

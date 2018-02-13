@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.emredavarci.noty.Noty;
 import com.example.jana.motivlearn.model.CreateChallengeImp;
 import com.example.jana.motivlearn.presenter.CreateChallengePresenter;
 import com.example.jana.motivlearn.view.CreateChallengeView;
@@ -20,7 +22,9 @@ public class createChallenge extends AppCompatActivity implements CreateChalleng
     Spinner challengeTypeF , challengeFieldF;
     ScrollableNumberPicker ScrollableNumberPickerTime ,ScrollableNumberPickerCoins;
     Button Next ;
-    CreateChallengePresenter  CreateChallengeView = new CreateChallengeImp(createChallenge.class);
+    CreateChallengePresenter  CreateChallengeView = new CreateChallengeImp(createChallenge.this);
+    String challengeType = "";
+    String ChallengeTitle="";
 
 
     @Override
@@ -36,19 +40,9 @@ public class createChallenge extends AppCompatActivity implements CreateChalleng
         Next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String ChallengeTitle = ChallengeTitleF.getText().toString();
-                String challengeType = challengeTypeF.getSelectedItem().toString();
-                String challengeField = challengeFieldF.getSelectedItem().toString();
-                int challengeTime=ScrollableNumberPickerTime.getValue();
-                int challengeCoins=ScrollableNumberPickerCoins.getValue();
+                ChallengeTitle = ChallengeTitleF.getText().toString();
+
                 CreateChallengeView.pformvalidet(ChallengeTitle);
-                Intent intent= new Intent(getBaseContext(),CodeOutput.class);
-                intent.putExtra("ChallengeTitle",ChallengeTitle);
-                intent.putExtra("challengeType",challengeType);
-                intent.putExtra("challengeField",challengeField);
-                intent.putExtra("challengeTime",challengeTime);
-                intent.putExtra("challengeCoins",challengeCoins);
-                startActivity(intent);
 
             }
         });
@@ -86,20 +80,48 @@ public class createChallenge extends AppCompatActivity implements CreateChalleng
     }
 
     @Override
-    public void CreateChallengeValidations() {
-        Toast.makeText(getApplicationContext(),"Enter all the field",Toast.LENGTH_LONG).show();
+    public void CreateChallengeValidations(String message) {
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
+        int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
+        String mmm = createChallenge.this.getResources().getString(resourceId);
+
+        Noty.init(createChallenge.this, mmm, rl,
+                Noty.WarningStyle.ACTION)
+                .setActionText("OK")
+                .setWarningBoxBgColor("#d9534f")
+                .setWarningTappedColor("#d9534f")
+                .setWarningBoxPosition(Noty.WarningPos.BOTTOM)
+                .setWarningBoxRadius(80,80,80,80)
+                .setWarningBoxMargins(15,15,15,10)
+                .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
+                .show();
 
     }
-
     @Override
-    public void CreateChallengeError() {
-        Toast.makeText(getApplicationContext()," Error found",Toast.LENGTH_LONG).show();
+    public void CreateChallengeSuccess()
+    {
+        challengeType = challengeTypeF.getSelectedItem().toString();
+        String challengeField = challengeFieldF.getSelectedItem().toString();
+        int challengeTime=ScrollableNumberPickerTime.getValue();
+        int challengeCoins=ScrollableNumberPickerCoins.getValue();
 
+        Intent intent=null;
+
+        if(challengeType.equals("Multiple choices"))
+            intent= new Intent(getBaseContext(),multipleChoices.class);
+        else if(challengeType.equals("Code output"))
+            intent= new Intent(getBaseContext(),CodeOutput.class);
+        else if(challengeType.equals("Puzzle"))
+            intent= new Intent(getBaseContext(),puzzel.class);
+        else if(challengeType.equals("Fill blanks"))
+            intent= new Intent(getBaseContext(),fillBlank.class);
+
+        intent.putExtra("ChallengeTitle",ChallengeTitle);
+        intent.putExtra("challengeType",challengeType);
+        intent.putExtra("challengeField",challengeField);
+        intent.putExtra("challengeTime",challengeTime);
+        intent.putExtra("challengeCoins",challengeCoins);
+        startActivity(intent);
     }
 
-    @Override
-    public void CreateChallengeSuccess() {
-        Toast.makeText(getApplicationContext()," success :))",Toast.LENGTH_LONG).show();
-
-    }
 }

@@ -10,9 +10,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emredavarci.noty.Noty;
 import com.example.jana.motivlearn.Login;
 import com.example.jana.motivlearn.R;
 import com.example.jana.motivlearn.model.PresenterImp;
@@ -51,7 +53,6 @@ RegisterPresenter mRegisterView;
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 radioButton = findViewById(selectedId);
                 mRegisterView.performRegister(userName, email, password, conPassword,radioButton);
-
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
@@ -61,102 +62,43 @@ RegisterPresenter mRegisterView;
                 startActivity(LoginInt);
             }
         });
-
-
-
-
-    }
-
-
-
-    @Override
-    public void registerValidations() {
-        LinearLayout linlay = findViewById(R.id.errorlay);
-        linlay.setVisibility(View.VISIBLE);
-
-        TextView eror = findViewById(R.id.textView7);
-        eror.setVisibility(View.VISIBLE);
-
-        TextView eror1 = findViewById(R.id.textView8);
-        eror1.setVisibility(View.GONE);
-
-        TextView eror2 = findViewById(R.id.textView9);
-        eror2.setVisibility(View.GONE);
-
-        TextView eror3 = findViewById(R.id.textView10);
-        eror3.setVisibility(View.GONE);
     }
 
     @Override
-    public void registerSuccess() {
-        Toast.makeText(getApplicationContext(),"Register is success",Toast.LENGTH_LONG).show();
-
-
-
-    }
-
-    @Override
-    public void registerError() {
-        //Toast.makeText(getApplicationContext(),"Email is exset",Toast.LENGTH_LONG).show();
-        LinearLayout linlay = findViewById(R.id.errorlay);
-        linlay.setVisibility(View.VISIBLE);
-
-        TextView eror = findViewById(R.id.textView10);
-        eror.setVisibility(View.VISIBLE);
-
-        TextView eror1 = findViewById(R.id.textView7);
-        eror1.setVisibility(View.GONE);
-
-        TextView eror2 = findViewById(R.id.textView8);
-        eror2.setVisibility(View.GONE);
-
-        TextView eror3 = findViewById(R.id.textView9);
-        eror3.setVisibility(View.GONE);
-
-
-    }
-    public void registerIn(){
-        //coecion
-
-        Toast.makeText(getApplicationContext(),"Register  In",Toast.LENGTH_LONG).show();
-
-
-    }
-    public void passwordMatch(){
-
-        LinearLayout linlay = findViewById(R.id.errorlay);
-        linlay.setVisibility(View.VISIBLE);
-
-        TextView eror = findViewById(R.id.textView9);
-        eror.setVisibility(View.VISIBLE);
-
-        TextView eror1 = findViewById(R.id.textView7);
-        eror1.setVisibility(View.GONE);
-
-        TextView eror2 = findViewById(R.id.textView8);
-        eror2.setVisibility(View.GONE);
-
-        TextView eror3 = findViewById(R.id.textView10);
-        eror3.setVisibility(View.GONE);
+    public void registerSuccess(String message) {
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
+        int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
+        String mmm = Register.this.getResources().getString(resourceId);
+        Noty.init(Register.this, mmm, rl,
+                Noty.WarningStyle.ACTION)
+                .setActionText("OK")
+                .setWarningBoxBgColor("#5cb85c")
+                .setWarningTappedColor("#5cb85c")
+                .setWarningBoxPosition(Noty.WarningPos.BOTTOM)
+                .setWarningBoxRadius(80,80,80,80)
+                .setWarningBoxMargins(15,15,15,10)
+                .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
+                .show();
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(intent);
 
     }
 
-    public void emailError(){
+    public void registerFail(String message){
+        RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
+        int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
+        String mmm = Register.this.getResources().getString(resourceId);
 
-        LinearLayout linlay = findViewById(R.id.errorlay);
-        linlay.setVisibility(View.VISIBLE);
-
-        TextView eror = findViewById(R.id.textView8);
-        eror.setVisibility(View.VISIBLE);
-
-        TextView eror1 = findViewById(R.id.textView7);
-        eror1.setVisibility(View.GONE);
-
-        TextView eror2 = findViewById(R.id.textView9);
-        eror2.setVisibility(View.GONE);
-
-        TextView eror3 = findViewById(R.id.textView10);
-        eror3.setVisibility(View.GONE);
+        Noty.init(Register.this, mmm, rl,
+                Noty.WarningStyle.ACTION)
+                .setActionText("OK")
+                .setWarningBoxBgColor("#d9534f")
+                .setWarningTappedColor("#d9534f")
+                .setWarningBoxPosition(Noty.WarningPos.BOTTOM)
+                .setWarningBoxRadius(80,80,80,80)
+                .setWarningBoxMargins(15,15,15,10)
+                .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
+                .show();
 
     }
 }

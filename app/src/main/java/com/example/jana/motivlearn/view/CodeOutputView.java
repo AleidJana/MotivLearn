@@ -5,8 +5,8 @@ package com.example.jana.motivlearn.view;
  */
 
 public interface CodeOutputView {
-    void codeOutputValidations();
-    void codeOutputSuccess();
-    void codeOutputError();
+
+    void codeOutputSuccess(String message);
+    void codeOutputFail(String message);
 
 }

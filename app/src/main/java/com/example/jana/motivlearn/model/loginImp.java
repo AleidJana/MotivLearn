@@ -22,7 +22,7 @@ public class loginImp implements loginPresenter {
     @Override
     public void login(String email, String password) {
         if(email.equals("") || password.equals(""))
-          logView.loginValidation();
+          logView.loginFail("login_error_empty");
         else {
             AsyncHttpClient client = new AsyncHttpClient();
             RequestParams params = new RequestParams();
@@ -33,16 +33,15 @@ public class loginImp implements loginPresenter {
                         public void onSuccess(int statusCode, Header[] headers, String res) {
                             // called when response HTTP status is "200 OK"
                             if (res.length() > 2)
-                                logView.loginSuccess(res);
+                                logView.loginSuccess("login_success");
                             else
-                                logView.loginFail();
-
+                                logView.loginFail("login_error_notFound");
                         }
 
                         @Override
                         public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
                             // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                            logView.loginFail();
+                            logView.loginFail("bad_connection");
                         }
                     }
             );

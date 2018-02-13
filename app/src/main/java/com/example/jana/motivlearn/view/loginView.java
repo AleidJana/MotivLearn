@@ -6,7 +6,6 @@ package com.example.jana.motivlearn.view;
 
 public interface loginView {
 
-    void loginValidation();
-    void loginFail();
+    void loginFail(String res);
     void loginSuccess(String res);
 }
