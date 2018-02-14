@@ -34,8 +34,6 @@
     <string name="suggestVideo_error_format">Enter the link with http:// format</string>
 
 
-
-
     <!--login page -->
     <string name="login_title">LOGIN</string>
     <string name="login_btn">Login</string>
@@ -62,7 +60,7 @@
     <string name="answer">Answer</string>
     <string name="enterQ">    Enter question</string>
     <string name="enterA">   Enter answer</string>
-<string name="submit">Submit</string>
+    <string name="submit">Submit</string>
 
     <!--buttons-->
     <string name="Submit">Submit</string>
