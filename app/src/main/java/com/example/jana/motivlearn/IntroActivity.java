@@ -2,6 +2,7 @@ package com.example.jana.motivlearn;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.Nullable;

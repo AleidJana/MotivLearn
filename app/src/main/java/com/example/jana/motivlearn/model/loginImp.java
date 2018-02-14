@@ -28,12 +28,14 @@ public class loginImp implements loginPresenter {
             RequestParams params = new RequestParams();
             //  params.put("key", "value");
             //   params.put("more", "data");
-            client.get("https://api.appery.io/rest/1/apiexpress/api/2_login/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&email=" + email + "&password=" + password, params, new TextHttpResponseHandler() {
+            client.get("https://api.appery.io/rest/1/apiexpress/api/2_login/?" +
+                    "apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&email=" + email +
+                    "&password=" + password, params, new TextHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String res) {
                             // called when response HTTP status is "200 OK"
                             if (res.length() > 2)
-                                logView.loginSuccess("login_success");
+                                logView.loginSuccess(res);
                             else
                                 logView.loginFail("login_error_notFound");
                         }

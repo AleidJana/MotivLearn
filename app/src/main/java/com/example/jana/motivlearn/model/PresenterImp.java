@@ -54,7 +54,7 @@ public class PresenterImp  implements RegisterPresenter {
 
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                            mRegisterView.registerSuccess("register_success");
+                            mRegisterView.registerSuccess(responseString, type);
 
                         }
                     });
