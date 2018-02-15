@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 
 
@@ -49,7 +50,7 @@ public class StudentServices extends Fragment {
         WatchVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  startActivity(new Intent(getActivity(), createChallenge.class));
+                startActivity(new Intent(getActivity(), WatchVideo.class));
 
             }
         });

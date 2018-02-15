@@ -3,7 +3,7 @@
     package="com.example.jana.motivlearn">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -31,7 +31,8 @@
         <activity android:name=".displaychoice" />
         <activity android:name=".createChallenge" />
         <activity android:name=".puzzel" />
-        <activity android:name=".RecordAchievement"></activity>
+        <activity android:name=".RecordAchievement" />
+        <activity android:name=".WatchVideo"></activity>
     </application>
 
 </manifest>
