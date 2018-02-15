@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                     case R.id.tab_Services:
                     {
-                        Fragment t1 = new tab5();
+                        Fragment t1 = new StudentServices();
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, t1);
                         transaction.commit();

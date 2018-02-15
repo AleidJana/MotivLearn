@@ -41,17 +41,22 @@
     <string name="login_error_empty">Fill all fields please</string>
     <string name="login_error_notFound">Incorrect email or password</string>
     <string name="login_success">logged in successfully</string>
-    <!--Services page for teacher-->
+    <!--Teacher Services page -->
     <string name="Create_challenge">Create Challenge</string>
     <string name="Suggest_challenge">Suggest Challenge</string>
-    <string name="Suggest_video">Suggest Video</string>
+    <string name="Suggest_video">Suggest Educational Video</string>
+
+    <!--Student Services page -->
+    <string name="Create_group_challenge">Create Group Challenge</string>
+    <string name="Record_achievement">Record Achievement</string>
+    <string name="Watch_video">Watch Educational Video</string>
+    <string name="Join_group_challenge">Join Group Challenge</string>
+
 
     <!--suggest Video-->
     <string name="Video_hint">Write the video link in the next field:</string>
     <string name="URL">https://</string>
     <string name="video_title">Suggest Video</string>
-
-
     <string name="blankT">Fill Blank</string>
 
 
@@ -110,6 +115,8 @@
 
     <string name="bad_connection">poor connection</string>
     <string name="successCreation">the challenge have been created successfully</string>
+    <string name="permission_camera_rationale">permissioncamerarationale</string>
+    <string name="ok">ok</string>
 
 
 </resources>
