@@ -6,12 +6,14 @@ package com.example.jana.motivlearn;
 
 
     public class UserInfo {
+        private int id;
         private String Name;
         private int coins;
         private int order;
         private int image;
 
-    public UserInfo(String name, int coins, int order, int image) {
+    public UserInfo(int uid, String name, int coins, int order, int image) {
+        id = uid;
         Name = name;
         this.coins = coins;
         this.order = order;

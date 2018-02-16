@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
         holder.textViewName.setText(String.valueOf(questions.getWriter()));
         holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(questions.getImage()));
         holder.fieldimage.setImageDrawable(mCtx.getResources().getDrawable(questions.getField()));
+        holder.progressbar.setProgress(questions.getDuration());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +69,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
 
         TextView textViewTitle,textViewName;
         ImageView imageView,fieldimage;
+        ProgressBar progressbar;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
@@ -75,6 +78,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
             textViewName = itemView.findViewById(R.id.textViewPrice);
             imageView = itemView.findViewById(R.id.imageView);
             fieldimage=itemView.findViewById(R.id.imageView2);
+            progressbar = itemView.findViewById(R.id.progressBar);
         }
     }
 }

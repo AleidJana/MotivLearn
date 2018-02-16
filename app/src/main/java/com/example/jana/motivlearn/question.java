@@ -11,13 +11,15 @@ package com.example.jana.motivlearn;
         private String writer;
         private int image;
         private int field;
+        private int duration;
 
-    public question(int id, String title, String writer, int image, int field) {
+    public question(int id, String title, String writer, int image, int field, int duration) {
         this.id = id;
         this.title = title;
         this.writer = writer;
         this.image = image;
         this.field = field;
+        this.duration = duration;
     }
 
     public int getId() {
@@ -38,5 +40,9 @@ package com.example.jana.motivlearn;
 
     public int getField() {
         return field;
+    }
+
+    public int getDuration() {
+        return duration;
     }
 }

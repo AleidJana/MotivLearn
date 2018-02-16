@@ -17,17 +17,19 @@ import android.widget.Toast;
 
 import com.emredavarci.noty.Noty;
 import com.example.jana.motivlearn.Register;
+import com.example.jana.motivlearn.model.challengeBoardImp;
 import com.example.jana.motivlearn.model.loginImp;
+import com.example.jana.motivlearn.presenter.challengeBoardPresenter;
 import com.example.jana.motivlearn.presenter.loginPresenter;
 import com.example.jana.motivlearn.model.PresenterImp;
 import com.example.jana.motivlearn.presenter.RegisterPresenter;
 import com.example.jana.motivlearn.view.RegisterView;
+import com.example.jana.motivlearn.view.challengeBoardView;
 import com.example.jana.motivlearn.view.loginView;
 
 import org.json.JSONObject;
 
-public class Login extends AppCompatActivity
-        implements loginView {
+public class Login extends AppCompatActivity implements loginView {
     private loginPresenter logPres;
 
     @Override
