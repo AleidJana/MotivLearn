@@ -79,7 +79,6 @@ public class tab1 extends Fragment {
                         public void onBoomButtonClick(int index) {
                            // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
                             final RatingDialog ratingDialog = new RatingDialog.Builder(getActivity())
-                                    .threshold(4)
                                     .onThresholdCleared(new RatingDialog.Builder.RatingThresholdClearedListener() {
                                         @Override
                                         public void onThresholdCleared(RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
