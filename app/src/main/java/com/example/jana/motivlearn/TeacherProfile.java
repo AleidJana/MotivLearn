@@ -1,15 +1,15 @@
 package com.example.jana.motivlearn;
 
-import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TabHost;
 import android.widget.Toast;
-
 
 import com.codemybrainsout.ratingdialog.RatingDialog;
 import com.github.mikephil.charting.charts.RadarChart;
@@ -22,8 +22,7 @@ import com.nightonke.boommenu.BoomMenuButton;
 
 import java.util.ArrayList;
 
-
-public class tab1 extends Fragment {
+public class TeacherProfile extends Fragment {
     TabHost tabHost;
     ArrayList<Entry> entries = new ArrayList<>();
     ArrayList<Entry> entries2 = new ArrayList<>();
@@ -35,7 +34,7 @@ public class tab1 extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.fragment_tab1, container, false);
+        View view = inflater.inflate(R.layout.fragment_teacher_profile, container, false);
         TabHost host = (TabHost)view.findViewById(R.id.tabHost);
         host.setup();
 
@@ -77,14 +76,14 @@ public class tab1 extends Fragment {
                     .normalText("Team Work!").listener(new OnBMClickListener() {
                         @Override
                         public void onBoomButtonClick(int index) {
-                           // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
+                            // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
                             final RatingDialog ratingDialog = new RatingDialog.Builder(getActivity())
                                     .threshold(4)
                                     .onThresholdCleared(new RatingDialog.Builder.RatingThresholdClearedListener() {
                                         @Override
                                         public void onThresholdCleared(RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
                                             //do something
-                                             Toast.makeText(getContext(),"rating value is : "+rating,Toast.LENGTH_LONG).show();
+                                            Toast.makeText(getContext(),"rating value is : "+rating,Toast.LENGTH_LONG).show();
 
                                             ratingDialog.dismiss();
                                         }
@@ -102,13 +101,6 @@ public class tab1 extends Fragment {
         spec.setIndicator("Skills");
         host.addTab(spec);
 
-
-
-        //Tab 2
-        spec = host.newTabSpec("Badges");
-        spec.setContent(R.id.tab2);
-        spec.setIndicator("Badges");
-        host.addTab(spec);
 
         // Inflate the layout for this fragment
         return view;    }

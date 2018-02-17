@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.jana.motivlearn"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -36,6 +36,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.emredavarci:noty:1.0.3'
+    compile 'com.nightonke:boommenu:2.1.1'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
+    compile 'com.codemybrainsout.rating:ratingdialog:1.0.8'
     compile 'com.victor:lib:1.0.4'
     compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
+
+
 }
