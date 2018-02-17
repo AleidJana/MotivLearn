@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     case R.id.tab_Profile:
                     {
-                        Fragment t1 = new TeacherProfile();
+                        Fragment t1 = new tab1();
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, t1);
                         transaction.commit();
