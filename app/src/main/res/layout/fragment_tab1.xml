@@ -171,66 +171,66 @@
 
                        <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_height="62dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginRight="5dp"
                         android:layout_weight="1">
 
                         <!--line 1 -->
                         <ImageView
-                            android:id="@+id/imgview2"
+                            android:id="@+id/healper"
                             android:layout_width="40dp"
-                            android:layout_height="39dp"
+                            android:layout_height="50dp"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
-                            android:background="@drawable/html1" />
+                            android:background="@drawable/healper1" />
 
                         <ImageView
-                            android:id="@+id/imgview3"
+                            android:id="@+id/learner"
                             android:layout_width="40dp"
-                            android:layout_height="39dp"
+                            android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:background="@drawable/supermaster" />
+                            android:background="@drawable/learner1" />
 
                         <ImageView
                             android:id="@+id/imgview4"
                             android:layout_width="40dp"
-                            android:layout_height="39dp"
+                            android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:background="@drawable/learner" />
+                            android:background="@drawable/asker1" />
 
                         <ImageView
                             android:id="@+id/imgview5"
                             android:layout_width="40dp"
-                            android:layout_height="39dp"
+                            android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:background="@drawable/unstoppable" />
+                            android:background="@drawable/challangemaster" />
                         <ImageView
                             android:id="@+id/imgview6"
                             android:layout_width="40dp"
-                            android:layout_height="39dp"
+                            android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:background="@drawable/html1" />
+                            android:background="@drawable/unbeatable" />
 
                         <ImageView
                             android:id="@+id/imgview7"
                             android:layout_width="40dp"
-                            android:layout_height="39dp"
+                            android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:background="@drawable/unstoppable" />
+                            android:background="@drawable/topwinner" />
 
                         <ImageView
                             android:id="@+id/imgview8"
                             android:layout_width="40dp"
-                            android:layout_height="39dp"
+                            android:layout_height="50dp"
                             android:layout_weight="1"
-                            android:background="@drawable/html1" />
+                            android:background="@drawable/unstoppable" />
 
                     </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
+                            android:layout_height="62dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="5dp"
                             android:layout_weight="1">
@@ -239,7 +239,7 @@
                             <ImageView
                                 android:id="@+id/imgview22"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/html1" />
@@ -247,48 +247,48 @@
                             <ImageView
                                 android:id="@+id/imgview33"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/supermaster" />
+                                android:background="@drawable/css1" />
 
                             <ImageView
                                 android:id="@+id/imgview44"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/learner" />
+                                android:background="@drawable/java1" />
 
                             <ImageView
                                 android:id="@+id/imgview55"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/unstoppable" />
+                                android:background="@drawable/c1" />
                             <ImageView
                                 android:id="@+id/imgview66"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/html1" />
+                                android:background="@drawable/js1" />
 
                             <ImageView
                                 android:id="@+id/imgview77"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/unstoppable" />
+                                android:background="@drawable/php1" />
 
                             <ImageView
                                 android:id="@+id/imgview88"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/html1" />
+                                android:background="@drawable/profssenal" />
 
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
+                            android:layout_height="62dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="5dp"
                             android:layout_weight="1">
@@ -297,56 +297,56 @@
                             <ImageView
                                 android:id="@+id/imgview222"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/html1" />
+                                android:background="@drawable/html2" />
 
                             <ImageView
                                 android:id="@+id/imgview333"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/supermaster" />
+                                android:background="@drawable/css2" />
 
                             <ImageView
                                 android:id="@+id/imgview444"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/learner" />
+                                android:background="@drawable/java2" />
 
                             <ImageView
                                 android:id="@+id/imgview555"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/unstoppable" />
+                                android:background="@drawable/c2" />
                             <ImageView
                                 android:id="@+id/imgview666"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/html1" />
+                                android:background="@drawable/js2" />
 
                             <ImageView
                                 android:id="@+id/imgview777"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/unstoppable" />
+                                android:background="@drawable/php2" />
 
                             <ImageView
                                 android:id="@+id/imgview888"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/html1" />
+                                android:background="@drawable/educator" />
 
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
+                            android:layout_height="62dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="5dp"
                             android:layout_weight="1">
@@ -355,51 +355,51 @@
                             <ImageView
                                 android:id="@+id/imgview2222"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_marginLeft="5dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/html1" />
+                                android:background="@drawable/html3" />
 
                             <ImageView
                                 android:id="@+id/imgview3333"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/supermaster" />
+                                android:background="@drawable/css3" />
 
                             <ImageView
                                 android:id="@+id/imgview4444"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/learner" />
+                                android:background="@drawable/java3" />
 
                             <ImageView
                                 android:id="@+id/imgview5555"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/unstoppable" />
+                                android:background="@drawable/c3" />
                             <ImageView
                                 android:id="@+id/imgview6666"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/html1" />
+                                android:background="@drawable/js3" />
 
                             <ImageView
                                 android:id="@+id/imgview7777"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/unstoppable" />
+                                android:background="@drawable/php3" />
 
                             <ImageView
                                 android:id="@+id/imgview8888"
                                 android:layout_width="40dp"
-                                android:layout_height="39dp"
+                                android:layout_height="50dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/html1" />
+                                android:background="@drawable/supermaster1" />
 
                         </LinearLayout>
                     </LinearLayout>
