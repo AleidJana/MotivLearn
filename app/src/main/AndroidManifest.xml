@@ -32,7 +32,9 @@
         <activity android:name=".createChallenge" />
         <activity android:name=".puzzel" />
         <activity android:name=".RecordAchievement" />
-        <activity android:name=".WatchVideo"></activity>
+        <activity android:name=".WatchVideo" />
+        <activity android:name=".Comment" />
+        <activity android:name=".AddPost"></activity>
     </application>
 
 </manifest>

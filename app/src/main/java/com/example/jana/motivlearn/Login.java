@@ -8,23 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.emredavarci.noty.Noty;
-import com.example.jana.motivlearn.Register;
-import com.example.jana.motivlearn.model.challengeBoardImp;
+
 import com.example.jana.motivlearn.model.loginImp;
-import com.example.jana.motivlearn.presenter.challengeBoardPresenter;
 import com.example.jana.motivlearn.presenter.loginPresenter;
-import com.example.jana.motivlearn.model.PresenterImp;
-import com.example.jana.motivlearn.presenter.RegisterPresenter;
-import com.example.jana.motivlearn.view.RegisterView;
-import com.example.jana.motivlearn.view.challengeBoardView;
 import com.example.jana.motivlearn.view.loginView;
 
 import org.json.JSONObject;

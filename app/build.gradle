@@ -41,6 +41,7 @@ dependencies {
     compile 'com.codemybrainsout.rating:ratingdialog:1.0.8'
     compile 'com.victor:lib:1.0.4'
     compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
-
+    compile 'com.github.jd-alexander:LikeButton:0.2.3'
+    compile 'com.android.support:design:26.1.0'
 
 }
