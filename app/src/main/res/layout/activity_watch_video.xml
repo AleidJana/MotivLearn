@@ -6,12 +6,41 @@
     android:layout_height="match_parent"
     tools:context="com.example.jana.motivlearn.WatchVideo">
 
-    <com.halilibo.bettervideoplayer.BetterVideoPlayer
-        xmlns:android="http://schemas.android.com/apk/res/android"
+   <com.halilibo.bettervideoplayer.BetterVideoPlayer xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:bvp_autoFullscreen="true"
-        app:bvp_loadingStyle="ChasingDots"
-        />
+        app:bvp_loadingStyle="ChasingDots" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="627dp"
+        android:layout_marginEnd="379dp"
+        android:background="@drawable/button"
+        android:contentDescription="@string/addblank"
+        android:scaleType="fitEnd"
+        app:srcCompat="@drawable/close" />
+
+    <com.emredavarci.circleprogressbar.CircleProgressBar xmlns:cpb="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/progressBar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        cpb:backgroundColor="@color/colorAccent"
+        cpb:backgroundWidth="3"
+        cpb:maxValue="100"
+        cpb:prefix=""
+        cpb:progressColor="#b1e4f9"
+        cpb:progressText="0"
+        cpb:progressTextColor="@color/white"
+        cpb:roundedCorners="true"
+        cpb:strokeWidth="5"
+        cpb:suffix="s"
+        cpb:textSize="14sp" />
 </RelativeLayout>
