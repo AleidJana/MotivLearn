@@ -49,28 +49,33 @@
                 android:textStyle="bold"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="112dp"
-                android:gravity="center_horizontal"
+                android:layout_height="85dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="45dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:layout_weight="3"
-                    android:layout_marginLeft="40dp"
+                    android:layout_weight="1"
+                    android:layout_margin="20dp"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/coins" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:text="100"
-                        android:textSize="22sp"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:text="1000"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -78,14 +83,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:layout_weight="3"
-                    android:layout_marginLeft="25dp"
+                    android:layout_weight="1"
+                    android:layout_margin="20dp"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="60dp"
-                        android:layout_marginTop="5dp"
                         android:layout_height="55dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/level" />
 
                 </LinearLayout>
@@ -93,14 +98,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
-                    android:layout_weight="3"
-                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:layout_margin="20dp"
                     android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_gravity="center"
                         android:background="@drawable/swedepartment" />
                 </LinearLayout>
 
@@ -138,10 +143,11 @@
                         android:id="@+id/tab1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                       >
 <RelativeLayout
-    android:layout_width="400dp"
-    android:layout_height="300dp">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center">
     <com.nightonke.boommenu.BoomMenuButton
         android:id="@+id/bmb"
         android:layout_width="wrap_content"
@@ -154,8 +160,8 @@
         />
     <com.github.mikephil.charting.charts.RadarChart
         android:id="@+id/chart"
-        android:layout_width="400dp"
-        android:layout_height="300dp"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
         android:elevation="4dp"
         />
 

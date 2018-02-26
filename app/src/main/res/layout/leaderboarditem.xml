@@ -19,7 +19,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:padding="8dp">
 
             <ImageView
                 android:id="@+id/imageView"
@@ -42,29 +42,37 @@
                 android:textColor="#5a3689"
                 android:textSize="18dp"
                 android:textStyle="bold" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_centerVertical="true"
+    android:id="@+id/coins">
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_weight="3"
+        android:layout_margin="5dp"
+        android:layout_toStartOf="@+id/textViewCoins"
+        android:src="@drawable/coins" />
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/textViewCoins"
-                android:src="@drawable/coins" />
+    <TextView
+        android:id="@+id/textViewCoins"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="5dp"
+        android:textStyle="bold"
+        android:text="333" />
+</LinearLayout>
 
-            <TextView
-                android:id="@+id/textViewCoins"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:textStyle="bold"
-                android:text="333" />
             <TextView
                 android:id="@+id/textViewOrder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageView2"
+                android:layout_alignBottom="@+id/coins"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="15dp"
                 android:text="0"
