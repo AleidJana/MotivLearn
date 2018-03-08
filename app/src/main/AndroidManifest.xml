@@ -27,8 +27,9 @@
         <activity android:name=".fillBlank" />
         <activity android:name=".multipleChoices" />
         <activity android:name=".CodeOutput" />
-        <activity android:name=".displayfillBlanck" />
-        <activity android:name=".displaychoice" />
+        <activity android:name=".displayfillBlanck"  />
+        <activity android:name=".displaychoice"  />
+        <activity android:name=".displayCodeOutput"  />
         <activity android:name=".createChallenge" />
         <activity android:name=".puzzel" />
         <activity android:name=".RecordAchievement" />

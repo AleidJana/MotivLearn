@@ -29,7 +29,7 @@
                 android:id="@+id/textViewTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Apple was soo cute ans frindly tryuhgyfrtdesrddfghgftrtyghjgytryghjgtfygh ______________"
+                android:text=""
                 android:textSize="18dp"
                 android:layout_margin="5dp"
                 android:textStyle="bold"
@@ -99,7 +99,7 @@
         android:gravity="center"
         android:textSize="25dp"
         android:textStyle="bold"
-        android:text="Network challenge" />
+        android:text="" />
 
     <ProgressBar
         android:id="@+id/progressBar2"

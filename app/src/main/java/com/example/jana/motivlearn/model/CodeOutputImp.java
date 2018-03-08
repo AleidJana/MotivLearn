@@ -8,6 +8,8 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import org.json.JSONObject;
+
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -28,12 +30,15 @@ public class CodeOutputImp implements CodeOutputPresenter{
         if(TextUtils.isEmpty(code)|| TextUtils.isEmpty(outPut)){
             codeOutputView.codeOutputFail("codeoutput_empty");
         }
+
+
         //String type="CO";
        // String field ="java";
        // String title="firstQ";
        // int coins=5;
      //   int time=20;
         else {
+
             int userId = 3;
             AsyncHttpClient client = new AsyncHttpClient();
             RequestParams params = new RequestParams();

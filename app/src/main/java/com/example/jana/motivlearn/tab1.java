@@ -7,11 +7,16 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.codemybrainsout.ratingdialog.RatingDialog;
+import com.example.jana.motivlearn.model.StudentProImp;
+import com.example.jana.motivlearn.presenter.StudentProPresenter;
+import com.example.jana.motivlearn.view.StudentproView;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.RadarData;
@@ -20,22 +25,34 @@ import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.TextInsideCircleButton;
 import com.nightonke.boommenu.BoomMenuButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
-public class tab1 extends Fragment {
+public class tab1 extends Fragment implements StudentproView {
     TabHost tabHost;
     ArrayList<Entry> entries = new ArrayList<>();
     ArrayList<Entry> entries2 = new ArrayList<>();
     BoomMenuButton bmb ;
+    TextView UserNamef , UserCoins;
+    ImageView UserDep ,UserLevel;
+    StudentProPresenter ll;
     private ArrayList<RadarDataSet> dataSets = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         View view = inflater.inflate(R.layout.fragment_tab1, container, false);
+        UserNamef=view.findViewById(R.id.Username);
+        UserCoins=view.findViewById(R.id.Usercoins);
+        UserDep=view.findViewById(R.id.UserDep);
+        UserLevel=view.findViewById(R.id.Userlevel);
+        ll=new StudentProImp(tab1.class);
+        ll.displayStudentInfo(2);
+
         TabHost host = (TabHost)view.findViewById(R.id.tabHost);
         host.setup();
 
@@ -113,5 +130,32 @@ public class tab1 extends Fragment {
         return view;    }
 
 
+    @Override
+    public void viewS() {
 
+    }
+
+    @Override
+    public void viewF() {
+
+    }
+
+    @Override
+    public void setInf(String respond) {
+        try {
+            JSONObject obj = new JSONObject(respond);
+          String  Name=obj.getString("name");
+          int coin=obj.getInt("coins");
+          String dep = obj.getString("dep");
+          int level =obj.getInt("level");
+
+
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }
