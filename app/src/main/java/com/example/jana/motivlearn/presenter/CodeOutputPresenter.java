@@ -5,5 +5,5 @@ package com.example.jana.motivlearn.presenter;
  */
 
 public interface CodeOutputPresenter {
-    void performCodeOutput(String code , String outPut , String challengeTitle , String challengeType , String challengeField,int challengetime ,int challemgeCoins);
+    void performCodeOutput(int uid, String code , String outPut , String challengeTitle , String challengeType , String challengeField,int challengetime ,int challemgeCoins);
 }

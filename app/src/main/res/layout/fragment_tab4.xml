@@ -4,23 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.jana.motivlearn.tab4">
 
-    <com.baoyz.widget.PullRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!-- ListView、ScrollView、RecyclerView、Other -->
-
-
-    <!-- TODO: Update blank fragment layout -->
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="5dp" />
-        </com.baoyz.widget.PullRefreshLayout>
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
@@ -32,6 +15,23 @@
             android:paddingLeft="100dp" />
     </RelativeLayout>
 
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp">
+
+        <!-- ListView、ScrollView、RecyclerView、Other -->
+
+
+        <!-- TODO: Update blank fragment layout -->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" />
+    </com.baoyz.widget.PullRefreshLayout>
 
 
 </FrameLayout>

@@ -35,6 +35,8 @@
         <activity android:name=".RecordAchievement" />
         <activity android:name=".WatchVideo" />
         <activity android:name=".Comment" />
+        <activity android:name=".userTprofile" />
+        <activity android:name=".userSprofile" />
         <activity android:name=".AddPost"></activity>
     </application>
 

@@ -42,7 +42,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         //getting the product of the specified position
-        question questions = questionList.get(position);
+        final question questions = questionList.get(position);
         //binding the data with the viewholder views
         holder.textViewTitle.setText(questions.getTitle());
         holder.textViewName.setText(String.valueOf(questions.getWriter()));
@@ -53,7 +53,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(mCtx ,"here you will add small code for question page ",Toast.LENGTH_LONG).show();
-                mCtx.startActivity(new Intent(mCtx,displayfillBlanck.class));
+                Intent intent = null;
+                String type = questions.getType();
+                if(type.equals("choice"))
+                    intent = new Intent(mCtx, displaychoice.class);
+                else if(type.equals("code") || type.equals("fillblank"))
+                    intent = new Intent(mCtx, displayfillBlanck.class);
+
+                intent.putExtra("type", type);
+                intent.putExtra("id", questions.getId());
+                mCtx.startActivity(intent);
+           //     mCtx.startActivity(new Intent(mCtx,displayfillBlanck.class));
 
             }
         });
