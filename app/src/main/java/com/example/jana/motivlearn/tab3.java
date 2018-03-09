@@ -122,6 +122,7 @@ public class tab3 extends Fragment implements leaderBoardView {
                 studentList.add(new UserInfo(
                         uid,
                         name,
+                        "S",
                         coins,
                         i+1,
                         img
@@ -176,6 +177,7 @@ public class tab3 extends Fragment implements leaderBoardView {
                teacherList.add(new UserInfo(
                         uid,
                         name,
+                        "T",
                         coins,
                         i+1,
                         img

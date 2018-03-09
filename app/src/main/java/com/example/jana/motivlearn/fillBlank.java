@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog;
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialogListener;
 import com.emredavarci.noty.Noty;
 import com.example.jana.motivlearn.model.fillBlankImp;
 import com.example.jana.motivlearn.presenter.fillBlankPresenter;
@@ -42,9 +45,11 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
                 String field =bundle.getString("challengeField");
                 int time=bundle.getInt("challengeTime");
                 int coins=bundle.getInt("challengeCoins");
+                SharedPreferences sp1= fillBlank.this.getSharedPreferences("Login", MODE_PRIVATE);
+                int uid =sp1.getInt("user_id", 0);
 
                 pres = new fillBlankImp(fillBlank.this);
-                pres.addPublicChallenge(2,question, title,field,time,coins);
+                pres.addPublicChallenge(uid,question, title,field,time,coins);
 
             }
         });
@@ -74,6 +79,22 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
                 .setWarningBoxMargins(15,15,15,10)
                 .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
                 .show();
+
+        new TTFancyGifDialog.Builder(fillBlank.this)
+                .setTitle("Congratulations")
+                .setMessage("You Have got 10 Coins")
+                .setPositiveBtnText("Ok")
+                .setPositiveBtnBackground("#9577bc")
+                .setGifResource(R.drawable.hgif1)      //pass your gif, png or jpg
+                .isCancellable(true)
+                .OnPositiveClicked(new TTFancyGifDialogListener() {
+                    @Override
+                    public void OnClick() {
+                        //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                })
+                .build();
 
     }
 

@@ -1,12 +1,17 @@
 package com.example.jana.motivlearn;
 
-import android.os.Bundle;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog;
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialogListener;
 import com.emredavarci.noty.Noty;
 import com.example.jana.motivlearn.model.CodeOutputImp;
 import com.example.jana.motivlearn.presenter.CodeOutputPresenter;
@@ -36,7 +41,11 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
                 int challengeCoins=bundle.getInt("challengeCoins");
                 String code =codeF.getText().toString();
                 String output =outputF.getText().toString();
-                codeOutpuView.performCodeOutput(code,output,challengTitle,challengType,challengField,challengeTime,challengeCoins);
+
+                SharedPreferences sp1= CodeOutput.this.getSharedPreferences("Login", MODE_PRIVATE);
+                int uid =sp1.getInt("user_id", 0);
+
+                codeOutpuView.performCodeOutput(uid, code,output,challengTitle,challengType,challengField,challengeTime,challengeCoins);
               //  Intent intent = new Intent(getBaseContext(),MainActivity.class);
               //  startActivity(intent);
 
@@ -60,6 +69,21 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
                 .setWarningBoxMargins(15,15,15,10)
                 .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
                 .show();
+        new TTFancyGifDialog.Builder(CodeOutput.this)
+                .setTitle("Congratulations")
+                .setMessage("You Have got 10 Coins")
+                .setPositiveBtnText("Ok")
+                .setPositiveBtnBackground("#9577bc")
+                .setGifResource(R.drawable.hgif1)      //pass your gif, png or jpg
+                .isCancellable(true)
+                .OnPositiveClicked(new TTFancyGifDialogListener() {
+                    @Override
+                    public void OnClick() {
+                        //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                })
+                .build();
 
     }
 

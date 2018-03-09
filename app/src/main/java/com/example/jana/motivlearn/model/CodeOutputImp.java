@@ -1,16 +1,19 @@
 package com.example.jana.motivlearn.model;
 
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 
+import com.example.jana.motivlearn.CodeOutput;
+import com.example.jana.motivlearn.Splash;
 import com.example.jana.motivlearn.presenter.CodeOutputPresenter;
 import com.example.jana.motivlearn.view.CodeOutputView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
-import org.json.JSONObject;
-
 import cz.msebera.android.httpclient.Header;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by reemaibrahim on 10/02/2018 AD.
@@ -26,12 +29,10 @@ public class CodeOutputImp implements CodeOutputPresenter{
     }
 
     @Override
-    public void performCodeOutput(String code, String outPut , String challengeTitle , String challengeType , String challengeField ,int challengeTime ,int challengeCoins) {
+    public void performCodeOutput(int userId, String code, String outPut , String challengeTitle , String challengeType , String challengeField ,int challengeTime ,int challengeCoins) {
         if(TextUtils.isEmpty(code)|| TextUtils.isEmpty(outPut)){
             codeOutputView.codeOutputFail("codeoutput_empty");
         }
-
-
         //String type="CO";
        // String field ="java";
        // String title="firstQ";
@@ -39,7 +40,6 @@ public class CodeOutputImp implements CodeOutputPresenter{
      //   int time=20;
         else {
 
-            int userId = 3;
             AsyncHttpClient client = new AsyncHttpClient();
             RequestParams params = new RequestParams();
             client.get(

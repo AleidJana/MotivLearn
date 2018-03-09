@@ -4,13 +4,18 @@ package com.example.jana.motivlearn;
  * Created by jana on 2/9/2018 AD.
  */
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.roughike.bottombar.BottomBar;
 
 import java.util.List;
 
@@ -39,7 +44,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         //getting the product of the specified position
-        UserInfo product = usersList.get(position);
+        final UserInfo product = usersList.get(position);
         //binding the data with the viewholder views
         holder.textViewName.setText(product.getName());
         holder.textViewCoins.setText(String.valueOf(product.getCoins()));
@@ -48,9 +53,21 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               // Intent intent = new Intent(mCtx, tab1.class);
              //   Toast.makeText(mCtx ,"here you will add small code for question page ",Toast.LENGTH_LONG).show();
-               // mCtx.startActivity(new Intent(mCtx,displaychoice.class));
+              Intent intent = null;
+                String type = product.getType();
+                if(type.equals("T"))
+                    intent = new Intent(mCtx, userTprofile.class);
+                else
+                    intent = new Intent(mCtx, userSprofile.class);
 
+               // intent.putExtra("type", type);
+                intent.putExtra("id", product.getId());
+                mCtx.startActivity(intent);
+               //BottomBar bottomBar = (BottomBar) MainActivity.findViewById(R.id.bottomBar);
+            /* intent.putExtra("page", 2);
+             mCtx.startActivity(intent);*/
             }
         });
     }

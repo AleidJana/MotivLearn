@@ -17,13 +17,13 @@
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="627dp"
-        android:layout_marginEnd="379dp"
+        android:layout_alignBottom="@+id/progressBar"
+        android:layout_marginBottom="36dp"
+        android:layout_marginEnd="327dp"
+        android:layout_toStartOf="@+id/progressBar"
         android:background="@drawable/button"
         android:contentDescription="@string/addblank"
-        android:scaleType="fitEnd"
+        android:scaleType="centerInside"
         app:srcCompat="@drawable/close" />
 
     <com.emredavarci.circleprogressbar.CircleProgressBar xmlns:cpb="http://schemas.android.com/apk/res-auto"

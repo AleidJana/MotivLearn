@@ -252,8 +252,8 @@ t = new Timer();
      //   Toast.makeText(this,"finished", Toast.LENGTH_SHORT).show();
        // super.onBackPressed();
         pres.updateUserCoins(uid, vidId);
-        Toast.makeText(this,"uid"+uid, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,"vidId"+vidId, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"uid"+uid, Toast.LENGTH_SHORT).show();
+    //    Toast.makeText(this,"vidId"+vidId, Toast.LENGTH_SHORT).show();
         new TTFancyGifDialog.Builder(WatchVideo.this)
                 .setTitle("Congratulations")
                 .setMessage("You Have got 10 Coins")

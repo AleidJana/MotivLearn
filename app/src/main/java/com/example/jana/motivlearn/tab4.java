@@ -97,6 +97,7 @@ public class tab4 extends Fragment implements challengeBoardView {
                         cid,
                         title,
                         writer,
+                        type,
                         typeid,
                         fieldid,
                         duration
