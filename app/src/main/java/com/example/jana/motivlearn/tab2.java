@@ -130,10 +130,6 @@ public class tab2 extends Fragment implements TimelineView {
 
     }
 
-    @Override
-    public void deleteSuccess() {
-
-    }
 
 
 }
