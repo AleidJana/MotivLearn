@@ -1,20 +1,34 @@
 package com.example.jana.motivlearn;
 
+import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Parcelable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baoyz.widget.PullRefreshLayout;
+import com.example.jana.motivlearn.model.Timeline;
+import com.example.jana.motivlearn.presenter.TimelinePresenter;
+import com.example.jana.motivlearn.view.TimelineView;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 
+import java.io.Serializable;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.jana.motivlearn.tab2.pres;
 
 /**
  * Created by jana on 2/19/2018 AD.
@@ -23,10 +37,14 @@ import java.util.List;
 public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder> {
 
     private Context mCtx;
+    private TimeLineInfo item;
+   // TimelinePresenter pres;
     private List<TimeLineInfo> InfoList;
-    public TimeLineAdapter(Context mCtx, List<TimeLineInfo> InfoList) {
+    private List<Integer> likedposts;
+    public TimeLineAdapter(Context mCtx, List<TimeLineInfo> InfoList,List<Integer> likedposts) {
         this.mCtx = mCtx;
         this.InfoList = InfoList;
+        this.likedposts=likedposts;
     }
 
     @Override
@@ -35,12 +53,15 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.time_line_item, null);
         return new TimeLineViewHolder(view);
+
     }
 
     @Override
-    public void onBindViewHolder(TimeLineViewHolder holder, int position) {
-        //getting the product of the specified position
-        TimeLineInfo item = InfoList.get(position);
+    public void onBindViewHolder(final TimeLineViewHolder holder, final int position) {
+        SharedPreferences sp1= mCtx.getSharedPreferences("Login", MODE_PRIVATE);
+        final int uid =sp1.getInt("user_id", 0);
+        //getting the post of the specified position
+        item = InfoList.get(position);
         //binding the data with the viewholder views
         holder.textViewName.setText(item.getName());
         holder.textViewHours.setText(String.valueOf(item.getHours()));
@@ -51,49 +72,75 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //   Toast.makeText(mCtx ,"here you will add small code for question page ",Toast.LENGTH_LONG).show();
-                 mCtx.startActivity(new Intent(mCtx,Comment.class));
+                Intent intent=new Intent(mCtx,Comment.class);
+                intent.putExtra("post",item);
+                 mCtx.startActivity(intent);
             }
         });
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mCtx ,"view profile by image ",Toast.LENGTH_LONG).show();
+                openusersprofile(item);
             }
         });
         holder.textViewName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mCtx ,"view profile by name",Toast.LENGTH_LONG).show();
-
+                openusersprofile(item);
             }
         });
+        if(likedposts.contains(item.getPostid()))
+        {
+            holder.like.setLiked(true);
+        }
         holder.like.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-
+                pres.addlike(item.getPostid(),item.getUserid());
+                addlikersult(item);
             }
-
             @Override
             public void unLiked(LikeButton likeButton) {
-
+                holder.like.setLiked(true);
             }
         });
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(mCtx ,"comment button ",Toast.LENGTH_LONG).show();
-                mCtx.startActivity(new Intent(mCtx,Comment.class));
-
-            }
+                Intent intent=new Intent(mCtx,Comment.class);
+                intent.putExtra("post",item);
+                mCtx.startActivity(intent);            }
         });
-        holder.delete.setVisibility(View.INVISIBLE);
+        if(item.getUserid()!= uid) {
+            holder.delete.setVisibility(View.INVISIBLE);
+        }
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mCtx ,"delete button",Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
+                builder.setMessage("are you sure you want to delete this post?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                pres.deletepost(item.getPostid());
+                                int potition = InfoList.indexOf(item);
+                                InfoList.remove(potition);
+                                notifyItemRemoved(potition);
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
 
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("Delete Post");
+                alert.show();
             }
         });
 
@@ -105,7 +152,8 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         return InfoList.size();
     }
 
-    class TimeLineViewHolder extends RecyclerView.ViewHolder {
+
+     class TimeLineViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewHours,textViewName,textViewLike,textViewContent,textViewComment;
         ImageView imageView;
@@ -125,4 +173,22 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
 
         }
     }
+public void addlikersult(TimeLineInfo item)
+{
+    int potition = InfoList.indexOf(item);
+    InfoList.get(potition).setLikes(item.getLikes()+1);
+    notifyDataSetChanged();
+}
+public void openusersprofile(TimeLineInfo item)
+{
+    Intent intent = null;
+    String type = item.getUsertype();
+    if(type.equals("T"))
+        intent = new Intent(mCtx, userTprofile.class);
+    else
+        intent = new Intent(mCtx, userSprofile.class);
+    intent.putExtra("id", item.getUserid());
+    mCtx.startActivity(intent);
+
+}
 }

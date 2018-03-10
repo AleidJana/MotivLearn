@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -174,7 +175,7 @@ public class tab1 extends Fragment implements myProfileView {
            TextView uname = view.findViewById(R.id.uname);
             uname.setText(obj2.getString("u_name"));
 
-            TextView coins = view.findViewById(R.id.coins);
+            @SuppressLint("WrongViewCast") TextView coins = view.findViewById(R.id.coins);
             coins.setText(obj2.getInt("u_coins")+"");
 
            int levelid = getResources().getIdentifier("level"+obj2.getInt("u_level"), "drawable", getActivity().getPackageName());

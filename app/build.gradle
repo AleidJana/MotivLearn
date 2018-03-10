@@ -51,6 +51,7 @@ dependencies {
     compile 'com.emredavarci:circleprogressbar:1.0.4'
     compile 'com.github.jd-alexander:LikeButton:0.2.3'
     compile 'com.android.support:design:26.1.0'
+    compile 'com.ultramegasoft.radarchart:radar-chart:0.1.5'
 
 
 

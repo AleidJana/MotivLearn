@@ -22,6 +22,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/post"
             android:hint="What do you need ? "
             android:layout_marginTop="15dp"
             android:background="@null"
@@ -29,4 +30,10 @@
             android:gravity="start"/>
     </LinearLayout>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="add"
+        android:id="@+id/addpost"/>
 </RelativeLayout>

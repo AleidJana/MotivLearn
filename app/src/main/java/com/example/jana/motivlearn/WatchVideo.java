@@ -55,29 +55,7 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
         uid =sp1.getInt("user_id", 0);
         pres = new watchVideoImp(WatchVideo.this);
         pres.getVideoLink(uid);
-t = new Timer();
-     /*   Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=_QElVrqBwnk"));
-        intent.putExtra("force_fullscreen",true);
-        startActivity(intent);*/
-
-        // Grabs a reference to the player view
-     /*   player = (BetterVideoPlayer) findViewById(R.id.player);
-
-        // Sets the callback to this Activity, since it inherits EasyVideoCallback
-        player.setCallback(this);
-
-        // Sets the source to the HTTP URL held in the TEST_URL variable.
-        // To play files, you can use Uri.fromFile(new File("..."))
-        player.setSource(Uri.parse(TEST_URL));
-        player.disableSwipeGestures();
-        // Hide the default controls and prevents them from being shown.
-        player.disableControls();
-
-// Defaults to false. Immediately starts playback when the player becomes prepared.
-        player.setAutoPlay(true);*/
-        // From here, the player view will show a progress indicator until the player is prepared.
-        // Once it's prepared, the progress indicator goes away and the controls become enabled for the user to begin playback.
-       // setUrl("");
+        t = new Timer();
         player = (BetterVideoPlayer) findViewById(R.id.player);
         player.setCallback(this);
         player.disableControls();

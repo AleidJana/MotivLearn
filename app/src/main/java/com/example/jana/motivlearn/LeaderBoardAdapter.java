@@ -43,27 +43,27 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
 
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
-        //getting the product of the specified position
-        final UserInfo product = usersList.get(position);
+        //getting the user of the specified position
+        final UserInfo user = usersList.get(position);
         //binding the data with the viewholder views
-        holder.textViewName.setText(product.getName());
-        holder.textViewCoins.setText(String.valueOf(product.getCoins()));
-        holder.textViewOrder.setText(String.valueOf(product.getOrder()));
-        holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(product.getImage()));
+        holder.textViewName.setText(user.getName());
+        holder.textViewCoins.setText(String.valueOf(user.getCoins()));
+        holder.textViewOrder.setText(String.valueOf(user.getOrder()));
+        holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(user.getImage()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                // Intent intent = new Intent(mCtx, tab1.class);
              //   Toast.makeText(mCtx ,"here you will add small code for question page ",Toast.LENGTH_LONG).show();
               Intent intent = null;
-                String type = product.getType();
+                String type = user.getType();
                 if(type.equals("T"))
                     intent = new Intent(mCtx, userTprofile.class);
                 else
                     intent = new Intent(mCtx, userSprofile.class);
 
                // intent.putExtra("type", type);
-                intent.putExtra("id", product.getId());
+                intent.putExtra("id", user.getId());
                 mCtx.startActivity(intent);
                //BottomBar bottomBar = (BottomBar) MainActivity.findViewById(R.id.bottomBar);
             /* intent.putExtra("page", 2);

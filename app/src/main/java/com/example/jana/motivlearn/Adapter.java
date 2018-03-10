@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -26,9 +25,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
 
     private Context mCtx;
     private List<question> questionList;
-    public Adapter(Context mCtx, List<question> productList) {
+    public Adapter(Context mCtx, List<question> InfoList) {
         this.mCtx = mCtx;
-        this.questionList = productList;
+        this.questionList = InfoList;
     }
 
     @Override
