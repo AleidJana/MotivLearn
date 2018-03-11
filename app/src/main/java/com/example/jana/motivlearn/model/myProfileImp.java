@@ -67,4 +67,59 @@ public class myProfileImp implements myProfilePresenter {
         );
     }
 
+    @Override
+    public void rateSkill(int rid, final int uid, String skill, double val) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        client.get("https://api.appery.io/rest/1/apiexpress/api/12_EvaluateuserSkill/" +
+                "?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&rid="+rid+"&" +
+                "uid="+uid+"&skill="+skill+"&val="+val, params, new TextHttpResponseHandler()
+                {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String res) {
+                        //   Toast.makeText((Context) vue,"owwww", Toast.LENGTH_SHORT).show();
+                        getUserInfo(uid);
+
+                    /*    else
+                            vue2.displayInfo(res);*/
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+
+                    }
+                }
+        );
+    }
+
+    @Override
+    public void didRate(int rid, final int uid, final String skill) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        client.get("https://api.appery.io/rest/1/apiexpress/api/11_EvaluateUserSkill/?" +
+                "apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+uid+"&skill="+skill+"&rid="+rid, params, new TextHttpResponseHandler()
+                {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String res) {
+                        //   Toast.makeText((Context) vue,"owwww", Toast.LENGTH_SHORT).show();
+                     /*   if(res.length()<3)
+                            vue.cantRate();
+                        else
+                            vue.rateForm(skill);
+
+*/
+                    /*    else
+                            vue2.displayInfo(res);*/
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+
+                    }
+                }
+        );
+    }
+
 }
