@@ -129,7 +129,15 @@ public class tab2 extends Fragment implements TimelineView {
         catch (Exception e){}
 
     }
+    @Override
+    public void onResume(){
+        super.onResume();
 
+        SharedPreferences sp1= this.getActivity().getSharedPreferences("Login", MODE_PRIVATE);
+        int uid =sp1.getInt("user_id", 0);
+        pres = new Timeline(tab2.this);
+        pres.likedposts(uid);
+    }
 
 
 }

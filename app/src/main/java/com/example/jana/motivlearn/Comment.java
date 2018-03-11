@@ -83,7 +83,10 @@ public class Comment extends AppCompatActivity {
         like.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                pres.addlike(post.getPostid(),post.getUserid());
+                pres.addlike(post.getPostid(),uid);
+                textViewLike.setText(String.valueOf(post.getLikes()+1));
+
+
             }
 
             @Override
@@ -111,8 +114,6 @@ public class Comment extends AppCompatActivity {
             }
         });
 
-
-
-
     }
+    
 }
