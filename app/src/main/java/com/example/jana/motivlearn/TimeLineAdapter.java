@@ -37,7 +37,7 @@ import static com.example.jana.motivlearn.tab2.pres;
 public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder> {
 
     private Context mCtx;
-    private TimeLineInfo item;
+   // private TimeLineInfo item;
    // TimelinePresenter pres;
     private List<TimeLineInfo> InfoList;
     private List<Integer> likedposts;
@@ -57,11 +57,11 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
     }
 
     @Override
-    public void onBindViewHolder(final TimeLineViewHolder holder, final int position) {
+    public void onBindViewHolder(final TimeLineViewHolder holder, int position) {
         SharedPreferences sp1= mCtx.getSharedPreferences("Login", MODE_PRIVATE);
         final int uid =sp1.getInt("user_id", 0);
         //getting the post of the specified position
-        item = InfoList.get(position);
+        final TimeLineInfo item = InfoList.get(position);
         //binding the data with the viewholder views
         holder.textViewName.setText(item.getName());
         holder.textViewHours.setText(String.valueOf(item.getHours()));
@@ -72,7 +72,8 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mCtx,Comment.class);
+                Toast.makeText(mCtx, String.valueOf(item.getContent()), Toast.LENGTH_SHORT).show();
+               Intent intent=new Intent(mCtx,Comment.class);
                 intent.putExtra("post",item);
                  mCtx.startActivity(intent);
             }
@@ -97,12 +98,12 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         holder.like.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                pres.addlike(item.getPostid(),item.getUserid());
+                pres.addlike(item.getPostid(),uid);
                 addlikersult(item);
             }
             @Override
             public void unLiked(LikeButton likeButton) {
-                holder.like.setLiked(true);
+               holder.like.setLiked(true);
             }
         });
         holder.comment.setOnClickListener(new View.OnClickListener() {

@@ -7,4 +7,6 @@ package com.example.jana.motivlearn.presenter;
 public interface myProfilePresenter {
 
     void getUserInfo(int uid);
+    void rateSkill(int rid , int uid, String skill, double val);
+    void didRate(int rid , int uid, String skill);
 }

@@ -82,7 +82,7 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_tab1);
 
-        int uid = getIntent().getIntExtra("id", 0);
+        final int uid = getIntent().getIntExtra("id", 0);
        // Toast.makeText(this,uid+"", Toast.LENGTH_SHORT).show();
 
         NewtonCradleLoading newtonCradleLoading;
@@ -94,7 +94,11 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
         host.setup();
 
         bmb= (BoomMenuButton) findViewById(R.id.bmb);
-       // bmb.setVisibility(View.INVISIBLE);
+        SharedPreferences sp1= userSprofile.this.getSharedPreferences("Login", MODE_PRIVATE);
+        final int uid2 =sp1.getInt("user_id", 0);
+        if(uid == uid2)
+            bmb.setVisibility(View.INVISIBLE);
+
         TextOutsideCircleButton.Builder builder = new TextOutsideCircleButton.Builder()
                 .normalImageRes(R.drawable.ic_teamwork)
                 .normalText("TeamWork").listener(new OnBMClickListener() {
@@ -126,7 +130,8 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
                         ratingDialog.getTvPositive().setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Toast.makeText(userSprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(userSprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
+                                pres.rateSkill(uid2, uid, "teamwork", ratingDialog.getValue());
                                 ratingDialog.dismiss();
                             }
                         });
@@ -154,14 +159,25 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
                                 .onThresholdCleared(new com.example.jana.motivlearn.RatingDialog.Builder.RatingThresholdClearedListener() {
                                     @Override
                                     public void onThresholdCleared(com.example.jana.motivlearn.RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
-                                        //do something
-                                        Toast.makeText(userSprofile.this,"rating value is : "+rating,Toast.LENGTH_LONG).show();
-
-                                        //  ratingDialog.dismiss();
                                     }
                                 }).build();
 
                         ratingDialog2.show();
+                        ratingDialog2.getTvPositive().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                // Toast.makeText(userSprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
+                                pres.rateSkill(uid2, uid, "presentation", ratingDialog2.getValue());
+                                ratingDialog2.dismiss();
+                            }
+                        });
+
+                        ratingDialog2.getTvNegative().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ratingDialog2.dismiss();
+                            }
+                        });
                     }
                 });
         bmb.addBuilder(builder2);
