@@ -5,8 +5,7 @@ package com.example.jana.motivlearn.view;
  */
 
 public interface displayCodeOutputView {
-    void succesView();
     void fileView();
     void setR(String responseString);
-    void correct();
+    void correct(int coinns, String status);
 }

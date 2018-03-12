@@ -56,7 +56,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
                 String type = questions.getType();
                 if(type.equals("choice"))
                     intent = new Intent(mCtx, displaychoice.class);
-                else if(type.equals("code") || type.equals("fillblank"))
+                else if(type.equals("code"))
+                    intent = new Intent(mCtx, displayCodeOutput.class);
+                    else if(type.equals("fillblank"))
                     intent = new Intent(mCtx, displayfillBlanck.class);
 
                 intent.putExtra("type", type);

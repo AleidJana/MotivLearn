@@ -48,7 +48,7 @@ public class displayCodeOutputImp implements displayCodeOutputPresenter {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
 
-                displayCodeOutput1.succesView();
+             //   displayCodeOutput1.succesView();
                 responseString = responseString.substring(1,responseString.length()-1);
 
                 try {
@@ -73,7 +73,7 @@ public class displayCodeOutputImp implements displayCodeOutputPresenter {
 
 
     @Override
-    public void crrectAnswer(int user_id, int challenge_id, String stutes, String skillType, int rateValue ,int coins) {
+    public void crrectAnswer(int user_id, int challenge_id, final String stutes, String skillType, int rateValue ,int coins) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         RequestHandle requestHandle = client.get("https://api.appery.io/rest/1/apiexpress/api/5_TakePublicChallenge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+user_id+"&cid="+challenge_id+"&coins="+coins+"&status="+stutes+"&rateValue="+rateValue+"&skill="+skillType, params, new TextHttpResponseHandler() {
@@ -84,7 +84,7 @@ public class displayCodeOutputImp implements displayCodeOutputPresenter {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                displayCodeOutput1.correct();
+                displayCodeOutput1.correct(coins1, stutes);
 
             }
         });
@@ -110,7 +110,7 @@ public class displayCodeOutputImp implements displayCodeOutputPresenter {
                     JSONObject obj = new JSONObject(responseString);
                     JSONObject object = obj.getJSONObject("Branch1");
                     rank = object.getInt("rank");
-                    rank=rank-1;
+                  //  rank=rank-1;
 
                     switch (rank){
                         case 1:coins1=10+coins;

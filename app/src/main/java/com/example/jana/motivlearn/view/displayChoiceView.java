@@ -5,8 +5,7 @@ package com.example.jana.motivlearn.view;
  */
 
 public interface displayChoiceView {
-    void displaySuccess();
     void displayFailed();
     void setR(String responseString);
-    void correct();
+    void correct(int coinns, String status);
 }

@@ -8,5 +8,5 @@ public interface displayfillBlanckView {
     void succesView();
     void fileView();
     void setR(String responseString);
-    void correct();
+    void correct(int coinns, String status);
 }

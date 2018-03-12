@@ -1,5 +1,7 @@
 package com.example.jana.motivlearn;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog;
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialogListener;
 import com.example.jana.motivlearn.model.displayCodeOutputImp;
 import com.example.jana.motivlearn.presenter.displayCodeOutputPresenter;
 import com.example.jana.motivlearn.view.displayCodeOutputView;
@@ -33,19 +37,18 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
         setContentView(R.layout.activity_codeoutput);
         Ttitle = findViewById(R.id.textView);
         Tqustion = findViewById(R.id.textViewTitle);
+
+        final int challNum = getIntent().getIntExtra("id", 0);
+
+        SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
+        final int uid =sp1.getInt("user_id", 0);
+
+       // Toast.makeText(this,getIntent().getIntExtra("id", 0)+"", Toast.LENGTH_SHORT).show();
         displayCodeOutputP = new displayCodeOutputImp(displayCodeOutput.this);
-        displayCodeOutputP.peformdisplayfillBlanck(25);
-
-
+        displayCodeOutputP.peformdisplayfillBlanck(challNum);
 
     }
 
-
-    @Override
-    public void succesView() {
-        Toast.makeText(getApplicationContext(), "View success",
-                Toast.LENGTH_LONG).show();
-    }
 
     @Override
     public void fileView() {
@@ -56,6 +59,12 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
     @Override
     public void setR(String responseString) {
         try {
+          //  Toast.makeText(this,"SetR", Toast.LENGTH_SHORT).show();
+            final int challNum = getIntent().getIntExtra("id", 0);
+
+            SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
+            final int uid =sp1.getInt("user_id", 0);
+
             JSONObject obj = new JSONObject(responseString);
             String title = obj.getString("challenge_title");
             String question = obj.getString("question");
@@ -72,36 +81,57 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
 
 
                         if (userAnswer.equals(answer.trim())) {
-                            Toast.makeText(getApplicationContext(), "correct",
-                                    Toast.LENGTH_LONG).show();
-                         displayCodeOutputP.selectRank(4,25,"pass","gg",22);
+                         /*   Toast.makeText(getApplicationContext(), "correct",
+                                    Toast.LENGTH_LONG).show();*/
+                         displayCodeOutputP.selectRank(uid,challNum,"pass","gg",3);
 
                         } else {
-                            Toast.makeText(getApplicationContext(), "not correct", Toast.LENGTH_LONG).show();
+                           // Toast.makeText(getApplicationContext(), "not correct", Toast.LENGTH_LONG).show();
+                            displayCodeOutputP.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0);
                         }
-
-
-
-
-
                 }
             });
-
-
-
-
-
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
-    public void correct() {
-        Toast.makeText(getApplicationContext(), "ccooorreect",
-                Toast.LENGTH_LONG).show();
+    public void correct(int coinns, String status) {
+
+        String msg1, msg2;
+        int dr1 = 0;
+        if(status.equals("pass"))
+        {
+            msg1 = "Congratulations";
+            msg2= "You Have got "+coinns+" Coins";
+            dr1 = getResources().getIdentifier("hgif1", "drawable", getPackageName());
+        }
+        else
+        {
+            msg1 = "Unfortunately";
+            msg2= "you didn't get any coins";
+            dr1 = getResources().getIdentifier("losse", "drawable", getPackageName());
+        }
+
+        new TTFancyGifDialog.Builder(displayCodeOutput.this)
+                .setTitle(msg1)
+                .setMessage(msg2)
+                .setPositiveBtnText("Ok")
+                .setPositiveBtnBackground("#9577bc")
+                .setGifResource(dr1)      //pass your gif, png or jpg
+                .isCancellable(true)
+                .OnPositiveClicked(new TTFancyGifDialogListener() {
+                    @Override
+                    public void OnClick() {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("nextFrag", "cha");
+                        startActivity(intent);
+                    }
+                })
+                .build();
+
     }
 }
 

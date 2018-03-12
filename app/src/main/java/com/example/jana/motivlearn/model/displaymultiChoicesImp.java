@@ -24,7 +24,7 @@ public class displaymultiChoicesImp implements displayChoicePresenter {
 
     int coins1;
     int rank;
-    public int    coins;
+    private int coins;
 
 
     public displaymultiChoicesImp(displaychoice displaychoice) {
@@ -47,9 +47,9 @@ public class displaymultiChoicesImp implements displayChoicePresenter {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                responseString = responseString.substring(1,responseString.length()-1);
+             //   displaychoice.displaySuccess();
 
-                displaychoice.displaySuccess();
-                 responseString = responseString.substring(1,responseString.length()-1);
                 try {
                     JSONObject obj = new JSONObject(responseString);
                     coins=obj.getInt("coins");
@@ -58,11 +58,6 @@ public class displaymultiChoicesImp implements displayChoicePresenter {
                 }
 
                 displaychoice.setR(responseString);
-
-
-
-
-
 
             }
 
@@ -74,10 +69,10 @@ public class displaymultiChoicesImp implements displayChoicePresenter {
     }
 
     @Override
-    public void crrectAnswer(int user_id, int challenge_id, String stutes, String skillType, int rateValue ,int rank) {
+    public void crrectAnswer(int user_id, int challenge_id, final String status, String skillType, int rateValue , int rank) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        RequestHandle requestHandle1 = client.get("https://api.appery.io/rest/1/apiexpress/api/5_TakePublicChallenge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+user_id+"&cid="+challenge_id+"&coins="+rank+"&status="+"pass"+"&rateValue="+rateValue+"&skill="+skillType, params, new TextHttpResponseHandler() {
+        RequestHandle requestHandle1 = client.get("https://api.appery.io/rest/1/apiexpress/api/5_TakePublicChallenge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+user_id+"&cid="+challenge_id+"&coins="+rank+"&status="+status+"&rateValue="+rateValue+"&skill="+skillType, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 displaychoice.displayFailed();
@@ -85,7 +80,7 @@ public class displaymultiChoicesImp implements displayChoicePresenter {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                displaychoice.correct();
+                displaychoice.correct(coins1, status);
             }
         });
 
@@ -109,7 +104,7 @@ public class displaymultiChoicesImp implements displayChoicePresenter {
                             JSONObject obj = new JSONObject(responseString);
                             JSONObject object = obj.getJSONObject("Branch1");
                             rank = object.getInt("rank");
-                            rank=rank-1;
+                           // rank=rank-1;
 
                             switch (rank){
                                 case 1:coins1=10+coins;
