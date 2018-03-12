@@ -43,7 +43,7 @@ public class CodeOutputImp implements CodeOutputPresenter{
             AsyncHttpClient client = new AsyncHttpClient();
             RequestParams params = new RequestParams();
             client.get(
-                    "https://api.appery.io/rest/1/apiexpress/api/7_CreatePublicChallenge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&type=" + challengeType + "&question=" + code + "&answer=" + outPut + "&time=" + challengeTime + "&field=" + challengeField + "&uid=" + userId + "&coins=" + challengeCoins + "&title=" + challengeTitle, params, new TextHttpResponseHandler() {
+                    "https://api.appery.io/rest/1/apiexpress/api/7_CreatePublicChallenge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&type=CO&question=" + code + "&answer=" + outPut + "&time=" + challengeTime + "&field=" + challengeField + "&uid=" + userId + "&coins=" + challengeCoins + "&title=" + challengeTitle, params, new TextHttpResponseHandler() {
                         @Override
                         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                             codeOutputView.codeOutputFail("bad_connection");

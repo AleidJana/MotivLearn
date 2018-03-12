@@ -122,6 +122,8 @@ public class createChallenge extends AppCompatActivity implements CreateChalleng
         intent.putExtra("challengeTime",challengeTime);
         intent.putExtra("challengeCoins",challengeCoins);
         startActivity(intent);
+
+       // finish();
     }
 
 }

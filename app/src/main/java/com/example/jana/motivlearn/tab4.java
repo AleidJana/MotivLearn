@@ -86,9 +86,11 @@ public class tab4 extends Fragment implements challengeBoardView {
                         type = "fillblank";
                         break;
                     case "PZ":
-                        type = "puzzle";
+                        type = "puzzel";
                         break;
                 }
+                if(field.equals("swe"))
+                    field="swe1";
 
                 int typeid = getResources().getIdentifier(type, "drawable", getActivity().getPackageName());
                 int fieldid = getResources().getIdentifier(field, "drawable", getActivity().getPackageName());

@@ -52,7 +52,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text=" "
+                    android:text="Noura Alomar"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="#5a3689"
                     android:textSize="20dp"
@@ -78,7 +78,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:background="@drawable/coins" />
+                            android:src="@drawable/coins" />
 
                         <TextView
                             android:id="@+id/coins"
@@ -104,7 +104,7 @@
                             android:layout_width="60dp"
                             android:layout_height="55dp"
                             android:layout_gravity="center"
-                            android:background="@drawable/medal" />
+                            android:src="@drawable/level3" />
 
                     </LinearLayout>
 
@@ -120,7 +120,7 @@
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_gravity="center"
-                            android:background="@drawable/medal" />
+                            android:src="@drawable/swedepartment" />
                     </LinearLayout>
 
 

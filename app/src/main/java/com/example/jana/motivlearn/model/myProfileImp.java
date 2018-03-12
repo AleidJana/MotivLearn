@@ -80,9 +80,6 @@ public class myProfileImp implements myProfilePresenter {
                         //   Toast.makeText((Context) vue,"owwww", Toast.LENGTH_SHORT).show();
                         getUserInfo(uid);
 
-                    /*    else
-                            vue2.displayInfo(res);*/
-
                     }
 
                     @Override

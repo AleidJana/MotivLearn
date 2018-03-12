@@ -94,25 +94,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+      /*  if(getIntent() != null) {
+            int intentFragment = getIntent().getExtras().getInt("frgToLoad");
+            if (intentFragment!= 0) {
+          */
+
+      if(getIntent().hasExtra("nextFrag")) {
+          String str = getIntent().getStringExtra("nextFrag");
+          if (str.equals("cha"))
+              bottomBar.selectTabAtPosition(3);
+      }
+          /*      Fragment t1 = new tab4();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, t1);
+                transaction.commit();
+            }
+        }*/
         /*String s = getIntent().getStringExtra("id");
         if(s!=null)
         bottomBar.selectTabAtPosition(Integer.parseInt(s));*/
 
-        fm = getFragmentManager();
+      //  fm = getFragmentManager();
 
     }
 
     @Override
     public void onBackPressed() {
 
-        int count = getFragmentManager().getBackStackEntryCount();
+       /* int count = getFragmentManager().getBackStackEntryCount();
 
         if (count == 0) {
             super.onBackPressed();
             //additional code
         } else {
             getFragmentManager().popBackStack();
-        }
+        }*/
 
     }
 }

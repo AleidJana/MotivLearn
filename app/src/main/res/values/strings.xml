@@ -85,17 +85,17 @@
 
 
     <string-array name="planets_array2">
-        <item>Java</item>
-        <item>JavaScript</item>
-        <item>C</item>
-        <item>Html</item>
-        <item>CSS</item>
-        <item>Php</item>
-        <item>Security</item>
-        <item>Ethics</item>
-        <item>Network</item>
-        <item>Quality assurance</item>
-        <item>SWE</item>
+        <item>java</item>
+        <item>javascript</item>
+        <item>c</item>
+        <item>html</item>
+        <item>css</item>
+        <item>php</item>
+        <item>security</item>
+        <item>ethics</item>
+        <item>network</item>
+        <item>quality assurance</item>
+        <item>swe</item>
 
     </string-array>
 

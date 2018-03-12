@@ -53,7 +53,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text=""
+                    android:text="Raghad Alsaleh"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="#5a3689"
                     android:textSize="20dp"
@@ -79,7 +79,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_gravity="center"
-                            android:background="@drawable/coins" />
+                            android:src="@drawable/coins" />
 
                         <TextView
                             android:id="@+id/coins"
@@ -105,7 +105,7 @@
                             android:layout_width="60dp"
                             android:layout_height="55dp"
                             android:layout_gravity="center"
-                            android:background="@drawable/medal" />
+                            android:src="@drawable/level3" />
 
                     </LinearLayout>
 
@@ -121,7 +121,7 @@
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:layout_gravity="center"
-                            android:background="@drawable/medal" />
+                            android:src="@drawable/swedepartment" />
                     </LinearLayout>
 
 
@@ -206,49 +206,49 @@
                                     android:layout_height="50dp"
                                     android:layout_marginLeft="5dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb6" />
+                                    android:src="@drawable/badgeb6" />
 
                                 <ImageView
                                     android:id="@+id/badge4"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb4" />
+                                    android:src="@drawable/badgeb4" />
 
                                 <ImageView
                                     android:id="@+id/badge8"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb8" />
+                                    android:src="@drawable/badgeb8" />
 
                                 <ImageView
                                     android:id="@+id/badge5"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb5" />
+                                    android:src="@drawable/badgeb5" />
 
                                 <ImageView
                                     android:id="@+id/badge9"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb9" />
+                                    android:src="@drawable/badgeb9" />
 
                                 <ImageView
                                     android:id="@+id/badge11"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb11" />
+                                    android:src="@drawable/badgeb11" />
 
                                 <ImageView
                                     android:id="@+id/badge10"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb10" />
+                                    android:src="@drawable/badgeb10" />
 
                             </LinearLayout>
 
@@ -267,49 +267,49 @@
                                     android:layout_height="50dp"
                                     android:layout_marginLeft="5dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb23" />
+                                    android:src="@drawable/badgeb23" />
 
                                 <ImageView
                                     android:id="@+id/badge14"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb14" />
+                                    android:src="@drawable/badgeb14" />
 
                                 <ImageView
                                     android:id="@+id/badge17"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb17" />
+                                    android:src="@drawable/badgeb17" />
 
                                 <ImageView
                                     android:id="@+id/badge1"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb1" />
+                                    android:src="@drawable/badgeb1" />
 
                                 <ImageView
                                     android:id="@+id/badge20"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb20" />
+                                    android:src="@drawable/badgeb20" />
 
                                 <ImageView
                                     android:id="@+id/badge26"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb26" />
+                                    android:src="@drawable/badgeb26" />
 
                                 <ImageView
                                     android:id="@+id/badge12"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb12" />
+                                    android:src="@drawable/badgeb12" />
 
                             </LinearLayout>
 
@@ -327,49 +327,49 @@
                                     android:layout_height="50dp"
                                     android:layout_marginLeft="5dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb24" />
+                                    android:src="@drawable/badgeb24" />
 
                                 <ImageView
                                     android:id="@+id/badge15"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb15" />
+                                    android:src="@drawable/badgeb15" />
 
                                 <ImageView
                                     android:id="@+id/badge18"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb18" />
+                                    android:src="@drawable/badgeb18" />
 
                                 <ImageView
                                     android:id="@+id/badge2"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb2" />
+                                    android:src="@drawable/badgeb2" />
 
                                 <ImageView
                                     android:id="@+id/badge21"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb21" />
+                                    android:src="@drawable/badgeb21" />
 
                                 <ImageView
                                     android:id="@+id/badge27"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb27" />
+                                    android:src="@drawable/badgeb27" />
 
                                 <ImageView
                                     android:id="@+id/badge13"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb13" />
+                                    android:src="@drawable/badgeb13" />
 
                             </LinearLayout>
 
@@ -387,49 +387,49 @@
                                     android:layout_height="50dp"
                                     android:layout_marginLeft="5dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb25" />
+                                    android:src="@drawable/badgeb25" />
 
                                 <ImageView
                                     android:id="@+id/badge16"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb16" />
+                                    android:src="@drawable/badgeb16" />
 
                                 <ImageView
                                     android:id="@+id/badge19"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb19" />
+                                    android:src="@drawable/badgeb19" />
 
                                 <ImageView
                                     android:id="@+id/badge3"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb3" />
+                                    android:src="@drawable/badgeb3" />
 
                                 <ImageView
                                     android:id="@+id/badge22"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb22" />
+                                    android:src="@drawable/badgeb22" />
 
                                 <ImageView
                                     android:id="@+id/badge28"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb28" />
+                                    android:src="@drawable/badgeb28" />
 
                                 <ImageView
                                     android:id="@+id/badge7"
                                     android:layout_width="40dp"
                                     android:layout_height="50dp"
                                     android:layout_weight="1"
-                                    android:background="@drawable/badgeb7" />
+                                    android:src="@drawable/badgeb7" />
 
                             </LinearLayout>
                         </LinearLayout>

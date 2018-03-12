@@ -59,18 +59,8 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
         String mmm = CodeOutput.this.getResources().getString(resourceId);
-        Noty.init(CodeOutput.this, mmm, rl,
-                Noty.WarningStyle.ACTION)
-                .setActionText("OK")
-                .setWarningBoxBgColor("#5cb85c")
-                .setWarningTappedColor("#5cb85c")
-                .setWarningBoxPosition(Noty.WarningPos.BOTTOM)
-                .setWarningBoxRadius(80,80,80,80)
-                .setWarningBoxMargins(15,15,15,10)
-                .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
-                .show();
         new TTFancyGifDialog.Builder(CodeOutput.this)
-                .setTitle("Congratulations")
+                .setTitle("The challenge have been created successfully")
                 .setMessage("You Have got 10 Coins")
                 .setPositiveBtnText("Ok")
                 .setPositiveBtnBackground("#9577bc")
@@ -80,7 +70,11 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
                     @Override
                     public void OnClick() {
                         //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
-                        finish();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                     //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("nextFrag", "cha");
+                        startActivity(intent);
+                        //finish();
                     }
                 })
                 .build();

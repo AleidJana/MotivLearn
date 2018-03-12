@@ -5,6 +5,7 @@ package com.example.jana.motivlearn;
  */
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -65,17 +66,22 @@ import java.util.ArrayList;
 
 public class userTprofile extends AppCompatActivity implements myProfileView {
     TabHost host;
+    ArrayList<Entry> entries = new ArrayList<>();
     ArrayList<Entry> entries2 = new ArrayList<>();
     private ArrayList<RadarDataSet> dataSets = new ArrayList<>();
     private myProfilePresenter pres;
     private BoomMenuButton bmb ;
+    private String username;
+    int uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_teacher_profile);
 
-        final int uid = getIntent().getIntExtra("id", 0);
+        uid = getIntent().getIntExtra("id", 0);
+
+      //  uid = getIntent().getIntExtra("id", 0);
       //  SharedPreferences sp1= this.getSharedPreferences("Login", MODE_PRIVATE);
       //  int uid =sp1.getInt("user_id", 0);
        // Toast.makeText(this,uid+"", Toast.LENGTH_SHORT).show();
@@ -100,10 +106,11 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                 .normalText("Creativity").listener(new OnBMClickListener() {
                     @Override
                     public void onBoomButtonClick(int index) {
+
                         // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
                         final com.example.jana.motivlearn.RatingDialog ratingDialog = new com.example.jana.motivlearn.RatingDialog.Builder(userTprofile.this)
                                 .icon(getResources().getDrawable(R.drawable.rateheader))
-                                .title("How was your experience with us?")
+                                .title("Rate "+username+"'s 'creativity' skill")
                                 .titleTextColor(R.color.black)
                                 .negativeButtonText("cancel")
                                 .positiveButtonText("submit")
@@ -126,8 +133,12 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                         ratingDialog.getTvPositive().setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                              //  Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
+                                //  Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
                                 pres.rateSkill(uid2, uid, "creativity", ratingDialog.getValue());
+                                Intent refresh = new Intent(userTprofile.this, userTprofile.class);
+                                refresh.putExtra("id", uid);
+                                startActivity(refresh);
+                                userTprofile.this.finish();
                                 ratingDialog.dismiss();
                             }
                         });
@@ -150,7 +161,7 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                         // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
                         final com.example.jana.motivlearn.RatingDialog ratingDialog = new com.example.jana.motivlearn.RatingDialog.Builder(userTprofile.this)
                                 .icon(getResources().getDrawable(R.drawable.rateheader))
-                                .title("How was your experience with us?")
+                                .title("Rate "+username+"'s 'presentation' skill")
                                 .titleTextColor(R.color.black)
                                 .negativeButtonText("cancel")
                                 .positiveButtonText("submit")
@@ -173,9 +184,13 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                         ratingDialog.getTvPositive().setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                               // Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
-                             //   pres.didRate(uid2, uid, "presentation");
+                                // Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
+                                //   pres.didRate(uid2, uid, "presentation");
                                 pres.rateSkill(uid2, uid, "presentation", ratingDialog.getValue());
+                                Intent refresh = new Intent(userTprofile.this, userTprofile.class);
+                                refresh.putExtra("id", uid);
+                                startActivity(refresh);
+                                userTprofile.this.finish();
                                 ratingDialog.dismiss();
                             }
                         });
@@ -198,7 +213,7 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                         // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
                         final com.example.jana.motivlearn.RatingDialog ratingDialog = new com.example.jana.motivlearn.RatingDialog.Builder(userTprofile.this)
                                 .icon(getResources().getDrawable(R.drawable.rateheader))
-                                .title("How was your experience with us?")
+                                .title("Rate "+username+"'s 'communication' skill")
                                 .titleTextColor(R.color.black)
                                 .negativeButtonText("cancel")
                                 .positiveButtonText("submit")
@@ -221,8 +236,12 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                         ratingDialog.getTvPositive().setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                               // Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
+                                // Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
                                 pres.rateSkill(uid2, uid, "communication", ratingDialog.getValue());
+                                Intent refresh = new Intent(userTprofile.this, userTprofile.class);
+                                refresh.putExtra("id", uid);
+                                startActivity(refresh);
+                                userTprofile.this.finish();
                                 ratingDialog.dismiss();
                             }
                         });
@@ -237,10 +256,10 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                 });
         bmb.addBuilder(builder3);
 
-        ArrayList<BoomButtonBuilder> ar = bmb.getBuilders();
-        Toast.makeText(this,ar.size()+"", Toast.LENGTH_SHORT).show();
-        for( int i=0 ; i< ar.size() ; i++)
-            ar.get(i).setUnable(true);
+        // ArrayList<BoomButtonBuilder> ar = bmb.getBuilders();
+        //Toast.makeText(this,ar.size()+"", Toast.LENGTH_SHORT).show();
+        //for( int i=0 ; i< ar.size() ; i++)
+          //  ar.get(i).setUnable(true);
 
         //Tab 1
         TabHost.TabSpec spec = host.newTabSpec("Skills");
@@ -267,6 +286,7 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
 
             TextView uname = findViewById(R.id.uname);
             uname.setText(obj2.getString("u_name"));
+            username = obj2.getString("u_name");
 
             TextView coins = findViewById(R.id.coins);
             coins.setText(obj2.getInt("u_coins")+"");
@@ -282,7 +302,8 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
 
             String skillstr = obj.getString("skills");
             JSONArray arr = new JSONArray(skillstr);
-            entries2.clear();
+            ArrayList<Entry> entries2 = new ArrayList<>();
+           // entries2.clear();
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject jsonobject = arr.getJSONObject(i);
                 float ff = (float)jsonobject.getDouble("average");
@@ -290,8 +311,6 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
             }
 
             RadarChart chart = (RadarChart)findViewById(R.id.chart);
-            dataSets.clear();
-            chart.clear();
             RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "nouf");
 
             dataset_comp2.setColor(Color.BLUE);
@@ -312,15 +331,21 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
         }
         catch (Exception e){}
 
+
         NewtonCradleLoading newtonCradleLoading;
         newtonCradleLoading = (NewtonCradleLoading)findViewById(R.id.newton_cradle_loading);
         newtonCradleLoading.setVisibility(View.GONE);
 
         ScrollView whole = findViewById(R.id.wholeview);
         whole.setVisibility(View.VISIBLE);
+      //  last();
 
     }
 
+    public void last()
+    {
+
+    }
    /* @Override
     public void cantRate() {
         new TTFancyGifDialog.Builder(userTprofile.this)
