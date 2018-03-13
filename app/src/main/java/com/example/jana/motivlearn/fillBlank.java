@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,7 +63,15 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
             int index = obj.getInt("GENERATED_KEY");
         }
         catch (Exception e) {}*/
-
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+       // mToolbar.setTitle("Create Challenge");
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     @Override

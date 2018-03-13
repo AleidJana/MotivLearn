@@ -3,10 +3,12 @@ package com.example.jana.motivlearn;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,8 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
     Button submit ;
     int count ,  coins;
     String  answer;
+    ProgressBar progressBar;
+    int time;
     displayCodeOutputPresenter displayCodeOutputP;
 
     @Override
@@ -42,6 +46,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
 
         SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
         final int uid =sp1.getInt("user_id", 0);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar2) ;
 
        // Toast.makeText(this,getIntent().getIntExtra("id", 0)+"", Toast.LENGTH_SHORT).show();
         displayCodeOutputP = new displayCodeOutputImp(displayCodeOutput.this);
@@ -69,9 +74,41 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
             String title = obj.getString("challenge_title");
             String question = obj.getString("question");
             coins = obj.getInt("coins");
+            time= obj.getInt("time");
             Ttitle.setText(title);
             Tqustion.setText(question);
              answer = obj.getString("answer");
+            progressBar.setMax(time);
+            progressBar.setProgress(time);
+            time=time*1000;
+            new CountDownTimer(time, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    progressBar.setProgress((int) (millisUntilFinished / 1000));
+                }
+                public void onFinish() {
+                    progressBar.setProgress(0);
+                    new TTFancyGifDialog.Builder(displayCodeOutput.this)
+                            .setTitle("OOPS!")
+                            .setMessage("your time is finished")
+                            .setPositiveBtnText("Ok")
+                            .setPositiveBtnBackground("#9577bc")
+                            .setGifResource(getResources().getIdentifier("losse", "drawable", getPackageName()))      //pass your gif, png or jpg
+                            .isCancellable(true)
+                            .OnPositiveClicked(new TTFancyGifDialogListener() {
+                                @Override
+                                public void OnClick() {
+                                    //displayCodeOutputP.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0);
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    intent.putExtra("nextFrag", "cha");
+                                    startActivity(intent);
+                                }
+                            })
+                            .build();
+
+                }
+            }.start();
+
             submit = findViewById(R.id.button);
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -132,6 +169,10 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
                 })
                 .build();
 
+    }
+    @Override
+    public void onBackPressed() {
+        // Toast.makeText(this,"can't go back", Toast.LENGTH_SHORT).show();
     }
 }
 

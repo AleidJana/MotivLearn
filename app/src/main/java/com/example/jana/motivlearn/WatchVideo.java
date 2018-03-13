@@ -6,6 +6,7 @@ import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -30,6 +31,7 @@ import com.shashank.sony.fancygifdialoglib.FancyGifDialogListener;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,6 +42,8 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
     private String url;
     private int vidId;
     int uid;
+    private         Handler updateHandler;
+
     private BetterVideoPlayer player;
     private watchVideoPresenter pres;
     private ImageButton imgbtn;
@@ -59,6 +63,7 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
         player = (BetterVideoPlayer) findViewById(R.id.player);
         player.setCallback(this);
         player.disableControls();
+
     }
 
     @Override
@@ -87,9 +92,9 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
                     new TTFancyGifDialog.Builder(WatchVideo.this)
                             .setTitle("Are you sure you want close the video?")
                             .setMessage("Note that you will not be able to rewatch this video\n and you will not gain any coins")
-                            .setPositiveBtnText("NO")
+                            .setPositiveBtnText("Yes")
                             .setPositiveBtnBackground("#9577bc")
-                            .setNegativeBtnText("YES")
+                            .setNegativeBtnText("No")
                             .setNegativeBtnBackground("#c6c9ce")
                             .setGifResource(R.drawable.hgif5)      //pass your gif, png or jpg
                             .isCancellable(true)
@@ -97,14 +102,14 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
                                 @Override
                                 public void OnClick() {
                                     //Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
-                                    player.start();
+                                    finish();
                                 }
                             })
                             .OnNegativeClicked(new TTFancyGifDialogListener() {
                                 @Override
                                 public void OnClick() {
                                     //Toast.makeText(MainActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
-                                    finish();
+                                    player.start();
                                 }
                             })
                             .build();
@@ -133,7 +138,7 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
     @Override
     public void noVid() {
         new TTFancyGifDialog.Builder(WatchVideo.this)
-                .setTitle("No Vid to Watch")
+                .setTitle("No Video to Watch")
                 .setMessage("you have watched this week's video, come again next week")
                 .setPositiveBtnText("Ok")
                 .setPositiveBtnBackground("#9577bc")
@@ -151,7 +156,6 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
 
     @Override
     public void onPause() {
-        t.cancel();
         player.pause();
         super.onPause();
         // Make sure the player stops playing if the user presses the home button.
@@ -164,27 +168,16 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
     @Override
     public void onStarted(BetterVideoPlayer player) {
         Log.i("haifa", "Started");
-        t = new Timer();
-        TimerTask tt = new TimerTask()
-        {
-            @Override
-            public void run() {
-                progressBar.setText(String.valueOf(seconds));
-            }
-        };
-        t.schedule(tt, 0,1000);
     }
 
     @Override
     public void onPaused(BetterVideoPlayer player) {
         Log.i("haifa", "Paused");
-        t.cancel();
     }
 
     @Override
     public void onPreparing(BetterVideoPlayer player) {
         Log.i("haifa", "Preparing");
-        t.cancel();
     }
 
 
@@ -193,40 +186,37 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
     public void onPrepared(final BetterVideoPlayer player) {
         Log.i("haifa", "Prepared");
 
-           t = new Timer();
-            TimerTask tt = new TimerTask() {
+        updateHandler = new Handler();
+        Runnable RecurringTask = new Runnable() {
 
-                @Override
-                public void run() {
-                    //if(player.isPlaying())
-                    int mm = player.getCurrentPosition()/1000;
-                    Log.i("jj", "Prepared"+mm);
-                    progressBar.setText(String.valueOf(seconds-mm));
-                    progressBar.setProgress(seconds-mm);
-
-                }
-
-            };
-            t.schedule(tt, 0, 1000);
+            public void run() {
+                // Do whatever you want
+                int mm = player.getCurrentPosition()/1000;
+                progressBar.setText(String.valueOf(seconds-mm));
+                   progressBar.setProgress(seconds-mm);
+                // Call this method again every 30 seconds
+                updateHandler.postDelayed(this, 1000);
+            }
+        };
+        // Do this first after 1 second
+        updateHandler.postDelayed(RecurringTask, 1000);
 
     }
+
 
     @Override
     public void onBuffering(int percent) {
         Log.i("haifa", "Buffering " + percent);
-        t.cancel();
-
     }
 
     @Override
     public void onError(BetterVideoPlayer player, Exception e) {
         Log.i("haifa", "Error " +e.getMessage());
-        t.cancel();
     }
 
     @Override
     public void onCompletion(BetterVideoPlayer player) {
-        t.cancel();
+        updateHandler.removeCallbacksAndMessages(null);
      //   Toast.makeText(this,"finished", Toast.LENGTH_SHORT).show();
        // super.onBackPressed();
         pres.updateUserCoins(uid, vidId);
@@ -254,7 +244,6 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
     @Override
     public void onToggleControls(BetterVideoPlayer player, boolean isShowing) {
         Log.i("haifa", "Controls toggled " + isShowing);
-       t.cancel();
     }
 
     @Override

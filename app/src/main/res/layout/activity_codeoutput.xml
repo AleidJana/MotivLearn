@@ -68,6 +68,8 @@
             android:background="@drawable/text_view_style"
             android:layout_gravity="center"
             android:text=" "
+            android:inputType="text|textMultiLine"
+            android:gravity="top"
             android:padding="10dp"
             android:textColor="#8767b3"
             android:textSize="15sp" />

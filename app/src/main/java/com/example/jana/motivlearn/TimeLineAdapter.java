@@ -98,9 +98,11 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         holder.like.setOnLikeListener(new OnLikeListener() {
             @Override
             public void liked(LikeButton likeButton) {
-                pres.addlike(item.getPostid(),uid);
+                //if(uid!=item.getUserid()) {
+                pres.addlike(item.getPostid(), uid);
                 addlikersult(item);
-            }
+
+        }
             @Override
             public void unLiked(LikeButton likeButton) {
                holder.like.setLiked(true);
@@ -121,7 +123,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
-                builder.setMessage("are you sure you want to delete this post?")
+                builder.setMessage("Do you want to delete this post?")
                         .setCancelable(false)
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -178,7 +180,8 @@ public void addlikersult(TimeLineInfo item)
 {
     int potition = InfoList.indexOf(item);
     InfoList.get(potition).setLikes(item.getLikes()+1);
-    notifyDataSetChanged();
+    notifyItemChanged(potition,item);
+    //notifyDataSetChanged();
 }
 public void openusersprofile(TimeLineInfo item)
 {

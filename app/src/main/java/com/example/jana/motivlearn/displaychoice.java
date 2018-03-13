@@ -3,9 +3,11 @@ package com.example.jana.motivlearn;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -29,7 +31,8 @@ RadioGroup radio ;
 RadioButton radioButton;
 displayChoicePresenter ll;
 String answer;
-
+    ProgressBar progressBar;
+    int time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ String answer;
         final int uid =sp1.getInt("user_id", 0);
         ll=new displaymultiChoicesImp(displaychoice.this);
         ll.peformDisplayChoice(challNum);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar2) ;
 
 
         // check the answer ...
@@ -88,6 +92,7 @@ String answer;
             String qustion=obj.getString("question");
             String challenge_title=obj.getString("challenge_title");
             String allChoise = obj.getString("answer");
+            time= obj.getInt("time");
             JSONObject obj2 = new JSONObject(allChoise);
             int length= obj2.length();
             TitleD.setText(challenge_title);
@@ -100,7 +105,38 @@ String answer;
                 rbn.setText(c);
                 radio.addView(rbn);
             }
-             answer = obj2.getString("answer");
+            progressBar.setMax(10);
+            progressBar.setProgress(10);
+            time=10*1000;
+            new CountDownTimer(time, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    progressBar.setProgress((int) (millisUntilFinished / 1000));
+                }
+                public void onFinish() {
+                    progressBar.setProgress(0);
+                    new TTFancyGifDialog.Builder(displaychoice.this)
+                            .setTitle("OOPS!")
+                            .setMessage("your time is finished")
+                            .setPositiveBtnText("Ok")
+                            .setPositiveBtnBackground("#9577bc")
+                            .setGifResource(getResources().getIdentifier("losse", "drawable", getPackageName()))      //pass your gif, png or jpg
+                            .isCancellable(true)
+                            .OnPositiveClicked(new TTFancyGifDialogListener() {
+                                @Override
+                                public void OnClick() {
+                                    //displayCodeOutputP.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0);
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    intent.putExtra("nextFrag", "cha");
+                                    startActivity(intent);
+                                }
+                            })
+                            .build();
+
+                }
+            }.start();
+
+            answer = obj2.getString("answer");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -148,7 +184,10 @@ String answer;
     }
 
 
-
+    @Override
+    public void onBackPressed() {
+        // Toast.makeText(this,"can't go back", Toast.LENGTH_SHORT).show();
+    }
 
 
 

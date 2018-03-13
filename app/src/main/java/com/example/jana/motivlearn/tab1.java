@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.util.EventLogTags;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -196,9 +197,8 @@ public class tab1 extends Fragment implements myProfileView {
                 float ff = (float)jsonobject.getDouble("average");
                 entries2.add(new Entry(ff, i));
             }
-
             RadarChart chart = (RadarChart) view.findViewById(R.id.chart);
-            RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "nouf");
+            RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "");
 
             dataset_comp2.setColor(Color.BLUE);
             dataset_comp2.setValueTextSize(10f);

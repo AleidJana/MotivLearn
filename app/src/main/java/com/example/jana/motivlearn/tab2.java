@@ -52,7 +52,7 @@ public class tab2 extends Fragment implements TimelineView {
         newtonCradleLoading.setVisibility(View.VISIBLE);
         newtonCradleLoading.start();
         PullRefreshLayout layout = (PullRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
-        layout.setRefreshing(true);
+       // layout.setRefreshing(true);
         layout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -62,6 +62,7 @@ public class tab2 extends Fragment implements TimelineView {
                 pres.likedposts(uid);
             }
         });
+
         addPost=(FloatingActionButton) view.findViewById(R.id.fab);
         addPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +78,7 @@ public class tab2 extends Fragment implements TimelineView {
     @Override
     public void setResult(String res) {
         InfoList.clear();
+
         try {
             JSONArray jsonArray = new JSONArray(res);
             for (int i = 0; i < jsonArray.length(); i++)
@@ -115,6 +117,7 @@ public class tab2 extends Fragment implements TimelineView {
 
     @Override
     public void setlikedResult(String resu) {
+        likedposts.clear();
 
         try {
             JSONArray jsonArray = new JSONArray(resu);
