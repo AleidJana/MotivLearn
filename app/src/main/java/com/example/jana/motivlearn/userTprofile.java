@@ -135,10 +135,11 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                             public void onClick(View view) {
                                 //  Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
                                 pres.rateSkill(uid2, uid, "creativity", ratingDialog.getValue());
-                                Intent refresh = new Intent(userTprofile.this, userTprofile.class);
+                                pres.getSkill(uid);
+                               /* Intent refresh = new Intent(userTprofile.this, userTprofile.class);
                                 refresh.putExtra("id", uid);
                                 startActivity(refresh);
-                                userTprofile.this.finish();
+                                userTprofile.this.finish();*/
                                 ratingDialog.dismiss();
                             }
                         });
@@ -187,10 +188,11 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                                 // Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
                                 //   pres.didRate(uid2, uid, "presentation");
                                 pres.rateSkill(uid2, uid, "presentation", ratingDialog.getValue());
-                                Intent refresh = new Intent(userTprofile.this, userTprofile.class);
+                                pres.getSkill(uid);
+                               /* Intent refresh = new Intent(userTprofile.this, userTprofile.class);
                                 refresh.putExtra("id", uid);
                                 startActivity(refresh);
-                                userTprofile.this.finish();
+                                userTprofile.this.finish();*/
                                 ratingDialog.dismiss();
                             }
                         });
