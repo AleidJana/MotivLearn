@@ -6,16 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/pink4"
-    android:padding="16dp"
     tools:context="com.example.jana.motivlearn.AddPost">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="60dp"
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/user_image"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_marginRight="16dp"
             android:src="@drawable/profileimg" />
 
@@ -33,7 +42,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="180dp"
         android:text="add"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ovalbutton"
+        android:textColor="#FFFFFF"
         android:id="@+id/addpost"/>
 </RelativeLayout>

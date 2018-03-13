@@ -16,6 +16,7 @@
         android:id="@+id/wholeview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="60dp"
         android:visibility="visible">
 
         <RelativeLayout
@@ -53,7 +54,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="Raghad Alsaleh"
+                    android:text=" "
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                     android:textColor="#5a3689"
                     android:textSize="20dp"
@@ -87,7 +88,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
-                            android:text="1000"
+                            android:text=""
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
