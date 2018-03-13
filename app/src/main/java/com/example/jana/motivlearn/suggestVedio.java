@@ -1,6 +1,7 @@
 package com.example.jana.motivlearn;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +25,7 @@ public class suggestVedio extends Activity implements SuggestVedioView {
     EditText VedioLinkF ;
     Button SubmitB ;
     SuggestVedioPresenter mSuggestVedio;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,10 +33,11 @@ public class suggestVedio extends Activity implements SuggestVedioView {
         VedioLinkF = findViewById(R.id.editText7);
         SubmitB=findViewById(R.id.button2);
         mSuggestVedio = new SuggestVedioImp(suggestVedio.this);
-
         SubmitB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog = ProgressDialog.show(suggestVedio.this, "", "Please wait...");
+
                 String VedioLink = VedioLinkF.getText().toString();
                 SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
                 int uid =sp1.getInt("user_id", 0);
@@ -55,6 +58,8 @@ public class suggestVedio extends Activity implements SuggestVedioView {
 
     @Override
     public void suggestVrdioError() {
+        progressDialog.dismiss();
+
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         Noty.init(suggestVedio.this, "fill the field please", rl,
                 Noty.WarningStyle.ACTION)
@@ -76,6 +81,7 @@ public class suggestVedio extends Activity implements SuggestVedioView {
 
     @Override
     public void SuggestVedioValidations() {
+        progressDialog.dismiss();
         new TTFancyGifDialog.Builder(suggestVedio.this)
                 .setTitle("suggested successfully")
                 .setMessage("Thank you, \n your video has been recorded \n and you have got 5 Coins")
@@ -95,6 +101,7 @@ public class suggestVedio extends Activity implements SuggestVedioView {
 
     @Override
     public void wrongFormat() {
+        progressDialog.dismiss();
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         Noty.init(suggestVedio.this, "Enter the link with http:// or https:// format", rl,
                 Noty.WarningStyle.ACTION)

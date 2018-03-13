@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="80dp"
         android:text="Multiple Choices"
         android:textColor="#8767b3"
         android:textSize="24sp"
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="140dp"
         android:text="Question"
         android:textColor="#8767b3"
         android:textSize="22sp"
@@ -49,11 +49,14 @@
         android:layout_width="270dp"
         android:layout_height="50dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="145dp"
+        android:layout_marginTop="185dp"
         android:background="@drawable/text_view_style"
         android:ems="10"
-        android:hint="  Enter Question"
-        android:inputType="textPersonName"
+        android:textColor="#8767b3"
+        android:inputType="text|textMultiLine"
+        android:gravity="top"
+        android:padding="6dp"
+        android:hint="Enter Question"
         android:scrollbars="horizontal" />
 
     <TextView
@@ -61,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="240dp"
         android:text="Choices"
         android:textColor="#8767b3"
         android:textSize="23sp"
@@ -78,7 +81,9 @@
         android:layout_toRightOf="@+id/radioGroup"
         android:background="@drawable/text_view_style"
         android:ems="10"
+        android:textColor="@color/colorAccent"
         android:hint="  Enter Choice 1"
+        android:paddingLeft="6dp"
         android:inputType="textPersonName"
         android:scrollbars="horizontal" />
 
@@ -93,6 +98,8 @@
         android:layout_toRightOf="@+id/radioGroup"
         android:background="@drawable/text_view_style"
         android:ems="10"
+        android:paddingLeft="6dp"
+        android:textColor="@color/colorAccent"
         android:hint="  Enter Choice 2"
         android:inputType="textPersonName"
         android:scrollbars="horizontal" />
@@ -109,6 +116,8 @@
         android:layout_toRightOf="@+id/radioGroup"
         android:background="@drawable/text_view_style"
         android:ems="10"
+        android:paddingLeft="6dp"
+        android:textColor="@color/colorAccent"
         android:hint="  Enter Choice 3"
         android:inputType="textPersonName"
         android:scrollbars="horizontal" />
@@ -125,6 +134,8 @@
         android:layout_toRightOf="@+id/radioGroup"
         android:background="@drawable/text_view_style"
         android:ems="10"
+        android:paddingLeft="6dp"
+        android:textColor="@color/colorAccent"
         android:hint="  Enter Choice 4"
         android:inputType="textPersonName"
         android:scrollbars="horizontal" />
@@ -146,7 +157,7 @@
         android:layout_width="30dp"
         android:layout_height="200dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="280dp"
         android:orientation="vertical">
 
         <RadioButton

@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
     String  answer;
     ProgressBar progressBar;
     int time;
+    ProgressDialog progressDialog;
+
     displayCodeOutputPresenter displayCodeOutputP;
 
     @Override
@@ -88,6 +91,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
                 }
                 public void onFinish() {
                     progressBar.setProgress(0);
+                    progressDialog.dismiss();
                     new TTFancyGifDialog.Builder(displayCodeOutput.this)
                             .setTitle("OOPS!")
                             .setMessage("your time is finished")
@@ -113,6 +117,8 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    progressDialog = ProgressDialog.show(displayCodeOutput.this, "", "Please wait...");
+
                     Uanswer = findViewById(R.id.editText);
                     String userAnswer = Uanswer.getText().toString().trim();
 
@@ -136,7 +142,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
 
     @Override
     public void correct(int coinns, String status) {
-
+        progressDialog.dismiss();
         String msg1, msg2;
         int dr1 = 0;
         if(status.equals("pass"))
