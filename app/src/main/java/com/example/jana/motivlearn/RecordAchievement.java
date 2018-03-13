@@ -52,7 +52,7 @@ public class RecordAchievement extends AppCompatActivity implements recordAchiev
                                     SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
                                     int uid =sp1.getInt("user_id", 0);
                                     pres= new recordAchievementImp(RecordAchievement.this);
-                                 //   pres.updateUserCoins(uid);
+                                    pres.updateUserCoins(uid);
                                     new TTFancyGifDialog.Builder(RecordAchievement.this)
                                             .setTitle("Scanned successfully")
                                             .setMessage("Good job, \n your achievement have been recorded \n and you have got 10 Coins")

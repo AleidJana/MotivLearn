@@ -25,13 +25,14 @@ public class SuggestVedioImp implements SuggestVedioPresenter {
         this.suggestVedioView=suggestVedioView;
     }
     @Override
-    public void performSuggestVedio(String vedioLink) {
+    public void performSuggestVedio(String vedioLink, int userId) {
         if(TextUtils.isEmpty(vedioLink)){
-            suggestVedioView.SuggestVedioValidations();
+           // suggestVedioView.SuggestVedioValidations();
+            suggestVedioView.suggestVrdioError();
         }
         else {
-            if ((vedioLink.substring(0,7)).toLowerCase().equals("http://")){
-                final int userId=1;
+            if ((vedioLink.toLowerCase().contains("http://")) || (vedioLink.toLowerCase().contains("https://"))){
+               // final int userId=1;
                 final AsyncHttpClient client = new AsyncHttpClient();
                 final RequestParams params = new RequestParams();
                 client.get("https://api.appery.io/rest/1/apiexpress/api/27_SuggestVideo/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&id="+userId+"&link="+vedioLink, params, new TextHttpResponseHandler() {
@@ -42,10 +43,11 @@ public class SuggestVedioImp implements SuggestVedioPresenter {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String response) {
+                        suggestVedioView.SuggestVedioValidations();
 
                     }
                 });
-                client.get("https://api.appery.io/rest/1/apiexpress/api/checkForEducatorBadge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&userId="+userId, params, new TextHttpResponseHandler() {
+              /*  client.get("https://api.appery.io/rest/1/apiexpress/api/checkForEducatorBadge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&userId="+userId, params, new TextHttpResponseHandler() {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                         suggestVedioView.SuggestVedioValidations();
@@ -80,7 +82,7 @@ public class SuggestVedioImp implements SuggestVedioPresenter {
 
 
                     }
-                });
+                });*/
               }
             else {
                 suggestVedioView.wrongFormat();

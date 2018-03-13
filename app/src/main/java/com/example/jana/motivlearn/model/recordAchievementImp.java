@@ -25,8 +25,7 @@ public recordAchievementImp(RecordAchievement v)
     public void updateUserCoins(int uid) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        client.get("https://api.appery.io/rest/1/apiexpress/api/18_watchEducationalVideo1/" +
-                        "?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&userId="+uid, params, new TextHttpResponseHandler()
+        client.get("https://api.appery.io/rest/1/apiexpress/api/13_RecordAchievment/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+uid+"&skill=null", params, new TextHttpResponseHandler()
                 {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String res) {

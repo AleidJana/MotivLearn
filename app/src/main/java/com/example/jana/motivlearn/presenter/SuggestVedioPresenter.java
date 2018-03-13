@@ -5,5 +5,5 @@ package com.example.jana.motivlearn.presenter;
  */
 
 public interface SuggestVedioPresenter {
-    void performSuggestVedio(String vedioLink);
+    void performSuggestVedio(String vedioLink, int uid);
 }
