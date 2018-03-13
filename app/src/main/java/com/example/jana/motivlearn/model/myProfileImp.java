@@ -119,4 +119,28 @@ public class myProfileImp implements myProfilePresenter {
         );
     }
 
+    @Override
+    public void getSkill(int uid) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        client.get("https://api.appery.io/rest/1/apiexpress/api/getSkill/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+uid, params, new TextHttpResponseHandler()
+                {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String res) {
+                        //   Toast.makeText((Context) vue,"owwww", Toast.LENGTH_SHORT).show();
+                        res = res.substring(1,res.length()-1);
+                        vue.updateChart(res);
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+
+                    }
+                }
+        );
+
+    }
+
+
 }

@@ -188,35 +188,7 @@ public class tab1 extends Fragment implements myProfileView {
 
 
             String skillstr = obj.getString("skills");
-            JSONArray arr = new JSONArray(skillstr);
-            ArrayList<Entry> entries2 = new ArrayList<>();
-
-           for (int i = 0; i < arr.length(); i++) {
-                JSONObject jsonobject = arr.getJSONObject(i);
-                float ff = (float)jsonobject.getDouble("average");
-                entries2.add(new Entry(ff, i));
-            }
-
-            RadarChart chart = (RadarChart) view.findViewById(R.id.chart);
-            RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "nouf");
-
-            dataset_comp2.setColor(Color.BLUE);
-            dataset_comp2.setValueTextSize(10f);
-            dataset_comp2.setDrawFilled(true);
-
-            ArrayList<String> labels = new ArrayList<String>();
-
-            labels.add("Team work");
-            labels.add("Activation");
-            labels.add("Technical Knowledge");
-            labels.add("Programming");
-            labels.add("Presentation");
-            dataSets.add(dataset_comp2);
-            RadarData data = new RadarData(labels, dataSets);
-            chart.setData(data);
-            chart.setWebLineWidthInner(2f);
-            chart.invalidate();
-            chart.animate();
+            updateChart(skillstr);
 
         String badgestr = obj.getString("badges");
         JSONArray arr2 = new JSONArray(badgestr);
@@ -239,5 +211,46 @@ public class tab1 extends Fragment implements myProfileView {
         ScrollView whole = view.findViewById(R.id.wholeview);
         whole.setVisibility(View.VISIBLE);
 
+    }
+
+    @Override
+    public void updateChart(String skillstr)
+    {
+        try {
+            JSONArray arr = new JSONArray(skillstr);
+            ArrayList<Entry> entries2 = new ArrayList<>();
+            // entries2.clear();
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject jsonobject = arr.getJSONObject(i);
+                float ff = (float)jsonobject.getDouble("average");
+                entries2.add(new Entry(ff, i));
+            }
+
+            RadarChart chart = (RadarChart)view.findViewById(R.id.chart);
+            chart.clear();
+            RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "nouf");
+            //dataset_comp2.clear();
+
+            dataset_comp2.setColor(Color.BLUE);
+            dataset_comp2.setValueTextSize(10f);
+            dataset_comp2.setDrawFilled(true);
+
+            ArrayList<String> labels = new ArrayList<String>();
+
+            labels.add("Teamwork");
+            labels.add("Activation");
+            labels.add("Technical Knowledge");
+            labels.add("Programming");
+            labels.add("Presentation");
+            dataSets.clear();
+            dataSets.add(dataset_comp2);
+
+            RadarData data = new RadarData(labels, dataSets);
+            chart.setData(data);
+            chart.setWebLineWidthInner(2f);
+            chart.invalidate();
+            chart.animate();
+        }
+        catch (Exception e){}
     }
 }

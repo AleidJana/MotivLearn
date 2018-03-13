@@ -7,6 +7,7 @@ package com.example.jana.motivlearn.view;
 public interface myProfileView {
 
     void displayInfo(String res);
+    void updateChart(String skillstr);
    // void cantRate();
   //  void rateForm(String skill);
 }

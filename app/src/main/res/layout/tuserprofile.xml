@@ -1,0 +1,195 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/pink4"
+    tools:context="com.example.jana.motivlearn.tab3">
+
+    <com.victor.loading.newton.NewtonCradleLoading
+        android:id="@+id/newton_cradle_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="100dp" />
+    <ScrollView
+        android:id="@+id/wholeview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_alignBottom="@+id/cardView"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center|top"
+                android:layout_marginBottom="87dp"
+                android:elevation="10dp"
+                android:padding="10dp"
+                android:src="@drawable/profileimg" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="182dp"
+                android:layout_alignTop="@id/qcard"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="50dp"
+                app:cardBackgroundColor="@color/cardback"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="4dp">
+
+                <TextView
+                    android:id="@+id/uname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="Noura Alomar"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="#5a3689"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="45dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/coins" />
+
+                        <TextView
+                            android:id="@+id/coins"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="1000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/level"
+                            android:layout_width="60dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/level3" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/dep"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/swedepartment" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TabHost
+                android:id="@+id/tabHost"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="240dp"
+                android:layout_weight="4"
+                android:theme="@style/TabWidgetTheme">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/cardback"></TabWidget>
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/tab1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center">
+
+                                <com.nightonke.boommenu.BoomMenuButton
+                                    android:id="@+id/bmb"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="6dp"
+                                    app:bmb_buttonEnum="textOutsideCircle"
+                                    app:bmb_buttonPlaceEnum="buttonPlace_sc_3_1"
+                                    app:bmb_normalColor="@color/colorPrimary"
+                                    app:bmb_piecePlaceEnum="piecePlace_dot_3_1" />
+
+                                <com.github.mikephil.charting.charts.RadarChart
+                                    android:id="@+id/chart"
+                                    android:layout_width="500dp"
+                                    android:layout_height="500dp"
+                                    android:elevation="4dp" />
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+                    </FrameLayout>
+                </LinearLayout>
+            </TabHost>
+
+        </RelativeLayout>
+    </ScrollView>
+</FrameLayout>
+

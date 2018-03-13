@@ -1,0 +1,444 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/pink4"
+    tools:context="com.example.jana.motivlearn.tab3">
+
+    <com.victor.loading.newton.NewtonCradleLoading
+        android:id="@+id/newton_cradle_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="100dp" />
+
+    <ScrollView
+        android:id="@+id/wholeview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_alignBottom="@+id/cardView"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center|top"
+                android:layout_marginBottom="87dp"
+                android:elevation="10dp"
+                android:padding="10dp"
+                android:src="@drawable/profileimg" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="182dp"
+                android:layout_alignTop="@id/qcard"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="50dp"
+                app:cardBackgroundColor="@color/cardback"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="4dp">
+
+                <TextView
+                    android:id="@+id/uname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="Raghad Alsaleh"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:textColor="#5a3689"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="85dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="45dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/coins" />
+
+                        <TextView
+                            android:id="@+id/coins"
+                            android:layout_width="60dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="1000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/level"
+                            android:layout_width="60dp"
+                            android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/level3" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/dep"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/swedepartment" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <TabHost
+                android:id="@+id/tabHost"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="240dp"
+                android:layout_weight="4"
+                android:theme="@style/TabWidgetTheme">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/cardback"></TabWidget>
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:id="@+id/tab1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RelativeLayout
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:gravity="center">
+
+                                <com.nightonke.boommenu.BoomMenuButton
+                                    android:id="@+id/bmb"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:elevation="6dp"
+                                    app:bmb_buttonEnum="textOutsideCircle"
+                                    app:bmb_buttonPlaceEnum="buttonPlace_sc_2_1"
+                                    app:bmb_normalColor="@color/colorPrimary"
+                                    app:bmb_piecePlaceEnum="piecePlace_dot_2_1" />
+
+                                <com.github.mikephil.charting.charts.RadarChart
+                                    android:id="@+id/chart"
+                                    android:layout_width="500dp"
+                                    android:layout_height="500dp"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_alignParentTop="true"
+                                    android:elevation="4dp" />
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/tab2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="62dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_weight="1">
+
+                                <!--line 1 -->
+                                <ImageView
+                                    android:id="@+id/badge6"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb6" />
+
+                                <ImageView
+                                    android:id="@+id/badge4"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb4" />
+
+                                <ImageView
+                                    android:id="@+id/badge8"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb8" />
+
+                                <ImageView
+                                    android:id="@+id/badge5"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb5" />
+
+                                <ImageView
+                                    android:id="@+id/badge9"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb9" />
+
+                                <ImageView
+                                    android:id="@+id/badge11"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb11" />
+
+                                <ImageView
+                                    android:id="@+id/badge10"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb10" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/badge"
+                                android:layout_width="match_parent"
+                                android:layout_height="62dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1">
+
+                                <!--line 1 -->
+                                <ImageView
+                                    android:id="@+id/badge23"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb23" />
+
+                                <ImageView
+                                    android:id="@+id/badge14"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb14" />
+
+                                <ImageView
+                                    android:id="@+id/badge17"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb17" />
+
+                                <ImageView
+                                    android:id="@+id/badge1"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb1" />
+
+                                <ImageView
+                                    android:id="@+id/badge20"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb20" />
+
+                                <ImageView
+                                    android:id="@+id/badge26"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb26" />
+
+                                <ImageView
+                                    android:id="@+id/badge12"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb12" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="62dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1">
+
+                                <!--line 1 -->
+                                <ImageView
+                                    android:id="@+id/badge24"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb24" />
+
+                                <ImageView
+                                    android:id="@+id/badge15"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb15" />
+
+                                <ImageView
+                                    android:id="@+id/badge18"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb18" />
+
+                                <ImageView
+                                    android:id="@+id/badge2"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb2" />
+
+                                <ImageView
+                                    android:id="@+id/badge21"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb21" />
+
+                                <ImageView
+                                    android:id="@+id/badge27"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb27" />
+
+                                <ImageView
+                                    android:id="@+id/badge13"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb13" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="62dp"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1">
+
+                                <!--line 1 -->
+                                <ImageView
+                                    android:id="@+id/badge25"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb25" />
+
+                                <ImageView
+                                    android:id="@+id/badge16"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb16" />
+
+                                <ImageView
+                                    android:id="@+id/badge19"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb19" />
+
+                                <ImageView
+                                    android:id="@+id/badge3"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb3" />
+
+                                <ImageView
+                                    android:id="@+id/badge22"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb22" />
+
+                                <ImageView
+                                    android:id="@+id/badge28"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb28" />
+
+                                <ImageView
+                                    android:id="@+id/badge7"
+                                    android:layout_width="40dp"
+                                    android:layout_height="50dp"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/badgeb7" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </FrameLayout>
+                </LinearLayout>
+            </TabHost>
+
+        </RelativeLayout>
+    </ScrollView>
+</FrameLayout>
+
