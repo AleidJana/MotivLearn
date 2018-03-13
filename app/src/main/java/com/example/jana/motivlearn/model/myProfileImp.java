@@ -128,7 +128,7 @@ public class myProfileImp implements myProfilePresenter {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String res) {
                         //   Toast.makeText((Context) vue,"owwww", Toast.LENGTH_SHORT).show();
-                        res = res.substring(1,res.length()-1);
+                       // res = res.substring(1,res.length()-1);
                         vue.updateChart(res);
 
                     }

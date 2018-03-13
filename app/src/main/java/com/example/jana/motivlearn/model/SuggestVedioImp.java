@@ -35,7 +35,7 @@ public class SuggestVedioImp implements SuggestVedioPresenter {
                // final int userId=1;
                 final AsyncHttpClient client = new AsyncHttpClient();
                 final RequestParams params = new RequestParams();
-                client.get("https://api.appery.io/rest/1/apiexpress/api/27_SuggestVideo/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&id="+userId+"&link="+vedioLink, params, new TextHttpResponseHandler() {
+                client.get("https://api.appery.io/rest/1/apiexpress/api/27_suggestEducationVideo/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&link="+vedioLink+"&userId="+userId, params, new TextHttpResponseHandler() {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
                         suggestVedioView.suggestVrdioError();

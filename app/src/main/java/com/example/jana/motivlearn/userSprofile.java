@@ -288,6 +288,7 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject jsonobject = arr.getJSONObject(i);
                 float ff = (float)jsonobject.getDouble("average");
+               // Toast.makeText(this,i+"", Toast.LENGTH_SHORT).show();
                 entries2.add(new Entry(ff, i));
             }
 

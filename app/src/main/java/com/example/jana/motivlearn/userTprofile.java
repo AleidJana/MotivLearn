@@ -344,9 +344,10 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
 
         ArrayList<String> labels = new ArrayList<String>();
 
-        labels.add("Presentation");
-        labels.add("Communication");
         labels.add("Creativity");
+        labels.add("Communication");
+        labels.add("Presentation");
+
         dataSets.clear();
         dataSets.add(dataset_comp2);
 
