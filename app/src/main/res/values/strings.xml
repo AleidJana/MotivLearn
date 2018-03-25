@@ -42,7 +42,7 @@
     <string name="login_error_notFound">Incorrect email or password</string>
     <string name="login_success">logged in successfully</string>
     <!--Teacher Services page -->
-    <string name="Create_challenge">Create Challenge</string>
+    <string name="Create_challenge">Create Public Challenge</string>
     <string name="Suggest_challenge">Suggest Challenge</string>
     <string name="Suggest_video">Suggest Educational Video</string>
 
