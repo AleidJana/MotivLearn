@@ -254,6 +254,8 @@ public class TeacherProfile extends Fragment implements myProfileView {
         newtonCradleLoading.setVisibility(View.GONE);
 
         ScrollView whole = view.findViewById(R.id.wholeview);
+        whole.setFocusable(false);
+        whole.smoothScrollTo(0,0);
         whole.setVisibility(View.VISIBLE);
 
     }

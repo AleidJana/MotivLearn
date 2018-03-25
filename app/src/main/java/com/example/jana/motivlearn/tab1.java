@@ -209,6 +209,8 @@ public class tab1 extends Fragment implements myProfileView {
         newtonCradleLoading.setVisibility(View.GONE);
 
         ScrollView whole = view.findViewById(R.id.wholeview);
+        whole.setFocusable(false);
+        whole.smoothScrollTo(0,0);
         whole.setVisibility(View.VISIBLE);
 
     }
@@ -237,11 +239,11 @@ public class tab1 extends Fragment implements myProfileView {
 
             ArrayList<String> labels = new ArrayList<String>();
 
-            labels.add("Activation");
             labels.add("Teamwork");
+            labels.add("Activation");
+            labels.add("Technical Knowledge");
             labels.add("Programming");
             labels.add("Presentation");
-            labels.add("Technical Knowledge");
             dataSets.clear();
             dataSets.add(dataset_comp2);
 
@@ -252,5 +254,6 @@ public class tab1 extends Fragment implements myProfileView {
             chart.animate();
         }
         catch (Exception e){}
+
     }
 }

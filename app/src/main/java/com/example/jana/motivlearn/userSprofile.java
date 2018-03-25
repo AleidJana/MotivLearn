@@ -274,6 +274,8 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
         newtonCradleLoading.setVisibility(View.GONE);
 
         ScrollView whole = findViewById(R.id.wholeview);
+        whole.setFocusable(false);
+        whole.smoothScrollTo(0,0);
         whole.setVisibility(View.VISIBLE);
 
     }
