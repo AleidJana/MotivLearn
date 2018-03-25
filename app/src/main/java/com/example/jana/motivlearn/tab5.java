@@ -20,29 +20,29 @@ public class tab5 extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_tab5, container, false);
-//        createChallenge = (Button) view.findViewById(R.id.button2);
-//        createChallenge.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getActivity(),createChallenge.class));
-//
-//            }
-//        });
-//        sagestCallenge = (Button) view.findViewById(R.id.button);
-//        sagestCallenge.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getActivity(),createChallenge.class));
-//
-//            }
-//        });
-//        sagestVedio = (Button) view.findViewById(R.id.vediobutton);
-//        sagestVedio.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getActivity(),suggestVedio.class));
-//            }
-//        });
+        createChallenge = (Button) view.findViewById(R.id.button2);
+        createChallenge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),createChallenge.class));
+
+            }
+        });
+        sagestCallenge = (Button) view.findViewById(R.id.button);
+        sagestCallenge.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),createChallenge.class));
+
+            }
+        });
+        sagestVedio = (Button) view.findViewById(R.id.vediobutton);
+        sagestVedio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(),suggestVedio.class));
+            }
+        });
         // Inflate the layout for this fragment
         return view;
     }
