@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
 
     EditText codeF ,outputF;
     Button Submit;
+    ProgressDialog progressDialog;
     CodeOutputPresenter codeOutpuView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog = ProgressDialog.show(CodeOutput.this, "", "Please wait...");
                 Bundle bundle=getIntent().getExtras();
                 String challengTitle =bundle.getString("ChallengeTitle");
                 String challengType =bundle.getString("challengeType");
@@ -42,7 +45,6 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
                 int challengeCoins=bundle.getInt("challengeCoins");
                 String code =codeF.getText().toString();
                 String output =outputF.getText().toString();
-
                 SharedPreferences sp1= CodeOutput.this.getSharedPreferences("Login", MODE_PRIVATE);
                 int uid =sp1.getInt("user_id", 0);
 
@@ -66,6 +68,7 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
 
     @Override
     public void codeOutputSuccess(String message) {
+        progressDialog.dismiss();
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
         String mmm = CodeOutput.this.getResources().getString(resourceId);
@@ -93,6 +96,7 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
 
     @Override
     public void codeOutputFail(String message) {
+        progressDialog.dismiss();
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
         String mmm = CodeOutput.this.getResources().getString(resourceId);

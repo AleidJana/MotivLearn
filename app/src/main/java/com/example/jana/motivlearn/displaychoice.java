@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,8 +33,10 @@ RadioButton radioButton;
 displayChoicePresenter ll;
 String answer;
     ProgressBar progressBar;
+    ProgressDialog progressDialog;
+    int uid;
     int time;
-
+    int challNum;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +46,10 @@ String answer;
         radio=findViewById(R.id.radioG);
         submit=findViewById(R.id.button);
 
-        final int challNum = getIntent().getIntExtra("id", 0);
+        challNum = getIntent().getIntExtra("id", 0);
 
         SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
-        final int uid =sp1.getInt("user_id", 0);
+        uid =sp1.getInt("user_id", 0);
         ll=new displaymultiChoicesImp(displaychoice.this);
         ll.peformDisplayChoice(challNum);
         progressBar = (ProgressBar)findViewById(R.id.progressBar2) ;
@@ -56,6 +59,8 @@ String answer;
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog = ProgressDialog.show(displaychoice.this, "", "Please wait...");
+
                 int selectedId = radio.getCheckedRadioButtonId();
                 radioButton = findViewById(selectedId);
                 if (answer.equals(radioButton.getText())){
@@ -115,6 +120,7 @@ String answer;
                 }
                 public void onFinish() {
                     progressBar.setProgress(0);
+                    progressDialog.dismiss();
                     new TTFancyGifDialog.Builder(displaychoice.this)
                             .setTitle("OOPS!")
                             .setMessage("your time is finished")
@@ -125,7 +131,7 @@ String answer;
                             .OnPositiveClicked(new TTFancyGifDialogListener() {
                                 @Override
                                 public void OnClick() {
-                                    //displayCodeOutputP.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0);
+                                    ll.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0);
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.putExtra("nextFrag", "cha");
                                     startActivity(intent);
@@ -146,7 +152,7 @@ String answer;
 
     @Override
     public void correct(int coinns, String status) {
-
+        progressDialog.dismiss();
         String msg1, msg2;
         int dr1 = 0;
         if(status.equals("pass"))

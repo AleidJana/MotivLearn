@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ Button submit ;
 int count ,  coins;
 String [] answer1;
 ProgressBar progressBar;
+    ProgressDialog progressDialog;
+
 int time;
 displayfillBlanckPresenter displayfillBlanckP;
     @Override

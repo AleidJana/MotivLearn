@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.example.jana.motivlearn.view.fillBlankView;
 
 public class fillBlank extends AppCompatActivity implements fillBlankView {
     private fillBlankPresenter pres;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                progressDialog = ProgressDialog.show(fillBlank.this, "", "Please wait...");
 
                 EditText myInput = (EditText)findViewById(R.id.editText);
                 String question = myInput.getText().toString();
@@ -76,6 +79,7 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
 
     @Override
     public void fillBlankSuccess(String message) {
+        progressDialog.dismiss();
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
         String mmm = fillBlank.this.getResources().getString(resourceId);
@@ -113,6 +117,7 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
 
     @Override
     public void fillBlankFail(String message) {
+        progressDialog.dismiss();
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
         String mmm = fillBlank.this.getResources().getString(resourceId);

@@ -1,10 +1,12 @@
 package com.example.jana.motivlearn;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +26,7 @@ public class AddPost extends AppCompatActivity implements AddpostView {
 Button addpost;
 EditText message;
     Addpost pres;
-
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +45,8 @@ EditText message;
                 }else {
                     String m = message.getText().toString();
                     pres.addPost(m, uid);
+                    progressDialog = ProgressDialog.show(AddPost.this, "", "Please wait...");
+
                 }
             }
         });
@@ -59,8 +63,11 @@ EditText message;
 
     @Override
     public void addPostSuccess() {
-        Toast.makeText(AddPost.this,"Your post added successfully",Toast.LENGTH_LONG).show();
       // pres.notifyDataSetChanged();
+                // dismiss the progress dialog
+                progressDialog.dismiss();
+                //Toast.makeText(AddPost.this,"Your post added successfully",Toast.LENGTH_LONG).show();
+
         this.finish();
     }
 }

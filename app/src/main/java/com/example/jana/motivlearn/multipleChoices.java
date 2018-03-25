@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.example.jana.motivlearn.view.multiChoicesView;
 
 public class multipleChoices extends AppCompatActivity implements multiChoicesView {
     private multiChoicesPresenter pres;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class multipleChoices extends AppCompatActivity implements multiChoicesVi
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                progressDialog = ProgressDialog.show(multipleChoices.this, "", "Please wait...");
 
                 EditText myInput = (EditText)findViewById(R.id.editText);
                 String question = myInput.getText().toString();
@@ -79,6 +82,7 @@ public class multipleChoices extends AppCompatActivity implements multiChoicesVi
 
     @Override
     public void multiChoiceSuccess(String message) {
+        progressDialog.dismiss();
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
         String mmm = multipleChoices.this.getResources().getString(resourceId);
@@ -116,6 +120,7 @@ public class multipleChoices extends AppCompatActivity implements multiChoicesVi
 
     @Override
     public void multiChoiceFail(String message) {
+        progressDialog.dismiss();
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
         String mmm = multipleChoices.this.getResources().getString(resourceId);

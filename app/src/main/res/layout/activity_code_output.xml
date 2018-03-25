@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="80dp"
         android:text="Code Output"
         android:textColor="#8767b3"
         android:textSize="24sp"
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="140dp"
         android:text="Question"
         android:textColor="#8767b3"
         android:textSize="24sp"
@@ -45,15 +45,18 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="270dp"
-        android:layout_height="110dp"
-        android:layout_marginLeft="50dp"
-
-        android:layout_marginTop="155dp"
+        android:layout_width="300dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:inputType="text|textMultiLine"
+        android:gravity="top"
+        android:padding="6dp"
+        android:textSize="20dp"
+        android:layout_marginTop="185dp"
         android:background="@drawable/text_view_style"
         android:ems="10"
-        android:hint="  Enter Question"
-        android:inputType="textPersonName"
+        android:textColor="@color/colorAccent"
+        android:hint="Enter Question"
         android:scrollbars="horizontal" />
 
     <TextView
@@ -61,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="320dp"
         android:text="Answer"
         android:textColor="#8767b3"
         android:textSize="24sp"
@@ -69,14 +72,18 @@
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="270dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="320dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="360dp"
         android:background="@drawable/text_view_style"
         android:ems="10"
+        android:layout_centerHorizontal="true"
+        android:inputType="text|textMultiLine"
+        android:gravity="top"
+        android:padding="6dp"
+        android:textColor="@color/colorAccent"
+        android:textSize="20dp"
         android:hint="  Enter Answer"
-        android:inputType="textPersonName"
         android:scrollbars="horizontal" />
 
 
@@ -89,7 +96,7 @@
         android:layout_below="@+id/editText2"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/ovalbutton"
         android:text="@string/Submit"
         android:textColor="@color/cardview_light_background" />
