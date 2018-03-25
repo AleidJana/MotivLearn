@@ -107,26 +107,7 @@ displayfillBlanckPresenter displayfillBlanckP;
                 }
                 public void onFinish() {
                     progressBar.setProgress(0);
-                    progressDialog.dismiss();
-                    new TTFancyGifDialog.Builder(displayfillBlanck.this)
-                                .setTitle("OOPS!")
-                                .setMessage("your time is finished")
-                                .setPositiveBtnText("Ok")
-                                .setPositiveBtnBackground("#9577bc")
-                                .setGifResource(getResources().getIdentifier("losse", "drawable", getPackageName()))      //pass your gif, png or jpg
-                                .isCancellable(true)
-                                .OnPositiveClicked(new TTFancyGifDialogListener() {
-                                    @Override
-                                    public void OnClick() {
-                                       displayfillBlanckP.crrectAnswer(uid, challNum, "fail", "gg", 0, 0);
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                      intent.putExtra("nextFrag", "cha");
-                                       startActivity(intent);
-                                       // finish();
-                                    }
-                                })
-                                .build();
-
+                    displayfillBlanckP.crrectAnswer(uid, challNum, "timeout", "gg", 0 , 0);
                 }
             }.start();
 
@@ -177,8 +158,9 @@ displayfillBlanckPresenter displayfillBlanckP;
 
     @Override
     public void correct(int coinns, String status) {
-        progressDialog.dismiss();
-        String msg1, msg2;
+        if(progressDialog!=null&&progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }        String msg1="", msg2="";
         int dr1 = 0;
         if(status.equals("pass"))
         {
@@ -186,13 +168,18 @@ displayfillBlanckPresenter displayfillBlanckP;
             msg2= "You Have got "+coinns+" Coins";
             dr1 = getResources().getIdentifier("hgif1", "drawable", getPackageName());
         }
-        else
+        if(status.equals("fail"))
         {
             msg1 = "Unfortunately";
             msg2= "you didn't get any coins";
             dr1 = getResources().getIdentifier("losse", "drawable", getPackageName());
         }
-
+        if(status.equals("timeout"))
+        {
+            msg1 = "OOPS!";
+            msg2= "Question time is finished";
+            dr1 = getResources().getIdentifier("time", "drawable", getPackageName());
+        }
         new TTFancyGifDialog.Builder(displayfillBlanck.this)
                 .setTitle(msg1)
                 .setMessage(msg2)

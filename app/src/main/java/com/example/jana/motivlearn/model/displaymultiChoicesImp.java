@@ -69,20 +69,24 @@ public class displaymultiChoicesImp implements displayChoicePresenter {
     }
 
     @Override
-    public void crrectAnswer(int user_id, int challenge_id, final String status, String skillType, int rateValue , int rank) {
+    public void crrectAnswer(int user_id, int challenge_id, String status, String skillType, int rateValue , int rank) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        RequestHandle requestHandle1 = client.get("https://api.appery.io/rest/1/apiexpress/api/5_TakePublicChallenge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+user_id+"&cid="+challenge_id+"&coins="+rank+"&status="+status+"&rateValue="+rateValue+"&skill="+skillType, params, new TextHttpResponseHandler() {
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                displaychoice.displayFailed();
-            }
+        final String status2=status;
+        if(status.equals("timeout")) {
+            status="fail" ;
+        }
+            RequestHandle requestHandle1 = client.get("https://api.appery.io/rest/1/apiexpress/api/5_TakePublicChallenge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid=" + user_id + "&cid=" + challenge_id + "&coins=" + rank + "&status=" + status + "&rateValue=" + rateValue + "&skill=" + skillType, params, new TextHttpResponseHandler() {
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    displaychoice.displayFailed();
+                }
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                displaychoice.correct(coins1, status);
-            }
-        });
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    displaychoice.correct(coins1, status2);
+                }
+            });
 
     }
 

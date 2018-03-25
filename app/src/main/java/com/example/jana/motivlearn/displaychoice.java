@@ -46,6 +46,7 @@ String answer;
         qustionD= findViewById(R.id.textViewTitle);
         radio=findViewById(R.id.radioG);
         submit=findViewById(R.id.button);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar2) ;
 
         challNum = getIntent().getIntExtra("id", 0);
 
@@ -53,7 +54,6 @@ String answer;
         uid =sp1.getInt("user_id", 0);
         ll=new displaymultiChoicesImp(displaychoice.this);
         ll.peformDisplayChoice(challNum);
-        progressBar = (ProgressBar)findViewById(R.id.progressBar2) ;
 
 
         // check the answer ...
@@ -114,7 +114,7 @@ String answer;
             }
             progressBar.setMax(10);
             progressBar.setProgress(10);
-            time=10*1000;
+            time=time*1000;
             countDownTimer=new CountDownTimer(time, 1000) {
 
                 public void onTick(long millisUntilFinished) {
@@ -122,24 +122,7 @@ String answer;
                 }
                 public void onFinish() {
                     progressBar.setProgress(0);
-                    progressDialog.dismiss();
-                    new TTFancyGifDialog.Builder(displaychoice.this)
-                            .setTitle("OOPS!")
-                            .setMessage("your time is finished")
-                            .setPositiveBtnText("Ok")
-                            .setPositiveBtnBackground("#9577bc")
-                            .setGifResource(getResources().getIdentifier("losse", "drawable", getPackageName()))      //pass your gif, png or jpg
-                            .isCancellable(true)
-                            .OnPositiveClicked(new TTFancyGifDialogListener() {
-                                @Override
-                                public void OnClick() {
-                                    ll.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0);
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    intent.putExtra("nextFrag", "cha");
-                                    startActivity(intent);
-                                }
-                            })
-                            .build();
+                    ll.crrectAnswer(uid, challNum, "timeout", "gg", 0 , 0);
 
                 }
             }.start();
@@ -154,8 +137,9 @@ String answer;
 
     @Override
     public void correct(int coinns, String status) {
-        progressDialog.dismiss();
-        String msg1, msg2;
+        if(progressDialog!=null&&progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }        String msg1 = "", msg2="";
         int dr1 = 0;
         if(status.equals("pass"))
         {
@@ -165,11 +149,17 @@ String answer;
 
 
         }
-        else
+        if(status.equals("fail"))
         {
             msg1 = "Unfortunately";
             msg2= "you didn't get any coins";
             dr1 = getResources().getIdentifier("losse", "drawable", getPackageName());
+        }
+        if(status.equals("timeout"))
+        {
+            msg1 = "OOPS!";
+            msg2= "Question time is finished";
+            dr1 = getResources().getIdentifier("time", "drawable", getPackageName());
         }
 
         new TTFancyGifDialog.Builder(displaychoice.this)

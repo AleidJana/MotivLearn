@@ -161,7 +161,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="435dp"
         android:orientation="horizontal">
 
         <RadioButton
@@ -243,9 +243,9 @@
         android:layout_marginRight="17dp"
         android:drawableLeft="@drawable/ic_action_department"
         android:gravity="start"
-        android:paddingLeft="70dp"
+        android:paddingLeft="60dp"
         android:paddingTop="15dp"
-        android:text="  Department :"
+android:layout_marginBottom="10dp"        android:text="  Department :"
         android:textAlignment="textStart"
         android:textColor="#8767b3"
         android:textSize="15sp" />

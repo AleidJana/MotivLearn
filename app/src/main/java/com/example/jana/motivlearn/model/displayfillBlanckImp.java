@@ -64,9 +64,13 @@ public class displayfillBlanckImp  implements displayfillBlanckPresenter {
     }
 
     @Override
-    public void crrectAnswer(int user_id, int challenge_id, final String stutes, String skillType, int rateValue , final int coins) {
+    public void crrectAnswer(int user_id, int challenge_id, String stutes, String skillType, int rateValue , final int coins) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
+        final String status2=stutes;
+        if(stutes.equals("timeout")) {
+            stutes="fail" ;
+        }
         RequestHandle requestHandle = client.get("https://api.appery.io/rest/1/apiexpress/api/5_TakePublicChallenge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+user_id+"&cid="+challenge_id+"&coins="+coins+"&status="+stutes+"&rateValue="+rateValue+"&skill="+skillType, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -75,7 +79,7 @@ public class displayfillBlanckImp  implements displayfillBlanckPresenter {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-              displayfillBlanck1.correct(coins, stutes);
+              displayfillBlanck1.correct(coins, status2);
 
             }
         });
