@@ -55,6 +55,7 @@ public class multipleChoices extends AppCompatActivity implements multiChoicesVi
                 int indx = radGroup.indexOfChild(schoice);
 
                 Bundle bundle=getIntent().getExtras();
+                String pathtype =bundle.getString("pathType");
                 String title =bundle.getString("ChallengeTitle");
                 String field =bundle.getString("challengeField");
                 int time=bundle.getInt("challengeTime");
@@ -62,8 +63,13 @@ public class multipleChoices extends AppCompatActivity implements multiChoicesVi
                 SharedPreferences sp1= multipleChoices.this.getSharedPreferences("Login", MODE_PRIVATE);
                 int userId =sp1.getInt("user_id", 0);
                 pres = new multiChoicesImp(multipleChoices.this);
+
+                if(pathtype.equals("p"))
                 pres.addPublicChallenge(userId,question, choice11, choice22, choice33, choice44,
                         indx, title,field,time,coins);
+                else
+                    pres.suggestMultiChoices(userId,question, choice11, choice22, choice33, choice44,
+                            indx, title,field,time,coins);
 
             }
         });

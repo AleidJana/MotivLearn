@@ -8,4 +8,6 @@ public interface multiChoicesPresenter {
 
     void addPublicChallenge(int user, String q, String c1, String c2, String c3, String c4,
                             int id, String title, String field, int time, int coins);
+    void suggestMultiChoices(int user, String q, String c1, String c2, String c3, String c4,
+                            int id, String title, String field, int time, int coins);
 }

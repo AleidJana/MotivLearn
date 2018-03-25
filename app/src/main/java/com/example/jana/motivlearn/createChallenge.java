@@ -123,6 +123,7 @@ public class createChallenge extends AppCompatActivity implements CreateChalleng
         else if(challengeType.equals("Fill blanks"))
             intent= new Intent(getBaseContext(),fillBlank.class);
 
+        intent.putExtra("pathType", "p");
         intent.putExtra("ChallengeTitle",ChallengeTitle);
         intent.putExtra("challengeType",challengeType);
         intent.putExtra("challengeField",challengeField);

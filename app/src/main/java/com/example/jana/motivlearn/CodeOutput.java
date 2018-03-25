@@ -39,6 +39,7 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
                 progressDialog = ProgressDialog.show(CodeOutput.this, "", "Please wait...");
                 Bundle bundle=getIntent().getExtras();
                 String challengTitle =bundle.getString("ChallengeTitle");
+                String pathtype =bundle.getString("pathType");
                 String challengType =bundle.getString("challengeType");
                 String challengField =bundle.getString("challengeField");
                 int challengeTime=bundle.getInt("challengeTime");
@@ -48,8 +49,12 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
                 SharedPreferences sp1= CodeOutput.this.getSharedPreferences("Login", MODE_PRIVATE);
                 int uid =sp1.getInt("user_id", 0);
 
+                if(pathtype.equals("p"))
                 codeOutpuView.performCodeOutput(uid, code,output,challengTitle,challengType,challengField,challengeTime,challengeCoins);
-              //  Intent intent = new Intent(getBaseContext(),MainActivity.class);
+              else
+                codeOutpuView.suggestCodeOutput(uid, code,output,challengTitle,challengType,challengField,challengeTime,challengeCoins);
+
+                //  Intent intent = new Intent(getBaseContext(),MainActivity.class);
               //  startActivity(intent);
 
             }

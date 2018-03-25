@@ -31,6 +31,7 @@
         <activity android:name=".displaychoice"  />
         <activity android:name=".displayCodeOutput"  />
         <activity android:name=".createChallenge" />
+        <activity android:name=".suggestQuestion" />
         <activity android:name=".puzzel" />
         <activity android:name=".RecordAchievement" />
         <activity android:name=".WatchVideo" />

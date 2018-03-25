@@ -32,7 +32,7 @@ public class tab5 extends Fragment {
         sagestCallenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(),createChallenge.class));
+                startActivity(new Intent(getActivity(),suggestQuestion.class));
 
             }
         });

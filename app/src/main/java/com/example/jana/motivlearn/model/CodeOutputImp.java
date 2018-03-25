@@ -33,13 +33,7 @@ public class CodeOutputImp implements CodeOutputPresenter{
         if(TextUtils.isEmpty(code)|| TextUtils.isEmpty(outPut)){
             codeOutputView.codeOutputFail("codeoutput_empty");
         }
-        //String type="CO";
-       // String field ="java";
-       // String title="firstQ";
-       // int coins=5;
-     //   int time=20;
         else {
-
             AsyncHttpClient client = new AsyncHttpClient();
             RequestParams params = new RequestParams();
             client.get(
@@ -48,7 +42,6 @@ public class CodeOutputImp implements CodeOutputPresenter{
                         public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                             codeOutputView.codeOutputFail("bad_connection");
                         }
-
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String responseString) {
                             codeOutputView.codeOutputSuccess("successCreation");
@@ -56,5 +49,28 @@ public class CodeOutputImp implements CodeOutputPresenter{
                     });
         }
     }
+
+    @Override
+    public void suggestCodeOutput(int userId, String code, String outPut , String challengeTitle , String challengeType , String challengeField ,int challengeTime ,int challengeCoins) {
+        if(TextUtils.isEmpty(code)|| TextUtils.isEmpty(outPut)){
+            codeOutputView.codeOutputFail("codeoutput_empty");
+        }
+        else {
+            AsyncHttpClient client = new AsyncHttpClient();
+            RequestParams params = new RequestParams();
+            client.get(
+                    "https://api.appery.io/rest/1/apiexpress/api/SuggestQuestion/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&type=CO&question=" + code + "&answer=" + outPut + "&field=" + challengeField +"&coins=" + challengeCoins + "&title=" + challengeTitle+  "&uid=" + userId + "&time=" + challengeTime, params, new TextHttpResponseHandler() {
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                            codeOutputView.codeOutputFail("bad_connection");
+                        }
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                            codeOutputView.codeOutputSuccess("successCreation");
+                        }
+                    });
+        }
+    }
+
 }
 

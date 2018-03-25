@@ -47,6 +47,7 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
                 String question = myInput.getText().toString();
                 Bundle bundle=getIntent().getExtras();
                 String title =bundle.getString("ChallengeTitle");
+                String pathtype =bundle.getString("pathType");
                 String field =bundle.getString("challengeField");
                 int time=bundle.getInt("challengeTime");
                 int coins=bundle.getInt("challengeCoins");
@@ -54,7 +55,10 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
                 int uid =sp1.getInt("user_id", 0);
 
                 pres = new fillBlankImp(fillBlank.this);
+                if(pathtype.equals("p"))
                 pres.addPublicChallenge(uid,question, title,field,time,coins);
+                else
+                    pres.suggestFillBlank(uid,question, title,field,time,coins);
 
             }
         });
@@ -83,17 +87,7 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
         String mmm = fillBlank.this.getResources().getString(resourceId);
-     /*   Noty.init(fillBlank.this, mmm, rl,
-                Noty.WarningStyle.ACTION)
-                .setActionText("OK")
-                .setWarningBoxBgColor("#5cb85c")
-                .setWarningTappedColor("#5cb85c")
-                .setWarningBoxPosition(Noty.WarningPos.BOTTOM)
-                .setWarningBoxRadius(80,80,80,80)
-                .setWarningBoxMargins(15,15,15,10)
-                .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
-                .show();
-*/
+
         new TTFancyGifDialog.Builder(fillBlank.this)
                 .setTitle("Congratulations")
                 .setMessage("You Have got 10 Coins")

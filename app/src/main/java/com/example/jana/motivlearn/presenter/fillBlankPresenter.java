@@ -8,4 +8,7 @@ public interface fillBlankPresenter {
 
     void addPublicChallenge(int user, String q, String title,
                             String field, int time, int coins);
+
+    void suggestFillBlank(int user, String q, String title,
+                            String field, int time, int coins);
 }
