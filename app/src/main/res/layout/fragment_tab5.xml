@@ -61,6 +61,7 @@
                 android:scaleType="fitCenter" />
 
             <Button
+
                 android:id="@+id/button"
                 android:layout_width="110dp"
                 android:layout_height="180dp"
