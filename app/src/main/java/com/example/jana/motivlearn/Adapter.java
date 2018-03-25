@@ -6,6 +6,7 @@ package com.example.jana.motivlearn;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Belal on 10/18/2017.
@@ -52,18 +55,22 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(mCtx ,"here you will add small code for question page ",Toast.LENGTH_LONG).show();
-                Intent intent = null;
-                String type = questions.getType();
-                if(type.equals("choice"))
-                    intent = new Intent(mCtx, displaychoice.class);
-                else if(type.equals("code"))
-                    intent = new Intent(mCtx, displayCodeOutput.class);
-                    else if(type.equals("fillblank"))
-                    intent = new Intent(mCtx, displayfillBlanck.class);
+                SharedPreferences sp1= mCtx.getSharedPreferences("Login", MODE_PRIVATE);
+                String typeu =sp1.getString("user_type", null);
+                if(typeu.equals("S")) {
+                    Intent intent = null;
+                    String type = questions.getType();
+                    if (type.equals("choice"))
+                        intent = new Intent(mCtx, displaychoice.class);
+                    else if (type.equals("code"))
+                        intent = new Intent(mCtx, displayCodeOutput.class);
+                    else if (type.equals("fillblank"))
+                        intent = new Intent(mCtx, displayfillBlanck.class);
 
-                intent.putExtra("type", type);
-                intent.putExtra("id", questions.getId());
-                mCtx.startActivity(intent);
+                    intent.putExtra("type", type);
+                    intent.putExtra("id", questions.getId());
+                    mCtx.startActivity(intent);
+                }
            //     mCtx.startActivity(new Intent(mCtx,displayfillBlanck.class));
 
             }
