@@ -15,7 +15,8 @@
     <tab
         id="@+id/tab_Challengeboard"
         icon="@drawable/ic_challenge"
-        title="Challengeboard" />
+        title="Challengeboard"
+        />
     <tab
         id="@+id/tab_Services"
         icon="@drawable/ic_services"

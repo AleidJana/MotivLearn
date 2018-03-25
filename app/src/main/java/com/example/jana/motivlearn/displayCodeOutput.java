@@ -35,7 +35,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
     ProgressBar progressBar;
     int time;
     ProgressDialog progressDialog;
-
+    CountDownTimer countDownTimer;
     displayCodeOutputPresenter displayCodeOutputP;
 
     @Override
@@ -84,7 +84,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
             progressBar.setMax(time);
             progressBar.setProgress(time);
             time=time*1000;
-            new CountDownTimer(time, 1000) {
+            countDownTimer = new CountDownTimer(time, 1000) {
 
                 public void onTick(long millisUntilFinished) {
                     progressBar.setProgress((int) (millisUntilFinished / 1000));
@@ -102,7 +102,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
                             .OnPositiveClicked(new TTFancyGifDialogListener() {
                                 @Override
                                 public void OnClick() {
-                                    //displayCodeOutputP.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0);
+                                    displayCodeOutputP.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0);
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     intent.putExtra("nextFrag", "cha");
                                     startActivity(intent);
@@ -117,6 +117,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    countDownTimer.cancel();
                     progressDialog = ProgressDialog.show(displayCodeOutput.this, "", "Please wait...");
 
                     Uanswer = findViewById(R.id.editText);

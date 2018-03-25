@@ -34,6 +34,7 @@ int count ,  coins;
 String [] answer1;
 ProgressBar progressBar;
     ProgressDialog progressDialog;
+    CountDownTimer countDownTimer;
 
 int time;
 displayfillBlanckPresenter displayfillBlanckP;
@@ -98,7 +99,7 @@ displayfillBlanckPresenter displayfillBlanckP;
             progressBar.setMax(time);
             progressBar.setProgress(time);
             time=time*1000;
-            new CountDownTimer(time, 1000) {
+            countDownTimer= new CountDownTimer(time, 1000) {
 
                 public void onTick(long millisUntilFinished) {
                    // Toast.makeText(displayfillBlanck.this,"seconds remaining: " + millisUntilFinished / 1000,Toast.LENGTH_SHORT).show();
@@ -106,7 +107,8 @@ displayfillBlanckPresenter displayfillBlanckP;
                 }
                 public void onFinish() {
                     progressBar.setProgress(0);
-                        new TTFancyGifDialog.Builder(displayfillBlanck.this)
+                    progressDialog.dismiss();
+                    new TTFancyGifDialog.Builder(displayfillBlanck.this)
                                 .setTitle("OOPS!")
                                 .setMessage("your time is finished")
                                 .setPositiveBtnText("Ok")
@@ -116,7 +118,7 @@ displayfillBlanckPresenter displayfillBlanckP;
                                 .OnPositiveClicked(new TTFancyGifDialogListener() {
                                     @Override
                                     public void OnClick() {
-                                      //  displayfillBlanckP.crrectAnswer(uid, challNum, "fail", "gg", 0, 0);
+                                       displayfillBlanckP.crrectAnswer(uid, challNum, "fail", "gg", 0, 0);
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                       intent.putExtra("nextFrag", "cha");
                                        startActivity(intent);
@@ -133,6 +135,8 @@ displayfillBlanckPresenter displayfillBlanckP;
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    countDownTimer.cancel();
+                    progressDialog = ProgressDialog.show(displayfillBlanck.this, "", "Please wait...");
                     String userAnswer = Uanswer.getText().toString();
                     String[] answer = userAnswer.split(",");
 
@@ -173,7 +177,7 @@ displayfillBlanckPresenter displayfillBlanckP;
 
     @Override
     public void correct(int coinns, String status) {
-
+        progressDialog.dismiss();
         String msg1, msg2;
         int dr1 = 0;
         if(status.equals("pass"))

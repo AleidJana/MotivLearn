@@ -7,87 +7,89 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="62dp">
+     >
     <!-- 1 -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-    <ImageView
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="40dp"
-        android:background="@drawable/r11"
-        android:padding="0dp"
-        android:scaleType="fitEnd"
-        android:id="@+id/imageView" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="90dp"
-        android:layout_height="140dp"
-        android:layout_alignEnd="@+id/imageView"
-        android:layout_alignRight="@+id/imageView"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_marginEnd="38dp"
-        android:layout_marginRight="38dp"
-        android:background="@drawable/button"
-        android:text="@string/Create_challenge"
-        android:textAllCaps="false"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/r11"
+                android:padding="0dp"
+                android:scaleType="fitEnd" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="90dp"
+                android:layout_height="140dp"
+                android:layout_alignEnd="@+id/imageView"
+                android:layout_alignRight="@+id/imageView"
+                android:layout_alignTop="@+id/imageView"
+                android:layout_marginEnd="38dp"
+                android:layout_marginRight="38dp"
+                android:background="@drawable/button"
+                android:text="@string/Create_challenge"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
-    <!--  2  -->
+            <!--  2  -->
 
-    <ImageView
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="94dp"
-        android:layout_marginLeft="175dp"
-        android:padding="0dp"
-        android:scaleType="fitCenter"
-        android:background="@drawable/r22"
-        android:id="@+id/imageView2" />
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="175dp"
+                android:layout_marginTop="94dp"
+                android:background="@drawable/r22"
+                android:padding="0dp"
+                android:scaleType="fitCenter" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="90dp"
-        android:layout_height="140dp"
-        android:layout_alignTop="@+id/imageView2"
-        android:layout_toEndOf="@+id/imageView"
-        android:layout_toRightOf="@+id/imageView"
-        android:background="@drawable/button"
-        android:text="@string/Suggest_challenge"
-        android:textAllCaps="false"
-        android:textColor="@android:color/background_light"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="90dp"
+                android:layout_height="140dp"
+                android:layout_alignTop="@+id/imageView2"
+                android:layout_toEndOf="@+id/imageView"
+                android:layout_toRightOf="@+id/imageView"
+                android:background="@drawable/button"
+                android:text="@string/Suggest_challenge"
+                android:textAllCaps="false"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-    <!--  3  -->
+            <!--  3  -->
 
-    <ImageView
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="170dp"
-        android:background="@drawable/r33"
-        android:padding="0dp"
-        android:scaleType="fitEnd"
-        android:id="@+id/imageView3" />
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="170dp"
+                android:background="@drawable/r33"
+                android:padding="0dp"
+                android:scaleType="fitEnd" />
 
 
             <Button
                 android:id="@+id/vediobutton"
-                android:layout_width="90dp"
+                android:layout_width="100dp"
                 android:layout_height="140dp"
-                android:layout_alignStart="@+id/button2"
+                android:layout_alignEnd="@+id/button2"
                 android:layout_alignTop="@+id/imageView3"
                 android:background="@drawable/button"
                 android:text="@string/Suggest_video"
@@ -97,40 +99,40 @@
                 android:textStyle="bold" />
 
 
-    <!--  4  -->
+            <!--  4  -->
 
-    <ImageView
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginLeft="175dp"
-        android:padding="0dp"
-        android:scaleType="fitCenter"
-        android:background="@drawable/r44"
-        android:id="@+id/imageView4" />
-
-    <!--  5  -->
-
-    <ImageView
-        android:layout_width="170dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="328dp"
-        android:layout_marginLeft="40dp"
-        android:background="@drawable/r55"
-        android:padding="0dp"
-        android:scaleType="fitEnd"
-        android:id="@+id/imageView5" />
-
-    <!--  6  -->
             <ImageView
+                android:id="@+id/imageView4"
                 android:layout_width="170dp"
                 android:layout_height="150dp"
-                android:layout_marginTop="407dp"
                 android:layout_marginLeft="175dp"
+                android:layout_marginTop="250dp"
+                android:background="@drawable/r44"
                 android:padding="0dp"
-                android:scaleType="fitCenter"
+                android:scaleType="fitCenter" />
+
+            <!--  5  -->
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                android:layout_alignStart="@+id/imageView3"
+                android:layout_below="@+id/imageView3"
+                android:background="@drawable/r55"
+                android:padding="0dp"
+                android:scaleType="fitEnd" />
+
+            <!--  6  -->
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="170dp"
+                android:layout_height="150dp"
+                android:layout_marginLeft="175dp"
+                android:layout_marginTop="407dp"
                 android:background="@drawable/r66"
-                android:id="@+id/imageView6" />
+                android:padding="0dp"
+                android:scaleType="fitCenter" />
 
 
         </RelativeLayout>

@@ -37,6 +37,7 @@ String answer;
     int uid;
     int time;
     int challNum;
+    CountDownTimer countDownTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +60,7 @@ String answer;
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                countDownTimer.cancel();
                 progressDialog = ProgressDialog.show(displaychoice.this, "", "Please wait...");
 
                 int selectedId = radio.getCheckedRadioButtonId();
@@ -113,7 +115,7 @@ String answer;
             progressBar.setMax(10);
             progressBar.setProgress(10);
             time=10*1000;
-            new CountDownTimer(time, 1000) {
+            countDownTimer=new CountDownTimer(time, 1000) {
 
                 public void onTick(long millisUntilFinished) {
                     progressBar.setProgress((int) (millisUntilFinished / 1000));

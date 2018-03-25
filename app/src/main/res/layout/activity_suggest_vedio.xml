@@ -27,20 +27,14 @@
         android:textColor="#8767b3"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editText7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.429" />
+ />
 
     <EditText
         android:id="@+id/editText7"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
         android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/text_view_style"
         android:drawableLeft="@drawable/ic_vid"
         android:ems="50"
@@ -51,10 +45,7 @@
         android:textColor="#8767b3"
         android:textColorHint="#8767b3"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="UnknownId" />
+        />
     <requestFocus />
 
 
@@ -64,20 +55,18 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editText7"
         android:layout_marginTop="60dp"
-        android:layout_toEndOf="@+id/textView4"
-        android:layout_toRightOf="@+id/textView4"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/ovalbutton"
         android:text="@string/Submit"
         android:textColor="#ffffff" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="350dp"
-        android:layout_height="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_below="@+id/textView4"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:text="@string/Video_hint"
         android:textColor="#808080"
         android:textSize="18dp" />

@@ -78,7 +78,8 @@
         android:ems="17"
         android:inputType="text|textMultiLine"
         android:gravity="top"
-        android:padding="6dp"
+        android:paddingTop="6dp"
+        android:paddingLeft="10dp"
         android:hint="Enter Question"
         android:textColorHint="#8767b3"
         android:textSize="20dp" />
