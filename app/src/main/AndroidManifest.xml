@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -27,9 +28,9 @@
         <activity android:name=".fillBlank" />
         <activity android:name=".multipleChoices" />
         <activity android:name=".CodeOutput" />
-        <activity android:name=".displayfillBlanck"  />
-        <activity android:name=".displaychoice"  />
-        <activity android:name=".displayCodeOutput"  />
+        <activity android:name=".displayfillBlanck" />
+        <activity android:name=".displaychoice" />
+        <activity android:name=".displayCodeOutput" />
         <activity android:name=".createChallenge" />
         <activity android:name=".suggestQuestion" />
         <activity android:name=".puzzel" />
@@ -38,7 +39,8 @@
         <activity android:name=".Comment" />
         <activity android:name=".userTprofile" />
         <activity android:name=".userSprofile" />
-        <activity android:name=".AddPost"></activity>
+        <activity android:name=".AddPost" />
+        <activity android:name=".RegisterCode"></activity>
     </application>
 
 </manifest>

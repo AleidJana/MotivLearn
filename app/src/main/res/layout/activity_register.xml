@@ -245,7 +245,8 @@
         android:gravity="start"
         android:paddingLeft="60dp"
         android:paddingTop="15dp"
-android:layout_marginBottom="10dp"        android:text="  Department :"
+        android:layout_marginBottom="10dp"
+        android:text="  Department :"
         android:textAlignment="textStart"
         android:textColor="#8767b3"
         android:textSize="15sp" />
