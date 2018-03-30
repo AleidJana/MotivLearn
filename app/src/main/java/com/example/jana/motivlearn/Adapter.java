@@ -66,6 +66,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
                         intent = new Intent(mCtx, displayCodeOutput.class);
                     else if (type.equals("fillblank"))
                         intent = new Intent(mCtx, displayfillBlanck.class);
+                    else
+                        intent = new Intent(mCtx, displayPuzzle.class);
 
                     intent.putExtra("type", type);
                     intent.putExtra("id", questions.getId());
