@@ -1,6 +1,7 @@
 package com.example.jana.motivlearn;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +20,7 @@ import org.json.JSONObject;
 
 public class Login extends AppCompatActivity implements loginView {
     private loginPresenter logPres;
-
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,7 @@ public class Login extends AppCompatActivity implements loginView {
         ) {
             @Override
             public void onClick(View view) {
+                progressDialog = ProgressDialog.show(Login.this, "", "Please wait...");
                 EditText uemail = findViewById(R.id.editText7);
                 EditText upassword = findViewById(R.id.editText5);
                 logPres = new loginImp(Login.this);
@@ -51,6 +53,7 @@ public class Login extends AppCompatActivity implements loginView {
 
     @Override
     public void loginFail(String message) {
+        progressDialog.dismiss();
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
         String mmm = Login.this.getResources().getString(resourceId);
@@ -69,6 +72,7 @@ public class Login extends AppCompatActivity implements loginView {
 
     @Override
     public void loginSuccess(String result) {
+        progressDialog.dismiss();
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         int resourceId = this.getResources().getIdentifier("login_success", "string", this.getPackageName());
         String mmm = Login.this.getResources().getString(resourceId);
