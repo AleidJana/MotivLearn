@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:hapticFeedbackEnabled="true"
+    android:background="@drawable/pink4"
+    tools:context="com.example.jana.motivlearn.displayPuzzle">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:allowUndo="false"
+            android:fitsSystemWindows="true"
+            android:fontFamily="sans-serif"
+            android:text="Puzzle"
+            android:textColor="#8767b3"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="230dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/textView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp" />
+
+        <Button
+            android:id="@+id/submit1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="38dp"
+            android:background="@drawable/ovalbutton"
+            android:text="Submit"
+            android:textColor="#FFFFFF" />
+
+        <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+            android:id="@+id/dynamiclistview"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/text_view_style"
+            tools:layout_editor_absoluteX="166dp"
+            android:paddingTop="6dp"
+            android:textColor="@color/colorAccent"
+            android:paddingLeft="10dp"
+            tools:layout_editor_absoluteY="460dp" />
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>
