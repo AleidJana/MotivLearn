@@ -1,8 +1,10 @@
 package com.example.jana.motivlearn;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,19 +18,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
+import com.shephertz.app42.gaming.multiplayer.client.WarpClient;
 
 
-public class StudentServices extends Fragment {
+public class StudentServices extends Fragment  {
     Button RecordAchievement,WatchVideo,CreateGroupChallenge, SuggestChallenge,SuggestVideo,JoinGroupChallenge;
     private static final int CAMERA_REQUEST = 1888;
-
+    private WarpClient theClient;
+    private ProgressDialog progressDialog;
+    private boolean isConnected = false;
+    int uid;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_student_services, container, false);
-
-
         RecordAchievement = (Button) view.findViewById(R.id.RecordAchievement);
         RecordAchievement.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,7 +64,7 @@ public class StudentServices extends Fragment {
         CreateGroupChallenge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // startActivity(new Intent(getActivity(), createChallenge.class));
+                //startActivity(new Intent(getActivity(), CreateGroup.class));
 
             }
         });
@@ -89,7 +94,6 @@ public class StudentServices extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == CAMERA_REQUEST) {
@@ -100,5 +104,10 @@ public class StudentServices extends Fragment {
             }
         }
     }
+
+
+
+
+
 
 }

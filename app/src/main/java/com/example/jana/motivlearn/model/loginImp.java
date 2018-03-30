@@ -29,7 +29,7 @@ public class loginImp implements loginPresenter {
             //  params.put("key", "value");
             //   params.put("more", "data");
             client.get("https://api.appery.io/rest/1/apiexpress/api/2_login/?" +
-                    "apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&email=" + email +
+                    "apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&com.example.jana.motivlearn.email=" + email +
                     "&password=" + password, params, new TextHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String res) {

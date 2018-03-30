@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.jana.motivlearn"
-        minSdkVersion 23
+        minSdkVersion 22
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -53,5 +53,6 @@ dependencies {
     compile 'com.android.support:design:26.1.0'
     compile 'com.ultramegasoft.radarchart:radar-chart:0.1.5'
     implementation files('libs/activation.jar')
+    implementation files('libs/andengine.jar')
 
 }

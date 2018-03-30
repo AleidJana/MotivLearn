@@ -23,8 +23,7 @@
         android:textStyle="bold" />
 
 
-    <!-- email -->
-    <EditText
+     <EditText
         android:id="@+id/editText7"
         android:layout_width="270dp"
         android:layout_height="43dp"

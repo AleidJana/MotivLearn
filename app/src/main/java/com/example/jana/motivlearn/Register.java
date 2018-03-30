@@ -3,27 +3,18 @@ package com.example.jana.motivlearn;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.emredavarci.noty.Noty;
-import com.example.jana.motivlearn.model.PresenterImp;
-import com.example.jana.motivlearn.presenter.RegisterPresenter;
-import com.example.jana.motivlearn.view.RegisterView;
-import org.json.JSONObject;
 
-import email.GMailSender;
+import com.example.jana.motivlearn.email.GMailSender;
 
 public class Register extends AppCompatActivity {
 
@@ -73,11 +64,11 @@ public class Register extends AppCompatActivity {
                             SharedPreferences.Editor Ed = sp.edit();
                             Ed.putString("RQ", RQ);
                             Ed.commit();
-                            sendEmail(email, "Registration code", "Dear, " + userName + " Welcome to MotivLearn Community your registration code is:  " + RQ, progressDialog, userinfo);
+                            sendEmail(email, "Registration code", "Dear " + userName + ", Welcome to MotivLearn Community your registration code is:  " + RQ, progressDialog, userinfo);
                         }
                         else {errormessage("The passwords not matches");}
                         }
-                        else {errormessage("Please enter KSU email");}
+                        else {errormessage("Please enter KSU com.example.jana.motivlearn.email");}
                     }
 
 

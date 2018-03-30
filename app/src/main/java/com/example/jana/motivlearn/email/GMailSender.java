@@ -1,10 +1,8 @@
-package email;
+package com.example.jana.motivlearn.email;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.jana.motivlearn.Register;
 import com.example.jana.motivlearn.RegisterCode;
@@ -28,7 +26,6 @@ public class GMailSender extends AsyncTask<Void,Void,Void> {
     private Session session;
     private Multipart _multipart;
     ProgressDialog progressDialog;
-    //Information to send email
     private String email;
     private String subject;
     private String message;
