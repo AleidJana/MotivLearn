@@ -86,10 +86,13 @@ Button submit;
             responsee = responsee.substring(1, responsee.length()-1);
             JSONObject obj = new JSONObject(responsee);
             int uid = obj.getInt("GENERATED_KEY");
+            String user_name=obj.getString("u_name");
+
             SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
             SharedPreferences.Editor Ed=sp.edit();
             Ed.putInt("user_id",uid );
             Ed.putString("user_type",type);
+            Ed.putString("user_name",user_name);
             Ed.commit();
         }
         catch (Exception e) {}

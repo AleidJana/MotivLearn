@@ -92,11 +92,13 @@ public class Login extends AppCompatActivity implements loginView {
             JSONObject obj = new JSONObject(result);
             int user_id = obj.getInt("user_id");
             String user_type = obj.getString("u_type");
+            String user_name=obj.getString("u_name");
 
             SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
             SharedPreferences.Editor Ed=sp.edit();
             Ed.putInt("user_id",user_id );
             Ed.putString("user_type",user_type);
+            Ed.putString("user_name",user_name);
             Ed.commit();
         }
         catch (Exception e) {}

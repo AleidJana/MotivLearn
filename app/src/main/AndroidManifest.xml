@@ -34,7 +34,6 @@
         <activity android:name=".displayCodeOutput" />
         <activity android:name=".createChallenge" />
         <activity android:name=".suggestQuestion" />
-        <activity android:name=".puzzel" />
         <activity android:name=".RecordAchievement" />
         <activity android:name=".WatchVideo" />
         <activity android:name=".Comment" />
@@ -42,7 +41,9 @@
         <activity android:name=".userSprofile" />
         <activity android:name=".AddPost" />
         <activity android:name=".RegisterCode" />
-        <activity android:name=".displayPuzzle"></activity>
+        <activity android:name=".CreatGroupChallenge" />
+        <activity android:name=".GroupChallenge" />
+        <activity android:name=".JoinGroupChallenge"></activity>
     </application>
 
 </manifest>

@@ -118,8 +118,8 @@ public class suggestQuestion extends AppCompatActivity implements CreateChalleng
             intent= new Intent(getBaseContext(),multipleChoices.class);
         else if(challengeType.equals("Code output"))
             intent= new Intent(getBaseContext(),CodeOutput.class);
-        else if(challengeType.equals("Puzzle"))
-            intent= new Intent(getBaseContext(),puzzel.class);
+//        else if(challengeType.equals("Puzzle"))
+//            intent= new Intent(getBaseContext(),puzzel.class);
         else if(challengeType.equals("Fill blanks"))
             intent= new Intent(getBaseContext(),fillBlank.class);
 
