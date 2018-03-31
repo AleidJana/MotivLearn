@@ -7,6 +7,6 @@ package com.example.jana.motivlearn.view;
 public interface SuggestVedioView {
     void suggestVrdioError();
     void addBadgySuccess();
-    void SuggestVedioValidations();
+    void SuggestVedioValidations(boolean badge);
     void wrongFormat();
 }

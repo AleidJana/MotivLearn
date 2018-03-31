@@ -80,7 +80,7 @@ public class suggestVedio extends Activity implements SuggestVedioView {
     }
 
     @Override
-    public void SuggestVedioValidations() {
+    public void SuggestVedioValidations(final boolean badge) {
         progressDialog.dismiss();
         new TTFancyGifDialog.Builder(suggestVedio.this)
                 .setTitle("suggested successfully")
@@ -93,6 +93,25 @@ public class suggestVedio extends Activity implements SuggestVedioView {
                     @Override
                     public void OnClick() {
                         //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
+                        if(badge) {
+                            new TTFancyGifDialog.Builder(suggestVedio.this)
+                                    .setTitle("Good Job")
+                                    .setMessage("Congratulations, \n you have got 'Edugator' badge \n because this is your" +
+                                            " 5th suggested video")
+                                    .setPositiveBtnText("Ok")
+                                    .setPositiveBtnBackground("#9577bc")
+                                    .setGifResource(R.drawable.badgec13)      //pass your gif, png or jpg
+                                    .isCancellable(true)
+                                    .OnPositiveClicked(new TTFancyGifDialogListener() {
+                                        @Override
+                                        public void OnClick() {
+                                            //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    })
+                                    .build();
+                        }
+                        else
                         finish();
                     }
                 })

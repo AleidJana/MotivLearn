@@ -24,8 +24,9 @@ public class SuggestVedioImp implements SuggestVedioPresenter {
 
         this.suggestVedioView=suggestVedioView;
     }
+
     @Override
-    public void performSuggestVedio(String vedioLink, int userId) {
+    public void performSuggestVedio(String vedioLink, final int userId) {
         if(TextUtils.isEmpty(vedioLink)){
            // suggestVedioView.SuggestVedioValidations();
             suggestVedioView.suggestVrdioError();
@@ -35,7 +36,7 @@ public class SuggestVedioImp implements SuggestVedioPresenter {
                // final int userId=1;
                 final AsyncHttpClient client = new AsyncHttpClient();
                 final RequestParams params = new RequestParams();
-                client.get("https://api.appery.io/rest/1/apiexpress/api/27_suggestEducationVideo/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&link="+vedioLink+"&userId="+userId, params, new TextHttpResponseHandler() {
+                client.get("https://api.appery.io/rest/1/apiexpress/api/27_SuggestVideo/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&id="+userId+"&link="+vedioLink, params, new TextHttpResponseHandler() {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
                         suggestVedioView.suggestVrdioError();
@@ -43,52 +44,46 @@ public class SuggestVedioImp implements SuggestVedioPresenter {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String response) {
-                        suggestVedioView.SuggestVedioValidations();
-
+                        try {
+                            response = response.substring(1, response.length() - 1);
+                            JSONObject obj = new JSONObject(response);
+                            int videos = Integer.parseInt(obj.getString("count(*)"));
+                            if(videos == 5)
+                            {
+                                suggestVedioView.SuggestVedioValidations(true);
+                                addBadge(userId);
+                            }
+                            else
+                                suggestVedioView.SuggestVedioValidations(false);
+                        }
+                        catch(Exception e){}
                     }
                 });
-              /*  client.get("https://api.appery.io/rest/1/apiexpress/api/checkForEducatorBadge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&userId="+userId, params, new TextHttpResponseHandler() {
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        suggestVedioView.SuggestVedioValidations();
-
-                    }
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, String response) {
-                        response=response.substring(1,response.length()-1);
-                        try {
-                            JSONObject obj = new JSONObject(response);
-                            int vaule = obj.getInt("COUNT(link)");
-                            if(vaule>3){
-                                client.get("https://api.appery.io/rest/1/apiexpress/api/AddBadge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+userId+"&bid="+13, params, new TextHttpResponseHandler() {
-                                    @Override
-                                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                                        suggestVedioView.addBadgySuccess();
-
-                                    }
-
-                                    @Override
-                                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                                        suggestVedioView.addBadgySuccess();
-
-                                    }
-                                });
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-
-                    }
-                });*/
               }
             else {
                 suggestVedioView.wrongFormat();
             }
         }
 
+    }
+
+    public void addBadge(int userId)
+    {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        client.get("https://api.appery.io/rest/1/apiexpress/api/AddBadge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+userId+"&bid=13", params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                //suggestVedioView.addBadgySuccess();
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                //suggestVedioView.addBadgySuccess();
+
+            }
+        });
     }
 }
 

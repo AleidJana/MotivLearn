@@ -74,7 +74,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
                     mCtx.startActivity(intent);
                 }
            //     mCtx.startActivity(new Intent(mCtx,displayfillBlanck.class));
-
             }
         });
     }
