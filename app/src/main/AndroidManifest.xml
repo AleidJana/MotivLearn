@@ -31,6 +31,7 @@
         <activity android:name=".CodeOutput" />
         <activity android:name=".displayfillBlanck" />
         <activity android:name=".displaychoice" />
+        <activity android:name=".displayPuzzle" />
         <activity android:name=".displayCodeOutput" />
         <activity android:name=".createChallenge" />
         <activity android:name=".suggestQuestion" />

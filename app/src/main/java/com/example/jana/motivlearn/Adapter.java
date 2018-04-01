@@ -64,20 +64,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
                         intent = new Intent(mCtx, displaychoice.class);
                     else if (type.equals("code"))
                         intent = new Intent(mCtx, displayCodeOutput.class);
-                    else if (type.equals("fillblank")) {
+                    else if (type.equals("fillblank"))
                         intent = new Intent(mCtx, displayfillBlanck.class);
-                        //else
-                        //    intent = new Intent(mCtx, displayPuzzle.class);
+                    else
+                        intent = new Intent(mCtx, displayPuzzle.class);
+
                         intent.putExtra("type", type);
                         intent.putExtra("id", questions.getId());
                         mCtx.startActivity(intent);
-                    }
                 }
-           //     mCtx.startActivity(new Intent(mCtx,displayfillBlanck.class));
             }
         });
     }
-
 
     @Override
     public int getItemCount() {
