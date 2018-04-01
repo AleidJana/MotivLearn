@@ -33,6 +33,8 @@ import org.json.JSONObject;
 
 import java.util.Random;
 
+import static com.loopj.android.http.AsyncHttpClient.log;
+
 public class displayPuzzle extends MyListActivity implements displayPuzzleView {
     TextView Ttitle , Tqustion ;
     EditText Uanswer;
@@ -104,6 +106,7 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
             JSONObject obj = new JSONObject(responseString);
             String title = obj.getString("challenge_title");
             final String question = obj.getString("question");
+            log.d("HAIFA", question );
             DynamicListView listView = (DynamicListView) findViewById(R.id.dynamiclistview);
             ArrayAdapter<String> adapter = new MyListAdapter(this, question);
 
@@ -223,6 +226,7 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
                 jsonArray = shuffleJsonArray(jsonArray);
                 for (int i = 0; i < jsonArray.length(); i++) {
                     add(jsonArray.get(i)+"");
+                   // log.d("HAIFA", jsonArray.get(i)+"" );
                     // add(mContext.getString(R.string.row_number, i));
                 }
             }

@@ -73,7 +73,7 @@ public class puzzel extends AppCompatActivity implements puzzleView {
 
                 JSONArray question = new JSONArray(lines0);
 
-                Toast.makeText(puzzel.this,question.toString(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(puzzel.this,question.toString(), Toast.LENGTH_SHORT).show();
 
                 SharedPreferences sp1= puzzel.this.getSharedPreferences("Login", MODE_PRIVATE);
                 int uid =sp1.getInt("user_id", 0);

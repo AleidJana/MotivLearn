@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn.model;
 
+import android.net.Uri;
 import android.text.TextUtils;
 
 import com.example.jana.motivlearn.presenter.CodeOutputPresenter;
@@ -9,6 +10,9 @@ import com.example.jana.motivlearn.view.puzzleView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
+
+import java.net.URI;
+import java.net.URLEncoder;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -53,19 +57,26 @@ public class puzzleImp implements puzzlePresenter {
             vue.puzzleFail("codeoutput_empty");
         }
         else {
-            AsyncHttpClient client = new AsyncHttpClient();
-            RequestParams params = new RequestParams();
-            client.get(
-                    "https://api.appery.io/rest/1/apiexpress/api/SuggestQuestion/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&type=PZ&question=" + question + "&answer=" + answer + "&field=" + challengeField +"&coins=" + challengeCoins + "&title=" + challengeTitle+  "&uid=" + userId + "&time=" + challengeTime, params, new TextHttpResponseHandler() {
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                            vue.puzzleFail("bad_connection");
-                        }
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                            vue.puzzleSuccess("successCreation");
-                        }
-                    });
+            try {
+                AsyncHttpClient client = new AsyncHttpClient();
+                RequestParams params = new RequestParams();
+                // question = question.substring(1,question.length()-1);
+                //encodeURIComponent()
+                //URLEncoder.encode(question, "UTF-8")
+                client.get(
+                        "https://api.appery.io/rest/1/apiexpress/api/SuggestQuestion/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&type=PZ&question=" + URLEncoder.encode(question, "UTF-8") + "&answer=" + answer + "&field=" + challengeField + "&coins=" + challengeCoins + "&title=" + challengeTitle + "&uid=" + userId + "&time=" + challengeTime, params, new TextHttpResponseHandler() {
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                                vue.puzzleFail("bad_connection");
+                            }
+
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                                vue.puzzleSuccess("successCreation");
+                            }
+                        });
+            }
+            catch(Exception e){}
         }
     }
 

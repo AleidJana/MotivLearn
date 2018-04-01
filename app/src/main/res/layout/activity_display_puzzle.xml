@@ -50,14 +50,14 @@
         <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
             android:id="@+id/dynamiclistview"
             android:layout_width="@dimen/_200sdp"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="@drawable/text_view_style"
-            tools:layout_editor_absoluteX="166dp"
+            android:paddingLeft="10dp"
             android:paddingTop="6dp"
             android:textColor="@color/colorAccent"
-            android:paddingLeft="10dp"
+            tools:layout_editor_absoluteX="166dp"
             tools:layout_editor_absoluteY="460dp" />
     </RelativeLayout>
 
