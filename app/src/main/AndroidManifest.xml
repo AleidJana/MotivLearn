@@ -41,6 +41,7 @@
         <activity android:name=".userTprofile" />
         <activity android:name=".userSprofile" />
         <activity android:name=".AddPost" />
+        <activity android:name=".puzzel" />
         <activity android:name=".RegisterCode" />
         <activity android:name=".CreatGroupChallenge" />
         <activity android:name=".GroupChallenge" />

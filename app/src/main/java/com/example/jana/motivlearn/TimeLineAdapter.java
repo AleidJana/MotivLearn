@@ -3,6 +3,7 @@ package com.example.jana.motivlearn;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
+import java.lang.Object;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,6 +26,8 @@ import com.like.LikeButton;
 import com.like.OnLikeListener;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -63,6 +66,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         //getting the post of the specified position
         final TimeLineInfo item = InfoList.get(position);
         //binding the data with the viewholder views
+       // String time0 = formatTime(String.valueOf(item.getHours()));
         holder.textViewName.setText(item.getName());
         holder.textViewHours.setText(String.valueOf(item.getHours()));
         holder.textViewContent.setText(String.valueOf(item.getContent()));
@@ -149,6 +153,15 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         });
 
     }
+
+   /* private String formatTime(String s) {
+        String result;
+        long prevEventTime = System.currentTimeMillis();
+        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        final LocalDate dt1 = dtf.parseLocalDate(dateString1);
+        final LocalDate dt2 = dtf.parseLocalDate(dateString2);
+        return result;
+    }*/
 
 
     @Override
