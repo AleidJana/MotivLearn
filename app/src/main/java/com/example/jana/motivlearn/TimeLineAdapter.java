@@ -26,12 +26,17 @@ import com.like.LikeButton;
 import com.like.OnLikeListener;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.jana.motivlearn.tab2.pres;
+import static com.loopj.android.http.AsyncHttpClient.log;
 
 /**
  * Created by jana on 2/19/2018 AD.
@@ -66,9 +71,9 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         //getting the post of the specified position
         final TimeLineInfo item = InfoList.get(position);
         //binding the data with the viewholder views
-       // String time0 = formatTime(String.valueOf(item.getHours()));
+        String time0 = formatTime(String.valueOf(item.getHours()));
         holder.textViewName.setText(item.getName());
-        holder.textViewHours.setText(String.valueOf(item.getHours()));
+        holder.textViewHours.setText(time0);
         holder.textViewContent.setText(String.valueOf(item.getContent()));
         holder.textViewLike.setText(String.valueOf(item.getLikes()));
         holder.textViewComment.setText(String.valueOf(item.getComment()));
@@ -154,14 +159,45 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
 
     }
 
-   /* private String formatTime(String s) {
-        String result;
-        long prevEventTime = System.currentTimeMillis();
-        DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-        final LocalDate dt1 = dtf.parseLocalDate(dateString1);
-        final LocalDate dt2 = dtf.parseLocalDate(dateString2);
+    private String formatTime(String s) {
+        String result="";
+        s=s.substring(0, s.length()-2);
+        try {
+            long secondsInMilli = 1000;
+            long minutesInMilli = secondsInMilli * 60;
+            long hoursInMilli = minutesInMilli * 60;
+            long daysInMilli = hoursInMilli * 24;
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String c = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+
+            Date postDate = dateFormat.parse(s);
+            Date currentDate = dateFormat.parse(c);
+
+            Calendar c0 = Calendar.getInstance();
+            c0.setTime(postDate);
+            c0.add(Calendar.HOUR_OF_DAY, 10);
+            int year = c0.get(Calendar.YEAR);
+            int month = c0.get(Calendar.MONTH) + 1;
+            int day = c0.get(Calendar.DAY_OF_MONTH);
+            int hour = c0.get(Calendar.HOUR_OF_DAY);
+            int minute = c0.get(Calendar.MINUTE);
+            int second = c0.get(Calendar.SECOND);
+            postDate = dateFormat.parse(year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second);
+
+            long diff = currentDate.getTime() - postDate.getTime();
+
+            if(diff < minutesInMilli)
+                result=TimeUnit.MILLISECONDS.toSeconds(diff)+"s";
+            else if(diff < hoursInMilli)
+                result= TimeUnit.MILLISECONDS.toMinutes(diff)+"m";
+            else if(diff < (daysInMilli)*3)
+                result=(TimeUnit.MILLISECONDS.toDays(diff)+1)+"d";
+            else
+                result=s.substring(0,10);
+        } catch(Exception e){}
         return result;
-    }*/
+    }
 
 
     @Override

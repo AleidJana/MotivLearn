@@ -90,7 +90,7 @@ public class tab2 extends Fragment implements TimelineView {
                 int postid = object.getInt("post_id");
                 String name = object.getString("u_name");
                 String post = object.getString("message");
-                String hours ="5h";//object.getString("post_date");
+                String hours = object.getString("post_date");
                 String utype = object.getString("u_type");
                 ///object.getString("post_date");
                 InfoList.add(
