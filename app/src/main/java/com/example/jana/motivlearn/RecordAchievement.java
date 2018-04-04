@@ -44,8 +44,8 @@ public class RecordAchievement extends AppCompatActivity implements recordAchiev
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(RecordAchievement.this, result.getText(),
-                                        Toast.LENGTH_LONG).show();
+                              //  Toast.makeText(RecordAchievement.this, result.getText(),
+                                //        Toast.LENGTH_LONG).show();
                                 res = result.getText().trim();
                                 if(res.equals("MotivLearn"))
                                 {
@@ -53,21 +53,6 @@ public class RecordAchievement extends AppCompatActivity implements recordAchiev
                                     int uid =sp1.getInt("user_id", 0);
                                     pres= new recordAchievementImp(RecordAchievement.this);
                                     pres.updateUserCoins(uid);
-                                    new TTFancyGifDialog.Builder(RecordAchievement.this)
-                                            .setTitle("Scanned successfully")
-                                            .setMessage("Good job, \n your achievement have been recorded \n and you have got 10 Coins")
-                                            .setPositiveBtnText("Ok")
-                                            .setPositiveBtnBackground("#9577bc")
-                                            .setGifResource(R.drawable.hgif3)      //pass your gif, png or jpg
-                                            .isCancellable(true)
-                                            .OnPositiveClicked(new TTFancyGifDialogListener() {
-                                                @Override
-                                                public void OnClick() {
-                                                    //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
-                                                    finish();
-                                                }
-                                            })
-                                            .build();
                                 }
                                 else
                                 {new TTFancyGifDialog.Builder(RecordAchievement.this)
@@ -81,7 +66,7 @@ public class RecordAchievement extends AppCompatActivity implements recordAchiev
                                             @Override
                                             public void OnClick() {
                                                 //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
-                                                finish();
+                                             //   finish();
                                             }
                                         })
                                         .build();}
@@ -131,5 +116,44 @@ public class RecordAchievement extends AppCompatActivity implements recordAchiev
         mCodeScanner.releaseResources();
         super.onPause();
     }
+
+    @Override
+    public void addBadge(final boolean b) {
+
+        new TTFancyGifDialog.Builder(RecordAchievement.this)
+                .setTitle("Scanned successfully")
+                .setMessage("Good job, \n your achievement have been recorded \n and you have got 10 Coins")
+                .setPositiveBtnText("Ok")
+                .setPositiveBtnBackground("#9577bc")
+                .setGifResource(R.drawable.hgif3)      //pass your gif, png or jpg
+                .isCancellable(true)
+                .OnPositiveClicked(new TTFancyGifDialogListener() {
+                    @Override
+                    public void OnClick() {
+                        if(b) {
+                            new TTFancyGifDialog.Builder(RecordAchievement.this)
+                                    .setTitle("Good Job")
+                                    .setMessage("Congratulations, \n you have got 'Learner' badge \n because this is your" +
+                                            " 5th recorded achievement")
+                                    .setPositiveBtnText("Ok")
+                                    .setPositiveBtnBackground("#9577bc")
+                                    .setGifResource(R.drawable.badgec4)      //pass your gif, png or jpg
+                                    .isCancellable(true)
+                                    .OnPositiveClicked(new TTFancyGifDialogListener() {
+                                        @Override
+                                        public void OnClick() {
+                                            //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
+                                            finish();
+                                        }
+                                    })
+                                    .build();
+                        }
+                        else
+                            finish();
+                    }
+                })
+                .build();
+
     }
+}
 

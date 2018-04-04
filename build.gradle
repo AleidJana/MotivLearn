@@ -20,6 +20,9 @@ allprojects {
         google()
         jcenter()
         maven {url 'http://jitpack.io'}
+        maven {
+            url "http://dl.bintray.com/glomadrian/maven"
+        }
     }
 }
 

@@ -45,6 +45,7 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
     ProgressBar progressBar;
     ProgressDialog progressDialog;
     CountDownTimer countDownTimer;
+    String field;
     int time;
     int millisecondsleft;
     displayPuzzlePresenter pre;
@@ -110,7 +111,7 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
                             @Override
                             public void OnClick() {
                                 //Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
-                                pre.crrectAnswer(uid, challNum, "fialBack", "gg", 0 , 0);
+                                pre.crrectAnswer(uid, challNum, "fialBack", "gg", 0 , 0,0);
                                 finish();
                             }
                         })
@@ -126,7 +127,7 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
 
                                         public void onFinish() {
                                             progressBar.setProgress(0);
-                                            pre.crrectAnswer(uid, challNum, "timeout", "gg", 0, 0);
+                                            pre.crrectAnswer(uid, challNum, "timeout", "gg", 0, 0,0);
                                         }
                                     }.start();
                                 }
@@ -156,6 +157,7 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
         try {
             JSONObject obj = new JSONObject(responseString);
             String title = obj.getString("challenge_title");
+            field = obj.getString("field");
             final String question = obj.getString("question");
             log.d("HAIFA", question );
             DynamicListView listView = (DynamicListView) findViewById(R.id.dynamiclistview);
@@ -180,7 +182,7 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
                 }
                 public void onFinish() {
                     progressBar.setProgress(0);
-                    pre.crrectAnswer(uid, challNum, "timeout", "gg", 0 , 0);
+                    pre.crrectAnswer(uid, challNum, "timeout", "gg", 0 , 0,0);
                 }
             }.start();
 
@@ -202,12 +204,12 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
 
                             flag = false;
                             //Toast.makeText(getApplicationContext(), "Wrong order", Toast.LENGTH_SHORT).show();
-                            pre.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0);
+                            pre.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0,0);
                             break;
                         }
                         if (flag)
                         {   //Toast.makeText(getApplicationContext(), "Correct order", Toast.LENGTH_SHORT).show();
-                            pre.selectRank(uid,challNum,"pass","gg",3);
+                            pre.selectRank(uid,challNum,"pass","gg",3, field);
                         }
                     } catch (Exception e) {
                     }
@@ -219,7 +221,7 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
     }
 
     @Override
-    public void correct(int coins, String status) {
+    public void correct(int coins, String status, final int badge) {
         if(progressDialog!=null&&progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
@@ -254,9 +256,31 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
                 .OnPositiveClicked(new TTFancyGifDialogListener() {
                     @Override
                     public void OnClick() {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("nextFrag", "cha");
-                        startActivity(intent);
+                        if(badge!=0)
+                        {
+                            int badgeid = getResources().getIdentifier("badgec"+badge, "drawable", getPackageName());
+                            new TTFancyGifDialog.Builder(displayPuzzle.this)
+                                    .setTitle("Good Job")
+                                    .setMessage("Congratulations, \n you have got a new badge")
+                                    .setPositiveBtnText("Ok")
+                                    .setPositiveBtnBackground("#9577bc")
+                                    .setGifResource(badgeid)      //pass your gif, png or jpg
+                                    .isCancellable(true)
+                                    .OnPositiveClicked(new TTFancyGifDialogListener() {
+                                        @Override
+                                        public void OnClick() {
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            intent.putExtra("nextFrag", "cha");
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .build();
+                        }
+                        else {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("nextFrag", "cha");
+                            startActivity(intent);
+                        }
                     }
                 })
                 .build();

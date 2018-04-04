@@ -73,7 +73,7 @@ public class displayCodeOutputImp implements displayCodeOutputPresenter {
 
 
     @Override
-    public void crrectAnswer(int user_id, int challenge_id, String stutes, String skillType, int rateValue ,int coins) {
+    public void crrectAnswer(int user_id, int challenge_id, String stutes, String skillType, int rateValue ,int coins, final int badge) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         final String status2=stutes;
@@ -88,19 +88,18 @@ public class displayCodeOutputImp implements displayCodeOutputPresenter {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                displayCodeOutput1.correct(coins1, status2);
+                displayCodeOutput1.correct(coins1, status2, badge);
 
             }
         });
 
     }
 
-
     @Override
-    public void selectRank(final int user_id, final int challenge_id, final String stutes, final String skillType, final int rateValue) {
+    public void selectRank(final int user_id, final int challenge_id, final String stutes, final String skillType, final int rateValue, final String field) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        RequestHandle requestHandle = client.get("https://api.appery.io/rest/1/apiexpress/api/selectRank/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&challengeId=" + challenge_id, params, new TextHttpResponseHandler() {
+        RequestHandle requestHandle = client.get("https://api.appery.io/rest/1/apiexpress/api/selectRank/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&challengeId=" + challenge_id + "&field=" + field + "&uid=" + user_id, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
@@ -109,37 +108,131 @@ public class displayCodeOutputImp implements displayCodeOutputPresenter {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 try {
-                    responseString = responseString.replace("[{","{");
-                    responseString = responseString.replace("}]","}");
+                    responseString = responseString.replace("[{", "{");
+                    responseString = responseString.replace("}]", "}");
                     JSONObject obj = new JSONObject(responseString);
                     JSONObject object = obj.getJSONObject("Branch1");
                     rank = object.getInt("rank");
-                  //  rank=rank-1;
+                    // rank=rank-1;
 
-                    switch (rank){
-                        case 1:coins1=10+coins;
+                    switch (rank) {
+                        case 1:
+                            coins1 = 10 + coins;
                             break;
-                        case 2:coins1=5+coins;
+                        case 2:
+                            coins1 = 5 + coins;
                             break;
-                        case 3:coins1=3+coins;
+                        case 3:
+                            coins1 = 3 + coins;
                             break;
-                        default:coins1=1+coins;
+                        default:
+                            coins1 = 1 + coins;
 
                     }
-                }
-                catch(Exception e){
+
+                    if (field.equals("java") || field.equals("c") || field.equals("javascript")
+                            || field.equals("html") || field.equals("css") || field.equals("php")) {
+                        JSONObject object2 = obj.getJSONObject("Branch2");
+                        int numOfpass = object2.getInt("numOfPass") + 1;
+
+                        int badge = findBadge(numOfpass, field);
+
+                        if(badge != 0)
+                            addBadge(user_id, badge);
+
+                        crrectAnswer(user_id, challenge_id, stutes, skillType, rateValue, coins1, badge);
+                    }
+                } catch (Exception e) {
 
                 }
-                crrectAnswer(user_id, challenge_id,  stutes, skillType, rateValue,coins1);
+            }
+        });
+    }
+
+    public void addBadge(int userId, int num)
+    {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        client.get("https://api.appery.io/rest/1/apiexpress/api/AddBadge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+userId+"&bid="+num, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                //suggestVedioView.addBadgySuccess();
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                //suggestVedioView.addBadgySuccess();
 
             }
         });
-
-
-
     }
 
+    int findBadge(int numOfpass, String field) {
+        if(numOfpass==50)
+            return 12;
 
+        switch (field) {
+            case "java":
+                if (numOfpass == 5)
+                    return 17;
+                else if (numOfpass == 10)
+                    return 18;
+                else if(numOfpass==20)
+                    return 19;
+                break;
+
+            case "c":
+                if (numOfpass == 5)
+                    return 1;
+                else if (numOfpass == 10)
+                    return 2;
+                else if(numOfpass==20)
+                    return 3;
+                break;
+
+            case "html":
+                if (numOfpass == 5)
+                    return 23;
+                else if (numOfpass == 10)
+                    return 24;
+                else if(numOfpass==20)
+                    return 25;
+                break;
+
+            case "css":
+                if (numOfpass == 5)
+                    return 14;
+                else if (numOfpass == 10)
+                    return 15;
+                else if(numOfpass==20)
+                    return 16;
+                break;
+
+            case "javascript":
+                if (numOfpass == 5)
+                    return 20;
+                else if (numOfpass == 10)
+                    return 21;
+                else if(numOfpass==20)
+                    return 22;
+                break;
+
+            case "php":
+                if (numOfpass == 5)
+                    return 26;
+                else if (numOfpass == 10)
+                    return 27;
+                else if(numOfpass==20)
+                    return 28;
+                break;
+
+            default:
+                return 0;
+        }
+
+        return 0;
+    }
 
 
 }

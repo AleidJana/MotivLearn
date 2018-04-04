@@ -8,5 +8,5 @@ public interface displayPuzzleView {
 
     void displayFailed();
     void setChallenge(String responseString);
-    void correct(int coins, String status);
+    void correct(int coins, String status, int badge);
 }

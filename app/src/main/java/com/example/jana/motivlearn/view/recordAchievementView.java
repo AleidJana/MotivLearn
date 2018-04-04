@@ -5,5 +5,5 @@ package com.example.jana.motivlearn.view;
  */
 
 public interface recordAchievementView {
-
+    void addBadge(boolean b);
 }

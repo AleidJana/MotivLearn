@@ -39,6 +39,7 @@ ProgressBar progressBar;
     CountDownTimer countDownTimer;
 int time;
     int challNum;
+    String field;
     int uid;
 displayfillBlanckPresenter displayfillBlanckP;
     @Override
@@ -49,6 +50,12 @@ displayfillBlanckPresenter displayfillBlanckP;
 
         SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
         uid =sp1.getInt("user_id", 0);
+
+        Ttitle = findViewById(R.id.textView);
+        Tqustion = findViewById(R.id.textViewTitle);
+        Uanswer = findViewById(R.id.editText);
+        submit = findViewById(R.id.button);
+
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         // mToolbar.setTitle("");
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
@@ -75,7 +82,7 @@ displayfillBlanckPresenter displayfillBlanckP;
                             @Override
                             public void OnClick() {
                                 //Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
-                                displayfillBlanckP.crrectAnswer(uid, challNum, "fialBack", "gg", 0 , 0);
+                                displayfillBlanckP.crrectAnswer(uid, challNum, "fialBack", "gg", 0 , 0,0);
                                 finish();
                             }
                         })
@@ -91,7 +98,7 @@ displayfillBlanckPresenter displayfillBlanckP;
 
                                         public void onFinish() {
                                             progressBar.setProgress(0);
-                                            displayfillBlanckP.crrectAnswer(uid, challNum, "timeout", "gg", 0, 0);
+                                            displayfillBlanckP.crrectAnswer(uid, challNum, "timeout", "gg", 0, 0,0);
                                         }
                                     }.start();
                                 }
@@ -100,14 +107,49 @@ displayfillBlanckPresenter displayfillBlanckP;
                         .build();
             }
         });
-        Ttitle = findViewById(R.id.textView);
-        Tqustion = findViewById(R.id.textViewTitle);
 
         progressBar = (ProgressBar)findViewById(R.id.progressBar2) ;
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                countDownTimer.cancel();
+                progressDialog = ProgressDialog.show(displayfillBlanck.this, "", "Please wait...");
+                String userAnswer = Uanswer.getText().toString();
+                String[] answer = userAnswer.split(",");
+             //   Toast.makeText(displayfillBlanck.this, answer.length+"--"+answer1.length,
+               //         Toast.LENGTH_LONG).show();
+
+                if (answer.length == answer1.length) {
+                    boolean flag = true;
+                    for (int l = 0; l < answer.length; l++) {
+                        if ((answer[l]).trim().toLowerCase().equals(answer1[l])){
+                            flag = true;
+                        }
+                        else{
+                            flag=false;
+                            break;
+                        }
+                    }
+                    if (flag) {
+                        //Toast.makeText(getApplicationContext(), "correct",
+                        //      Toast.LENGTH_LONG).show();
+                        displayfillBlanckP.selectRank(uid,challNum,"pass","gg",3, field);
+
+                    } else {
+                        // Toast.makeText(getApplicationContext(), "not correct", Toast.LENGTH_LONG).show();
+                        displayfillBlanckP.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0,0);
+                    }
+
+                }else {
+                  //  Toast.makeText(displayfillBlanck.this, "small or long",
+                    //        Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
         displayfillBlanckP = new displayfillBlanckImp(displayfillBlanck.this);
         displayfillBlanckP.peformdisplayfillBlanck(challNum);
-        Uanswer = findViewById(R.id.editText);
-
     }
 
     @Override
@@ -132,6 +174,7 @@ displayfillBlanckPresenter displayfillBlanckP;
             time= obj.getInt("time");
             coins = obj.getInt("coins");
             Ttitle.setText(title);
+            field = obj.getString("field");
             Tqustion.setText(question);
             String Allanswer = obj.getString("answer");
             JSONObject obj2 = new JSONObject(Allanswer);
@@ -156,48 +199,9 @@ displayfillBlanckPresenter displayfillBlanckP;
                 }
                 public void onFinish() {
                     progressBar.setProgress(0);
-                    displayfillBlanckP.crrectAnswer(uid, challNum, "timeout", "gg", 0 , 0);
+                    displayfillBlanckP.crrectAnswer(uid, challNum, "timeout", "gg", 0 , 0,0);
                 }
             }.start();
-
-
-            submit = findViewById(R.id.button);
-            submit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    countDownTimer.cancel();
-                    progressDialog = ProgressDialog.show(displayfillBlanck.this, "", "Please wait...");
-                    String userAnswer = Uanswer.getText().toString();
-                    String[] answer = userAnswer.split(",");
-
-                    if (answer.length == answer1.length) {
-                        boolean flag = true;
-                        for (int l = 0; l < answer.length; l++) {
-                            if ((answer[l]).trim().toLowerCase().equals(answer1[l])){
-                                flag = true;
-                            }
-                            else{
-
-                                flag=false;
-                                break;
-                            }
-                        }
-                        if (flag) {
-                            //Toast.makeText(getApplicationContext(), "correct",
-                              //      Toast.LENGTH_LONG).show();
-                            displayfillBlanckP.selectRank(uid,challNum,"pass","gg",3);
-
-                        } else {
-                           // Toast.makeText(getApplicationContext(), "not correct", Toast.LENGTH_LONG).show();
-                            displayfillBlanckP.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0);
-                        }
-
-                    }else {
-                        //Toast.makeText(getApplicationContext(), "small or long",
-                         //       Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
 
             } catch (JSONException e) {
             e.printStackTrace();
@@ -206,10 +210,11 @@ displayfillBlanckPresenter displayfillBlanckP;
     }
 
     @Override
-    public void correct(int coinns, String status) {
+    public void correct(int coinns, String status, final int badge) {
         if(progressDialog!=null&&progressDialog.isShowing()) {
             progressDialog.dismiss();
-        }        String msg1="", msg2="";
+        }
+        String msg1="", msg2="";
         int dr1 = 0;
         if(status.equals("pass"))
         {
@@ -239,9 +244,31 @@ displayfillBlanckPresenter displayfillBlanckP;
                 .OnPositiveClicked(new TTFancyGifDialogListener() {
                     @Override
                     public void OnClick() {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("nextFrag", "cha");
-                        startActivity(intent);
+                        if(badge!=0)
+                        {
+                            int badgeid = getResources().getIdentifier("badgec"+badge, "drawable", getPackageName());
+                            new TTFancyGifDialog.Builder(displayfillBlanck.this)
+                                    .setTitle("Good Job")
+                                    .setMessage("Congratulations, \n you have got a new badge")
+                                    .setPositiveBtnText("Ok")
+                                    .setPositiveBtnBackground("#9577bc")
+                                    .setGifResource(badgeid)      //pass your gif, png or jpg
+                                    .isCancellable(true)
+                                    .OnPositiveClicked(new TTFancyGifDialogListener() {
+                                        @Override
+                                        public void OnClick() {
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            intent.putExtra("nextFrag", "cha");
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .build();
+                        }
+                        else {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("nextFrag", "cha");
+                            startActivity(intent);
+                        }
                     }
                 })
                 .build();

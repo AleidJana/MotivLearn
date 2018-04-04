@@ -7,5 +7,5 @@ package com.example.jana.motivlearn.view;
 public interface displayCodeOutputView {
     void fileView();
     void setR(String responseString);
-    void correct(int coinns, String status);
+    void correct(int coinns, String status, int badge);
 }

@@ -33,6 +33,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
     Button submit ;
     int count ,  coins;
     String  answer;
+    String field;
     ProgressBar progressBar;
     int time;
     ProgressDialog progressDialog;
@@ -82,7 +83,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
                             @Override
                             public void OnClick() {
                                 //Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
-                                displayCodeOutputP.crrectAnswer(uid, challNum, "fialBack", "gg", 0 , 0);
+                                displayCodeOutputP.crrectAnswer(uid, challNum, "fialBack", "gg", 0 , 0, 0);
                                 finish();
                             }
                         })
@@ -98,7 +99,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
 
                                         public void onFinish() {
                                             progressBar.setProgress(0);
-                                            displayCodeOutputP.crrectAnswer(uid, challNum, "timeout", "gg", 0, 0);
+                                            displayCodeOutputP.crrectAnswer(uid, challNum, "timeout", "gg", 0, 0, 0);
                                         }
                                     }.start();
                                 }
@@ -133,6 +134,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
             Ttitle.setText(title);
             Tqustion.setText(question);
              answer = obj.getString("answer");
+            field = obj.getString("field");
             progressBar.setMax(time);
             progressBar.setProgress(time);
             time=time*1000;
@@ -145,7 +147,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
                 public void onFinish() {
                     progressBar.setProgress(0);
                     //progressDialog.dismiss();
-                    displayCodeOutputP.crrectAnswer(uid, challNum, "timeout", "gg", 0 , 0);
+                    displayCodeOutputP.crrectAnswer(uid, challNum, "timeout", "gg", 0 , 0, 0);
                 }
             }.start();
 
@@ -163,11 +165,11 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
                         if (userAnswer.equals(answer.trim())) {
                          /*   Toast.makeText(getApplicationContext(), "correct",
                                     Toast.LENGTH_LONG).show();*/
-                         displayCodeOutputP.selectRank(uid,challNum,"pass","gg",3);
+                         displayCodeOutputP.selectRank(uid,challNum,"pass","gg",3, field);
 
                         } else {
                            // Toast.makeText(getApplicationContext(), "not correct", Toast.LENGTH_LONG).show();
-                            displayCodeOutputP.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0);
+                            displayCodeOutputP.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0, 0);
                         }
                 }
             });
@@ -178,7 +180,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
     }
 
     @Override
-    public void correct(int coinns, String status) {
+    public void correct(int coinns, String status, final int badge) {
         if(progressDialog!=null&&progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
@@ -213,9 +215,31 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
                 .OnPositiveClicked(new TTFancyGifDialogListener() {
                     @Override
                     public void OnClick() {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("nextFrag", "cha");
-                        startActivity(intent);
+                        if(badge!=0)
+                        {
+                            int badgeid = getResources().getIdentifier("badgec"+badge, "drawable", getPackageName());
+                            new TTFancyGifDialog.Builder(displayCodeOutput.this)
+                                    .setTitle("Good Job")
+                                    .setMessage("Congratulations, \n you have got a new badge")
+                                    .setPositiveBtnText("Ok")
+                                    .setPositiveBtnBackground("#9577bc")
+                                    .setGifResource(badgeid)      //pass your gif, png or jpg
+                                    .isCancellable(true)
+                                    .OnPositiveClicked(new TTFancyGifDialogListener() {
+                                        @Override
+                                        public void OnClick() {
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            intent.putExtra("nextFrag", "cha");
+                                            startActivity(intent);
+                                        }
+                                    })
+                                    .build();
+                        }
+                        else {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("nextFrag", "cha");
+                            startActivity(intent);
+                        }
                     }
                 })
                 .build();
