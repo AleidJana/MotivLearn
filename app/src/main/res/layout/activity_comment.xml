@@ -19,6 +19,15 @@
         android:layout_margin="3dp"
         android:id="@+id/card"
         >
+        <TextView
+            android:id="@+id/textViewHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:text="3h"
+            android:layout_margin="10dp"
+            android:textSize="14dp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,7 +51,6 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:layout_gravity="center">
-
                     <TextView
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
@@ -52,15 +60,6 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:id="@+id/textViewName"
                         android:textSize="18dp" />
-
-                    <TextView
-                        android:id="@+id/textViewHours"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="3h"
-                        android:textSize="14dp" />
-
                 </LinearLayout>
             </LinearLayout>
 
@@ -136,7 +135,16 @@
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
+        <com.victor.loading.newton.NewtonCradleLoading
+            android:id="@+id/newton_cradle_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="100dp" />
+    </RelativeLayout>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -144,22 +152,36 @@
         android:layout_marginRight="8dp"
         android:layout_below="@+id/card"
         android:id="@+id/listview"
-        android:layout_above="@+id/edit"
+        android:layout_above="@+id/editco"
         android:divider="@color/card_divider"
         android:dividerHeight="1dp">
 
     </ListView>
-
-    <EditText
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/editco"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true">
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_edit"
         android:id="@+id/edit"
+        android:background="@color/colorPrimaryDark"
+        android:padding="8dp"
+        />
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
+        android:id="@+id/content"
+        android:layout_weight="3"
         android:padding="8dp"
         android:background="@color/colorPrimaryDark"
-        android:drawableLeft="@drawable/ic_edit"
         android:textColor="@color/card_divider"
         />
+
+</LinearLayout>
+
 
 </RelativeLayout>

@@ -68,7 +68,7 @@ public class displayfillBlanckImp  implements displayfillBlanckPresenter {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         final String status2=stutes;
-        if(stutes.equals("timeout")) {
+        if(stutes.equals("timeout")||stutes.equals("fialBack")) {
             stutes="fail" ;
         }
         RequestHandle requestHandle = client.get("https://api.appery.io/rest/1/apiexpress/api/5_TakePublicChallenge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+user_id+"&cid="+challenge_id+"&coins="+coins+"&status="+stutes+"&rateValue="+rateValue+"&skill="+skillType, params, new TextHttpResponseHandler() {

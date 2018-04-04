@@ -15,6 +15,7 @@ import com.loopj.android.http.*;
 public class PresenterImp  implements RegisterPresenter {
     RegisterView mRegisterView;
     String type;
+    private String result;
 
     public PresenterImp(RegisterView RegisterView) {
 
@@ -48,14 +49,35 @@ public class PresenterImp  implements RegisterPresenter {
 
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
                             mRegisterView.registerSuccess(responseString, type);
                         }
                     });
+
     }
+
+
+
+    @Override
+    public String isExist(String email) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        client.get("https://api.appery.io/rest/1/apiexpress/api/checkemail/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&email="+email, params, new TextHttpResponseHandler()
+                {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String res) {
+                        mRegisterView.setResult(res);
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
+
+                    }
+                }
+        );
+        return result;
+    }
+
 }
-
-
-
 
 
 

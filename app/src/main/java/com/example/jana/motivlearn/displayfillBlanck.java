@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,21 +35,73 @@ int count ,  coins;
 String [] answer1;
 ProgressBar progressBar;
     ProgressDialog progressDialog;
+    int millisecondsleft;
     CountDownTimer countDownTimer;
-
 int time;
+    int challNum;
+    int uid;
 displayfillBlanckPresenter displayfillBlanckP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fillblank);
-        Ttitle = findViewById(R.id.textView);
-        Tqustion = findViewById(R.id.textViewTitle);
-
-        final int challNum = getIntent().getIntExtra("id", 0);
+         challNum = getIntent().getIntExtra("id", 0);
 
         SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
-        final int uid =sp1.getInt("user_id", 0);
+        uid =sp1.getInt("user_id", 0);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        // mToolbar.setTitle("");
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // finish();
+                if(countDownTimer!=null)
+                {
+                    countDownTimer.cancel();
+
+                }else {
+                    countDownTimer=null;
+                }               new TTFancyGifDialog.Builder(displayfillBlanck.this)
+                        .setTitle("Are you sure you want close this question?")
+                        .setMessage("Note that you will not be able to resolve this question\n and you will not gain any coins")
+                        .setPositiveBtnText("Yes")
+                        .setPositiveBtnBackground("#9577bc")
+                        .setNegativeBtnText("No")
+                        .setNegativeBtnBackground("#c6c9ce")
+                        .setGifResource(R.drawable.closequ)      //pass your gif, png or jpg
+                        .isCancellable(true)
+                        .OnPositiveClicked(new TTFancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+                                //Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
+                                displayfillBlanckP.crrectAnswer(uid, challNum, "fialBack", "gg", 0 , 0);
+                                finish();
+                            }
+                        })
+                        .OnNegativeClicked(new TTFancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+                                if(countDownTimer!=null) {
+                                    countDownTimer = new CountDownTimer(millisecondsleft, 1000) {
+
+                                        public void onTick(long millisUntilFinished) {
+                                            progressBar.setProgress((int) (millisUntilFinished / 1000));
+                                        }
+
+                                        public void onFinish() {
+                                            progressBar.setProgress(0);
+                                            displayfillBlanckP.crrectAnswer(uid, challNum, "timeout", "gg", 0, 0);
+                                        }
+                                    }.start();
+                                }
+                            }
+                        })
+                        .build();
+            }
+        });
+        Ttitle = findViewById(R.id.textView);
+        Tqustion = findViewById(R.id.textViewTitle);
 
         progressBar = (ProgressBar)findViewById(R.id.progressBar2) ;
         displayfillBlanckP = new displayfillBlanckImp(displayfillBlanck.this);
@@ -72,11 +125,6 @@ displayfillBlanckPresenter displayfillBlanckP;
 
     @Override
     public void setR(String responseString) {
-        final int challNum = getIntent().getIntExtra("id", 0);
-
-        SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
-        final int uid =sp1.getInt("user_id", 0);
-
         try {
             JSONObject obj = new JSONObject(responseString);
             String title = obj.getString("challenge_title");
@@ -103,6 +151,7 @@ displayfillBlanckPresenter displayfillBlanckP;
 
                 public void onTick(long millisUntilFinished) {
                    // Toast.makeText(displayfillBlanck.this,"seconds remaining: " + millisUntilFinished / 1000,Toast.LENGTH_SHORT).show();
+                    millisecondsleft=(int)millisUntilFinished;
                     progressBar.setProgress((int) (millisUntilFinished / 1000));
                 }
                 public void onFinish() {

@@ -78,15 +78,15 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         holder.textViewLike.setText(String.valueOf(item.getLikes()));
         holder.textViewComment.setText(String.valueOf(item.getComment()));
         holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(item.getImage()));
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mCtx, String.valueOf(item.getContent()), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mCtx, String.valueOf(item.getContent()), Toast.LENGTH_SHORT).show();
                Intent intent=new Intent(mCtx,Comment.class);
                 intent.putExtra("post",item);
                  mCtx.startActivity(intent);
             }
-        });*/
+        });
 
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +117,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
                holder.like.setLiked(true);
             }
         });
-       /* holder.comment.setOnClickListener(new View.OnClickListener() {
+        holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Toast.makeText(mCtx ,"comment button ",Toast.LENGTH_LONG).show();
@@ -125,7 +125,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
                 intent.putExtra("post",item);
                 mCtx.startActivity(intent);
             }
-        });*/
+        });
         if(item.getUserid()!= uid) {
             holder.delete.setVisibility(View.INVISIBLE);
         }

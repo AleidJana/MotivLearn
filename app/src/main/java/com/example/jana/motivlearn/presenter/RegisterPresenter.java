@@ -8,4 +8,5 @@ import android.widget.RadioButton;
 
 public interface RegisterPresenter {
     void performRegister(String userName, String email, String password, String conPassword, String RadioButton);
+    String isExist(String email);
 }

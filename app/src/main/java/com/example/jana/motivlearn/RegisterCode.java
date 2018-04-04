@@ -15,6 +15,7 @@ import com.emredavarci.noty.Noty;
 import com.example.jana.motivlearn.model.PresenterImp;
 import com.example.jana.motivlearn.presenter.RegisterPresenter;
 import com.example.jana.motivlearn.view.RegisterView;
+import com.github.glomadrian.codeinputlib.CodeInput;
 
 import org.json.JSONObject;
 
@@ -22,8 +23,9 @@ public class RegisterCode extends AppCompatActivity implements RegisterView {
 Button submit;
     RegisterPresenter mRegisterView;
     ProgressDialog progressDialog;
-    EditText RQtext;
+    CodeInput RQtext;
     String RQ;
+    String type;
     String[] userinfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +34,10 @@ Button submit;
         mRegisterView = new PresenterImp(RegisterCode.this);
         SharedPreferences sp1= this.getSharedPreferences("RegisterCode", MODE_PRIVATE);
         RQ =sp1.getString("RQ",null);
-        RQtext=(EditText)findViewById(R.id.editText);
+        RQtext=(CodeInput) findViewById(R.id.editText);
+                //(EditText)findViewById(R.id.editText);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         userinfo = intent.getStringArrayExtra("userinfo");
        // Toast.makeText(RegisterCode.this,userinfo[5]+"",Toast.LENGTH_LONG).show();
 
@@ -42,9 +45,15 @@ Button submit;
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!String.valueOf(RQtext.getText()).equals("")&&String.valueOf(RQtext.getText())!=null&&Integer.parseInt(RQ)==Integer.parseInt(String.valueOf(RQtext.getText()))) {
+                String RQtxt="";
+                for (int i=0;i<4;i++)
+                {
+                    RQtxt=RQtxt+RQtext.getCode()[i];
+                }
+                if(!RQtxt.equals("")&&RQtxt!=null&&Integer.parseInt(RQ)==Integer.parseInt(RQtxt)) {
                     progressDialog = ProgressDialog.show(RegisterCode.this, "", "Please wait...");
                     mRegisterView.performRegister(userinfo[0], userinfo[1],userinfo[2], userinfo[3],userinfo[4]);
+
                 }else
                 {
                     RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
@@ -63,8 +72,6 @@ Button submit;
                 }
             }
         });
-
-
     }
     @Override
     public void registerSuccess(String responsee, String type) {
@@ -86,20 +93,19 @@ Button submit;
             responsee = responsee.substring(1, responsee.length()-1);
             JSONObject obj = new JSONObject(responsee);
             int uid = obj.getInt("GENERATED_KEY");
-            String user_name=obj.getString("u_name");
-
+            String user_name=userinfo[0];
             SharedPreferences sp=getSharedPreferences("Login", MODE_PRIVATE);
             SharedPreferences.Editor Ed=sp.edit();
             Ed.putInt("user_id",uid );
             Ed.putString("user_type",type);
+           // Toast.makeText(this,type,Toast.LENGTH_LONG).show();
             Ed.putString("user_name",user_name);
             Ed.commit();
+
         }
         catch (Exception e) {}
-
-        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-
     }
 
     public void registerFail(String message){
@@ -118,5 +124,10 @@ Button submit;
                 .setWarningBoxMargins(15,15,15,10)
                 .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
                 .show();
+    }
+
+    @Override
+    public void setResult(String message) {
+
     }
 }

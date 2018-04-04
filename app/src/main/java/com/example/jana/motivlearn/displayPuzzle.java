@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,13 +46,13 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
     ProgressDialog progressDialog;
     CountDownTimer countDownTimer;
     int time;
+    int millisecondsleft;
     displayPuzzlePresenter pre;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_puzzle);
-
         Ttitle = findViewById(R.id.textView);
         progressBar = (ProgressBar)findViewById(R.id.progressBar2) ;
        // Tqustion = findViewById(R.id.textViewTitle);
@@ -83,7 +84,57 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
 
         SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
         final int uid =sp1.getInt("user_id", 0);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        // mToolbar.setTitle("");
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // finish();
+                if(countDownTimer!=null)
+                {
+                    countDownTimer.cancel();
 
+                }else {
+                    countDownTimer=null;
+                }               new TTFancyGifDialog.Builder(displayPuzzle.this)
+                        .setTitle("Are you sure you want close this question?")
+                        .setMessage("Note that you will not be able to resolve this question\n and you will not gain any coins")
+                        .setPositiveBtnText("Yes")
+                        .setPositiveBtnBackground("#9577bc")
+                        .setNegativeBtnText("No")
+                        .setNegativeBtnBackground("#c6c9ce")
+                        .setGifResource(R.drawable.closequ)      //pass your gif, png or jpg
+                        .isCancellable(true)
+                        .OnPositiveClicked(new TTFancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+                                //Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
+                                pre.crrectAnswer(uid, challNum, "fialBack", "gg", 0 , 0);
+                                finish();
+                            }
+                        })
+                        .OnNegativeClicked(new TTFancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+                                if(countDownTimer!=null) {
+                                    countDownTimer = new CountDownTimer(millisecondsleft, 1000) {
+
+                                        public void onTick(long millisUntilFinished) {
+                                            progressBar.setProgress((int) (millisUntilFinished / 1000));
+                                        }
+
+                                        public void onFinish() {
+                                            progressBar.setProgress(0);
+                                            pre.crrectAnswer(uid, challNum, "timeout", "gg", 0, 0);
+                                        }
+                                    }.start();
+                                }
+                            }
+                        })
+                        .build();
+            }
+        });
         pre = new displayPuzzleImp(this);
         pre.peformGetPuzzle(challNum);
 
@@ -124,6 +175,7 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
             countDownTimer= new CountDownTimer(time, 1000) {
 
                 public void onTick(long millisUntilFinished) {
+                    millisecondsleft=(int)millisUntilFinished;
                     progressBar.setProgress((int) (millisUntilFinished / 1000));
                 }
                 public void onFinish() {

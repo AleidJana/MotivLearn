@@ -28,7 +28,7 @@ public class tab4 extends Fragment implements challengeBoardView {
     private String res;
     View view;
     RecyclerView recyclerView;
-
+    int uid;
     @SuppressLint("Range")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +36,7 @@ public class tab4 extends Fragment implements challengeBoardView {
         view =inflater.inflate(R.layout.fragment_tab4, container, false);
 
           SharedPreferences sp1= this.getActivity().getSharedPreferences("Login", MODE_PRIVATE);
-          int uid =sp1.getInt("user_id", 0);
+          uid =sp1.getInt("user_id", 0);
           pres = new challengeBoardImp(tab4.this);
           pres.getChallengeBoard(uid);
 
@@ -121,4 +121,11 @@ public class tab4 extends Fragment implements challengeBoardView {
         PullRefreshLayout layout = (PullRefreshLayout)view.findViewById(R.id.swipeRefreshLayout);
         layout.setRefreshing(false);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        pres.getChallengeBoard(uid);
+    }
+
 }

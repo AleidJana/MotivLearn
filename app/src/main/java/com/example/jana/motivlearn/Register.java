@@ -11,12 +11,18 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.emredavarci.noty.Noty;
 
 import com.example.jana.motivlearn.email.GMailSender;
+import com.example.jana.motivlearn.model.PresenterImp;
+import com.example.jana.motivlearn.presenter.RegisterPresenter;
+import com.example.jana.motivlearn.view.RegisterView;
 
-public class Register extends AppCompatActivity {
+import org.json.JSONObject;
+
+public class Register extends AppCompatActivity implements RegisterView{
 
     EditText userNameF , emailF,passwordF,conPasswordF ;
     RadioGroup radioGroup;
@@ -25,9 +31,16 @@ public class Register extends AppCompatActivity {
     ProgressDialog progressDialog;
     String RQ;
     String[] userinfo;
+    RegisterPresenter mRegisterView;
+    String userName;
+    String email;
+    String password;
+    String conPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mRegisterView = new PresenterImp(Register.this);
+
         setContentView(R.layout.activity_register);
         userNameF = findViewById(R.id.editText8);
         emailF = findViewById(R.id.editText7);
@@ -40,10 +53,10 @@ public class Register extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String userName = userNameF.getText().toString();
-                String email = emailF.getText().toString();
-                String password = passwordF.getText().toString();
-                String conPassword = conPasswordF.getText().toString();
+                userName = userNameF.getText().toString();
+                email = emailF.getText().toString();
+                password = passwordF.getText().toString();
+                conPassword = conPasswordF.getText().toString();
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 radioButton = findViewById(selectedId);
                 if(userName.equals("")||email.equals("")||password.equals("")||conPassword.equals(""))
@@ -57,22 +70,12 @@ public class Register extends AppCompatActivity {
                     {
                         if (password.equals(conPassword))
                         {
-                            userinfo = new String[]{userName, email, password, conPassword, String.valueOf(radioButton.getText())};
-                            progressDialog = ProgressDialog.show(Register.this, "", "Please wait...");
-                            RQ = "" + ((int) (Math.random() * 9000) + 1000);
-                            SharedPreferences sp = getSharedPreferences("RegisterCode", MODE_PRIVATE);
-                            SharedPreferences.Editor Ed = sp.edit();
-                            Ed.putString("RQ", RQ);
-                            Ed.commit();
-                            sendEmail(email, "Registration code", "Dear " + userName + ", Welcome to MotivLearn Community your registration code is:  " + RQ, progressDialog, userinfo);
+                            mRegisterView.isExist(email);
                         }
                         else {errormessage("The passwords not matches");}
                         }
                         else {errormessage("Please enter KSU com.example.jana.motivlearn.email");}
                     }
-
-
-
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +107,42 @@ public class Register extends AppCompatActivity {
                 .setWarningBoxMargins(2,2,2,10)
                 .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
                 .show();
+    }
+
+    @Override
+    public void registerSuccess(String message, String type) {
+
+    }
+
+    @Override
+    public void registerFail(String message) {
+
+    }
+
+    @Override
+    public void setResult(String message) {
+
+        try {
+            if(message.equals("[]"))
+            {
+                userinfo = new String[]{userName, email, password, conPassword, String.valueOf(radioButton.getText())};
+                progressDialog = ProgressDialog.show(Register.this, "", "Please wait...");
+                RQ = "" + ((int) (Math.random() * 9000) + 1000);
+                SharedPreferences sp = getSharedPreferences("RegisterCode", MODE_PRIVATE);
+                SharedPreferences.Editor Ed = sp.edit();
+                Ed.putString("RQ", RQ);
+                Ed.commit();
+                sendEmail(email, "Registration code", "Dear " + userName + ", Welcome to MotivLearn Community your registration code is:  " + RQ, progressDialog, userinfo);
+            }
+            else {
+                errormessage("This email is already exist");
+               }
+
+
+
+        }
+        catch (Exception e){}
+
     }
 }
 

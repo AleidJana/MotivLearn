@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import com.example.jana.motivlearn.multiplayer.MyConnectionListener;
 import com.shephertz.app42.gaming.multiplayer.client.WarpClient;
 import com.shephertz.app42.gaming.multiplayer.client.command.WarpResponseResultCode;
@@ -25,11 +24,9 @@ import com.shephertz.app42.gaming.multiplayer.client.events.LiveUserInfoEvent;
 import com.shephertz.app42.gaming.multiplayer.client.events.MatchedRoomsEvent;
 import com.shephertz.app42.gaming.multiplayer.client.events.RoomEvent;
 import com.shephertz.app42.gaming.multiplayer.client.listener.ZoneRequestListener;
-
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.jana.motivlearn.multiplayer.Constants.apiKey;
 import static com.example.jana.motivlearn.multiplayer.Constants.secretKey;
-
 
 public class StudentServices extends Fragment  implements ZoneRequestListener {
     Button RecordAchievement,WatchVideo,CreateGroupChallenge, SuggestChallenge,SuggestVideo,JoinGroupChallenge;

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -37,6 +38,7 @@ String answer;
     int uid;
     int time;
     int challNum;
+    int millisecondsleft;
     CountDownTimer countDownTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,57 @@ String answer;
         qustionD= findViewById(R.id.textViewTitle);
         radio=findViewById(R.id.radioG);
         submit=findViewById(R.id.button);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        // mToolbar.setTitle("");
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // finish();
+                if(countDownTimer!=null)
+                {
+                    countDownTimer.cancel();
+
+                }else {
+                    countDownTimer=null;
+                }               new TTFancyGifDialog.Builder(displaychoice.this)
+                        .setTitle("Are you sure you want close this question?")
+                        .setMessage("Note that you will not be able to resolve this question\n and you will not gain any coins")
+                        .setPositiveBtnText("Yes")
+                        .setPositiveBtnBackground("#9577bc")
+                        .setNegativeBtnText("No")
+                        .setNegativeBtnBackground("#c6c9ce")
+                        .setGifResource(R.drawable.closequ)      //pass your gif, png or jpg
+                        .isCancellable(true)
+                        .OnPositiveClicked(new TTFancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+                                //Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
+                                ll.crrectAnswer(uid, challNum, "fialBack", "gg", 0 , 0);
+                                finish();
+                            }
+                        })
+                        .OnNegativeClicked(new TTFancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+                                if(countDownTimer!=null) {
+                                    countDownTimer = new CountDownTimer(millisecondsleft, 1000) {
+
+                                        public void onTick(long millisUntilFinished) {
+                                            progressBar.setProgress((int) (millisUntilFinished / 1000));
+                                        }
+
+                                        public void onFinish() {
+                                            progressBar.setProgress(0);
+                                            ll.crrectAnswer(uid, challNum, "timeout", "gg", 0, 0);
+                                        }
+                                    }.start();
+                                }
+                            }
+                        })
+                        .build();
+            }
+        });
         progressBar = (ProgressBar)findViewById(R.id.progressBar2) ;
 
         challNum = getIntent().getIntExtra("id", 0);
@@ -94,7 +147,6 @@ String answer;
     public void setR(String res){
 
         try {
-
             JSONObject obj = new JSONObject(res);
             String qustion=obj.getString("question");
             String challenge_title=obj.getString("challenge_title");
@@ -118,12 +170,12 @@ String answer;
             countDownTimer=new CountDownTimer(time, 1000) {
 
                 public void onTick(long millisUntilFinished) {
-                    progressBar.setProgress((int) (millisUntilFinished / 1000));
+                    millisecondsleft=(int)millisUntilFinished;
+                    progressBar.setProgress((int)(millisUntilFinished / 1000));
                 }
                 public void onFinish() {
                     progressBar.setProgress(0);
                     ll.crrectAnswer(uid, challNum, "timeout", "gg", 0 , 0);
-
                 }
             }.start();
 
@@ -146,6 +198,7 @@ String answer;
             msg1 = "Congratulations";
             msg2= "You Have got "+coinns+" Coins";
             dr1 = getResources().getIdentifier("hgif1", "drawable", getPackageName());
+            errormessage(msg1,msg2,dr1);
 
 
         }
@@ -154,14 +207,25 @@ String answer;
             msg1 = "Unfortunately";
             msg2= "you didn't get any coins";
             dr1 = getResources().getIdentifier("losse", "drawable", getPackageName());
+            errormessage(msg1,msg2,dr1);
+
         }
         if(status.equals("timeout"))
         {
             msg1 = "OOPS!";
             msg2= "Question time is finished";
             dr1 = getResources().getIdentifier("time", "drawable", getPackageName());
+            errormessage(msg1,msg2,dr1);
+        }
+        if(status.equals("fialBack"))
+        {
         }
 
+
+
+    }
+    public void errormessage (String msg1,String msg2,int dr1)
+    {
         new TTFancyGifDialog.Builder(displaychoice.this)
                 .setTitle(msg1)
                 .setMessage(msg2)
@@ -178,9 +242,7 @@ String answer;
                     }
                 })
                 .build();
-
     }
-
 
     @Override
     public void onBackPressed() {

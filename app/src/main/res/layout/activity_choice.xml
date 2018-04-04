@@ -7,6 +7,16 @@
     android:background="@drawable/pink4"
     tools:context="com.example.jana.motivlearn.displaychoice">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+
+
+
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -78,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:gravity="center"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -91,7 +101,7 @@
         android:layout_height="20dp"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="15dp" />
 
     <Button
         android:id="@+id/button"
@@ -99,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="11dp"
+        android:layout_marginBottom="6dp"
         android:text="Submit"
         android:background="@drawable/ovalbutton"
         android:textColor="#FFFFFF"

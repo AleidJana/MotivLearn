@@ -73,7 +73,7 @@ public class displaymultiChoicesImp implements displayChoicePresenter {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         final String status2=status;
-        if(status.equals("timeout")) {
+        if(status.equals("timeout")||status.equals("fialBack")) {
             status="fail" ;
         }
             RequestHandle requestHandle1 = client.get("https://api.appery.io/rest/1/apiexpress/api/5_TakePublicChallenge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid=" + user_id + "&cid=" + challenge_id + "&coins=" + rank + "&status=" + status + "&rateValue=" + rateValue + "&skill=" + skillType, params, new TextHttpResponseHandler() {

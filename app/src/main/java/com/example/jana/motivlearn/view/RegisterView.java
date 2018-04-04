@@ -7,4 +7,5 @@ package com.example.jana.motivlearn.view;
 public interface RegisterView {
     void registerSuccess(String message, String type);
     void registerFail(String message);
+    void setResult(String message);
 }

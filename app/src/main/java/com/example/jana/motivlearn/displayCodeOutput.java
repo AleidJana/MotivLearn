@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +38,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
     ProgressDialog progressDialog;
     CountDownTimer countDownTimer;
     displayCodeOutputPresenter displayCodeOutputP;
+    int millisecondsleft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -54,7 +56,57 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
        // Toast.makeText(this,getIntent().getIntExtra("id", 0)+"", Toast.LENGTH_SHORT).show();
         displayCodeOutputP = new displayCodeOutputImp(displayCodeOutput.this);
         displayCodeOutputP.peformdisplayfillBlanck(challNum);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        // mToolbar.setTitle("");
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // finish();
+                if(countDownTimer!=null)
+                {
+                    countDownTimer.cancel();
 
+                }else {
+                    countDownTimer=null;
+                }               new TTFancyGifDialog.Builder(displayCodeOutput.this)
+                        .setTitle("Are you sure you want close this question?")
+                        .setMessage("Note that you will not be able to resolve this question\n and you will not gain any coins")
+                        .setPositiveBtnText("Yes")
+                        .setPositiveBtnBackground("#9577bc")
+                        .setNegativeBtnText("No")
+                        .setNegativeBtnBackground("#c6c9ce")
+                        .setGifResource(R.drawable.closequ)      //pass your gif, png or jpg
+                        .isCancellable(true)
+                        .OnPositiveClicked(new TTFancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+                                //Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
+                                displayCodeOutputP.crrectAnswer(uid, challNum, "fialBack", "gg", 0 , 0);
+                                finish();
+                            }
+                        })
+                        .OnNegativeClicked(new TTFancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+                                if(countDownTimer!=null) {
+                                    countDownTimer = new CountDownTimer(millisecondsleft, 1000) {
+
+                                        public void onTick(long millisUntilFinished) {
+                                            progressBar.setProgress((int) (millisUntilFinished / 1000));
+                                        }
+
+                                        public void onFinish() {
+                                            progressBar.setProgress(0);
+                                            displayCodeOutputP.crrectAnswer(uid, challNum, "timeout", "gg", 0, 0);
+                                        }
+                                    }.start();
+                                }
+                            }
+                        })
+                        .build();
+            }
+        });
     }
 
 
@@ -87,6 +139,7 @@ public class displayCodeOutput extends AppCompatActivity implements displayCodeO
             countDownTimer = new CountDownTimer(time, 1000) {
 
                 public void onTick(long millisUntilFinished) {
+                    millisecondsleft=(int)millisUntilFinished;
                     progressBar.setProgress((int) (millisUntilFinished / 1000));
                 }
                 public void onFinish() {

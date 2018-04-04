@@ -6,22 +6,26 @@
     android:layout_height="match_parent"
     android:background="@drawable/pink4"
     android:id="@+id/myLayout"
-    tools:context="com.example.jana.motivlearn.RegisterCode">
+    tools:context="com.example.jana.motivlearn.RegisterCode"
+    >
 
-    <EditText
+
+    <com.github.glomadrian.codeinputlib.CodeInput
+        android:layout_marginTop="20dp"
         android:id="@+id/editText"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:background="@drawable/oval"
-        android:ems="10"
-        android:hint="Enter registration Code"
-        android:paddingLeft="10dp"
-        android:textColor="#8767b3"
-        android:textColorHint="#8767b3"
-        android:textSize="15sp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:underline_color="@color/colorPrimaryDark"
+        app:underline_selected_color="#c273cc"
+        app:text_color="#c273cc"
+        app:hint_color="@color/gray"
+        app:hint_text="registration code"
+        app:codes="4"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-
         />
 
     <Button

@@ -42,14 +42,15 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
     private String url;
     private int vidId;
     int uid;
-    private         Handler updateHandler;
-
+    private  Handler updateHandler;
+private boolean flag=false;
     private BetterVideoPlayer player;
     private watchVideoPresenter pres;
     private ImageButton imgbtn;
     private int seconds;
     private CircleProgressBar progressBar;
     private Timer t;
+    private int currentposition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,14 +155,14 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
                 .build();
     }
 
-    @Override
+   /* @Override
     public void onPause() {
         player.pause();
         super.onPause();
         // Make sure the player stops playing if the user presses the home button.
 
 
-    }
+    }*/
 
     // Methods for the implemented EasyVideoCallback
 
@@ -206,6 +207,7 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
 
     @Override
     public void onBuffering(int percent) {
+
         Log.i("haifa", "Buffering " + percent);
     }
 
@@ -216,7 +218,9 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
 
     @Override
     public void onCompletion(BetterVideoPlayer player) {
-        updateHandler.removeCallbacksAndMessages(null);
+        if(updateHandler!=null) {
+            updateHandler.removeCallbacksAndMessages(null);
+        }
      //   Toast.makeText(this,"finished", Toast.LENGTH_SHORT).show();
        // super.onBackPressed();
         pres.updateUserCoins(uid, vidId);
@@ -249,5 +253,25 @@ public class WatchVideo extends AppCompatActivity implements BetterVideoCallback
     @Override
     public void onBackPressed() {
        // Toast.makeText(this,"can't go back", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();  // Always call the superclass method first
+if(player.isPlaying()) {
+    player.pause();
+    flag=true;
+    currentposition=player.getCurrentPosition();
+}
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(flag) {
+            player.start();
+            player.seekTo(currentposition);
+
+        }
     }
 }

@@ -1,65 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:hapticFeedbackEnabled="true"
     android:background="@drawable/pink4"
-    tools:context="com.example.jana.motivlearn.displayPuzzle">
-
-    <RelativeLayout
+    tools:context="com.example.jana.motivlearn.displayPuzzle"
+    >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:id="@+id/qcard"
+        android:layout_marginTop="30dp"
+        android:layout_alignTop="@id/progressBar2"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:cardBackgroundColor="#5a3689"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="8dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="80dp"
-            android:allowUndo="false"
-            android:fitsSystemWindows="true"
-            android:fontFamily="sans-serif"
-            android:text="Puzzle"
-            android:textColor="#8767b3"
-            android:textSize="24dp"
-            android:textStyle="bold" />
+            android:padding="5dp">
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Arrange the following lines in the correct way ."
+                android:textSize="18dp"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#ffffff" />
 
-        <ProgressBar
-            android:id="@+id/progressBar2"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="230dp"
-            android:layout_height="20dp"
-            android:layout_below="@+id/textView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp" />
+        </RelativeLayout>
 
-        <Button
-            android:id="@+id/submit1"
-            android:layout_width="wrap_content"
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="125dp"
+        android:layout_alignTop="@id/qcard"
+        app:cardBackgroundColor="@color/cardback"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="4dp"
+        android:id="@+id/cardView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="38dp"
-            android:background="@drawable/ovalbutton"
-            android:text="Submit"
-            android:textColor="#FFFFFF" />
+            android:padding="10dp">
 
-        <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
-            android:id="@+id/dynamiclistview"
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/text_view_style"
-            android:paddingLeft="10dp"
-            android:paddingTop="6dp"
-            android:textColor="@color/colorAccent"
-            tools:layout_editor_absoluteX="166dp"
-            tools:layout_editor_absoluteY="460dp" />
-    </RelativeLayout>
+            <com.nhaarman.listviewanimations.itemmanipulation.DynamicListView
+                android:id="@+id/dynamiclistview"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/text_view_style"
+                android:paddingLeft="10dp"
+                android:paddingTop="6dp"
+                android:textColor="@color/colorAccent"
+                tools:layout_editor_absoluteX="166dp"
+                tools:layout_editor_absoluteY="460dp" />
+        </RelativeLayout>
 
 
-</android.support.constraint.ConstraintLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:text="" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="230dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" />
+
+    <Button
+        android:id="@+id/submit1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="6dp"
+        android:text="Submit"
+        android:background="@drawable/ovalbutton"
+        android:textColor="#FFFFFF"
+        />
+
+
+</RelativeLayout>
