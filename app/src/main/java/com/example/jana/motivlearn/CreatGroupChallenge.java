@@ -60,8 +60,6 @@ public class CreatGroupChallenge extends AppCompatActivity implements ZoneReques
         }
     }
 
-
-
     @Override
     public void onDeleteRoomDone(RoomEvent roomEvent) {
 

@@ -45,7 +45,8 @@
         <activity android:name=".RegisterCode" />
         <activity android:name=".CreatGroupChallenge" />
         <activity android:name=".GroupChallenge" />
-        <activity android:name=".JoinGroupChallenge"></activity>
+        <activity android:name=".JoinGroupChallenge" />
+        <activity android:name=".Result"></activity>
     </application>
 
 </manifest>
