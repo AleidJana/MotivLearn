@@ -2,7 +2,6 @@ package com.example.jana.motivlearn;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.Nullable;
@@ -25,7 +24,7 @@ public class IntroActivity extends AppIntro {
         addSlide(SampleSlide.newInstance(R.layout.slide_1));
         addSlide(SampleSlide.newInstance(R.layout.slide_2));
         addSlide(SampleSlide.newInstance(R.layout.slide_3));
-        showSkipButton(false);
+        showSkipButton(true);
         setFadeAnimation();
         setBarColor(Color.parseColor("#5a3689"));
     }
@@ -41,5 +40,11 @@ public class IntroActivity extends AppIntro {
     public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
         super.onSlideChanged(oldFragment, newFragment);
         // Do something when the slide changes.
+    }
+    @Override
+    public void onSkipPressed(Fragment currentFragment) {
+        super.onSkipPressed(currentFragment);
+        startActivity(new Intent(getApplicationContext(), Register.class));
+        finish();
     }
 }

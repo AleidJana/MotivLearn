@@ -25,7 +25,7 @@
         <activity android:name=".IntroActivity" />
         <activity android:name=".Login" />
         <activity android:name=".suggestVedio" />
-        <activity android:name=".Register" />
+        <activity android:name=".Register"  />
         <activity android:name=".fillBlank" />
         <activity android:name=".multipleChoices" />
         <activity android:name=".CodeOutput" />

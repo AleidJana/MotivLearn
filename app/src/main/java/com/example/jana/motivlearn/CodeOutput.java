@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,7 +25,10 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
     EditText codeF ,outputF;
     Button Submit;
     ProgressDialog progressDialog;
+    String title;
+    Bundle bundle;
     CodeOutputPresenter codeOutpuView;
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,14 +36,20 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
         codeF = findViewById(R.id.editText);
         outputF = findViewById(R.id.editText2);
         codeOutpuView = new CodeOutputImp(CodeOutput.this);
+        bundle=getIntent().getExtras();
+        final String pathtype =bundle.getString("pathType");
+        if(pathtype.equals("p")) {
+            title = "Create Challenge";
+        }
+        else {
+            title="Suggest Challenge";
+        }
         Submit=findViewById(R.id.button);
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressDialog = ProgressDialog.show(CodeOutput.this, "", "Please wait...");
-                Bundle bundle=getIntent().getExtras();
                 String challengTitle =bundle.getString("ChallengeTitle");
-                String pathtype =bundle.getString("pathType");
                 String challengType =bundle.getString("challengeType");
                 String challengField =bundle.getString("challengeField");
                 int challengeTime=bundle.getInt("challengeTime");
@@ -49,18 +59,20 @@ public class CodeOutput extends AppCompatActivity implements CodeOutputView{
                 SharedPreferences sp1= CodeOutput.this.getSharedPreferences("Login", MODE_PRIVATE);
                 int uid =sp1.getInt("user_id", 0);
 
-                if(pathtype.equals("p"))
-                codeOutpuView.performCodeOutput(uid, code,output,challengTitle,challengType,challengField,challengeTime,challengeCoins);
-              else
-                codeOutpuView.suggestCodeOutput(uid, code,output,challengTitle,challengType,challengField,challengeTime,challengeCoins);
-
+                if(pathtype.equals("p")) {
+                    codeOutpuView.performCodeOutput(uid, code, output, challengTitle, challengType, challengField, challengeTime, challengeCoins);
+                }
+              else {
+                    codeOutpuView.suggestCodeOutput(uid, code, output, challengTitle, challengType, challengField, challengeTime, challengeCoins);
+                }
                 //  Intent intent = new Intent(getBaseContext(),MainActivity.class);
               //  startActivity(intent);
 
             }
         });
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-       // mToolbar.setTitle("");
+        mToolbar.setTitle(title);
+        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

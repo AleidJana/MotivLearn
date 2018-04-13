@@ -1,13 +1,17 @@
 package com.example.jana.motivlearn;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -55,10 +59,21 @@ public class Comment extends AppCompatActivity implements CommentView{
     EditText Content;
     int commentCounter;
     CommentAdapter customAdapter;
+    @SuppressLint({"ClickableViewAccessibility", "ResourceAsColor"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("Comments");
+        mToolbar.setTitleTextColor(R.color.white);
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         SharedPreferences sp1= this.getSharedPreferences("Login", MODE_PRIVATE);
         final int uid =sp1.getInt("user_id", 0);
         post = (TimeLineInfo) getIntent().getSerializableExtra("post");
@@ -74,15 +89,30 @@ public class Comment extends AppCompatActivity implements CommentView{
         textViewLike =(TextView) findViewById(R.id.textViewLikes);
         textViewComment=(TextView)findViewById(R.id.textViewComment);
         Content = (EditText) findViewById(R.id.content);
-        ImageButton imageButton=(ImageButton)findViewById(R.id.edit);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        Content.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                pres2.addComment(String.valueOf(Content.getText()),post.getUserid(),post.getPostid());
-                progressDialog = ProgressDialog.show(Comment.this, "", "Please wait...");
-                pres2.getComments(post.getPostid());
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (Content.getRight() - Content.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        if(Content.getText().toString()!="")
+                        {
+                            pres2.addComment(String.valueOf(Content.getText()),post.getUserid(),post.getPostid());
+                            progressDialog = ProgressDialog.show(Comment.this, "", "Please wait...");
+                            pres2.getComments(post.getPostid());
+                        }
+                        return true;
+                    }
+                }
+                return false;
             }
         });
+
         delete=(ImageButton) findViewById(R.id.ib_delete);
         if(post.getUserid()!= uid) {
             delete.setVisibility(View.INVISIBLE);
@@ -140,7 +170,6 @@ public class Comment extends AppCompatActivity implements CommentView{
 
 
     }
-
 
     @Override
     public void setResult(String res) {

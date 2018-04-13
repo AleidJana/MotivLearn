@@ -91,24 +91,24 @@ public class myProfileImp implements myProfilePresenter {
     }
 
     @Override
-    public void didRate(int rid, final int uid, final String skill) {
+    public void didRate(int rid, final int uid) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        client.get("https://api.appery.io/rest/1/apiexpress/api/11_EvaluateUserSkill/?" +
-                "apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&uid="+uid+"&skill="+skill+"&rid="+rid, params, new TextHttpResponseHandler()
+        client.get("https://api.appery.io/rest/1/apiexpress/api/checkRates/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&userid="+uid+"&rater="+rid, params, new TextHttpResponseHandler()
                 {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String res) {
                         //   Toast.makeText((Context) vue,"owwww", Toast.LENGTH_SHORT).show();
-                     /*   if(res.length()<3)
-                            vue.cantRate();
+                       if(res.length()<3)
+                            vue.cantRate(1,null);
                         else
-                            vue.rateForm(skill);
+                           vue.cantRate(2,res);
 
-*/
+                        //vue.rateForm(skill);
+
+
                     /*    else
                             vue2.displayInfo(res);*/
-
                     }
 
                     @Override

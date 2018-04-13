@@ -80,6 +80,7 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
     private String username;
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +97,8 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
         TabHost host = (TabHost)findViewById(R.id.tabHost);
         host.setup();
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        // mToolbar.setTitle("");
+        mToolbar.setTitle("User Profile");
+        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -306,7 +308,7 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
 
             RadarChart chart = (RadarChart)findViewById(R.id.chart);
             chart.clear();
-            RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "nouf");
+            RadarDataSet dataset_comp2 = new RadarDataSet(entries2, " ");
             //dataset_comp2.clear();
 
             dataset_comp2.setColor(Color.BLUE);
@@ -330,6 +332,11 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
             chart.animate();
         }
         catch (Exception e){}
+    }
+
+    @Override
+    public void cantRate(int type, String skill) {
+
     }
 
 }

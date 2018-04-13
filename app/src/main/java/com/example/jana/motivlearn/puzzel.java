@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,13 +32,26 @@ public class puzzel extends AppCompatActivity implements puzzleView {
 
     puzzlePresenter pre;
     ProgressDialog progressDialog;
-
+Bundle bundle;
+String title;
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_puzzle);
+
+
+        bundle=getIntent().getExtras();
+        final String pathtype =bundle.getString("pathType");
+        if(pathtype.equals("p")) {
+            title = "Create Challenge";
+        }
+        else {
+            title="Suggest Challenge";
+        }
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-       // mToolbar.setTitle("Create Challenge");
+        mToolbar.setTitle(title);
+        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +59,6 @@ public class puzzel extends AppCompatActivity implements puzzleView {
                 finish();
             }
         });
-
         pre = new puzzleImp(this);
 
         Button submit = findViewById(R.id.button);
@@ -53,9 +66,7 @@ public class puzzel extends AppCompatActivity implements puzzleView {
             @Override
             public void onClick(View view) {
                 progressDialog = ProgressDialog.show(puzzel.this, "", "Please wait...");
-                Bundle bundle=getIntent().getExtras();
                 String challengTitle =bundle.getString("ChallengeTitle");
-                String pathtype =bundle.getString("pathType");
                 String challengType =bundle.getString("challengeType");
                 String challengField =bundle.getString("challengeField");
                 int challengeTime=bundle.getInt("challengeTime");

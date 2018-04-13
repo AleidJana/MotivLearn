@@ -37,7 +37,6 @@ public class suggestVedio extends Activity implements SuggestVedioView {
             @Override
             public void onClick(View view) {
                 progressDialog = ProgressDialog.show(suggestVedio.this, "", "Please wait...");
-
                 String VedioLink = VedioLinkF.getText().toString();
                 SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
                 int uid =sp1.getInt("user_id", 0);
@@ -45,7 +44,8 @@ public class suggestVedio extends Activity implements SuggestVedioView {
             }
         });
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        // mToolbar.setTitle("");
+        mToolbar.setTitle("Suggest Video");
+        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,10 +119,19 @@ public class suggestVedio extends Activity implements SuggestVedioView {
     }
 
     @Override
-    public void wrongFormat() {
+    public void wrongFormat(int type) {
         progressDialog.dismiss();
+        String message = null;
+        if(type==2)
+        {
+            message="Enter the link with http:// or https:// format";
+        }else
+        if (type==1)
+        {
+            message="Enter the link with MP4 format";
+        }
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
-        Noty.init(suggestVedio.this, "Enter the link with http:// or https:// format", rl,
+        Noty.init(suggestVedio.this, message, rl,
                 Noty.WarningStyle.ACTION)
                 .setActionText("OK")
                 .setWarningBoxBgColor("#d9534f")

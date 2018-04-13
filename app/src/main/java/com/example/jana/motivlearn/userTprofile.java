@@ -74,29 +74,21 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
     private BoomMenuButton bmb ;
     private String username;
     int uid;
+    int uid2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tuserprofile);
-
         uid = getIntent().getIntExtra("id", 0);
-
-      //  uid = getIntent().getIntExtra("id", 0);
-      //  SharedPreferences sp1= this.getSharedPreferences("Login", MODE_PRIVATE);
-      //  int uid =sp1.getInt("user_id", 0);
-       // Toast.makeText(this,uid+"", Toast.LENGTH_SHORT).show();
-
         NewtonCradleLoading newtonCradleLoading;
         newtonCradleLoading = (NewtonCradleLoading)findViewById(R.id.newton_cradle_loading);
         newtonCradleLoading.setVisibility(View.VISIBLE);
         newtonCradleLoading.start();
-
         host = (TabHost)findViewById(R.id.tabHost);
         host.setup();
-
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        // mToolbar.setTitle("");
+        mToolbar.setTitle("User Profile");
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,192 +96,24 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                 finish();
             }
         });
-
-        bmb= (BoomMenuButton)findViewById(R.id.bmb);
         SharedPreferences sp1= userTprofile.this.getSharedPreferences("Login", MODE_PRIVATE);
-        final int uid2 =sp1.getInt("user_id", 0);
+        uid2 =sp1.getInt("user_id", 0);
+        bmb= (BoomMenuButton)findViewById(R.id.bmb);
         if(uid == uid2)
-            bmb.setVisibility(View.INVISIBLE);
-        //bmb.setVisibility(View.INVISIBLE);
-        TextOutsideCircleButton.Builder builder = new TextOutsideCircleButton.Builder()
-                .normalImageRes(R.drawable.ic_creativity)
-                .normalText("Creativity").listener(new OnBMClickListener() {
-                    @Override
-                    public void onBoomButtonClick(int index) {
-
-                        // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
-                        final com.example.jana.motivlearn.RatingDialog ratingDialog = new com.example.jana.motivlearn.RatingDialog.Builder(userTprofile.this)
-                                .icon(getResources().getDrawable(R.drawable.rateheader))
-                                .title("Rate "+username+"'s 'creativity' skill")
-                                .titleTextColor(R.color.black)
-                                .negativeButtonText("cancel")
-                                .positiveButtonText("submit")
-                                .positiveButtonTextColor(R.color.colorAccent)
-                                .negativeButtonTextColor(R.color.text)
-                                .ratingBarColor(R.color.rating)
-                                .onThresholdCleared(new com.example.jana.motivlearn.RatingDialog.Builder.RatingThresholdClearedListener() {
-                                    @Override
-                                    public void onThresholdCleared(com.example.jana.motivlearn.RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
-                                    }
-                                })
-                                .onRatingChanged(new com.example.jana.motivlearn.RatingDialog.Builder.RatingDialogListener() {
-                                    @Override
-                                    public void onRatingSelected(float rating, boolean thresholdCleared) {
-
-                                    }
-                                })
-                                .build();
-                        ratingDialog.show();
-                        ratingDialog.getTvPositive().setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                //  Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
-                                pres.rateSkill(uid2, uid, "creativity", ratingDialog.getValue());
-                                pres.getSkill(uid);
-                               /* Intent refresh = new Intent(userTprofile.this, userTprofile.class);
-                                refresh.putExtra("id", uid);
-                                startActivity(refresh);
-                                userTprofile.this.finish();*/
-                                ratingDialog.dismiss();
-                            }
-                        });
-
-                        ratingDialog.getTvNegative().setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                ratingDialog.dismiss();
-                            }
-                        });
-                    }
-                });
-        bmb.addBuilder(builder);
-
-        TextOutsideCircleButton.Builder builder2 = new TextOutsideCircleButton.Builder()
-                .normalImageRes(R.drawable.ic_presentation)
-                .normalText("Presentation").listener(new OnBMClickListener() {
-                    @Override
-                    public void onBoomButtonClick(int index) {
-                        // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
-                        final com.example.jana.motivlearn.RatingDialog ratingDialog = new com.example.jana.motivlearn.RatingDialog.Builder(userTprofile.this)
-                                .icon(getResources().getDrawable(R.drawable.rateheader))
-                                .title("Rate "+username+"'s 'presentation' skill")
-                                .titleTextColor(R.color.black)
-                                .negativeButtonText("cancel")
-                                .positiveButtonText("submit")
-                                .positiveButtonTextColor(R.color.colorAccent)
-                                .negativeButtonTextColor(R.color.text)
-                                .ratingBarColor(R.color.rating)
-                                .onThresholdCleared(new com.example.jana.motivlearn.RatingDialog.Builder.RatingThresholdClearedListener() {
-                                    @Override
-                                    public void onThresholdCleared(com.example.jana.motivlearn.RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
-                                    }
-                                })
-                                .onRatingChanged(new com.example.jana.motivlearn.RatingDialog.Builder.RatingDialogListener() {
-                                    @Override
-                                    public void onRatingSelected(float rating, boolean thresholdCleared) {
-
-                                    }
-                                })
-                                .build();
-                        ratingDialog.show();
-                        ratingDialog.getTvPositive().setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                // Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
-                                //   pres.didRate(uid2, uid, "presentation");
-                                pres.rateSkill(uid2, uid, "presentation", ratingDialog.getValue());
-                                pres.getSkill(uid);
-                               /* Intent refresh = new Intent(userTprofile.this, userTprofile.class);
-                                refresh.putExtra("id", uid);
-                                startActivity(refresh);
-                                userTprofile.this.finish();*/
-                                ratingDialog.dismiss();
-                            }
-                        });
-
-                        ratingDialog.getTvNegative().setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                ratingDialog.dismiss();
-                            }
-                        });
-                    }
-                });
-        bmb.addBuilder(builder2);
-
-        TextOutsideCircleButton.Builder builder3 = new TextOutsideCircleButton.Builder()
-                .normalImageRes(R.drawable.ic_acommunication)
-                .normalText("Communication").listener(new OnBMClickListener() {
-                    @Override
-                    public void onBoomButtonClick(int index) {
-                        // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
-                        final com.example.jana.motivlearn.RatingDialog ratingDialog = new com.example.jana.motivlearn.RatingDialog.Builder(userTprofile.this)
-                                .icon(getResources().getDrawable(R.drawable.rateheader))
-                                .title("Rate "+username+"'s 'communication' skill")
-                                .titleTextColor(R.color.black)
-                                .negativeButtonText("cancel")
-                                .positiveButtonText("submit")
-                                .positiveButtonTextColor(R.color.colorAccent)
-                                .negativeButtonTextColor(R.color.text)
-                                .ratingBarColor(R.color.rating)
-                                .onThresholdCleared(new com.example.jana.motivlearn.RatingDialog.Builder.RatingThresholdClearedListener() {
-                                    @Override
-                                    public void onThresholdCleared(com.example.jana.motivlearn.RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
-                                    }
-                                })
-                                .onRatingChanged(new com.example.jana.motivlearn.RatingDialog.Builder.RatingDialogListener() {
-                                    @Override
-                                    public void onRatingSelected(float rating, boolean thresholdCleared) {
-
-                                    }
-                                })
-                                .build();
-                        ratingDialog.show();
-                        ratingDialog.getTvPositive().setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                // Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
-                                pres.rateSkill(uid2, uid, "communication", ratingDialog.getValue());
-                                pres.getSkill(uid);
-                               /* Intent refresh = new Intent(userTprofile.this, userTprofile.class);
-                                refresh.putExtra("id", uid);
-                                startActivity(refresh);
-                                userTprofile.this.finish();*/
-                                ratingDialog.dismiss();
-                            }
-                        });
-
-                        ratingDialog.getTvNegative().setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                ratingDialog.dismiss();
-                            }
-                        });
-                    }
-                });
-        bmb.addBuilder(builder3);
-
-        // ArrayList<BoomButtonBuilder> ar = bmb.getBuilders();
-        //Toast.makeText(this,ar.size()+"", Toast.LENGTH_SHORT).show();
-        //for( int i=0 ; i< ar.size() ; i++)
-          //  ar.get(i).setUnable(true);
-
+        bmb.setVisibility(View.INVISIBLE);
         //Tab 1
         TabHost.TabSpec spec = host.newTabSpec("Skills");
         spec.setContent(R.id.tab1);
         spec.setIndicator("Skills");
         host.addTab(spec);
-
         pres = new myProfileImp(userTprofile.this);
         pres.getUserInfo(uid);
-
+        pres.didRate(uid,uid2);
         // Inflate the layout for this fragment
         }
 
     @Override
     public void displayInfo(String res) {
-
-
         try {
 
             JSONObject obj = new JSONObject(res);
@@ -344,10 +168,9 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
             float ff = (float)jsonobject.getDouble("average");
             entries2.add(new Entry(ff, i));
         }
-
         RadarChart chart = (RadarChart)findViewById(R.id.chart);
         chart.clear();
-        RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "nouf");
+        RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "");
         //dataset_comp2.clear();
 
         dataset_comp2.setColor(Color.BLUE);
@@ -371,6 +194,227 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
         }
         catch (Exception e){}
     }
+
+
+    @Override
+    public void cantRate(int type, String skill) {
+        switch (type)
+        {
+            case 1:
+                bmb.setVisibility(View.VISIBLE);
+                break;
+
+            case 2:
+                try {
+                    JSONArray arr = new JSONArray(skill);
+                    ArrayList<String> skills = new ArrayList<>();
+                    if(skills.size()<3)
+                    {
+                        bmb= (BoomMenuButton)findViewById(R.id.bmb);
+                        bmb.setVisibility(View.VISIBLE);
+                    }
+                    for (int i = 0; i < arr.length(); i++) {
+                        JSONObject jsonobject = arr.getJSONObject(i);
+                        String skilltype=jsonobject.getString("type");
+
+                        if(!skilltype.equals("creativity"))
+                        {
+                            ViewCreativityButton();
+                        }
+                        if(!skilltype.equals("presentation"))
+                        {
+                            ViewPresentationButton();
+                        }
+                        if(!skilltype.equals("communication"))
+                        {
+                            ViewCommunecationButton();
+                        }
+
+                    }
+                    for (int i = 0; i < 3-arr.length(); i++)
+                    {
+                        bmb.addBuilder(new TextOutsideCircleButton.Builder());
+
+                    }
+                }
+                catch (Exception e){}
+
+                break;
+        }
+
+    }
+    public void  ViewCreativityButton()
+    {
+        TextOutsideCircleButton.Builder builder = new TextOutsideCircleButton.Builder()
+                .normalImageRes(R.drawable.ic_creativity)
+                .normalText("Creativity").listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+
+                        // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
+                        final com.example.jana.motivlearn.RatingDialog ratingDialog = new com.example.jana.motivlearn.RatingDialog.Builder(userTprofile.this)
+                                .icon(getResources().getDrawable(R.drawable.rateheader))
+                                .title("Rate "+username+"'s 'creativity' skill")
+                                .titleTextColor(R.color.black)
+                                .negativeButtonText("cancel")
+                                .positiveButtonText("submit")
+                                .positiveButtonTextColor(R.color.colorAccent)
+                                .negativeButtonTextColor(R.color.text)
+                                .ratingBarColor(R.color.rating)
+                                .onThresholdCleared(new com.example.jana.motivlearn.RatingDialog.Builder.RatingThresholdClearedListener() {
+                                    @Override
+                                    public void onThresholdCleared(com.example.jana.motivlearn.RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
+                                    }
+                                })
+                                .onRatingChanged(new com.example.jana.motivlearn.RatingDialog.Builder.RatingDialogListener() {
+                                    @Override
+                                    public void onRatingSelected(float rating, boolean thresholdCleared) {
+
+                                    }
+                                })
+                                .build();
+                        ratingDialog.show();
+                        ratingDialog.getTvPositive().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                //  Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
+                                pres.rateSkill(uid2, uid, "creativity", ratingDialog.getValue());
+                                pres.getSkill(uid);
+                               /* Intent refresh = new Intent(userTprofile.this, userTprofile.class);
+                                refresh.putExtra("id", uid);
+                                startActivity(refresh);
+                                userTprofile.this.finish();*/
+                                ratingDialog.dismiss();
+                            }
+                        });
+
+                        ratingDialog.getTvNegative().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ratingDialog.dismiss();
+                            }
+                        });
+                    }
+                });
+        bmb.addBuilder(builder);
+
+    }
+
+    public void  ViewCommunecationButton()
+    {
+
+        TextOutsideCircleButton.Builder builder2 = new TextOutsideCircleButton.Builder()
+                .normalImageRes(R.drawable.ic_presentation)
+                .normalText("Presentation").listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
+                        final com.example.jana.motivlearn.RatingDialog ratingDialog = new com.example.jana.motivlearn.RatingDialog.Builder(userTprofile.this)
+                                .icon(getResources().getDrawable(R.drawable.rateheader))
+                                .title("Rate "+username+"'s 'presentation' skill")
+                                .titleTextColor(R.color.black)
+                                .negativeButtonText("cancel")
+                                .positiveButtonText("submit")
+                                .positiveButtonTextColor(R.color.colorAccent)
+                                .negativeButtonTextColor(R.color.text)
+                                .ratingBarColor(R.color.rating)
+                                .onThresholdCleared(new com.example.jana.motivlearn.RatingDialog.Builder.RatingThresholdClearedListener() {
+                                    @Override
+                                    public void onThresholdCleared(com.example.jana.motivlearn.RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
+                                    }
+                                })
+                                .onRatingChanged(new com.example.jana.motivlearn.RatingDialog.Builder.RatingDialogListener() {
+                                    @Override
+                                    public void onRatingSelected(float rating, boolean thresholdCleared) {
+
+                                    }
+                                })
+                                .build();
+                        ratingDialog.show();
+                        ratingDialog.getTvPositive().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                // Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
+                                //   pres.didRate(uid2, uid, "presentation");
+                                pres.rateSkill(uid2, uid, "presentation", ratingDialog.getValue());
+                                pres.getSkill(uid);
+                               /* Intent refresh = new Intent(userTprofile.this, userTprofile.class);
+                                refresh.putExtra("id", uid);
+                                startActivity(refresh);
+                                userTprofile.this.finish();*/
+                                ratingDialog.dismiss();
+                            }
+                        });
+
+                        ratingDialog.getTvNegative().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ratingDialog.dismiss();
+                            }
+                        });
+                    }
+                });
+        bmb.addBuilder(builder2);
+
+    }
+
+
+    public void  ViewPresentationButton()
+    {
+        TextOutsideCircleButton.Builder builder3 = new TextOutsideCircleButton.Builder()
+                .normalImageRes(R.drawable.ic_acommunication)
+                .normalText("Communication").listener(new OnBMClickListener() {
+                    @Override
+                    public void onBoomButtonClick(int index) {
+                        // Toast.makeText(getContext(),"dfdfd",Toast.LENGTH_LONG).show();
+                        final com.example.jana.motivlearn.RatingDialog ratingDialog = new com.example.jana.motivlearn.RatingDialog.Builder(userTprofile.this)
+                                .icon(getResources().getDrawable(R.drawable.rateheader))
+                                .title("Rate "+username+"'s 'communication' skill")
+                                .titleTextColor(R.color.black)
+                                .negativeButtonText("cancel")
+                                .positiveButtonText("submit")
+                                .positiveButtonTextColor(R.color.colorAccent)
+                                .negativeButtonTextColor(R.color.text)
+                                .ratingBarColor(R.color.rating)
+                                .onThresholdCleared(new com.example.jana.motivlearn.RatingDialog.Builder.RatingThresholdClearedListener() {
+                                    @Override
+                                    public void onThresholdCleared(com.example.jana.motivlearn.RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
+                                    }
+                                })
+                                .onRatingChanged(new com.example.jana.motivlearn.RatingDialog.Builder.RatingDialogListener() {
+                                    @Override
+                                    public void onRatingSelected(float rating, boolean thresholdCleared) {
+
+                                    }
+                                })
+                                .build();
+                        ratingDialog.show();
+                        ratingDialog.getTvPositive().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                // Toast.makeText(userTprofile.this,ratingDialog.getValue()+"", Toast.LENGTH_SHORT).show();
+                                pres.rateSkill(uid2, uid, "communication", ratingDialog.getValue());
+                                pres.getSkill(uid);
+                               /* Intent refresh = new Intent(userTprofile.this, userTprofile.class);
+                                refresh.putExtra("id", uid);
+                                startActivity(refresh);
+                                userTprofile.this.finish();*/
+                                ratingDialog.dismiss();
+                            }
+                        });
+
+                        ratingDialog.getTvNegative().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                ratingDialog.dismiss();
+                            }
+                        });
+                    }
+                });
+        bmb.addBuilder(builder3);
+
+    }
+
    /* @Override
     public void cantRate() {
         new TTFancyGifDialog.Builder(userTprofile.this)

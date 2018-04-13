@@ -49,7 +49,8 @@ public class suggestQuestion extends AppCompatActivity implements CreateChalleng
         });
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        // mToolbar.setTitle("");
+        mToolbar.setTitle("Suggest Question");
+        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
