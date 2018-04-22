@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,12 +25,22 @@ import com.example.jana.motivlearn.view.multiChoicesView;
 public class multipleChoices extends AppCompatActivity implements multiChoicesView {
     private multiChoicesPresenter pres;
     ProgressDialog progressDialog;
-
+    Bundle bundle;
+    String title;
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiple_choices);
 
+        bundle=getIntent().getExtras();
+        final String pathtype =bundle.getString("pathType");
+        if(pathtype.equals("p")) {
+            title = "Create Challenge";
+        }
+        else {
+            title="Suggest Challenge";
+        }
 
         Button submit = (Button)findViewById(R.id.button);
         submit.setOnClickListener(new View.OnClickListener(){
@@ -53,9 +64,6 @@ public class multipleChoices extends AppCompatActivity implements multiChoicesVi
                 int answerId = radGroup.getCheckedRadioButtonId();
                 RadioButton schoice = findViewById(answerId);
                 int indx = radGroup.indexOfChild(schoice);
-
-                Bundle bundle=getIntent().getExtras();
-                String pathtype =bundle.getString("pathType");
                 String title =bundle.getString("ChallengeTitle");
                 String field =bundle.getString("challengeField");
                 int time=bundle.getInt("challengeTime");
@@ -74,7 +82,8 @@ public class multipleChoices extends AppCompatActivity implements multiChoicesVi
             }
         });
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-       // mToolbar.setTitle("Create Challenge");
+        mToolbar.setTitle(title);
+        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

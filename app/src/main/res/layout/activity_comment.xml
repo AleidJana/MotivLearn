@@ -8,180 +8,190 @@
     android:background="@drawable/pink4"
     tools:context="com.example.jana.motivlearn.Comment">
 
-
-    <android.support.v7.widget.CardView
-
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/cardback"
-        app:cardCornerRadius="20dp"
-        app:cardPreventCornerOverlap="true"
-        android:layout_margin="3dp"
-        android:id="@+id/card"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="60dp"
         >
-        <TextView
-            android:id="@+id/textViewHours"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="right"
-            android:text="3h"
-            android:layout_margin="10dp"
-            android:textSize="14dp" />
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <!-- User avatar -->
-            <LinearLayout
-                android:padding="16dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="90dp">
-
-                <ImageView
-                    android:id="@+id/user_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginRight="16dp"
-                    android:src="@drawable/profileimg" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center">
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:text="Haifa Alabduljabbar "
-                        android:textStyle="bold"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:id="@+id/textViewName"
-                        android:textSize="18dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-
-
+            app:cardBackgroundColor="@color/cardback"
+            app:cardCornerRadius="20dp"
+            app:cardPreventCornerOverlap="true"
+            android:layout_margin="3dp"
+            android:id="@+id/card"
+            >
             <TextView
-                android:padding="8dp"
-                android:layout_marginLeft="75dp"
-                android:id="@+id/textViewContent"
-                android:layout_marginTop="-40dp"
-                android:text="Templates save time required to define the document's structure and ensure the quality and completion of them."
+                android:id="@+id/textViewHours"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:layout_margin="3dp"
-                android:background="@color/card_divider" />
-
-            <!-- User Actions -->
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="right"
+                android:text="3h"
+                android:layout_margin="10dp"
+                android:textSize="14dp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="left"
-                android:padding="2dp">
-                <ImageButton
-                    android:id="@+id/ib_delete"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:background="@null"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginLeft="12dp"
-                    android:src="@drawable/ic_delete" />
+                android:orientation="vertical">
+                <!-- User avatar -->
+                <LinearLayout
+                    android:padding="16dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp">
 
-                <ImageButton
-                    android:id="@+id/ib_comment"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:background="@null"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:src="@drawable/ic_comment" />
+                    <ImageView
+                        android:id="@+id/user_image"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginRight="16dp"
+                        android:src="@drawable/profileimg" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center">
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:text="Haifa Alabduljabbar "
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:id="@+id/textViewName"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
                 <TextView
+                    android:padding="8dp"
+                    android:layout_marginLeft="75dp"
+                    android:id="@+id/textViewContent"
+                    android:layout_marginTop="-40dp"
+                    android:text="Templates save time required to define the document's structure and ensure the quality and completion of them."
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_margin="3dp"
+                    android:background="@color/card_divider" />
+
+                <!-- User Actions -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textViewComment"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginTop="12dp"
-                    android:text="1232"
-                    android:textStyle="bold"
-                    android:textSize="10dp"/>
-                <com.like.LikeButton
-                    app:icon_type="heart"
-                    app:icon_size="18dp"
-                    android:id="@+id/like_button"
-                    android:layout_width="wrap_content"
-                    app:anim_scale_factor="2"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textViewLikes"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginTop="12dp"
-                    android:text="1232"
-                    android:textStyle="bold"
-                    android:textSize="10dp"/>
+                    android:orientation="horizontal"
+                    android:gravity="left"
+                    android:padding="2dp">
+                    <ImageButton
+                        android:id="@+id/ib_delete"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:background="@null"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginLeft="12dp"
+                        android:src="@drawable/ic_delete" />
+
+                    <ImageButton
+                        android:id="@+id/ib_comment"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:background="@null"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_comment" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textViewComment"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginTop="12dp"
+                        android:text="1232"
+                        android:textStyle="bold"
+                        android:textSize="10dp"/>
+                    <com.like.LikeButton
+                        app:icon_type="heart"
+                        app:icon_size="18dp"
+                        android:id="@+id/like_button"
+                        android:layout_width="wrap_content"
+                        app:anim_scale_factor="2"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textViewLikes"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="12dp"
+                        android:text="1232"
+                        android:textStyle="bold"
+                        android:textSize="10dp"/>
+                </LinearLayout>
+
             </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <com.victor.loading.newton.NewtonCradleLoading
+                android:id="@+id/newton_cradle_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="100dp" />
+        </RelativeLayout>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_below="@+id/card"
+            android:id="@+id/listview"
+            android:layout_above="@+id/editco"
+            android:divider="@color/card_divider"
+            android:dividerHeight="1dp">
+
+        </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editco"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/content"
+                android:padding="9dp"
+                android:maxLines="4"
+                android:scrollbars="vertical"
+                android:drawableRight="@drawable/ic_edit"
+                android:maxLength="280"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/white"
+                />
 
         </LinearLayout>
-    </android.support.v7.widget.CardView>
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
 
-        <com.victor.loading.newton.NewtonCradleLoading
-            android:id="@+id/newton_cradle_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingLeft="100dp" />
     </RelativeLayout>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_below="@+id/card"
-        android:id="@+id/listview"
-        android:layout_above="@+id/editco"
-        android:divider="@color/card_divider"
-        android:dividerHeight="1dp">
-
-    </ListView>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/editco"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentStart="true">
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_edit"
-        android:id="@+id/edit"
-        android:background="@color/colorPrimaryDark"
-        android:padding="8dp"
-        />
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/content"
-        android:layout_weight="3"
-        android:padding="8dp"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/card_divider"
-        />
-
-</LinearLayout>
 
 
 </RelativeLayout>

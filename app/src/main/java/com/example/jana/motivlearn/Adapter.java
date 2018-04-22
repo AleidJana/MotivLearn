@@ -4,7 +4,9 @@ package com.example.jana.motivlearn;
  * Created by jana on 2/9/2018 AD.
  */
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.jana.motivlearn.tab2.pres;
 
 /**
  * Created by Belal on 10/18/2017.
@@ -27,6 +30,8 @@ import static android.content.Context.MODE_PRIVATE;
 public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
 
     private Context mCtx;
+    String typeu;
+    String uName;
     private List<question> questionList;
     public Adapter(Context mCtx, List<question> InfoList) {
         this.mCtx = mCtx;
@@ -51,12 +56,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
         holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(questions.getImage()));
         holder.fieldimage.setImageDrawable(mCtx.getResources().getDrawable(questions.getField()));
         holder.progressbar.setProgress(questions.getDuration());
+        SharedPreferences sp1= mCtx.getSharedPreferences("Login", MODE_PRIVATE);
+         typeu =sp1.getString("user_type", null);
+        uName=sp1.getString("user_name", null);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(mCtx ,"here you will add small code for question page ",Toast.LENGTH_LONG).show();
-                SharedPreferences sp1= mCtx.getSharedPreferences("Login", MODE_PRIVATE);
-                String typeu =sp1.getString("user_type", null);
                 if(typeu.equals("S")) {
                     Intent intent = null;
                     String type = questions.getType();
@@ -73,6 +80,37 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
                         intent.putExtra("id", questions.getId());
                         mCtx.startActivity(intent);
                 }
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if(typeu.equals("T") && uName.equals(questions.getWriter())) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
+                    builder.setMessage("Do you want to delete this Question?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                //    pres.deleteQuestion(questions.getId());
+                                    int potition = questionList.indexOf(questions);
+                                    questionList.remove(potition);
+                                    notifyItemRemoved(potition);
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    //Creating dialog box
+                    AlertDialog alert = builder.create();
+                    //Setting the title manually
+                    alert.setTitle("Delete Question");
+                    alert.show();
+                }
+                    return true;
             }
         });
     }

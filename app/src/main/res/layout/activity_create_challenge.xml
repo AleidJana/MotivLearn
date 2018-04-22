@@ -24,9 +24,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="80dp"
-        android:fontFamily="sans-serif"
         android:text="NEW CHALLENGE"
         android:textColor="#c273cc"
+        android:fontFamily="cursive"
         android:textSize="28dp"
         android:textStyle="bold" />
 
@@ -53,6 +53,7 @@
         android:background="@drawable/vvv"
         android:ems="10"
         android:hint="Name"
+        android:maxLength="25"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
         android:textColor="#8767b3"
@@ -155,7 +156,7 @@
             app:snp_orientation="vertical"
             app:snp_stepSize="5"
             app:snp_updateInterval="10"
-            app:snp_value="5"
+            app:snp_value="10"
             app:snp_valueMarginEnd="8dp"
             app:snp_valueMarginStart="8dp"
             app:snp_value_text_color="@color/white" />

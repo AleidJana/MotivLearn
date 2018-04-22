@@ -19,7 +19,7 @@
         android:drawableLeft="@drawable/ic_action_em"
         android:ems="10"
         android:hint="  Email"
-        android:inputType="textCapCharacters|textEmailAddress"
+        android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
         android:singleLine="false"
         android:textColor="#8767b3"

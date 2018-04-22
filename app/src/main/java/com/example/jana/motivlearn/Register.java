@@ -22,6 +22,9 @@ import com.example.jana.motivlearn.view.RegisterView;
 
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Register extends AppCompatActivity implements RegisterView{
 
     EditText userNameF , emailF,passwordF,conPasswordF ;
@@ -66,15 +69,19 @@ public class Register extends AppCompatActivity implements RegisterView{
                 }
                 else{
 
-                    if (email.contains("@")&&((email.substring(email.indexOf("@"))).toLowerCase().equals("@student.ksu.edu.sa") ||(email.substring(email.indexOf("@"))).toLowerCase().equals("@ksu.edu.sa")))
-                    {
-                        if (password.equals(conPassword))
-                        {
+                    if (email.contains("@")&&((email.substring(email.indexOf("@"))).toLowerCase().equals("@student.ksu.edu.sa") ||(email.substring(email.indexOf("@"))).toLowerCase().equals("@ksu.edu.sa"))) {
+                        if (!isValidPassword(password)) {
+                            errormessage("The password should be more than 8 characters whiteout spaces ");
+                        } else {
+
+                        if (password.equals(conPassword)) {
                             mRegisterView.isExist(email);
+                        } else {
+                            errormessage("The passwords not matches");
                         }
-                        else {errormessage("The passwords not matches");}
+                    }
                         }
-                        else {errormessage("Please enter KSU com.example.jana.motivlearn.email");}
+                        else {errormessage("Please enter KSU email");}
                     }
             }
         });
@@ -103,6 +110,7 @@ public class Register extends AppCompatActivity implements RegisterView{
                 .setWarningBoxBgColor("#d9534f")
                 .setWarningTappedColor("#d9534f")
                 .setWarningBoxPosition(Noty.WarningPos.BOTTOM)
+                .setHeightDp(80)
                 .setWarningBoxRadius(80,80,80,80)
                 .setWarningBoxMargins(2,2,2,10)
                 .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
@@ -137,11 +145,15 @@ public class Register extends AppCompatActivity implements RegisterView{
             else {
                 errormessage("This email is already exist");
                }
-
-
-
         }
         catch (Exception e){}
+    }
+
+    public  boolean isValidPassword( String password) {
+        Matcher matcher;
+        Pattern PASSWORD_PATTERN = Pattern.compile("[a-zA-Z0-9\\!\\@\\#\\$]{8,24}");
+        matcher = PASSWORD_PATTERN.matcher(password);
+        return matcher.matches();
 
     }
 }

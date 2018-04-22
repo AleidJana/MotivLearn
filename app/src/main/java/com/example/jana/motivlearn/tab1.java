@@ -256,4 +256,9 @@ public class tab1 extends Fragment implements myProfileView {
         catch (Exception e){}
 
     }
+
+    @Override
+    public void cantRate(int type, String skill) {
+
+    }
 }

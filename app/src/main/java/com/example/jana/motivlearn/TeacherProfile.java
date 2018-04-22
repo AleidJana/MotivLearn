@@ -275,7 +275,7 @@ public class TeacherProfile extends Fragment implements myProfileView {
 
             RadarChart chart = (RadarChart)view.findViewById(R.id.chart);
             chart.clear();
-            RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "nouf");
+            RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "");
             //dataset_comp2.clear();
 
             dataset_comp2.setColor(Color.BLUE);
@@ -297,5 +297,10 @@ public class TeacherProfile extends Fragment implements myProfileView {
             chart.animate();
         }
         catch (Exception e){}
+    }
+
+    @Override
+    public void cantRate(int type, String skill) {
+
     }
 }

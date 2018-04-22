@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,7 +22,9 @@ import com.example.jana.motivlearn.view.fillBlankView;
 public class fillBlank extends AppCompatActivity implements fillBlankView {
     private fillBlankPresenter pres;
     ProgressDialog progressDialog;
-
+String pagetitle ;
+Bundle bundle;
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,14 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
                 myInput.setSelection(myInput.getText().toString().indexOf("write the answer here"),myInput.getText().toString().indexOf("write the answer here")+21);
             }
         });
+        bundle=getIntent().getExtras();
+        final String pathtype =bundle.getString("pathType");
+        if(pathtype.equals("p")) {
+            pagetitle = "Create Challenge";
+        }
+        else {
+            pagetitle="Suggest Challenge";
+        }
         Button submit = (Button)findViewById(R.id.button2);
         submit.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -45,9 +56,7 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
 
                 EditText myInput = (EditText)findViewById(R.id.editText);
                 String question = myInput.getText().toString();
-                Bundle bundle=getIntent().getExtras();
                 String title =bundle.getString("ChallengeTitle");
-                String pathtype =bundle.getString("pathType");
                 String field =bundle.getString("challengeField");
                 int time=bundle.getInt("challengeTime");
                 int coins=bundle.getInt("challengeCoins");
@@ -55,10 +64,12 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
                 int uid =sp1.getInt("user_id", 0);
 
                 pres = new fillBlankImp(fillBlank.this);
-                if(pathtype.equals("p"))
-                pres.addPublicChallenge(uid,question, title,field,time,coins);
-                else
-                    pres.suggestFillBlank(uid,question, title,field,time,coins);
+                if(pathtype.equals("p")) {
+                    pres.addPublicChallenge(uid, question, title, field, time, coins);
+                }
+                else {
+                    pres.suggestFillBlank(uid, question, title, field, time, coins);
+                }
 
             }
         });
@@ -71,7 +82,8 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
         }
         catch (Exception e) {}*/
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-       // mToolbar.setTitle("Create Challenge");
+        mToolbar.setTitle(pagetitle);
+        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,5 +8,5 @@ public interface SuggestVedioView {
     void suggestVrdioError();
     void addBadgySuccess();
     void SuggestVedioValidations(boolean badge);
-    void wrongFormat();
+    void wrongFormat(int type);
 }

@@ -230,7 +230,6 @@ String question;
 
     @Override
     public void onGameStarted(String s, String s1, String s2) {
-
         ProgressWheel wheel = new ProgressWheel(GroupChallenge.this);
         wheel.setBarColor(Color.BLUE);
         log.v("NOOOOOTTTTTEEEEE", "onGameStarted "+username);

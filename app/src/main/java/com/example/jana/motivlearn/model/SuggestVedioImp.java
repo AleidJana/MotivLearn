@@ -33,35 +33,37 @@ public class SuggestVedioImp implements SuggestVedioPresenter {
         }
         else {
             if ((vedioLink.toLowerCase().contains("http://")) || (vedioLink.toLowerCase().contains("https://"))){
-               // final int userId=1;
-                final AsyncHttpClient client = new AsyncHttpClient();
-                final RequestParams params = new RequestParams();
-                client.get("https://api.appery.io/rest/1/apiexpress/api/27_SuggestVideo/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&id="+userId+"&link="+vedioLink, params, new TextHttpResponseHandler() {
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
-                        suggestVedioView.suggestVrdioError();
-                    }
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, String response) {
-                        try {
-                            response = response.substring(1, response.length() - 1);
-                            JSONObject obj = new JSONObject(response);
-                            int videos = Integer.parseInt(obj.getString("count(*)"));
-                            if(videos == 5)
-                            {
-                                suggestVedioView.SuggestVedioValidations(true);
-                                addBadge(userId);
-                            }
-                            else
-                                suggestVedioView.SuggestVedioValidations(false);
+                if(vedioLink.toString().endsWith(".mp4")){
+                    // final int userId=1;
+                    final AsyncHttpClient client = new AsyncHttpClient();
+                    final RequestParams params = new RequestParams();
+                    client.get("https://api.appery.io/rest/1/apiexpress/api/27_SuggestVideo/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&id=" + userId + "&link=" + vedioLink, params, new TextHttpResponseHandler() {
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+                            suggestVedioView.suggestVrdioError();
                         }
-                        catch(Exception e){}
-                    }
-                });
+
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, String response) {
+                            try {
+                                response = response.substring(1, response.length() - 1);
+                                JSONObject obj = new JSONObject(response);
+                                int videos = Integer.parseInt(obj.getString("count(*)"));
+                                if (videos == 5) {
+                                    suggestVedioView.SuggestVedioValidations(true);
+                                    addBadge(userId);
+                                } else
+                                    suggestVedioView.SuggestVedioValidations(false);
+                            } catch (Exception e) {
+                            }
+                        }
+                    });
+                }else {
+                    suggestVedioView.wrongFormat(1);
+                }
               }
             else {
-                suggestVedioView.wrongFormat();
+                suggestVedioView.wrongFormat(2);
             }
         }
 
