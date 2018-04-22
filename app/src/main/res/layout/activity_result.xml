@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="52dp"
         android:text="TextView" />
 
     <Button
@@ -29,8 +29,35 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView13"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="30dp"
         android:text="Button" />
+
+    <com.emredavarci.circleprogressbar.CircleProgressBar xmlns:cpb="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/progressBar"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/button4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        cpb:backgroundColor="@color/colorAccent"
+        cpb:backgroundWidth="3"
+        cpb:maxValue="5"
+        cpb:prefix=""
+        cpb:progressColor="#b1e4f9"
+        cpb:progressText="5"
+        cpb:progressTextColor="@color/white"
+        cpb:roundedCorners="true"
+        cpb:strokeWidth="5"
+        cpb:suffix=""
+        cpb:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:text="Untill the next Question" />
 
 
 </RelativeLayout>

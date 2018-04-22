@@ -57,6 +57,8 @@ dependencies {
     compile 'com.nhaarman.listviewanimations:lib-core-slh:3.1.0'
     compile 'com.github.glomadrian:CodeInput:1.1@aar'
     compile 'com.pnikosis:materialish-progress:1.7'
+    compile 'com.dinuscxj:circleprogressbar:1.1.1'
+    compile 'nl.dionsegijn:konfetti:1.1.0'
     implementation files('libs/activation.jar')
     implementation files('libs/App42MultiPlayerGamingSDK.jar')
 }

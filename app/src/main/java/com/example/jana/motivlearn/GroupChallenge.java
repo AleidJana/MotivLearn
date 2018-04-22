@@ -80,6 +80,8 @@ int millisecondsleft;
 Button start;
 boolean ressu=false;
 String username;
+int owner=0;
+JSONArray fiveChallenges;
 String[] joinedUser=new String[4];
 String question;
     private String roomId = "";
@@ -130,7 +132,23 @@ String question;
     {
         super.onResume();
         log.v("RESUMMMMMMMED", username+"   "+MyCoins);
-        challnum++;
+        if(owner == 1) {
+            try {
+                theClient.setCustomRoomData(roomId, fiveChallenges.get(++challnum).toString());
+                theClient.sendChat("started");
+            } catch (Exception e) {
+            }
+        }
+        else
+            challnum++;
+
+        RelativeLayout mc = findViewById(R.id.multichoices);
+        mc.setVisibility(View.INVISIBLE);
+        RelativeLayout co = findViewById(R.id.codeoutput);
+        co.setVisibility(View.INVISIBLE);
+        RelativeLayout pz = findViewById(R.id.puzzlely);
+        pz.setVisibility(View.INVISIBLE);
+
 
     }
 
@@ -269,6 +287,7 @@ String question;
                     theClient.subscribeRoom(roomId);
                     if(roomEvent.getData().getRoomOwner().equals(username))
                     {
+                        owner=1;
                         start.setVisibility(View.VISIBLE);
                         start.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -278,14 +297,14 @@ String question;
                                 theClient.sendChat("Started");
                                 theClient.startGame();
                                 theClient.startGame(true, "");*/
-                                //getFiveChallenges();
-                                question ="{\"challenge_id\":5,\"type\":\"MC\",\"question\":\"When using the POST method, variables are displayed in the URL:\",\"answer\":\"{\\\"choice1\\\":\\\"True\\\",\\\"choice2\\\":\\\"False\\\",\\\"answer\\\":\\\"False\\\"}\",\"time\":10,\"field\":\"php\",\"rank\":5,\"coins\":5,\"challenge_title\":\"post method\",\"duration\":0,\"is_public\":false,\"user_id\":10,\"challenge_date\":\"2018-03-12 22:13:05.0\"}";
+                                getFiveChallenges();
+                                //question ="{\"challenge_id\":5,\"type\":\"MC\",\"question\":\"When using the POST method, variables are displayed in the URL:\",\"answer\":\"{\\\"choice1\\\":\\\"True\\\",\\\"choice2\\\":\\\"False\\\",\\\"answer\\\":\\\"False\\\"}\",\"time\":10,\"field\":\"php\",\"rank\":5,\"coins\":5,\"challenge_title\":\"post method\",\"duration\":0,\"is_public\":false,\"user_id\":10,\"challenge_date\":\"2018-03-12 22:13:05.0\"}";
                               //  question = "{\"challenge_id\":1,\"type\":\"CO\",\"question\":\"\\t\\tfor(int i = 0; i<3; i++) {\\r\\n\\t\\t\\tSystem.out.println(\\\"Hello\\\");\\r\\n\\t\\t\\tbreak;\\r\\n\\t\\t}\",\"answer\":\"Hello\",\"time\":20,\"field\":\"java\",\"rank\":2,\"coins\":3,\"challenge_title\":\"simple java test\",\"duration\":0,\"is_public\":false,\"user_id\":2,\"challenge_date\":\"2018-03-12 09:58:36.0\"}";
                                 // question = "{\"challenge_id\":6,\"type\":\"FB\",\"question\":\"The default connection type used by HTTP is\",\"answer\":\"{\\\"0\\\":\\\"Haifa\\\"}\",\"time\":15,\"field\":\"php\",\"rank\":14,\"coins\":5,\"challenge_title\":\"HTTP Request \",\"duration\":0,\"is_public\":false,\"user_id\":8,\"challenge_date\":\"2018-03-12 22:13:20.0\"}";
                                // question = "{\"challenge_id\":99,\"type\":\"PZ\",\"question\":\"[\\\"haifa\\\",\\\"ahmad\\\",\\\"zeyad\\\",\\\"bandar\\\"]\",\"answer\":\"\",\"time\":5,\"field\":\"java\",\"rank\":0,\"coins\":1,\"challenge_title\":\"test puzzle2\",\"duration\":0,\"is_public\":false,\"user_id\":2,\"challenge_date\":\"2018-03-30 10:44:10.0\"}";
-                                theClient.setCustomRoomData(roomId, question);
+                                /*theClient.setCustomRoomData(roomId, question);
                                 theClient.sendChat("started");
-                                start.setVisibility(View.INVISIBLE);
+                                start.setVisibility(View.INVISIBLE);*/
                             }
                         });
                     }
@@ -326,7 +345,7 @@ String question;
                             }
                         }
                         log.v("NOOOOOTTTTTEEEEE",liveRoomInfoEvent.getCustomData()+" "+username);
-                        if(!liveRoomInfoEvent.getCustomData().equals(""))
+                        if(!liveRoomInfoEvent.getCustomData().equals(" ") && !liveRoomInfoEvent.getCustomData().equals(""))
                         {
                             String type="";
                             try {
@@ -355,12 +374,35 @@ String question;
 
 
                         }
-                        if(ressu)
-                        {
-                            ressu=false;
-                            Intent intent = new Intent(GroupChallenge.this, Result.class);
-                            intent.putExtra("winners", liveRoomInfoEvent.getProperties().toString());
-                            intent.putExtra("num", challnum+1);
+                        if(ressu) {
+                            Intent intent;
+                            ressu = false;
+                            if (challnum == 4)
+                            {    intent = new Intent(GroupChallenge.this, finalResult.class);
+                          /*  theClient.setCustomUserData(username, MyCoins+"");
+                                HashMap<String, Object> content= new HashMap<>();
+                                content.put(username, MyCoins);
+                                theClient.updateRoomProperties(roomId, content, null);
+                            String[] users = liveRoomInfoEvent.getJoinedUsers();
+                            int[] scores = new int[users.length];
+                            String s = liveRoomInfoEvent.getProperties().toString();
+                            for(int i=0 ; i<users.length ; i++)
+                              /*  scores[i] = theClient.ge
+                                HashMap<String, Object> content= new HashMap<>();
+                                content.put(users[i], username);*/
+                                //theClient.getLiveRoomInfo(roomId);
+                            /*    theClient.updateRoomProperties(roomId, content, null);
+                                theClient.lockProperties(content);*/
+
+
+                            }
+                            else
+                            {
+                                intent = new Intent(GroupChallenge.this, Result.class);
+                                intent.putExtra("winners", liveRoomInfoEvent.getProperties().toString());
+                                intent.putExtra("num", challnum+1);
+                            }
+
                             startActivity(intent);
                         }
                     }else{
@@ -371,7 +413,8 @@ String question;
     }
 
     private void displayMultiChoice(String res) {
-        theClient.setCustomRoomData(roomId, "");
+       // progressBar.setProgress(0);
+        theClient.setCustomRoomData(roomId, " ");
         try {
             JSONObject obj = new JSONObject(res);
             String qustion=obj.getString("question");
@@ -385,7 +428,8 @@ String question;
             //TitleD.setText(challenge_title);
             progressBar = findViewById(R.id.progressBar2);
             progressBar.setMax(time);
-            progressBar.setProgress(10);
+            //progressBar.setProgress(10);
+            progressBar.setProgress(time);
             time=time*1000;
             countDownTimer=new CountDownTimer(time, 1000) {
 
@@ -397,6 +441,8 @@ String question;
                     progressBar.setProgress(0);
                     ressu=true;
                     theClient.getLiveRoomInfo(roomId);
+                    countDownTimer.cancel();
+
                    // ll.crrectAnswer(uid, challNum, "timeout", "gg", 0 , 0, 0);
                 }
             }.start();
@@ -456,7 +502,8 @@ String question;
         mcl.setVisibility(View.VISIBLE);
     }
     private void displayCodeOutput(String res){
-        theClient.setCustomRoomData(roomId, "");
+       // progressBar.setProgress(0);
+        theClient.setCustomRoomData(roomId, " ");
         try {
             JSONObject obj = new JSONObject(res);
             String question = obj.getString("question");
@@ -464,6 +511,8 @@ String question;
             time= obj.getInt("time");
             TextView Tqustion = findViewById(R.id.textViewTitle3);
             Tqustion.setText(question);
+            EditText Uanswer = findViewById(R.id.editText);
+            Uanswer.setText("");
             answer = obj.getString("answer");
             progressBar = findViewById(R.id.progressBar2);
             progressBar.setMax(time);
@@ -479,6 +528,8 @@ String question;
                     progressBar.setProgress(0);
                     ressu=true;
                     theClient.getLiveRoomInfo(roomId);
+                    countDownTimer.cancel();
+
                     //progressDialog.dismiss();
                    // displayCodeOutputP.crrectAnswer(uid, challNum, "timeout", "gg", 0 , 0, 0);
                 }
@@ -523,7 +574,8 @@ String question;
         col.setVisibility(View.VISIBLE);
     }
     private void displayFillBlank(String res) {
-        theClient.setCustomRoomData(roomId, "");
+      //  progressBar.setProgress(0);
+        theClient.setCustomRoomData(roomId, " ");
         try {
             JSONObject obj = new JSONObject(res);
             String question = obj.getString("question");
@@ -532,6 +584,8 @@ String question;
             TextView Tqustion = findViewById(R.id.textViewTitle3);
             Tqustion.setText(question);
             String Allanswer = obj.getString("answer");
+            final EditText Uanswer = findViewById(R.id.editText);
+            Uanswer.setText("");
             JSONObject obj2 = new JSONObject(Allanswer);
             int count = obj2.length();
             String hint = "answer";
@@ -541,7 +595,6 @@ String question;
                 answer1[j] = (obj2.getString("" + j)).trim().toLowerCase();
                 hint = hint + i + ",";
             }
-            final EditText Uanswer = findViewById(R.id.editText);
             Uanswer.setHint(hint);
             progressBar = findViewById(R.id.progressBar2);
             progressBar.setMax(time);
@@ -559,6 +612,8 @@ String question;
                     progressBar.setProgress(0);
                     ressu = true;
                     theClient.getLiveRoomInfo(roomId);
+                    countDownTimer.cancel();
+
                 }
             }.start();
             final Button submit = findViewById(R.id.button1);
@@ -602,7 +657,8 @@ String question;
         col.setVisibility(View.VISIBLE);
     }
     private void displayPuzzle(String res){
-        theClient.setCustomRoomData(roomId, "");
+   //     progressBar.setProgress(0);
+        theClient.setCustomRoomData(roomId, " ");
         try {
             JSONObject obj = new JSONObject(res);
             final String question = obj.getString("question");
@@ -631,6 +687,8 @@ String question;
                     progressBar.setProgress(0);
                     ressu = true;
                     theClient.getLiveRoomInfo(roomId);
+                    countDownTimer.cancel();
+
                 }
             }.start();
 
@@ -752,7 +810,7 @@ String question;
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                responseString = responseString.substring(1, responseString.length() - 1);
+              //  responseString = responseString.substring(1, responseString.length() - 1);
                 onGetFiveChallengesDone(responseString);
             }
 
@@ -762,8 +820,14 @@ String question;
     public void onGetFiveChallengesDone(String challenges)
     {
         //theClient.startGame(true);
-        theClient.setCustomRoomData(roomId, challenges);
-        theClient.sendChat("started");
+        try {
+            fiveChallenges = new JSONArray(challenges);
+            log.v("CHAAAAAAAAAL", fiveChallenges.toString());
+            theClient.setCustomRoomData(roomId, fiveChallenges.get(challnum).toString());
+            theClient.sendChat("started");
+            start.setVisibility(View.INVISIBLE);
+        }catch (Exception e){}
+
     }
     ////////////////////////////////////////////////////////////
     private static class MyListAdapter extends ArrayAdapter<String>{

@@ -157,7 +157,7 @@ public class displayPuzzleImp implements displayPuzzlePresenter
         });
     }
 
-    int findBadge(int numOfpass, String field) {
+    public int findBadge(int numOfpass, String field) {
         if(numOfpass==50)
             return 12;
         switch (field) {
