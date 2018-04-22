@@ -45,7 +45,6 @@ public class suggestVedio extends Activity implements SuggestVedioView {
         });
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("Suggest Video");
-        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +86,7 @@ public class suggestVedio extends Activity implements SuggestVedioView {
                 .setMessage("Thank you, \n your video has been recorded \n and you have got 5 Coins")
                 .setPositiveBtnText("Ok")
                 .setPositiveBtnBackground("#9577bc")
-                .setGifResource(R.drawable.hgif3)      //pass your gif, png or jpg
+                .setGifResource(R.drawable.hgif1)      //pass your gif, png or jpg
                 .isCancellable(true)
                 .OnPositiveClicked(new TTFancyGifDialogListener() {
                     @Override

@@ -24,7 +24,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class tab4 extends Fragment implements challengeBoardView {
     List<question> challengeList = new ArrayList<>();
-    challengeBoardPresenter pres;
+    public static challengeBoardPresenter presenter;
     private String res;
     View view;
     RecyclerView recyclerView;
@@ -37,8 +37,8 @@ public class tab4 extends Fragment implements challengeBoardView {
 
           SharedPreferences sp1= this.getActivity().getSharedPreferences("Login", MODE_PRIVATE);
           uid =sp1.getInt("user_id", 0);
-          pres = new challengeBoardImp(tab4.this);
-          pres.getChallengeBoard(uid);
+        presenter = new challengeBoardImp(tab4.this);
+        presenter.getChallengeBoard(uid);
 
         NewtonCradleLoading newtonCradleLoading;
         newtonCradleLoading = (NewtonCradleLoading)view.findViewById(R.id.newton_cradle_loading);
@@ -51,8 +51,8 @@ public class tab4 extends Fragment implements challengeBoardView {
             public void onRefresh() {
                 SharedPreferences sp1= getActivity().getSharedPreferences("Login", MODE_PRIVATE);
                 int uid =sp1.getInt("user_id", 0);
-                pres = new challengeBoardImp(tab4.this);
-                pres.getChallengeBoard(uid);
+                presenter = new challengeBoardImp(tab4.this);
+                presenter.getChallengeBoard(uid);
             }
         });
 
@@ -125,7 +125,7 @@ public class tab4 extends Fragment implements challengeBoardView {
     @Override
     public void onStart() {
         super.onStart();
-        pres.getChallengeBoard(uid);
+        presenter.getChallengeBoard(uid);
     }
 
 }

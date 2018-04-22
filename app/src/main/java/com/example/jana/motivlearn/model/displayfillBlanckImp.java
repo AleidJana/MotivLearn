@@ -17,7 +17,7 @@ import cz.msebera.android.httpclient.Header;
  * Created by reemaibrahim on 17/02/2018 AD.
  */
 
-public class displayfillBlanckImp  implements displayfillBlanckPresenter {
+public class displayfillBlanckImp implements displayfillBlanckPresenter {
 
     displayfillBlanckView displayfillBlanck1 ;
 

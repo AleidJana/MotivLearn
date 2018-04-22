@@ -4,6 +4,7 @@ package com.example.jana.motivlearn;
  * Created by haifamajid on 3/2/2018 AD.
  */
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -74,19 +75,28 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
     private BoomMenuButton bmb ;
     private String username;
     int uid;
-    int uid2;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tuserprofile);
+
         uid = getIntent().getIntExtra("id", 0);
+
+        //  uid = getIntent().getIntExtra("id", 0);
+        //  SharedPreferences sp1= this.getSharedPreferences("Login", MODE_PRIVATE);
+        //  int uid =sp1.getInt("user_id", 0);
+        // Toast.makeText(this,uid+"", Toast.LENGTH_SHORT).show();
+
         NewtonCradleLoading newtonCradleLoading;
         newtonCradleLoading = (NewtonCradleLoading)findViewById(R.id.newton_cradle_loading);
         newtonCradleLoading.setVisibility(View.VISIBLE);
         newtonCradleLoading.start();
+
         host = (TabHost)findViewById(R.id.tabHost);
         host.setup();
+
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("User Profile");
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
@@ -96,155 +106,13 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                 finish();
             }
         });
-        SharedPreferences sp1= userTprofile.this.getSharedPreferences("Login", MODE_PRIVATE);
-        uid2 =sp1.getInt("user_id", 0);
+
         bmb= (BoomMenuButton)findViewById(R.id.bmb);
+        SharedPreferences sp1= userTprofile.this.getSharedPreferences("Login", MODE_PRIVATE);
+        final int uid2 =sp1.getInt("user_id", 0);
         if(uid == uid2)
-        bmb.setVisibility(View.INVISIBLE);
-        //Tab 1
-        TabHost.TabSpec spec = host.newTabSpec("Skills");
-        spec.setContent(R.id.tab1);
-        spec.setIndicator("Skills");
-        host.addTab(spec);
-        pres = new myProfileImp(userTprofile.this);
-        pres.getUserInfo(uid);
-        pres.didRate(uid,uid2);
-        // Inflate the layout for this fragment
-        }
-
-    @Override
-    public void displayInfo(String res) {
-        try {
-
-            JSONObject obj = new JSONObject(res);
-            String userstr = obj.getString("user");
-            userstr = userstr.substring(1, userstr.length() - 1);
-            JSONObject obj2 = new JSONObject(userstr);
-
-            TextView uname = findViewById(R.id.uname);
-            uname.setText(obj2.getString("u_name"));
-            username = obj2.getString("u_name");
-
-            TextView coins = findViewById(R.id.coins);
-            coins.setText(obj2.getInt("u_coins")+"");
-
-            int levelid = getResources().getIdentifier("level"+obj2.getInt("u_level"), "drawable", getPackageName());
-            ImageView level = findViewById(R.id.level);
-            level.setImageDrawable(getResources().getDrawable(levelid));
-
-            int depid = getResources().getIdentifier((obj2.getString("u_department")).toLowerCase(), "drawable", getPackageName());
-            ImageView dep = findViewById(R.id.dep);
-            dep.setImageDrawable(getResources().getDrawable(depid));
-
-
-            String skillstr = obj.getString("skills");
-            updateChart(skillstr);
-
-        }
-        catch (Exception e){}
-
-
-        NewtonCradleLoading newtonCradleLoading;
-        newtonCradleLoading = (NewtonCradleLoading)findViewById(R.id.newton_cradle_loading);
-        newtonCradleLoading.setVisibility(View.GONE);
-
-        ScrollView whole = findViewById(R.id.wholeview);
-        whole.setFocusable(false);
-        whole.smoothScrollTo(0,0);
-        whole.setVisibility(View.VISIBLE);
-      //  last();
-
-    }
-
-    @Override
-    public void updateChart(String skillstr)
-    {
-        try {
-        JSONArray arr = new JSONArray(skillstr);
-        ArrayList<Entry> entries2 = new ArrayList<>();
-        // entries2.clear();
-        for (int i = 0; i < arr.length(); i++) {
-            JSONObject jsonobject = arr.getJSONObject(i);
-            float ff = (float)jsonobject.getDouble("average");
-            entries2.add(new Entry(ff, i));
-        }
-        RadarChart chart = (RadarChart)findViewById(R.id.chart);
-        chart.clear();
-        RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "");
-        //dataset_comp2.clear();
-
-        dataset_comp2.setColor(Color.BLUE);
-        dataset_comp2.setValueTextSize(10f);
-        dataset_comp2.setDrawFilled(true);
-
-        ArrayList<String> labels = new ArrayList<String>();
-
-        labels.add("Creativity");
-        labels.add("Communication");
-        labels.add("Presentation");
-
-        dataSets.clear();
-        dataSets.add(dataset_comp2);
-
-        RadarData data = new RadarData(labels, dataSets);
-        chart.setData(data);
-        chart.setWebLineWidthInner(2f);
-        chart.invalidate();
-        chart.animate();
-        }
-        catch (Exception e){}
-    }
-
-
-    @Override
-    public void cantRate(int type, String skill) {
-        switch (type)
-        {
-            case 1:
-                bmb.setVisibility(View.VISIBLE);
-                break;
-
-            case 2:
-                try {
-                    JSONArray arr = new JSONArray(skill);
-                    ArrayList<String> skills = new ArrayList<>();
-                    if(skills.size()<3)
-                    {
-                        bmb= (BoomMenuButton)findViewById(R.id.bmb);
-                        bmb.setVisibility(View.VISIBLE);
-                    }
-                    for (int i = 0; i < arr.length(); i++) {
-                        JSONObject jsonobject = arr.getJSONObject(i);
-                        String skilltype=jsonobject.getString("type");
-
-                        if(!skilltype.equals("creativity"))
-                        {
-                            ViewCreativityButton();
-                        }
-                        if(!skilltype.equals("presentation"))
-                        {
-                            ViewPresentationButton();
-                        }
-                        if(!skilltype.equals("communication"))
-                        {
-                            ViewCommunecationButton();
-                        }
-
-                    }
-                    for (int i = 0; i < 3-arr.length(); i++)
-                    {
-                        bmb.addBuilder(new TextOutsideCircleButton.Builder());
-
-                    }
-                }
-                catch (Exception e){}
-
-                break;
-        }
-
-    }
-    public void  ViewCreativityButton()
-    {
+            bmb.setVisibility(View.INVISIBLE);
+        //bmb.setVisibility(View.INVISIBLE);
         TextOutsideCircleButton.Builder builder = new TextOutsideCircleButton.Builder()
                 .normalImageRes(R.drawable.ic_creativity)
                 .normalText("Creativity").listener(new OnBMClickListener() {
@@ -297,11 +165,6 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                     }
                 });
         bmb.addBuilder(builder);
-
-    }
-
-    public void  ViewCommunecationButton()
-    {
 
         TextOutsideCircleButton.Builder builder2 = new TextOutsideCircleButton.Builder()
                 .normalImageRes(R.drawable.ic_presentation)
@@ -356,11 +219,6 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                 });
         bmb.addBuilder(builder2);
 
-    }
-
-
-    public void  ViewPresentationButton()
-    {
         TextOutsideCircleButton.Builder builder3 = new TextOutsideCircleButton.Builder()
                 .normalImageRes(R.drawable.ic_acommunication)
                 .normalText("Communication").listener(new OnBMClickListener() {
@@ -413,8 +271,108 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
                 });
         bmb.addBuilder(builder3);
 
+        // ArrayList<BoomButtonBuilder> ar = bmb.getBuilders();
+        //Toast.makeText(this,ar.size()+"", Toast.LENGTH_SHORT).show();
+        //for( int i=0 ; i< ar.size() ; i++)
+        //  ar.get(i).setUnable(true);
+
+        //Tab 1
+        TabHost.TabSpec spec = host.newTabSpec("Skills");
+        spec.setContent(R.id.tab1);
+        spec.setIndicator("Skills");
+        host.addTab(spec);
+
+        pres = new myProfileImp(userTprofile.this);
+        pres.getUserInfo(uid);
+
+        // Inflate the layout for this fragment
     }
 
+    @Override
+    public void displayInfo(String res) {
+
+
+        try {
+
+            JSONObject obj = new JSONObject(res);
+            String userstr = obj.getString("user");
+            userstr = userstr.substring(1, userstr.length() - 1);
+            JSONObject obj2 = new JSONObject(userstr);
+
+            TextView uname = findViewById(R.id.uname);
+            uname.setText(obj2.getString("u_name"));
+            username = obj2.getString("u_name");
+
+            TextView coins = findViewById(R.id.coins);
+            coins.setText(obj2.getInt("u_coins")+"");
+
+            int levelid = getResources().getIdentifier("level"+obj2.getInt("u_level"), "drawable", getPackageName());
+            ImageView level = findViewById(R.id.level);
+            level.setImageDrawable(getResources().getDrawable(levelid));
+
+            int depid = getResources().getIdentifier((obj2.getString("u_department")).toLowerCase(), "drawable", getPackageName());
+            ImageView dep = findViewById(R.id.dep);
+            dep.setImageDrawable(getResources().getDrawable(depid));
+
+
+            String skillstr = obj.getString("skills");
+            updateChart(skillstr);
+
+        }
+        catch (Exception e){}
+
+
+        NewtonCradleLoading newtonCradleLoading;
+        newtonCradleLoading = (NewtonCradleLoading)findViewById(R.id.newton_cradle_loading);
+        newtonCradleLoading.setVisibility(View.GONE);
+
+        ScrollView whole = findViewById(R.id.wholeview);
+        whole.setFocusable(false);
+        whole.smoothScrollTo(0,0);
+        whole.setVisibility(View.VISIBLE);
+        //  last();
+
+    }
+
+    @Override
+    public void updateChart(String skillstr)
+    {
+        try {
+            JSONArray arr = new JSONArray(skillstr);
+            ArrayList<Entry> entries2 = new ArrayList<>();
+            // entries2.clear();
+            for (int i = 0; i < arr.length(); i++) {
+                JSONObject jsonobject = arr.getJSONObject(i);
+                float ff = (float)jsonobject.getDouble("average");
+                entries2.add(new Entry(ff, i));
+            }
+
+            RadarChart chart = (RadarChart)findViewById(R.id.chart);
+            chart.clear();
+            RadarDataSet dataset_comp2 = new RadarDataSet(entries2, "");
+            //dataset_comp2.clear();
+
+            dataset_comp2.setColor(Color.BLUE);
+            dataset_comp2.setValueTextSize(10f);
+            dataset_comp2.setDrawFilled(true);
+
+            ArrayList<String> labels = new ArrayList<String>();
+
+            labels.add("Creativity");
+            labels.add("Communication");
+            labels.add("Presentation");
+
+            dataSets.clear();
+            dataSets.add(dataset_comp2);
+
+            RadarData data = new RadarData(labels, dataSets);
+            chart.setData(data);
+            chart.setWebLineWidthInner(2f);
+            chart.invalidate();
+            chart.animate();
+        }
+        catch (Exception e){}
+    }
    /* @Override
     public void cantRate() {
         new TTFancyGifDialog.Builder(userTprofile.this)
@@ -449,4 +407,9 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
 
     }
 */
+
+
+    @Override
+    public void cantRate(int type, String skill) {
+    }
 }

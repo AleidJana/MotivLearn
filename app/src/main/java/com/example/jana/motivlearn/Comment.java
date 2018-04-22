@@ -66,7 +66,6 @@ public class Comment extends AppCompatActivity implements CommentView{
         setContentView(R.layout.activity_comment);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("Comments");
-        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +101,7 @@ public class Comment extends AppCompatActivity implements CommentView{
                         // your action here
                         if(Content.getText().toString()!="")
                         {
-                            pres2.addComment(String.valueOf(Content.getText()),post.getUserid(),post.getPostid());
+                            pres2.addComment(String.valueOf(Content.getText()),uid,post.getPostid());
                             progressDialog = ProgressDialog.show(Comment.this, "", "Please wait...");
                             pres2.getComments(post.getPostid());
                         }

@@ -30,7 +30,8 @@
         android:layout_below="@+id/textView13"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="Button" />
+        android:text="Button"
+        android:visibility="invisible"/>
 
     <com.emredavarci.circleprogressbar.CircleProgressBar xmlns:cpb="http://schemas.android.com/apk/res-auto"
         android:id="@+id/progressBar"

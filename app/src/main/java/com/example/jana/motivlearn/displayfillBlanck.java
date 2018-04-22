@@ -132,10 +132,8 @@ displayfillBlanckPresenter displayfillBlanckP;
                         }
                     }
                     if (flag) {
-                        //Toast.makeText(getApplicationContext(), "correct",
-                        //      Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getApplicationContext(), "correct", Toast.LENGTH_LONG).show();
                         displayfillBlanckP.selectRank(uid,challNum,"pass","gg",3, field);
-
                     } else {
                         // Toast.makeText(getApplicationContext(), "not correct", Toast.LENGTH_LONG).show();
                         displayfillBlanckP.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0,0);
@@ -160,9 +158,10 @@ displayfillBlanckPresenter displayfillBlanckP;
 
     @Override
     public void fileView() {
-    //    Toast.makeText(getApplicationContext(), "View fail",
-             //   Toast.LENGTH_LONG).show();
-
+        if(progressDialog!=null&&progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    Toast.makeText(getApplicationContext(), "View fail",Toast.LENGTH_LONG).show();
     }
 
     @Override

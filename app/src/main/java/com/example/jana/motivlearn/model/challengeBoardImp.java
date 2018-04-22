@@ -30,7 +30,7 @@ public class challengeBoardImp implements challengeBoardPresenter{
     public String getChallengeBoard(int uid) {
      AsyncHttpClient client = new AsyncHttpClient();
             RequestParams params = new RequestParams();
-            client.get("https://api.appery.io/rest/1/apiexpress/api/3_ViewChallengeBoard/?" +
+        client.get("https://api.appery.io/rest/1/apiexpress/api/3_ViewChallengeBoard/?" +
                     "apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&id="+uid, params, new TextHttpResponseHandler()
                     {
                         @Override
@@ -46,4 +46,24 @@ public class challengeBoardImp implements challengeBoardPresenter{
             );
             return result;
         }
+
+    @Override
+    public String deleteQuestion(int uid) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        client.get("https://api.appery.io/rest/1/apiexpress/api/DeleteChallenge/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&cid="+uid, params, new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+            }
+        });
+
+
+        return null;
     }
+}

@@ -13,4 +13,5 @@ import java.util.List;
 public interface challengeBoardPresenter {
 
     String getChallengeBoard(int uid);
+    String deleteQuestion(int uid);
 }

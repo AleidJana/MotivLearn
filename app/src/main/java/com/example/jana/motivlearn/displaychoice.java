@@ -50,7 +50,7 @@ String answer;
         radio=findViewById(R.id.radioG);
         submit=findViewById(R.id.button);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        // mToolbar.setTitle("");
+       // mToolbar.setTitle("Multiple Choice Challenge ");
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +115,6 @@ String answer;
                     ll.selectRank(uid,challNum,"pass","gg",3, field);
                 }
                 else{
-
                     ll.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0, 0);
                 }
             }

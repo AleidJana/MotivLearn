@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +41,6 @@ Button submit;
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("Verify Registration code");
-        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +114,8 @@ Button submit;
             Ed.commit();
 
         }
-        catch (Exception e) {}
+        catch (Exception e) {       }
+        Log.v("HEEEEEEEEEREEEEEEEE", "hh");
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

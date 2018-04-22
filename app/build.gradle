@@ -61,4 +61,5 @@ dependencies {
     compile 'nl.dionsegijn:konfetti:1.1.0'
     implementation files('libs/activation.jar')
     implementation files('libs/App42MultiPlayerGamingSDK.jar')
+
 }

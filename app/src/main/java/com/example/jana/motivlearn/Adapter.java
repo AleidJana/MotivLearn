@@ -21,6 +21,7 @@ import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.jana.motivlearn.tab2.pres;
+import static com.example.jana.motivlearn.tab4.presenter;
 
 /**
  * Created by Belal on 10/18/2017.
@@ -92,7 +93,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
                             .setCancelable(false)
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                //    pres.deleteQuestion(questions.getId());
+                                    presenter.deleteQuestion(questions.getId());
                                     int potition = questionList.indexOf(questions);
                                     questionList.remove(potition);
                                     notifyItemRemoved(potition);

@@ -304,6 +304,8 @@ String question;
                                 /*theClient.setCustomRoomData(roomId, question);
                                 theClient.sendChat("started");
                                 start.setVisibility(View.INVISIBLE);*/
+                                RelativeLayout relativeLayout=(RelativeLayout) findViewById(R.id.relativeLayoutgroup);
+                                relativeLayout.setVisibility(View.INVISIBLE);
                             }
                         });
                     }
