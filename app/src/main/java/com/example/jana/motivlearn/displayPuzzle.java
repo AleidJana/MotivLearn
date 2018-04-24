@@ -203,12 +203,11 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
                                 continue;
 
                             flag = false;
-                            //Toast.makeText(getApplicationContext(), "Wrong order", Toast.LENGTH_SHORT).show();
                             pre.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0,0);
                             break;
                         }
                         if (flag)
-                        {   //Toast.makeText(getApplicationContext(), "Correct order", Toast.LENGTH_SHORT).show();
+                        {
                             pre.selectRank(uid,challNum,"pass","gg",3, field);
                         }
                     } catch (Exception e) {
@@ -296,17 +295,27 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
         private final Context mContext;
 
         MyListAdapter(final Context context, String question) {
+            //question : ordered puzzle pieces
             mContext = context;
             try {
-                JSONArray jsonArray = new JSONArray(question);
-                jsonArray = shuffleJsonArray(jsonArray);
-                for (int i = 0; i < jsonArray.length(); i++) {
+                JSONArray jsonArray = new JSONArray(question);//convert JSON string to JSON array
+                jsonArray = shuffleJsonArray(jsonArray); //shuffle the puzzle pieces
+                for (int i = 0; i < jsonArray.length(); i++) { // add the shuffled puzzle to this adapter
                     add(jsonArray.get(i)+"");
-                   // log.d("HAIFA", jsonArray.get(i)+"" );
-                    // add(mContext.getString(R.string.row_number, i));
                 }
-            }
-            catch(Exception e){}
+            } catch(Exception e){}
+        }
+
+        public static JSONArray shuffleJsonArray (JSONArray array) throws JSONException {
+            //recieve JSONArray and shuffle it randomly
+            Random rnd = new Random();
+            for (int i = array.length() - 1; i >= 0; i--)
+            {   int j = rnd.nextInt(i + 1);
+            // Simple swap
+                Object object = array.get(j);
+                array.put(j, array.get(i));
+                array.put(i, object);    }
+            return array;
         }
 
         @Override
@@ -330,20 +339,6 @@ public class displayPuzzle extends MyListActivity implements displayPuzzleView {
 
             return view;
         }
-
-    public static JSONArray shuffleJsonArray (JSONArray array) throws JSONException {
-        // Implementing Fisher–Yates shuffle
-        Random rnd = new Random();
-        for (int i = array.length() - 1; i >= 0; i--)
-        {
-            int j = rnd.nextInt(i + 1);
-            // Simple swap
-            Object object = array.get(j);
-            array.put(j, array.get(i));
-            array.put(i, object);
-        }
-        return array;
-    }
     }
 
 

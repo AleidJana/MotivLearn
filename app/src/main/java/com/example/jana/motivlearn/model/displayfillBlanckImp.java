@@ -165,6 +165,9 @@ public class displayfillBlanckImp implements displayfillBlanckPresenter {
     }
 
     int findBadge(int numOfpass, String field) {
+        //numOfpass : number of correctly solved challenges in specific field by this student
+        //field : name of this field
+        //according to these parameters the system can determine the badge number the student deserve
         if(numOfpass==50)
             return 12;
 

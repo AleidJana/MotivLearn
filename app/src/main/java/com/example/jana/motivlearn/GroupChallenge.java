@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jana.motivlearn.model.groupChallengeImp;
+import com.example.jana.motivlearn.presenter.groupChallengePresenter;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestHandle;
 import com.loopj.android.http.RequestParams;
@@ -60,11 +63,10 @@ import java.util.Random;
 
 import cz.msebera.android.httpclient.Header;
 
-import static com.example.jana.motivlearn.multiplayer.MyConnectionListener.Multiplayer;
 import static com.loopj.android.http.AsyncHttpClient.log;
 
-public class GroupChallenge extends AppCompatActivity  implements  RoomRequestListener, NotifyListener, TurnBasedRoomListener {
-    private WarpClient theClient=null;
+public class GroupChallenge extends AppCompatActivity  implements  RoomRequestListener, NotifyListener, TurnBasedRoomListener, ZoneRequestListener {
+    private WarpClient theClient = null;
 TextView textView0;
 TextView textView1;
 TextView textView2;
@@ -72,15 +74,19 @@ TextView textView3;
 int coins=0, MyCoins=0, time;
 int challnum=0;
 String winner="";
-RadioGroup radio;
+    RadioGroup radio;
 ProgressDialog progressDialog;
 String answer;
 ProgressBar progressBar;
 CountDownTimer countDownTimer;
 int millisecondsleft;
 Button start;
+int[] scores;
+String[] resultusernames;
+int counter = 0;
 boolean ressu=false;
 String username;
+boolean firstTime = true;
 int owner=0;
 JSONArray fiveChallenges;
 String[] joinedUser=new String[4];
@@ -113,18 +119,16 @@ String question;
     }
 
     private void init(String roomId){
-        try {
-            theClient = WarpClient.getInstance();
-            theClient.addNotificationListener(this);
-            theClient.addRoomRequestListener(this);
-            theClient.addTurnBasedRoomListener(this);
-            theClient.joinRoom(roomId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
+            try {
+                theClient = WarpClient.getInstance();
+                theClient.addNotificationListener(this);
+                theClient.addRoomRequestListener(this);
+                theClient.addTurnBasedRoomListener(this);
+                theClient.addZoneRequestListener(this);
+                theClient.joinRoom(roomId);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     @Override
@@ -193,6 +197,12 @@ String question;
         log.v("NOOOOOTTTTTEEEEE",chatEvent.getMessage()+" "+username);
         if(chatEvent.getMessage().equals("started"))
             theClient.getLiveRoomInfo(roomId);
+        else if(chatEvent.getMessage().startsWith("FinalResult"))
+        {
+            String[] temp = chatEvent.getMessage().split(":");
+            resultusernames[counter] = temp[1];
+            scores[counter++]= Integer.parseInt(temp[2]);
+        }
   //      else
           //  challnum=Integer.parseInt(chatEvent.getMessage());
       /*  if(winner.equals("")&&!chatEvent.getMessage().equals("started")) {
@@ -284,32 +294,19 @@ String question;
             public void run() {
                 if(roomEvent.getResult()== WarpResponseResultCode.SUCCESS){
                     theClient.subscribeRoom(roomId);
-                    if(roomEvent.getData().getRoomOwner().equals(username))
+                    if(roomEvent.getData().getRoomOwner().equals(username) && firstTime)
                     {
+                        firstTime = false;
                         owner=1;
                         start.setVisibility(View.VISIBLE);
                         start.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                              /*  theClient.sendChat("sentChat");
-                                theClient.setCustomRoomData(roomId, "setCustomRoomData");
-                                theClient.sendChat("Started");
-                                theClient.startGame();
-                                theClient.startGame(true, "");*/
-                                getFiveChallenges();
-                                //question ="{\"challenge_id\":5,\"type\":\"MC\",\"question\":\"When using the POST method, variables are displayed in the URL:\",\"answer\":\"{\\\"choice1\\\":\\\"True\\\",\\\"choice2\\\":\\\"False\\\",\\\"answer\\\":\\\"False\\\"}\",\"time\":10,\"field\":\"php\",\"rank\":5,\"coins\":5,\"challenge_title\":\"post method\",\"duration\":0,\"is_public\":false,\"user_id\":10,\"challenge_date\":\"2018-03-12 22:13:05.0\"}";
-                              //  question = "{\"challenge_id\":1,\"type\":\"CO\",\"question\":\"\\t\\tfor(int i = 0; i<3; i++) {\\r\\n\\t\\t\\tSystem.out.println(\\\"Hello\\\");\\r\\n\\t\\t\\tbreak;\\r\\n\\t\\t}\",\"answer\":\"Hello\",\"time\":20,\"field\":\"java\",\"rank\":2,\"coins\":3,\"challenge_title\":\"simple java test\",\"duration\":0,\"is_public\":false,\"user_id\":2,\"challenge_date\":\"2018-03-12 09:58:36.0\"}";
-                                // question = "{\"challenge_id\":6,\"type\":\"FB\",\"question\":\"The default connection type used by HTTP is\",\"answer\":\"{\\\"0\\\":\\\"Haifa\\\"}\",\"time\":15,\"field\":\"php\",\"rank\":14,\"coins\":5,\"challenge_title\":\"HTTP Request \",\"duration\":0,\"is_public\":false,\"user_id\":8,\"challenge_date\":\"2018-03-12 22:13:20.0\"}";
-                               // question = "{\"challenge_id\":99,\"type\":\"PZ\",\"question\":\"[\\\"haifa\\\",\\\"ahmad\\\",\\\"zeyad\\\",\\\"bandar\\\"]\",\"answer\":\"\",\"time\":5,\"field\":\"java\",\"rank\":0,\"coins\":1,\"challenge_title\":\"test puzzle2\",\"duration\":0,\"is_public\":false,\"user_id\":2,\"challenge_date\":\"2018-03-30 10:44:10.0\"}";
-                                /*theClient.setCustomRoomData(roomId, question);
-                                theClient.sendChat("started");
-                                start.setVisibility(View.INVISIBLE);*/
-                                RelativeLayout relativeLayout=(RelativeLayout) findViewById(R.id.relativeLayoutgroup);
-                                relativeLayout.setVisibility(View.INVISIBLE);
+                                theClient.getOnlineUsersCount();
+
                             }
                         });
                     }
-                    //Toast.makeText(GroupChallenge.this, "Room joining done",Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(GroupChallenge.this, "Room joining failed",Toast.LENGTH_LONG).show();
                 }
@@ -379,23 +376,26 @@ String question;
                             Intent intent;
                             ressu = false;
                             if (challnum == 4)
-                            {    intent = new Intent(GroupChallenge.this, finalResult.class);
-                          /*  theClient.setCustomUserData(username, MyCoins+"");
-                                HashMap<String, Object> content= new HashMap<>();
-                                content.put(username, MyCoins);
-                                theClient.updateRoomProperties(roomId, content, null);
-                            String[] users = liveRoomInfoEvent.getJoinedUsers();
-                            int[] scores = new int[users.length];
-                            String s = liveRoomInfoEvent.getProperties().toString();
-                            for(int i=0 ; i<users.length ; i++)
-                              /*  scores[i] = theClient.ge
-                                HashMap<String, Object> content= new HashMap<>();
-                                content.put(users[i], username);*/
-                                //theClient.getLiveRoomInfo(roomId);
-                            /*    theClient.updateRoomProperties(roomId, content, null);
-                                theClient.lockProperties(content);*/
+                            {   SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
+                                int uid =sp1.getInt("user_id", 0);
+                                groupChallengePresenter pre = new groupChallengeImp();
+                                String[] users = liveRoomInfoEvent.getJoinedUsers();
+                                scores = new int[users.length];
+                                resultusernames = new String[users.length];
+                                intent = new Intent(GroupChallenge.this, finalResult.class);
+                                theClient.sendChat("FinalResult:"+username+":"+MyCoins);
 
+                               while (counter<liveRoomInfoEvent.getJoinedUsers().length);
+                               
+                               orderWinners(resultusernames, scores);
+                               if(resultusernames[0].equals(username) && MyCoins!=0)
+                                   pre.updateCoinsWinner(uid, MyCoins+10);
+                               else
+                                   pre.updateCoins(uid, MyCoins);
 
+                               intent.putExtra("users", resultusernames);
+                               intent.putExtra("scores", scores);
+                               startActivity(intent);
                             }
                             else
                             {
@@ -410,7 +410,25 @@ String question;
                     }
                 }
             });
-      //  log.v("NOOOOOTTTTTEEEEE",liveRoomInfoEvent.getCustomData()+" "+username);
+    }
+
+    private void orderWinners(String[] resultusernames, int[] scores) {
+
+        for (int i = 0; i < scores.length; i++) {
+            for (int j = i + 1; j < scores.length; j++) {
+                int tmp = 0;
+                String tmp0="";
+                if (scores[i] < scores[j]) {
+                    tmp = scores[i];
+                    scores[i] = scores[j];
+                    scores[j] = tmp;
+
+                    tmp0 = resultusernames[i];
+                    resultusernames[i] = resultusernames[j];
+                    resultusernames[j] = tmp0;
+                }
+            }
+        }
     }
 
     private void displayMultiChoice(String res) {
@@ -469,24 +487,20 @@ String question;
                     RelativeLayout mcl = findViewById(R.id.multichoices);
                     mcl.setVisibility(View.INVISIBLE);
                     submit.setVisibility(View.INVISIBLE);
-                   // progressDialog = ProgressDialog.show(GroupChallenge.this, "", "Please wait...");
 
-                    int selectedId = radio.getCheckedRadioButtonId();
+                    int selectedId = radio.getCheckedRadioButtonId();//get the user choice
                     if(selectedId!=-1) {
                         RadioButton radioButton = findViewById(selectedId);
-                        if (answer.equals(radioButton.getText())) {
-                            //ll.selectRank(uid,challNum,"pass","gg",3, field);
+                        if (answer.equals(radioButton.getText())) {//compare the user choice eith the model answer
                             HashMap<String, Object> content= new HashMap<>();
+                            //create a hashmap with the number of the challenge and the answerd user's username
                             content.put("ch"+(challnum+1), username);
-                            //theClient.getLiveRoomInfo(roomId);
+                            //update the RoomProperties with the winner of the challenge
                             theClient.updateRoomProperties(roomId, content, null);
+                            //lock this Property to not allow other players to overwrite the winner record
                             theClient.lockProperties(content);
-                           // theClient.getLiveRoomInfo(roomId);
-                           /* if(winner.equals("")) {
-                                theClient.sendChat(username);
-                                winner=username;
-                            }*/
-                        } else {
+                        }
+                        else {
                             //ll.crrectAnswer(uid, challNum, "fail", "gg", 0 , 0, 0);
                         }
                     }
@@ -745,9 +759,7 @@ String question;
 
     @Override
     public void onUpdatePropertyDone(LiveRoomInfoEvent liveRoomInfoEvent) {
-        log.v("NOOOOOTTTTTEEEEE",liveRoomInfoEvent.getProperties()+" WINNER"+username);
         MyCoins+=coins;
-       // theClient.sendChat(++challnum+"");
     }
 
     @Override
@@ -823,13 +835,81 @@ String question;
         //theClient.startGame(true);
         try {
             fiveChallenges = new JSONArray(challenges);
-            log.v("CHAAAAAAAAAL", fiveChallenges.toString());
             theClient.setCustomRoomData(roomId, fiveChallenges.get(challnum).toString());
             theClient.sendChat("started");
             start.setVisibility(View.INVISIBLE);
         }catch (Exception e){}
 
     }
+
+    @Override
+    public void onDeleteRoomDone(RoomEvent roomEvent) {
+
+    }
+
+    @Override
+    public void onGetAllRoomsDone(AllRoomsEvent allRoomsEvent) {
+
+    }
+
+    @Override
+    public void onCreateRoomDone(RoomEvent roomEvent) {
+
+    }
+
+    @Override
+    public void onGetOnlineUsersDone(AllUsersEvent allUsersEvent) {
+       // Log.v("UUUUUSSSSSEEEEERRRRRS",allUsersEvent.getUsersCount()+"");
+
+
+    }
+
+    @Override
+    public void onGetLiveUserInfoDone(LiveUserInfoEvent liveUserInfoEvent) {
+
+
+    }
+
+    @Override
+    public void onSetCustomUserDataDone(LiveUserInfoEvent liveUserInfoEvent) {
+        resultusernames[counter]= liveUserInfoEvent.getName();
+        scores[counter++] = Integer.parseInt(liveUserInfoEvent.getCustomData());
+    }
+
+    @Override
+    public void onGetMatchedRoomsDone(MatchedRoomsEvent matchedRoomsEvent) {
+
+    }
+
+    @Override
+    public void onGetAllRoomsCountDone(AllRoomsEvent allRoomsEvent) {
+
+    }
+
+    @Override
+    public void onGetOnlineUsersCountDone(AllUsersEvent allUsersEvent) {
+        if(allUsersEvent.getUsersCount() <2) {
+            this.runOnUiThread(new Runnable() {
+                public void run() {
+                Toast.makeText(GroupChallenge.this,"the room has to contains 2 players at least", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
+        else
+            this.runOnUiThread(new Runnable() {
+                public void run() {
+                    getFiveChallenges();                }
+            });
+
+
+    }
+
+    @Override
+    public void onGetUserStatusDone(LiveUserInfoEvent liveUserInfoEvent) {
+
+    }
+
     ////////////////////////////////////////////////////////////
     private static class MyListAdapter extends ArrayAdapter<String>{
 

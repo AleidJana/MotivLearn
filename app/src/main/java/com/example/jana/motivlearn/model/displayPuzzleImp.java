@@ -80,39 +80,44 @@ public class displayPuzzleImp implements displayPuzzlePresenter
     }
 
 
-    @Override
-    public void selectRank(final int user_id, final int challenge_id, final String stutes, final String skillType, final int rateValue, final String field) {
+    @Override //this function will be called just if the user answered the challenge correctly
+    public void selectRank(final int user_id, final int challenge_id, final String stutes,
+                           final String skillType, final int rateValue, final String field) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
-        RequestHandle requestHandle = client.get("https://api.appery.io/rest/1/apiexpress/api/selectRank/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&challengeId=" + challenge_id + "&field=" + field + "&uid=" + user_id, params, new TextHttpResponseHandler() {
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+        //send request to the API to get the student rank between
+        //all students who answerd this challenge correctly
+        RequestHandle requestHandle = client.get("https://api.appery.io/rest/1/apiexpress" +
+                "/api/selectRank?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&challengeId="
+                + challenge_id + "&field=" + field + "&uid=" + user_id, params,
+                new TextHttpResponseHandler() {
 
-            }
+            @Override //In case of failed API connection
+            public void onFailure(int status, Header[] headers, String response, Throwable throwable)
+            {}
 
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+            @Override //after get API response successfully
+            public void onSuccess(int status, Header[] headers, String response) {
                 try {
-                    responseString = responseString.replace("[{", "{");
-                    responseString = responseString.replace("}]", "}");
-                    JSONObject obj = new JSONObject(responseString);
+                    response = response.substring(1,response.length()-1); //convert the response to JSON string format
+                    JSONObject obj = new JSONObject(response); //convert the response to JSON format
                     JSONObject object = obj.getJSONObject("Branch1");
-                    rank = object.getInt("rank");
-                    // rank=rank-1;
+                    //this function will be called just if the user answered the challenge correctly
+                    rank = object.getInt("rank"); // get the rank from API>DataBase
 
                     switch (rank) {
+                        //check the rank to give the appropriate coins(challenge coins + Bounus) to the user
                         case 1:
-                            coins1 = 10 + coins;
+                            coins1 = coins + 10;
                             break;
                         case 2:
-                            coins1 = 5 + coins;
+                            coins1 = coins + 7;
                             break;
                         case 3:
-                            coins1 = 3 + coins;
+                            coins1 = coins + 5;
                             break;
                         default:
-                            coins1 = 1 + coins;
-
+                            coins1 = coins + 1;
                     }
 
                     if (field.equals("java") || field.equals("c") || field.equals("javascript")

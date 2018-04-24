@@ -159,23 +159,25 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
 
     }
 
-    private String formatTime(String s) {
+    private String formatTime(String s) {//receive the post's timestamp
         String result="";
-        s=s.substring(0, s.length()-2);
+        s=s.substring(0, s.length()-2); //convert the parameter to the wanted format of timestamp
         try {
+            //fixed values
             long secondsInMilli = 1000;
             long minutesInMilli = secondsInMilli * 60;
             long hoursInMilli = minutesInMilli * 60;
             long daysInMilli = hoursInMilli * 24;
-
+            //create a date format of the current date and time (same format of timestamp)
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String c = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-
+            //convert the post'd date and the current date to Date
             Date postDate = dateFormat.parse(s);
             Date currentDate = dateFormat.parse(c);
-
+            //convert the post date to Calendar to easily add time (conver it to local time)
             Calendar c0 = Calendar.getInstance();
             c0.setTime(postDate);
+            //add 10 hours (th difference between the local time and database time)
             c0.add(Calendar.HOUR_OF_DAY, 10);
             int year = c0.get(Calendar.YEAR);
             int month = c0.get(Calendar.MONTH) + 1;
@@ -184,13 +186,14 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
             int minute = c0.get(Calendar.MINUTE);
             int second = c0.get(Calendar.SECOND);
             postDate = dateFormat.parse(year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second);
-
-            long diff = currentDate.getTime() - postDate.getTime();
-
+            long diff = currentDate.getTime() - postDate.getTime(); // find the difference
+            //determine the difference (seconds - minutes - 3days- or more) range
             if(diff < minutesInMilli)
                 result=TimeUnit.MILLISECONDS.toSeconds(diff)+"s";
             else if(diff < hoursInMilli)
                 result= TimeUnit.MILLISECONDS.toMinutes(diff)+"m";
+            else if(diff < daysInMilli)
+                result= TimeUnit.MILLISECONDS.toHours(diff)+"h";
             else if(diff < (daysInMilli)*3)
                 result=(TimeUnit.MILLISECONDS.toDays(diff)+1)+"d";
             else

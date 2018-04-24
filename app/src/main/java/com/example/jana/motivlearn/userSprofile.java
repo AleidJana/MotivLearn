@@ -326,27 +326,23 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
     public void updateChart(String skillstr)
     {
         try {
-            JSONArray arr = new JSONArray(skillstr);
+            JSONArray arr = new JSONArray(skillstr);//convert user's skill info to JSON
             ArrayList<Entry> entries2 = new ArrayList<>();
-            // entries2.clear();
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject jsonobject = arr.getJSONObject(i);
-                float ff = (float)jsonobject.getDouble("average");
-               // Toast.makeText(this,i+"", Toast.LENGTH_SHORT).show();
-                entries2.add(new Entry(ff, i));
+                float ff = (float)jsonobject.getDouble("average");//get the value of each skill
+                entries2.add(new Entry(ff, i));//store the average to display it on the radar chart
             }
 
             RadarChart chart = (RadarChart)findViewById(R.id.chart);
             chart.clear();
-            RadarDataSet dataset_comp2 = new RadarDataSet(entries2, " ");
-            //dataset_comp2.clear();
-
+            RadarDataSet dataset_comp2 = new RadarDataSet(entries2, " ");//create dataset with values
+            //customize chart
             dataset_comp2.setColor(Color.BLUE);
             dataset_comp2.setValueTextSize(10f);
             dataset_comp2.setDrawFilled(true);
-
+            //create label for each corner that indicate to a skill
             ArrayList<String> labels = new ArrayList<String>();
-
             labels.add("Activation");
             labels.add("Teamwork");
             labels.add("Programming");

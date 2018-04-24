@@ -30,14 +30,17 @@ Bundle bundle;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fill_blank);
         pres = new fillBlankImp(fillBlank.this);
-        Button myButton = (Button)findViewById(R.id.button3);
+        Button myButton = (Button)findViewById(R.id.button3); //add blank button
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String s = "{{write the answer here}}";
                 EditText myInput = (EditText)findViewById(R.id.editText);
+                //add "{{write the answer here}}" to the text to consider it as blank while test the students
                 myInput.append(s);
-                myInput.setSelection(myInput.getText().toString().indexOf("write the answer here"),myInput.getText().toString().indexOf("write the answer here")+21);
+                //select "write the answer here" to make the user easily replacing the text with the answer
+                myInput.setSelection(myInput.getText().toString().indexOf("write the answer here"),
+                        myInput.getText().toString().indexOf("write the answer here")+21);
             }
         });
         bundle=getIntent().getExtras();

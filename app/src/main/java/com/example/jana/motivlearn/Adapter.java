@@ -84,7 +84,36 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
             }
         });
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+
+        if(typeu.equals("T") && uName.equals(questions.getWriter())) {
+            holder.itemView.setOnTouchListener(new OnSwipeTouchListener(mCtx) {
+                public void onSwipeLeft() {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mCtx);
+                    builder.setMessage("Do you want to delete this Question?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    presenter.deleteQuestion(questions.getId());
+                                    int potition = questionList.indexOf(questions);
+                                    questionList.remove(potition);
+                                    notifyItemRemoved(potition);
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    //Creating dialog box
+                    AlertDialog alert = builder.create();
+                    //Setting the title manually
+                    alert.setTitle("Delete Question");
+                    alert.show();                }
+
+            });
+        }
+    /*    holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 if(typeu.equals("T") && uName.equals(questions.getWriter())) {
@@ -113,7 +142,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
                 }
                     return true;
             }
-        });
+        });*/
     }
 
     @Override
