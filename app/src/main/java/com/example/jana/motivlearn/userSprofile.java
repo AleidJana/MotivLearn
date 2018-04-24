@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TabHost;
@@ -85,6 +86,8 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
     int uid;
     int uid2;
     ProgressDialog progressDialog;
+    ImageButton helep;
+    ImageButton logout;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,12 +113,35 @@ public class userSprofile extends AppCompatActivity implements myProfileView {
             }
         });
 
+        helep=(ImageButton)findViewById(R.id.help) ;
+        helep.setVisibility(View.VISIBLE);
+        helep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(userSprofile.this, Help.class);
+                startActivity(intent);
+            }
+        });
         bmb= (BoomMenuButton) findViewById(R.id.bmb);
         SharedPreferences sp1= userSprofile.this.getSharedPreferences("Login", MODE_PRIVATE);
         uid2 =sp1.getInt("user_id", 0);
-        if(uid == uid2)
+        if(uid == uid2) {
             bmb.setVisibility(View.INVISIBLE);
-
+            logout=(ImageButton)findViewById(R.id.logout) ;
+            logout.setVisibility(View.VISIBLE);
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SharedPreferences preferences =getSharedPreferences("Login", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    Intent intent = new Intent(userSprofile.this, Login.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
         TextOutsideCircleButton.Builder builder = new TextOutsideCircleButton.Builder()
                 .normalImageRes(R.drawable.ic_teamwork)
                 .normalText("Teamwork").listener(new OnBMClickListener() {

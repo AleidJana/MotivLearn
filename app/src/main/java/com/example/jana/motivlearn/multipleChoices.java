@@ -27,14 +27,14 @@ public class multipleChoices extends AppCompatActivity implements multiChoicesVi
     ProgressDialog progressDialog;
     Bundle bundle;
     String title;
-    @SuppressLint("ResourceAsColor")
+    String pathtype;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiple_choices);
 
         bundle=getIntent().getExtras();
-        final String pathtype =bundle.getString("pathType");
+        pathtype =bundle.getString("pathType");
         if(pathtype.equals("p")) {
             title = "Create Challenge";
         }
@@ -73,8 +73,8 @@ public class multipleChoices extends AppCompatActivity implements multiChoicesVi
                 pres = new multiChoicesImp(multipleChoices.this);
 
                 if(pathtype.equals("p"))
-                pres.addPublicChallenge(userId,question, choice11, choice22, choice33, choice44,
-                        indx, title,field,time,coins);
+                    pres.addPublicChallenge(userId,question, choice11, choice22, choice33, choice44,
+                            indx, title,field,time,coins);
                 else
                     pres.suggestMultiChoices(userId,question, choice11, choice22, choice33, choice44,
                             indx, title,field,time,coins);
@@ -83,7 +83,6 @@ public class multipleChoices extends AppCompatActivity implements multiChoicesVi
         });
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(title);
-        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,10 +110,16 @@ public class multipleChoices extends AppCompatActivity implements multiChoicesVi
                 .setWarningBoxMargins(15,15,15,10)
                 .setAnimation(Noty.RevealAnim.SLIDE_UP, Noty.DismissAnim.BACK_TO_BOTTOM, 400,400)
                 .show();*/
-     //   finish();
+        //   finish();
+        String alertMessage="";
+        if(pathtype.equals("p")) {
+            alertMessage="You Have got 10 Coins";
+        }else{
+            alertMessage="You Have got 5 Coins";
+        }
         new TTFancyGifDialog.Builder(multipleChoices.this)
                 .setTitle("Congratulations")
-                .setMessage("You Have got 10 Coins")
+                .setMessage(alertMessage)
                 .setPositiveBtnText("Ok")
                 .setPositiveBtnBackground("#9577bc")
                 .setGifResource(R.drawable.hgif1)      //pass your gif, png or jpg

@@ -2,6 +2,7 @@ package com.example.jana.motivlearn;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TabHost;
@@ -46,7 +48,8 @@ public class TeacherProfile extends Fragment implements myProfileView {
     private View view;
     private myProfilePresenter pres;
     private BoomMenuButton bmb ;
-
+    ImageButton helep;
+    ImageButton logout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,6 +67,28 @@ public class TeacherProfile extends Fragment implements myProfileView {
         host = (TabHost)view.findViewById(R.id.tabHost);
         host.setup();
 
+        helep=(ImageButton)view.findViewById(R.id.help) ;
+        helep.setVisibility(View.VISIBLE);
+        helep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        logout=(ImageButton)view.findViewById(R.id.logout) ;
+        logout.setVisibility(View.VISIBLE);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences preferences =TeacherProfile.this.getActivity().getSharedPreferences("Login", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
+                Intent intent = new Intent(getActivity(), Login.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
         bmb= (BoomMenuButton) view.findViewById(R.id.bmb);
         bmb.setVisibility(View.INVISIBLE);

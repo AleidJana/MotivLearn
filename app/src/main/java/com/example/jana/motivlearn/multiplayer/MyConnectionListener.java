@@ -1,7 +1,5 @@
 package com.example.jana.motivlearn.multiplayer;
 
-import android.widget.Toast;
-
 import com.shephertz.app42.gaming.multiplayer.client.command.WarpResponseResultCode;
 import com.shephertz.app42.gaming.multiplayer.client.events.ConnectEvent;
 import com.shephertz.app42.gaming.multiplayer.client.listener.ConnectionRequestListener;

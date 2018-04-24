@@ -6,12 +6,14 @@ package com.example.jana.motivlearn;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TabHost;
@@ -49,6 +51,7 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
     boolean presentation=true;
     boolean communication=true;
     ProgressDialog progressDialog;
+    ImageButton logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +76,23 @@ public class userTprofile extends AppCompatActivity implements myProfileView {
         bmb= (BoomMenuButton)findViewById(R.id.bmb);
         SharedPreferences sp1= userTprofile.this.getSharedPreferences("Login", MODE_PRIVATE);
         uid2 =sp1.getInt("user_id", 0);
-        if(uid == uid2)
+        if(uid == uid2) {
             bmb.setVisibility(View.INVISIBLE);
-
+            logout=(ImageButton)findViewById(R.id.logout) ;
+            logout.setVisibility(View.VISIBLE);
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SharedPreferences preferences =getSharedPreferences("Login", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.clear();
+                    editor.commit();
+                    Intent intent = new Intent(userTprofile.this, Login.class);
+                    startActivity(intent);
+                   finish();
+                }
+            });
+        }
         //Tab 1
         TabHost.TabSpec spec = host.newTabSpec("Skills");
         spec.setContent(R.id.tab1);

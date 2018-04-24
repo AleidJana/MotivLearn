@@ -48,6 +48,11 @@
         <activity android:name=".JoinGroupChallenge" />
         <activity android:name=".Result" />
         <activity android:name=".finalResult"></activity>
+        <activity android:name=".Help" />
+        <activity android:name=".coins"/>
+        <activity android:name=".leaderboard"/>
+        <activity android:name=".levelshelp"/>
+        <activity android:name=".padgeshelp"/>
     </application>
 
 </manifest>

@@ -41,8 +41,8 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
         SharedPreferences sp1= getActivity().getSharedPreferences("Login", MODE_PRIVATE);
         username=sp1.getString("user_name","");
         WarpClient.initialize(apiKey,secretKey);
-        init();
         View view = inflater.inflate(R.layout.fragment_student_services, container, false);
+        init();
         RecordAchievement = (Button) view.findViewById(R.id.RecordAchievement);
         RecordAchievement.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
@@ -73,10 +73,11 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
             @Override
             public void onClick(View view) {
                 //If The Connection With AppWrapp Api Was Successfully, Calling createRoom Method To Generate Room Number
-                if(Multiplayer) {
-                        progressDialog = ProgressDialog.show(getActivity(), "", "Please wait...");
-                        theClient.createRoom("" + System.currentTimeMillis(), username, 4, null);
-                    }
+
+                        if(Multiplayer) {
+                            progressDialog = ProgressDialog.show(getActivity(), "", "Please wait...");
+                            theClient.createRoom("" + System.currentTimeMillis(), username, 4, null);
+                        }
 
             }
         });
@@ -208,4 +209,5 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
         intent.putExtra("roomId", roomId);
         startActivity(intent);
     }
+
 }

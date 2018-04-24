@@ -60,10 +60,11 @@ import java.util.Random;
 
 import cz.msebera.android.httpclient.Header;
 
+import static com.example.jana.motivlearn.multiplayer.MyConnectionListener.Multiplayer;
 import static com.loopj.android.http.AsyncHttpClient.log;
 
 public class GroupChallenge extends AppCompatActivity  implements  RoomRequestListener, NotifyListener, TurnBasedRoomListener {
-    private WarpClient theClient;
+    private WarpClient theClient=null;
 TextView textView0;
 TextView textView1;
 TextView textView2;
@@ -71,7 +72,7 @@ TextView textView3;
 int coins=0, MyCoins=0, time;
 int challnum=0;
 String winner="";
-    RadioGroup radio;
+RadioGroup radio;
 ProgressDialog progressDialog;
 String answer;
 ProgressBar progressBar;
@@ -96,12 +97,6 @@ String question;
         start=(Button) findViewById(R.id.button);
         SharedPreferences sp1= this.getSharedPreferences("Login", MODE_PRIVATE);
         username=sp1.getString("user_name","");
-        try {
-            theClient = WarpClient.getInstance();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         roomId=getIntent().getStringExtra("roomId");
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(roomId);
@@ -118,13 +113,18 @@ String question;
     }
 
     private void init(String roomId){
-        if(theClient!=null){
+        try {
+            theClient = WarpClient.getInstance();
             theClient.addNotificationListener(this);
             theClient.addRoomRequestListener(this);
             theClient.addTurnBasedRoomListener(this);
             theClient.joinRoom(roomId);
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+
+
     }
 
     @Override

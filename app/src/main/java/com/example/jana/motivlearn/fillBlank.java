@@ -24,7 +24,7 @@ public class fillBlank extends AppCompatActivity implements fillBlankView {
     ProgressDialog progressDialog;
 String pagetitle ;
 Bundle bundle;
-    @SuppressLint("ResourceAsColor")
+    String pathtype;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,7 @@ Bundle bundle;
             }
         });
         bundle=getIntent().getExtras();
-        final String pathtype =bundle.getString("pathType");
+         pathtype =bundle.getString("pathType");
         if(pathtype.equals("p")) {
             pagetitle = "Create Challenge";
         }
@@ -74,16 +74,8 @@ Bundle bundle;
             }
         });
 
-    /*    try {
-            String ss = "[{  'GENERATED_KEY': 2 }]";
-            ss = ss.substring(1, ss.length()-1);
-            JSONObject obj = new JSONObject(ss);
-            int index = obj.getInt("GENERATED_KEY");
-        }
-        catch (Exception e) {}*/
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(pagetitle);
-        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,26 +91,30 @@ Bundle bundle;
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
         int resourceId = this.getResources().getIdentifier(message, "string", this.getPackageName());
         String mmm = fillBlank.this.getResources().getString(resourceId);
-
-        new TTFancyGifDialog.Builder(fillBlank.this)
-                .setTitle("Congratulations")
-                .setMessage("You Have got 10 Coins")
-                .setPositiveBtnText("Ok")
-                .setPositiveBtnBackground("#9577bc")
-                .setGifResource(R.drawable.hgif1)      //pass your gif, png or jpg
-                .isCancellable(true)
-                .OnPositiveClicked(new TTFancyGifDialogListener() {
-                    @Override
-                    public void OnClick() {
-                        //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra("nextFrag", "cha");
-                        startActivity(intent);
-                    }
-                })
-                .build();
-
+        String alertMessage="";
+        if(pathtype.equals("p")) {
+            alertMessage="You Have got 10 Coins";
+        }else{
+            alertMessage="You Have got 5 Coins";
+        }
+            new TTFancyGifDialog.Builder(fillBlank.this)
+                    .setTitle("Congratulations")
+                    .setMessage(alertMessage)
+                    .setPositiveBtnText("Ok")
+                    .setPositiveBtnBackground("#9577bc")
+                    .setGifResource(R.drawable.hgif1)      //pass your gif, png or jpg
+                    .isCancellable(true)
+                    .OnPositiveClicked(new TTFancyGifDialogListener() {
+                        @Override
+                        public void OnClick() {
+                            //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            //   intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.putExtra("nextFrag", "cha");
+                            startActivity(intent);
+                        }
+                    })
+                    .build();
     }
 
     @Override

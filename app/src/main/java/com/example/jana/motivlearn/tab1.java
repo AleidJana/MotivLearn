@@ -3,6 +3,7 @@ package com.example.jana.motivlearn;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TabHost;
@@ -49,6 +51,8 @@ public class tab1 extends Fragment implements myProfileView {
     private ArrayList<RadarDataSet> dataSets = new ArrayList<>();
     private View view;
     private myProfilePresenter pres;
+    ImageButton helep;
+    ImageButton logout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,11 +67,32 @@ public class tab1 extends Fragment implements myProfileView {
         newtonCradleLoading = (NewtonCradleLoading)view.findViewById(R.id.newton_cradle_loading);
         newtonCradleLoading.setVisibility(View.VISIBLE);
         newtonCradleLoading.start();
-
         TabHost host = (TabHost)view.findViewById(R.id.tabHost);
         host.setup();
 
-
+        helep=(ImageButton)view.findViewById(R.id.help) ;
+        helep.setVisibility(View.VISIBLE);
+        helep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), Help.class);
+                startActivity(intent);
+            }
+        });
+        logout=(ImageButton)view.findViewById(R.id.logout) ;
+        logout.setVisibility(View.VISIBLE);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences preferences =tab1.this.getActivity().getSharedPreferences("Login", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.commit();
+                Intent intent = new Intent(getActivity(), Login.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
         bmb= (BoomMenuButton) view.findViewById(R.id.bmb);
         bmb.setVisibility(View.INVISIBLE);
@@ -131,7 +156,7 @@ public class tab1 extends Fragment implements myProfileView {
                                         @Override
                                         public void onThresholdCleared(RatingDialog ratingDialog, float rating, boolean thresholdCleared) {
                                             //do something
-                                            Toast.makeText(getContext(),"rating value is : "+rating,Toast.LENGTH_LONG).show();
+                                        //    Toast.makeText(getActivity(),"rating value is : "+rating,Toast.LENGTH_LONG).show();
 
                                           //  ratingDialog.dismiss();
                                         }
