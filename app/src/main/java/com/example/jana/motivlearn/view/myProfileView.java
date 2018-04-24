@@ -8,6 +8,6 @@ public interface myProfileView {
 
     void displayInfo(String res);
     void updateChart(String skillstr);
-    void cantRate(int type,String skill);
+    void cantRate(String skill);
   //  void rateForm(String skill);
 }

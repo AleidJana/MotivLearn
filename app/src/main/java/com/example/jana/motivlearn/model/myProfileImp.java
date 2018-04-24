@@ -79,7 +79,6 @@ public class myProfileImp implements myProfilePresenter {
                     public void onSuccess(int statusCode, Header[] headers, String res) {
                         //   Toast.makeText((Context) vue,"owwww", Toast.LENGTH_SHORT).show();
                         getUserInfo(uid);
-
                     }
 
                     @Override
@@ -91,26 +90,15 @@ public class myProfileImp implements myProfilePresenter {
     }
 
     @Override
-    public void didRate(int rid, final int uid) {
+    public void didRate(int rid, int uid) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         client.get("https://api.appery.io/rest/1/apiexpress/api/checkRates/?apiKey=cb85dda5-927f-4408-844b-44bb99347ed4&userid="+uid+"&rater="+rid, params, new TextHttpResponseHandler()
                 {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String res) {
-                        //   Toast.makeText((Context) vue,"owwww", Toast.LENGTH_SHORT).show();
-                       if(res.length()<3)
-                            vue.cantRate(1,null);
-                        else
-                           vue.cantRate(2,res);
-
-                        //vue.rateForm(skill);
-
-
-                    /*    else
-                            vue2.displayInfo(res);*/
+                           vue.cantRate(res);
                     }
-
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
 
@@ -127,12 +115,8 @@ public class myProfileImp implements myProfilePresenter {
                 {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String res) {
-                        //   Toast.makeText((Context) vue,"owwww", Toast.LENGTH_SHORT).show();
-                       // res = res.substring(1,res.length()-1);
                         vue.updateChart(res);
-
                     }
-
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
 

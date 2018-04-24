@@ -26,16 +26,28 @@ public class RecordAchievement extends AppCompatActivity implements recordAchiev
     private CodeScanner mCodeScanner;
     private String res;
     private recordAchievementPresenter pres;
-
+    private int uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_achievement);
+        SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
+        uid=sp1.getInt("user_id", 0);
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("Recode Extra Achievement");
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         CodeScannerView scannerView = findViewById(R.id.scanner_view);
         // Use builder
         mCodeScanner = CodeScanner.builder()
-                .formats(CodeScanner.ALL_FORMATS)/*List<BarcodeFormat>*/
+                .formats(CodeScanner.ALL_FORMATS)
+                //List<BarcodeFormat>
                 .autoFocus(true).autoFocusMode(AutoFocusMode.SAFE).autoFocusInterval(2000L)
                 .flash(false)
                 .onDecoded(new DecodeCallback() {
@@ -44,37 +56,17 @@ public class RecordAchievement extends AppCompatActivity implements recordAchiev
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                              //  Toast.makeText(RecordAchievement.this, result.getText(),
-                                //        Toast.LENGTH_LONG).show();
                                 res = result.getText().trim();
                                 if(res.equals("MotivLearn"))
                                 {
-                                    SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
-                                    int uid =sp1.getInt("user_id", 0);
                                     pres= new recordAchievementImp(RecordAchievement.this);
                                     pres.updateUserCoins(uid);
                                 }
                                 else
-                                {new TTFancyGifDialog.Builder(RecordAchievement.this)
-                                        .setTitle("Incorrect QR code")
-                                        .setMessage("Check the correct QR code, then try again")
-                                        .setPositiveBtnText("Ok")
-                                        .setPositiveBtnBackground("#9577bc")
-                                        .setGifResource(R.drawable.hgif4)      //pass your gif, png or jpg
-                                        .isCancellable(true)
-                                        .OnPositiveClicked(new TTFancyGifDialogListener() {
-                                            @Override
-                                            public void OnClick() {
-                                                //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
-                                             //   finish();
-                                            }
-                                        })
-                                        .build();}
-                            }
-                        });
-                    }
-                })
-                /*error callback*/
+                                    incorrectBarCode();
+                            }});
+                    }})
+                //error callback
                 .onError(new ErrorCallback() {
                     @Override
                     public void onError(@NonNull final Exception error) {
@@ -85,24 +77,14 @@ public class RecordAchievement extends AppCompatActivity implements recordAchiev
                                         Toast.LENGTH_LONG).show();
                             }
                         });
-                    }
-                }).build(this, scannerView);
-
+                    }}).build(this, scannerView);
         scannerView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mCodeScanner.startPreview();
             }
         });
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle("Recode Extra Achievement");
-        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+
     }
 
     @Override
@@ -154,6 +136,22 @@ public class RecordAchievement extends AppCompatActivity implements recordAchiev
                 })
                 .build();
 
+    }
+
+    public void incorrectBarCode()
+    {
+        new TTFancyGifDialog.Builder(RecordAchievement.this)
+                .setTitle("Incorrect QR code")
+                .setMessage("Check the correct QR code, then try again")
+                .setPositiveBtnText("Ok")
+                .setPositiveBtnBackground("#9577bc")
+                .setGifResource(R.drawable.hgif4)
+                .isCancellable(true)
+                .OnPositiveClicked(new TTFancyGifDialogListener() {
+                    @Override
+                    public void OnClick() {
+                    }
+                }).build();
     }
 }
 

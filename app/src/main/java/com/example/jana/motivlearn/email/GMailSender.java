@@ -3,10 +3,8 @@ package com.example.jana.motivlearn.email;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-
 import com.example.jana.motivlearn.Register;
 import com.example.jana.motivlearn.RegisterCode;
-
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -18,9 +16,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-//Class is extending AsyncTask because this class is going to perform a networking operation
 public class GMailSender extends AsyncTask<Void,Void,Void> {
-
     //Declaring Variables
     private Register context;
     private Session session;
@@ -41,7 +37,6 @@ public class GMailSender extends AsyncTask<Void,Void,Void> {
         progressDialog=p;
         this.userinfo=userinfo;
     }
-
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
@@ -51,7 +46,9 @@ public class GMailSender extends AsyncTask<Void,Void,Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         progressDialog.dismiss();
+        //After Sending An Email Here Will Open A Register Code Page To Verify Registration Code Was Sending
         Intent intent=new Intent(context,RegisterCode.class);
+        //Add User Information As Extra To Intent Which Will Use It After Verifying Registration Code
         intent.putExtra("userinfo",userinfo);
         context.startActivity(intent);
     }
@@ -60,7 +57,6 @@ public class GMailSender extends AsyncTask<Void,Void,Void> {
         //Creating properties
         Properties props = new Properties();
         //Configuring properties for gmail
-        //If you are not using gmail you may need to change the values
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -77,7 +73,6 @@ public class GMailSender extends AsyncTask<Void,Void,Void> {
                 return new PasswordAuthentication(Config.EMAIL, Config.PASSWORD);
             }
         });
-
         try {
             //Creating MimeMessage object
             MimeMessage mm = new MimeMessage(session);

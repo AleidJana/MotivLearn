@@ -24,8 +24,8 @@ public class CreatGroupChallenge extends AppCompatActivity implements ZoneReques
     private WarpClient theClient;
     TextView textView;
     private ProgressDialog progressDialog = null;
-   int userType;
-   Button button;
+    int userType;
+    Button button;
     String roomid;
     String username;
     @Override
@@ -45,6 +45,7 @@ public class CreatGroupChallenge extends AppCompatActivity implements ZoneReques
             }
         });
     }
+
     private void init(){
         try {
             theClient = WarpClient.getInstance();

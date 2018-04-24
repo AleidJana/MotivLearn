@@ -182,7 +182,7 @@
                 android:padding="9dp"
                 android:maxLines="4"
                 android:scrollbars="vertical"
-                android:drawableRight="@drawable/ic_edit"
+                android:drawableRight="@drawable/ic_send"
                 android:maxLength="280"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/white"

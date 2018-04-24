@@ -11,10 +11,12 @@ import com.shephertz.app42.gaming.multiplayer.client.listener.ConnectionRequestL
  */
 
 public class MyConnectionListener implements ConnectionRequestListener {
+    public  static boolean Multiplayer=false;
     @Override
     public void onConnectDone(ConnectEvent connectEvent) {
 
         if(connectEvent.getResult() == WarpResponseResultCode.SUCCESS){
+            Multiplayer=true;
             System.out.println("yipee I have connected");
         }
     }

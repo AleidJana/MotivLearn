@@ -52,7 +52,6 @@ public class suggestVedio extends Activity implements SuggestVedioView {
                 finish();
             }
         });
-
     }
 
     @Override

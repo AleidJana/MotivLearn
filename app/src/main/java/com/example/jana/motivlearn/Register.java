@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.emredavarci.noty.Noty;
 
@@ -19,8 +18,6 @@ import com.example.jana.motivlearn.email.GMailSender;
 import com.example.jana.motivlearn.model.PresenterImp;
 import com.example.jana.motivlearn.presenter.RegisterPresenter;
 import com.example.jana.motivlearn.view.RegisterView;
-
-import org.json.JSONObject;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -70,17 +67,15 @@ public class Register extends AppCompatActivity implements RegisterView{
                 else{
 
                     if (email.contains("@")&&((email.substring(email.indexOf("@"))).toLowerCase().equals("@student.ksu.edu.sa") ||(email.substring(email.indexOf("@"))).toLowerCase().equals("@ksu.edu.sa"))) {
-                        if (!isValidPassword(password)) {
-                            errormessage("The password should be more than 8 characters whiteout spaces ");
-                        } else {
-
-                        if (password.equals(conPassword)) {
-                            mRegisterView.isExist(email);
-                        } else {
-                            errormessage("The passwords not matches");
+                        if (validatePassword(password)) {
+                            if (password.equals(conPassword)) {
+                                progressDialog = ProgressDialog.show(Register.this, "", "Please wait...");
+                                mRegisterView.isExist(email);
+                            } else {
+                                errormessage("The passwords not matches");
+                            }
                         }
                     }
-                        }
                         else {errormessage("Please enter KSU email");}
                     }
             }
@@ -94,13 +89,6 @@ public class Register extends AppCompatActivity implements RegisterView{
         });
     }
 
-    private void sendEmail(String email,String title,String message,ProgressDialog p,String[] userinfo)
-    {
-
-        GMailSender sm = new GMailSender(this,email,title,message,p,userinfo);
-        sm.execute();
-
-    }
     private void errormessage (String message)
     {
         RelativeLayout rl = (RelativeLayout) findViewById(R.id.myLayout) ;
@@ -127,35 +115,56 @@ public class Register extends AppCompatActivity implements RegisterView{
 
     }
 
+    private void sendEmail(String email,String title,String message,ProgressDialog p,String[] userinfo)
+    {
+        // Create An Object Of GMailSender Class
+        GMailSender sm = new GMailSender(this,email,title,message,p,userinfo);
+        sm.execute();
+    }
     @Override
     public void setResult(String message) {
-
         try {
             if(message.equals("[]"))
             {
                 userinfo = new String[]{userName, email, password, conPassword, String.valueOf(radioButton.getText())};
-                progressDialog = ProgressDialog.show(Register.this, "", "Please wait...");
+                //progressDialog = ProgressDialog.show(Register.this, "", "Please wait...");
                 RQ = "" + ((int) (Math.random() * 9000) + 1000);
                 SharedPreferences sp = getSharedPreferences("RegisterCode", MODE_PRIVATE);
                 SharedPreferences.Editor Ed = sp.edit();
                 Ed.putString("RQ", RQ);
                 Ed.commit();
-                sendEmail(email, "Registration code", "Dear " + userName + ", Welcome to MotivLearn Community your registration code is:  " + RQ, progressDialog, userinfo);
+                //Calling sendEmail Method With Subject And Message
+                sendEmail(email, "Registration code", "Dear " + userName + ", " +
+                        "Welcome to MotivLearn Community your registration code is:  " + RQ, progressDialog, userinfo);
             }
             else {
+                progressDialog.dismiss();
                 errormessage("This email is already exist");
                }
         }
         catch (Exception e){}
     }
 
-    public  boolean isValidPassword( String password) {
-        Matcher matcher;
-        Pattern PASSWORD_PATTERN = Pattern.compile("[a-zA-Z0-9\\!\\@\\#\\$]{8,24}");
-        matcher = PASSWORD_PATTERN.matcher(password);
-        return matcher.matches();
 
+    public boolean validatePassword(String password)
+    {
+        Pattern hasUppercase = Pattern.compile("[A-Z]");
+        Pattern hasLowercase = Pattern.compile("[a-z]");
+        Pattern hasNumber = Pattern.compile("\\d");
+        Pattern hasSpecialChar = Pattern.compile("[^a-zA-Z0-9 ]");
+        String meassage;
+        boolean flag=true;
+            if (password.length() < 8 || password.contains(" ")) {
+                errormessage("The password should be more than 8 characters whiteout spaces");
+                flag=false;
+            }else
+            if ((!hasUppercase.matcher(password).find())||(!hasLowercase.matcher(password).find())||(!hasNumber.matcher(password).find())||(!hasSpecialChar.matcher(password).find())) {
+                errormessage("The password should contain at least one uppercase,lowercase,special character and number");
+                flag=false;
+            }
+            return flag;
     }
+
 }
 
 

@@ -34,7 +34,6 @@ public class watchVideoImp implements watchVideoPresenter {
                 {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String res) {
-                      //  Toast.makeText((Context) vue, res,Toast.LENGTH_SHORT).show();
                         if(res.length() > 3)
                             vue.setUrl(res);
                         else
@@ -58,8 +57,6 @@ public class watchVideoImp implements watchVideoPresenter {
                 {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, String res) {
-                        //  Toast.makeText((Context) vue, res,Toast.LENGTH_SHORT).show();
-
                     }
 
                     @Override

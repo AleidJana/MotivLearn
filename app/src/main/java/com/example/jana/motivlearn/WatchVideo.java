@@ -64,108 +64,46 @@ private boolean flag=false;
         player = (BetterVideoPlayer) findViewById(R.id.player);
         player.setCallback(this);
         player.disableControls();
-
     }
 
     @Override
     public void setUrl(String res)
     {
-      //  TEST_URL = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
         try {
             res = res.substring(1, res.length() - 1);
             JSONObject obj = new JSONObject(res);
             url = obj.getString("link");
             vidId = obj.getInt("video_id");
+
             MediaMetadataRetriever retriever = new MediaMetadataRetriever();
             if (Build.VERSION.SDK_INT >= 14)
                 retriever.setDataSource(url, new HashMap<String, String>());
             else
                 retriever.setDataSource(url);
+            //Getting The Video Duration Process And Convert It To Seconds
             String mVideoDuration =  retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
             long mTimeInMilliseconds= Long.parseLong(mVideoDuration);
             seconds = (int)mTimeInMilliseconds/1000;
-
+            //Close Button In Video Page
             imgbtn = findViewById(R.id.imageButton);
             imgbtn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
                     player.pause();
-                    new TTFancyGifDialog.Builder(WatchVideo.this)
-                            .setTitle("Are you sure you want close the video?")
-                            .setMessage("Note that you will not be able to rewatch this video\n and you will not gain any coins")
-                            .setPositiveBtnText("Yes")
-                            .setPositiveBtnBackground("#9577bc")
-                            .setNegativeBtnText("No")
-                            .setNegativeBtnBackground("#c6c9ce")
-                            .setGifResource(R.drawable.hgif5)      //pass your gif, png or jpg
-                            .isCancellable(true)
-                            .OnPositiveClicked(new TTFancyGifDialogListener() {
-                                @Override
-                                public void OnClick() {
-                                    //Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
-                                    finish();
-                                }
-                            })
-                            .OnNegativeClicked(new TTFancyGifDialogListener() {
-                                @Override
-                                public void OnClick() {
-                                    //Toast.makeText(MainActivity.this,"Cancel",Toast.LENGTH_SHORT).show();
-                                    player.start();
-                                }
-                            })
-                            .build();
+                    //Display An Alert To Ensure If The User Want To close The video Without Getting Any Coins
+                    closeVideo();
                 }
             });
-          //  Toast.makeText(this,seconds+"", Toast.LENGTH_SHORT).show();
         }
         catch (Exception e) {}
-//String uu = "https://www.youtube.com/embed/_QElVrqBwnk";
-        //Toast.makeText(this,url, Toast.LENGTH_SHORT).show();
+        //Set The Video Url and Play It
         player.setSource(Uri.parse(url));
         player.disableSwipeGestures();
         player.setAutoPlay(true);
-       // seconds = player.getDuration()/1000;
-        progressBar = (CircleProgressBar) findViewById(R.id.progressBar);
-        progressBar.setProgress(seconds);
-        progressBar.setMaxValue(seconds); 			// set progress max value
-        progressBar.setStrokeWidth(5); 		// set stroke width
-        progressBar.setBackgroundWidth(5); 		// set progress background width
-        progressBar.setText(String.valueOf(seconds)); 	// set progress text
-        progressBar.setTextColor("#FFFFFF"); 		// set text color
-        //player.start();
-
+        setProgressBar();
     }
-
-    @Override
-    public void noVid() {
-        new TTFancyGifDialog.Builder(WatchVideo.this)
-                .setTitle("No Video to Watch")
-                .setMessage("you have watched this week's video, come again next week")
-                .setPositiveBtnText("Ok")
-                .setPositiveBtnBackground("#9577bc")
-                .setGifResource(R.drawable.hgif2)      //pass your gif, png or jpg
-                .isCancellable(true)
-                .OnPositiveClicked(new TTFancyGifDialogListener() {
-                    @Override
-                    public void OnClick() {
-                        //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                })
-                .build();
-    }
-
-   /* @Override
-    public void onPause() {
-        player.pause();
-        super.onPause();
-        // Make sure the player stops playing if the user presses the home button.
-
-
-    }*/
 
     // Methods for the implemented EasyVideoCallback
-
     @Override
     public void onStarted(BetterVideoPlayer player) {
         Log.i("haifa", "Started");
@@ -181,17 +119,12 @@ private boolean flag=false;
         Log.i("haifa", "Preparing");
     }
 
-
-
     @Override
     public void onPrepared(final BetterVideoPlayer player) {
-        Log.i("haifa", "Prepared");
-
         updateHandler = new Handler();
         Runnable RecurringTask = new Runnable() {
-
             public void run() {
-                // Do whatever you want
+                //Display The Current Position Of Video In The ProgressBar
                 int mm = player.getCurrentPosition()/1000;
                 progressBar.setText(String.valueOf(seconds-mm));
                    progressBar.setProgress(seconds-mm);
@@ -201,7 +134,6 @@ private boolean flag=false;
         };
         // Do this first after 1 second
         updateHandler.postDelayed(RecurringTask, 1000);
-
     }
 
 
@@ -218,31 +150,14 @@ private boolean flag=false;
 
     @Override
     public void onCompletion(BetterVideoPlayer player) {
+        //Stop The Handler
         if(updateHandler!=null) {
             updateHandler.removeCallbacksAndMessages(null);
         }
-     //   Toast.makeText(this,"finished", Toast.LENGTH_SHORT).show();
-       // super.onBackPressed();
+        //Update User Coins In Database After Complete Watching
         pres.updateUserCoins(uid, vidId);
-        //Toast.makeText(this,"uid"+uid, Toast.LENGTH_SHORT).show();
-    //    Toast.makeText(this,"vidId"+vidId, Toast.LENGTH_SHORT).show();
-        new TTFancyGifDialog.Builder(WatchVideo.this)
-                .setTitle("Congratulations")
-                .setMessage("You Have got 10 Coins")
-                .setPositiveBtnText("Ok")
-                .setPositiveBtnBackground("#9577bc")
-                .setGifResource(R.drawable.hgif1)      //pass your gif, png or jpg
-                .isCancellable(true)
-                .OnPositiveClicked(new TTFancyGifDialogListener() {
-                    @Override
-                    public void OnClick() {
-                        //Toast.makeText(WatchVideo.this,"Ok",Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                })
-                .build();
-
-
+        //Display An Alert To Inform The How Many Coins She Getting
+        congratulation();
     }
 
     @Override
@@ -252,13 +167,15 @@ private boolean flag=false;
 
     @Override
     public void onBackPressed() {
-       // Toast.makeText(this,"can't go back", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onPause() {
-        super.onPause();  // Always call the superclass method first
-if(player.isPlaying()) {
+        super.onPause();
+        // Ensure If The Video Is Playing or not
+        //flag: Status Of The Video If Posed Or Not
+        // currentposition : Current Position In Seconds To Use It When Resume
+    if(player.isPlaying()) {
     player.pause();
     flag=true;
     currentposition=player.getCurrentPosition();
@@ -271,7 +188,81 @@ if(player.isPlaying()) {
         if(flag) {
             player.start();
             player.seekTo(currentposition);
-
         }
+    }
+
+    @Override
+    public void noVid() {
+        noVideo();
+    }
+    public void closeVideo()
+    {
+        new TTFancyGifDialog.Builder(WatchVideo.this)
+                .setTitle("Are you sure you want close the video?")
+                .setMessage("Note that the video will be playing from the beginning\n on the next time")
+                .setPositiveBtnText("Yes")
+                .setPositiveBtnBackground("#9577bc")
+                .setNegativeBtnText("No")
+                .setNegativeBtnBackground("#c6c9ce")
+                .setGifResource(R.drawable.hgif5)
+                .isCancellable(true)
+                .OnPositiveClicked(new TTFancyGifDialogListener() {
+                    @Override
+                    public void OnClick() {
+                        finish();
+                    }
+                })
+                .OnNegativeClicked(new TTFancyGifDialogListener() {
+                    @Override
+                    public void OnClick() {
+                        player.start();
+                    }
+                })
+                .build();
+    }
+    public void setProgressBar()
+    {
+        progressBar = (CircleProgressBar) findViewById(R.id.progressBar);
+        progressBar.setProgress(seconds);
+        progressBar.setMaxValue(seconds); 			// set progress max value
+        progressBar.setStrokeWidth(5); 		// set stroke width
+        progressBar.setBackgroundWidth(5); 		// set progress background width
+        progressBar.setText(String.valueOf(seconds)); 	// set progress text
+        progressBar.setTextColor("#FFFFFF"); 		// set text color
+    }
+    public void noVideo()
+    {
+        new TTFancyGifDialog.Builder(WatchVideo.this)
+                .setTitle("No Video to Watch")
+                .setMessage("you have watched this week's video, come again next week")
+                .setPositiveBtnText("Ok")
+                .setPositiveBtnBackground("#9577bc")
+                .setGifResource(R.drawable.hgif2)      //pass your gif, png or jpg
+                .isCancellable(true)
+                .OnPositiveClicked(new TTFancyGifDialogListener() {
+                    @Override
+                    public void OnClick() {
+                        finish();
+                    }
+                })
+                .build();
+    }
+    public void congratulation()
+    {
+        new TTFancyGifDialog.Builder(WatchVideo.this)
+                .setTitle("Congratulations")
+                .setMessage("You Have got 10 Coins")
+                .setPositiveBtnText("Ok")
+                .setPositiveBtnBackground("#9577bc")
+                .setGifResource(R.drawable.hgif1)      //pass your gif, png or jpg
+                .isCancellable(true)
+                .OnPositiveClicked(new TTFancyGifDialogListener() {
+                    @Override
+                    public void OnClick() {
+                        finish();
+                    }
+                })
+                .build();
+
     }
 }

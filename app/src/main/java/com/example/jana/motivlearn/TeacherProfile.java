@@ -300,7 +300,7 @@ public class TeacherProfile extends Fragment implements myProfileView {
     }
 
     @Override
-    public void cantRate(int type, String skill) {
+    public void cantRate(String skill) {
 
     }
 }

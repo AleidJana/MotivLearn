@@ -27,12 +27,12 @@ import com.shephertz.app42.gaming.multiplayer.client.listener.ZoneRequestListene
 import static android.content.Context.MODE_PRIVATE;
 import static com.example.jana.motivlearn.multiplayer.Constants.apiKey;
 import static com.example.jana.motivlearn.multiplayer.Constants.secretKey;
+import static com.example.jana.motivlearn.multiplayer.MyConnectionListener.Multiplayer;
 
 public class StudentServices extends Fragment  implements ZoneRequestListener {
     Button RecordAchievement,WatchVideo,CreateGroupChallenge, SuggestChallenge,SuggestVideo,JoinGroupChallenge;
     private static final int CAMERA_REQUEST = 1888;
-    WarpClient myGame;
-    private WarpClient theClient;
+    private WarpClient theClient=null;
     private ProgressDialog progressDialog = null;
     int uid;
     String username;
@@ -41,16 +41,8 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
         SharedPreferences sp1= getActivity().getSharedPreferences("Login", MODE_PRIVATE);
         username=sp1.getString("user_name","");
         WarpClient.initialize(apiKey,secretKey);
+        init();
         View view = inflater.inflate(R.layout.fragment_student_services, container, false);
-        myGame = null;
-        try {
-            myGame = WarpClient.getInstance();
-            myGame.addConnectionRequestListener(new MyConnectionListener());
-            WarpClient.getInstance().connectWithUserName(username);
-            init();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         RecordAchievement = (Button) view.findViewById(R.id.RecordAchievement);
         RecordAchievement.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
@@ -58,14 +50,12 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
             public void onClick(View view) {
 
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions( //Method of Fragment
+                    requestPermissions(//Method of Fragment
                             new String[]{Manifest.permission.CAMERA}, CAMERA_REQUEST
                     );
                 } else {
                     startActivity(new Intent(getActivity(), RecordAchievement.class));
                 }
-
-
             }
         });
 
@@ -77,19 +67,20 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
 
             }
         });
-
         CreateGroupChallenge = (Button) view.findViewById(R.id.CreateGroupChallenge);
         CreateGroupChallenge.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View view) {
-              /*  Intent intent=new Intent(getActivity(), CreatGroupChallenge.class);
-                intent.putExtra("usertype",1);
-                startActivity(intent);*/
-                theClient.createRoom("" + System.currentTimeMillis(), username, 4, null);
-                progressDialog = ProgressDialog.show(getActivity(), "", "Please wait...");
+                //If The Connection With AppWrapp Api Was Successfully, Calling createRoom Method To Generate Room Number
+                if(Multiplayer) {
+                        progressDialog = ProgressDialog.show(getActivity(), "", "Please wait...");
+                        theClient.createRoom("" + System.currentTimeMillis(), username, 4, null);
+                    }
+
             }
         });
+
         SuggestChallenge = (Button) view.findViewById(R.id.SuggestChallenge);
         SuggestChallenge.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,21 +106,25 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
         // Inflate the layout for this fragment
         return view;
     }
+    // Initiate The Connection With AppWrap Api And Add Listener for the Instance
     private void init(){
         try {
             theClient = WarpClient.getInstance();
+            theClient.addConnectionRequestListener(new MyConnectionListener());
+            WarpClient.getInstance().connectWithUserName(username);
             theClient.addZoneRequestListener(this);
         } catch (Exception ex) {
 
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == CAMERA_REQUEST) {
             if (permissions[0].equals(Manifest.permission.CAMERA)
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
                 startActivity(new Intent(getActivity(), RecordAchievement.class));
-                //  proceedWithSdCard();
             }
         }
     }
@@ -145,6 +140,7 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
 
     }
 
+// Using This Method To Handel Events After Creating Rome is done
     @Override
     public void onCreateRoomDone(final RoomEvent roomEvent) {
        getActivity().runOnUiThread(new Runnable() {
@@ -197,6 +193,8 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
     public void onGetUserStatusDone(LiveUserInfoEvent liveUserInfoEvent) {
 
     }
+
+    //Using This Method TO Handel Events When the Users Joining The group
     public void joinRoom(String roomId){
         if(roomId!=null && roomId.length()>0){
             goToGroupChallengeScreen(roomId);
@@ -204,6 +202,7 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
             Log.d("joinRoom", "failed:"+roomId);
         }
     }
+    //Using This Method For Moveing The Users to A Challenge room page
     private void goToGroupChallengeScreen(String roomId){
         Intent intent = new Intent(getActivity(), GroupChallenge.class);
         intent.putExtra("roomId", roomId);

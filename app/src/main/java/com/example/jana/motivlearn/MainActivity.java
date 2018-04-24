@@ -1,135 +1,70 @@
 package com.example.jana.motivlearn;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
-
-import com.example.jana.motivlearn.model.challengeBoardImp;
-import com.example.jana.motivlearn.presenter.challengeBoardPresenter;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
-
 public class MainActivity extends AppCompatActivity {
-
-    public static FragmentManager fm;
+    public Fragment t1;
+    public  String type;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-       // Toast.makeText(getContext(),s,Toast.LENGTH_LONG).show();
-
-
+        // Here WE Getting The User Type Attribute From Shared Preferences To Check The User Type
+        SharedPreferences sp1= MainActivity.this.getSharedPreferences("Login", MODE_PRIVATE);
+        type =sp1.getString("user_type", null);
+        // Identify the BottomBar View to set Listeners
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
-
-
+                // The Movement Between System Tabs Done By The Following Switch Statement
                 switch (tabId)
                 {
                     case R.id.tab_Profile:
                     {
-                        Fragment t1;
-                        SharedPreferences sp1= MainActivity.this.getSharedPreferences("Login", MODE_PRIVATE);
-                        String type =sp1.getString("user_type", null);
                         if(type.equals("S"))
-                            t1 = new tab1();
+                            t1 = new tab1(); //Open Student Profile fragment
                         else
-                            t1 = new TeacherProfile();
-
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_layout, t1);
-                        transaction.commit();
+                            t1 = new TeacherProfile(); //Open Teacher Profile fragment
                     }
                     break;
-                    case R.id.tab_Timeline:
-                    {
-                        Fragment t1 = new tab2();
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_layout, t1);
-                        transaction.commit();
-                    }
+                    case R.id.tab_Timeline: {t1 = new tab2();} //Open Timeline fragment
                     break;
-                    case R.id.tab_Leaderboard:
-                    {
-                        Fragment t1 = new tab3();
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_layout, t1);
-                        transaction.commit();
-                    }
+                    case R.id.tab_Leaderboard: {t1 = new tab3();} //Open LeaderBoard fragment
                     break;
-                    case R.id.tab_Challengeboard:
-                    {
-                        Fragment t1 = new tab4();
-                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.frame_layout, t1);
-                        transaction.commit();
-                    }
+                    case R.id.tab_Challengeboard: {t1 = new tab4();} //Open ChallengeBoard fragment
                     break;
                     case R.id.tab_Services:
                     {
-                        Fragment t1;
-                        SharedPreferences sp1= MainActivity.this.getSharedPreferences("Login", MODE_PRIVATE);
-                        String type =sp1.getString("user_type", null);
                         if(type.equals("T"))
-                            t1 = new tab5();
+                            t1 = new tab5(); //Open Student Services fragment
                         else
-                            t1 = new StudentServices();
-
-                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                            transaction.replace(R.id.frame_layout, t1);
-                            transaction.commit();
+                            t1 = new StudentServices(); //Open Teacher Services fragment
                     }
                     break;
                 }
-
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                // Change The Layout And Set The fragment Was Created In The Switch Based On The Clicked Tab
+                transaction.replace(R.id.frame_layout, t1);
+                transaction.commit();
             }
         });
-
-      /*  if(getIntent() != null) {
-            int intentFragment = getIntent().getExtras().getInt("frgToLoad");
-            if (intentFragment!= 0) {
-          */
 
       if(getIntent().hasExtra("nextFrag")) {
           String str = getIntent().getStringExtra("nextFrag");
           if (str.equals("cha"))
               bottomBar.selectTabAtPosition(3);
       }
-          /*      Fragment t1 = new tab4();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, t1);
-                transaction.commit();
-            }
-        }*/
-        /*String s = getIntent().getStringExtra("id");
-        if(s!=null)
-        bottomBar.selectTabAtPosition(Integer.parseInt(s));*/
-
-      //  fm = getFragmentManager();
-
     }
-
     @Override
     public void onBackPressed() {
-
-       /* int count = getFragmentManager().getBackStackEntryCount();
-
-        if (count == 0) {
-            super.onBackPressed();
-            //additional code
-        } else {
-            getFragmentManager().popBackStack();
-        }*/
-
     }
 }
 

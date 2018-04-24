@@ -31,7 +31,6 @@ Button button;
         setContentView(R.layout.activity_join_group_challenge);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("Join Group");
-        mToolbar.setTitleTextColor(R.color.white);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +80,7 @@ Button button;
     public void onDeleteRoomDone(RoomEvent roomEvent) {
 
     }
-
+//Getting All Rooms that Created To Compare It's Numbers With The Entered Number
     @Override
     public void onGetAllRoomsDone(final AllRoomsEvent allRoomsEvent) {
         runOnUiThread(new Runnable() {
@@ -99,22 +98,15 @@ Button button;
                         }
                         else
                             flag=false;
-
                     }
                     if(!flag)
                     {
                         Toast.makeText(JoinGroupChallenge.this, "Room is not found",Toast.LENGTH_LONG).show();
-
                     }
                 }else{
-                    //Toast.makeText(GroupChallenge.this, "Room Subscribe failed",Toast.LENGTH_LONG).show();
                 }
-
-
             }
         });
-
-
     }
 
     @Override
