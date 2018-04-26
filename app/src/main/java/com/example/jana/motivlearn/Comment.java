@@ -249,6 +249,8 @@ public class Comment extends AppCompatActivity implements CommentView{
                 result= TimeUnit.MILLISECONDS.toSeconds(diff)+"s";
             else if(diff < hoursInMilli)
                 result= TimeUnit.MILLISECONDS.toMinutes(diff)+"m";
+            else if(diff < daysInMilli)
+                result= TimeUnit.MILLISECONDS.toHours(diff)+"h";
             else if(diff < (daysInMilli)*3)
                 result=(TimeUnit.MILLISECONDS.toDays(diff)+1)+"d";
             else
