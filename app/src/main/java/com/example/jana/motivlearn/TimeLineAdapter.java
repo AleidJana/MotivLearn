@@ -55,6 +55,10 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         this.likedposts=likedposts;
     }
 
+    public TimeLineAdapter() {
+
+    }
+
     @Override
     public TimeLineViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         //inflating and returning our view holder
@@ -159,7 +163,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
 
     }
 
-    private String formatTime(String s) {//receive the post's timestamp
+    public String formatTime(String s) {//receive the post's timestamp
         String result="";
         s=s.substring(0, s.length()-2); //convert the parameter to the wanted format of timestamp
         try {
