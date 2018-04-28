@@ -48,7 +48,6 @@ public class TeacherProfile extends Fragment implements myProfileView {
     private View view;
     private myProfilePresenter pres;
     private BoomMenuButton bmb ;
-    ImageButton helep;
     ImageButton logout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,15 +65,6 @@ public class TeacherProfile extends Fragment implements myProfileView {
 
         host = (TabHost)view.findViewById(R.id.tabHost);
         host.setup();
-
-        helep=(ImageButton)view.findViewById(R.id.help) ;
-        helep.setVisibility(View.VISIBLE);
-        helep.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         logout=(ImageButton)view.findViewById(R.id.logout) ;
         logout.setVisibility(View.VISIBLE);
         logout.setOnClickListener(new View.OnClickListener() {

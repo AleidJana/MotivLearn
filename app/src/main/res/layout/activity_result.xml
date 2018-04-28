@@ -6,13 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/pink4"
     tools:context="com.example.jana.motivlearn.displayfillBlanck">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark" />
 
     <TextView
         android:id="@+id/textView13"
@@ -21,7 +14,10 @@
         android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15dp"
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/button4"
@@ -58,7 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/progressBar"
         android:layout_centerHorizontal="true"
-        android:text="Untill the next Question" />
+        android:text="Untill the next Question"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20dp"/>
 
 
 </RelativeLayout>

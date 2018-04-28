@@ -48,10 +48,9 @@ TextView[] tv = new TextView[4];
 
         for(int i=0 ; i<scores.length ; i++) {
             if(i==0 && scores[i]!=0)
-            {TextView t0 = findViewById(R.id.textView111);
+            {TextView t0 = findViewById(R.id.textView1);
             t0.setText("+ 10");
             }
-
             tv[i].setText(scores[i]+"");
             tv2[i].setText(usernames[i]);
 

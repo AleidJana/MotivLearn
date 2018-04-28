@@ -1,9 +1,12 @@
 package com.example.jana.motivlearn;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -20,12 +23,15 @@ import com.example.jana.motivlearn.model.SuggestVedioImp;
 import com.example.jana.motivlearn.presenter.SuggestVedioPresenter;
 import com.example.jana.motivlearn.view.SuggestVedioView;
 
+import static com.example.jana.motivlearn.R.color.white;
+
 public class suggestVedio extends Activity implements SuggestVedioView {
 
     EditText VedioLinkF ;
     Button SubmitB ;
     SuggestVedioPresenter mSuggestVedio;
     ProgressDialog progressDialog;
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +51,7 @@ public class suggestVedio extends Activity implements SuggestVedioView {
         });
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("Suggest Video");
+        mToolbar.setTitleTextColor(ContextCompat.getColor(getBaseContext(), R.color.white));
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

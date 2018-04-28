@@ -207,6 +207,7 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
     private void goToGroupChallengeScreen(String roomId){
         Intent intent = new Intent(getActivity(), GroupChallenge.class);
         intent.putExtra("roomId", roomId);
+        intent.putExtra("roomowner", true);
         startActivity(intent);
     }
 

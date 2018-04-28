@@ -114,6 +114,7 @@
     <string name="successCreation">the challenge have been created successfully</string>
     <string name="permission_camera_rationale">permissioncamerarationale</string>
     <string name="ok">ok</string>
+    <string name="share_using">Share Your Room ID</string>
 
 
 </resources>

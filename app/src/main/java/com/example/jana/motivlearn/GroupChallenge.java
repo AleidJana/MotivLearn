@@ -1,7 +1,9 @@
 package com.example.jana.motivlearn;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -63,6 +65,7 @@ import java.util.Random;
 
 import cz.msebera.android.httpclient.Header;
 
+import static com.example.jana.motivlearn.tab2.pres;
 import static com.loopj.android.http.AsyncHttpClient.log;
 
 public class GroupChallenge extends AppCompatActivity  implements  RoomRequestListener, NotifyListener, TurnBasedRoomListener, ZoneRequestListener {
@@ -91,6 +94,7 @@ int owner=0;
 JSONArray fiveChallenges;
 String[] joinedUser=new String[4];
 String question;
+boolean roomowner=false;
     private String roomId = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,10 +105,41 @@ String question;
         textView2=(TextView)findViewById(R.id.textView11);
         textView3=(TextView)findViewById(R.id.textView12);
         start=(Button) findViewById(R.id.button);
-        SharedPreferences sp1= this.getSharedPreferences("Login", MODE_PRIVATE);
-        username=sp1.getString("user_name","");
-        roomId=getIntent().getStringExtra("roomId");
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+            SharedPreferences sp1 = this.getSharedPreferences("Login", MODE_PRIVATE);
+            username = sp1.getString("user_name", "");
+            roomId = getIntent().getStringExtra("roomId");
+            roomowner = getIntent().getBooleanExtra("roomowner",false);
+
+        if(roomowner) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("your Room ID is: "+roomId+" Do you want to share it?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+
+                            String shareBody = "The Room ID is : " + roomId;
+                            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                            sharingIntent.setType("text/plain");
+                            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Room ID");
+                            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+                            startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share_using)));
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            //Creating dialog box
+            AlertDialog alert = builder.create();
+            //Setting the title manually
+            alert.setTitle("Room ID");
+            alert.show();
+
+        }
+       /* Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle(roomId);
         /*mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -296,6 +331,7 @@ String question;
                     theClient.subscribeRoom(roomId);
                     if(roomEvent.getData().getRoomOwner().equals(username) && firstTime)
                     {
+
                         firstTime = false;
                         owner=1;
                         start.setVisibility(View.VISIBLE);

@@ -25,7 +25,7 @@
         <activity android:name=".IntroActivity" />
         <activity android:name=".Login" />
         <activity android:name=".suggestVedio" />
-        <activity android:name=".Register"  />
+        <activity android:name=".Register" />
         <activity android:name=".fillBlank" />
         <activity android:name=".multipleChoices" />
         <activity android:name=".CodeOutput" />
@@ -47,12 +47,13 @@
         <activity android:name=".GroupChallenge" />
         <activity android:name=".JoinGroupChallenge" />
         <activity android:name=".Result" />
-        <activity android:name=".finalResult"></activity>
+        <activity android:name=".finalResult" />
         <activity android:name=".Help" />
-        <activity android:name=".coins"/>
-        <activity android:name=".leaderboard"/>
-        <activity android:name=".levelshelp"/>
-        <activity android:name=".padgeshelp"/>
+        <activity android:name=".coins" />
+        <activity android:name=".leaderboard" />
+        <activity android:name=".levelshelp" />
+        <activity android:name=".padgeshelp" />
+        <activity android:name=".group"></activity>
     </application>
 
 </manifest>

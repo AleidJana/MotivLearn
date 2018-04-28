@@ -1,9 +1,13 @@
 package com.example.jana.motivlearn;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.jana.motivlearn.tab2.pres;
 
 public class tab3 extends Fragment implements leaderBoardView {
     leaderBoardPresenter pres;
@@ -38,6 +43,8 @@ public class tab3 extends Fragment implements leaderBoardView {
     TabHost.TabSpec spec;
     TabHost host;
     View view;
+    FloatingActionButton share;
+
     @SuppressLint("Range")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +53,32 @@ public class tab3 extends Fragment implements leaderBoardView {
        view = inflater.inflate(R.layout.fragment_tab3, container, false);
         pres = new leaderBoardImp(tab3.this);
         pres.getLeaderBoard();
+        share=(FloatingActionButton) view.findViewById(R.id.fab);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage("Do you want to share your rank on twitter ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                       //here we will add share rank on twitter code
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                //Creating dialog box
+                AlertDialog alert = builder.create();
+                //Setting the title manually
+                alert.setTitle("Share Rank");
+                alert.show();
+            }
+        });
         NewtonCradleLoading newtonCradleLoading;
         newtonCradleLoading = (NewtonCradleLoading)view.findViewById(R.id.newton_cradle_loading);
         newtonCradleLoading.setVisibility(View.VISIBLE);
