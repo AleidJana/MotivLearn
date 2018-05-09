@@ -418,7 +418,6 @@ boolean roomowner=false;
                                 String[] users = liveRoomInfoEvent.getJoinedUsers();
                                 scores = new int[users.length];
                                 resultusernames = new String[users.length];
-                                intent = new Intent(GroupChallenge.this, finalResult.class);
                                 theClient.sendChat("FinalResult:"+username+":"+MyCoins);
 
                                while (counter<liveRoomInfoEvent.getJoinedUsers().length);
@@ -428,7 +427,7 @@ boolean roomowner=false;
                                    pre.updateCoinsWinner(uid, MyCoins+10);
                                else
                                    pre.updateCoins(uid, MyCoins);
-
+                               intent = new Intent(GroupChallenge.this, finalResult.class);
                                intent.putExtra("users", resultusernames);
                                intent.putExtra("scores", scores);
                                startActivity(intent);

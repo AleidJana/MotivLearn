@@ -63,6 +63,7 @@ dependencies {
     compile 'com.dinuscxj:circleprogressbar:1.1.1'
     compile 'nl.dionsegijn:konfetti:1.1.0'
     testCompile 'junit:junit:4.12'
+
     implementation files('libs/activation.jar')
     implementation files('libs/App42MultiPlayerGamingSDK.jar')
 
