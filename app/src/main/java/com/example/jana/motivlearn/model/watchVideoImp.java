@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn.model;
 
+import com.example.jana.motivlearn.WatchVideo;
 import com.example.jana.motivlearn.presenter.watchVideoPresenter;
 import com.example.jana.motivlearn.view.watchVideoView;
 import com.loopj.android.http.AsyncHttpClient;

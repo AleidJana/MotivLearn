@@ -66,6 +66,5 @@ dependencies {
     implementation files('libs/activation.jar')
     implementation files('libs/App42MultiPlayerGamingSDK.jar')
     implementation files('libs/twitter4j-core-4.0.4.jar')
-    implementation files('libs/android-support-v4.jar')
     implementation files('libs/twitter4j-media-support-4.0.4.jar')
 }

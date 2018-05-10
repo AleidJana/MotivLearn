@@ -1,5 +1,6 @@
 package com.example.jana.motivlearn;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,5 +57,10 @@ TextView[] tv = new TextView[4];
 
         }
 
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+startActivity(new Intent(getBaseContext(),MainActivity.class));
     }
 }

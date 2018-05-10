@@ -249,7 +249,7 @@ public class tab3 extends Fragment implements leaderBoardView {
     }
     private void shareTwitter(String message) {
         Intent tweetIntent = new Intent(Intent.ACTION_SEND);
-        tweetIntent.putExtra(Intent.EXTRA_TEXT, "Nouf Alsedairy is First one in ");
+        tweetIntent.putExtra(Intent.EXTRA_TEXT, "WOW check my rank , yes it's the first rank in MotivLearn app ");
         tweetIntent.setType("text/plain");
 
         PackageManager packManager = getActivity().getPackageManager();
