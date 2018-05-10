@@ -38,7 +38,7 @@ import java.util.TimerTask;
 import wseemann.media.FFmpegMediaMetadataRetriever;
 
 public class WatchVideo extends AppCompatActivity implements BetterVideoCallback, watchVideoView {
-//new
+//new 2
     private String url;
     private int vidId;
     int uid;
