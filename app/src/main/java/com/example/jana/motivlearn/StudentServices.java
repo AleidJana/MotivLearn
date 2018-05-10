@@ -63,8 +63,7 @@ public class StudentServices extends Fragment  implements ZoneRequestListener {
         WatchVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), WatchVideo.class));
-
+               startActivity(new Intent(getActivity(), WatchVideo.class));
             }
         });
         CreateGroupChallenge = (Button) view.findViewById(R.id.CreateGroupChallenge);

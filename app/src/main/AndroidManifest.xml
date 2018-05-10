@@ -36,7 +36,6 @@
         <activity android:name=".createChallenge" />
         <activity android:name=".suggestQuestion" />
         <activity android:name=".RecordAchievement" />
-        <activity android:name=".WatchVideo" />
         <activity android:name=".Comment" />
         <activity android:name=".userTprofile" />
         <activity android:name=".userSprofile" />
