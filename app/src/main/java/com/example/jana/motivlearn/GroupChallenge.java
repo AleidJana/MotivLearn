@@ -411,7 +411,7 @@ boolean roomowner=false;
                         if(ressu) {
                             Intent intent;
                             ressu = false;
-                            if (challnum == 4)
+                            if (challnum == 2)
                             {   SharedPreferences sp1= getSharedPreferences("Login", MODE_PRIVATE);
                                 int uid =sp1.getInt("user_id", 0);
                                 groupChallengePresenter pre = new groupChallengeImp();
